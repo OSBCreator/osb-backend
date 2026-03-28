@@ -39,6 +39,16 @@ app.post("/api/score", async (req, res) => {
 
   const { data, error } = await supabase
     .from("score_submissions")
+    .insert([{
+      user:
+
+  console.log("===== NEW SUBMISSION =====");
+  console.log(req.body);
+
+  const { result, email, country, platform, money, story, timestamp } = req.body;
+
+  const { data, error } = await supabase
+    .from("score_submissions")
     .insert([{ 
       user: result || 'Anonymous', 
       email: email || 'Not provided', 
