@@ -50,22 +50,88 @@ app.post("/api/score", async (req, res) => {
   res.json({ ok: true });
 });
 
-// ✅ IMPORTANT (Railway fix)
-const PORT = process.env.PORT || 5000;
-
-
+// Public submissions endpoint
 app.get('/submissions', async (req, res) => {
   const { data, error } = await supabase.from('score_submissions').select('*');
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
 });
 
-
+// Admin submissions endpoint
 app.get('/api/submissions', async (req, res) => {
   const { data, error } = await supabase.from('score_submissions').select('*');
   if (error) return res.status(500).json({ error: error.message });
   res.json({ data });
 });
+
+// Admin routes
+app.get('/api/admin/stats', async (req, res) => {
+  const [subs, msgs, posts, nl] = await Promise.all([
+    supabase.from('score_submissions').select('*'),
+    supabase.from('contact_submissions').select('*'),
+    supabase.from('community_posts').select('*'),
+    supabase.from('subscribers').select('*')
+  ]);
+  const s = subs.data || [];
+  const critical = s.filter(x => x.tier === 'critical' || x.result === 'critical').length;
+  const high = s.filter(x => x.tier === 'high' || x.result === 'high probability').length;
+  const unread = (msgs.data || []).filter(x => !x.is_read).length;
+  res.json({
+    total_submissions: s.length,
+    critical_tier: critical,
+    high_probability: high,
+    unread_messages: unread,
+    total_posts: (posts.data || []).length,
+    total_subscribers: (nl.data || []).length
+  });
+});
+
+app.get('/api/admin/messages', async (req, res) => {
+  const { data, error } = await supabase.from('contact_submissions').select('*').order('created_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ data });
+});
+
+app.post('/api/admin/messages/:id/read', async (req, res) => {
+  const { error } = await supabase.from('contact_submissions').update({ is_read: true }).eq('id', req.params.id);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
+});
+
+app.get('/api/admin/subscribers', async (req, res) => {
+  const { data, error } = await supabase.from('subscribers').select('*').order('subscribed_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ data });
+});
+
+app.get('/api/admin/posts', async (req, res) => {
+  const { data, error } = await supabase.from('community_posts').select('*').order('created_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ data });
+});
+
+app.post('/api/admin/posts/:id/approve', async (req, res) => {
+  const { error } = await supabase.from('community_posts').update({ is_approved: true }).eq('id', req.params.id);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
+});
+
+app.delete('/api/admin/posts/:id', async (req, res) => {
+  const { error } = await supabase.from('community_posts').delete().eq('id', req.params.id);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true });
+});
+
+app.post('/api/community', async (req, res) => {
+  const { username, content, pillar, ifn_ref } = req.body;
+  const { data, error } = await supabase.from('community_posts').insert([{ username, content, pillar, ifn_ref, is_approved: false }]);
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ ok: true, data });
+});
+
+// ✅ IMPORTANT (Railway fix)
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
 });
