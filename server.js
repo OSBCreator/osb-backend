@@ -60,6 +60,12 @@ app.get('/submissions', async (req, res) => {
   res.json(data);
 });
 
+
+app.get('/api/submissions', async (req, res) => {
+  const { data, error } = await supabase.from('score_submissions').select('*');
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ data });
+});
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
 });
