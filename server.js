@@ -55,4 +55,4 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
-});
+});\napp.get('/submissions', async (req, res) => {\n  const { data, error } = await supabase.from('score_submissions').select('*');\n  if (error) return res.status(500).json({ error: error.message });\n  res.json(data);\n});
