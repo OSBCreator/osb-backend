@@ -30,16 +30,25 @@ app.get("/form.html", (req, res) => {
   res.sendFile(path.join(__dirname, "form.html"));
 });
 
-// submit route
+// submit route — FIXED to match frontend field names
 app.post("/api/score", async (req, res) => {
   console.log("===== NEW SUBMISSION =====");
   console.log(req.body);
 
-  const { user, email, country, platform, score, risk, money, story } = req.body;
+  const { result, email, country, platform, money, story, timestamp } = req.body;
 
   const { data, error } = await supabase
     .from("score_submissions")
-    .insert([{ user, email, country, platform, score, risk, money, story }]);
+    .insert([{ 
+      user: result || 'Anonymous', 
+      email: email || 'Not provided', 
+      country: country || 'Not provided', 
+      platform: platform || 'Not provided', 
+      score: result || 'N/A',
+      risk: result || 'N/A', 
+      money: money || 'Not provided', 
+      story: story || 'Not provided' 
+    }]);
 
   if (error) {
     console.error("SUPABASE ERROR:", error);
