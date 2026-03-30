@@ -7,83 +7,43 @@
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="2022.7">
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-    span.s2 {font: 12.0px 'Apple Color Emoji'; font-kerning: none}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Apple Color Emoji'}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;OSB Case Submission&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body style="background:black; color:white; font-family:Arial;"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;h2&gt;OSB Case Submission&lt;/h2&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;form id="form"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;input type="text" id="user" placeholder="Your Name" required&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;input type="email" id="email" placeholder="Email" required&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;input type="text" id="country" placeholder="Country"&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;select id="platform"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;option&gt;WhatsApp&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;option&gt;Facebook&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;option&gt;Instagram&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;option&gt;Tinder&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;option&gt;Other&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/select&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;input type="number" id="score" placeholder="Score"&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;select id="risk"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;option&gt;High&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;option&gt;Low&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/select&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;input type="text" id="money" placeholder="Money Lost"&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;textarea id="story" placeholder="Describe what happened"&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;button type="submit"&gt;Submit Case&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/form&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p1"><span class="s1">document.getElementById("form").addEventListener("submit", async (e) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>e.preventDefault();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const data = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>user: document.getElementById("user").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>email: document.getElementById("email").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>country: document.getElementById("country").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>platform: document.getElementById("platform").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>score: document.getElementById("score").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>risk: document.getElementById("risk").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>money: document.getElementById("money").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>story: document.getElementById("story").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>timestamp: new Date().toISOString()</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const res = await fetch("https://osb-backend-production.up.railway.app/api/score", {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>method: "POST",</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>headers: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"Content-Type": "application/json"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body: JSON.stringify(data)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const result = await res.json();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>alert("Submitted successfully </span><span class="s2">✅</span><span class="s1">");</span></p>
-<p class="p1"><span class="s1">});</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;OSB Working&lt;/title&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;h1&gt;OSB SYSTEM LIVE <span class="s1">✅</span>&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;button onclick="send()"&gt;Send Test&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">function send() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>fetch("http://localhost:5000/api/score", {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>method: "POST",</p>
+<p class="p1"><span class="Apple-converted-space">    </span>headers: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>"Content-Type": "application/json"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body: JSON.stringify({</p>
+<p class="p1"><span class="Apple-converted-space">      </span>user: "test",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>email: "test@test.com",</p>
+<p class="p1"><span class="Apple-converted-space">      </span>country: "Nigeria"</p>
+<p class="p1"><span class="Apple-converted-space">    </span>})</p>
+<p class="p1"><span class="Apple-converted-space">  </span>})</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.then(res =&gt; res.json())</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.then(() =&gt; alert("Sent to Supabase <span class="s1">✅</span>"))</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.catch(err =&gt; console.error(err));</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
 </body>
 </html>
