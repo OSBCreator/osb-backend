@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
-<meta name="description" content="Reach out to Online Security Bureau — privately and securely. No judgment. No rush.">
-<title>Contact OSB — Online Security Bureau</title>
+<meta name="description" content="An open letter to the dating and social platform industry. From John Dee, Online Security Bureau.">
+<title>An Open Letter to the Industry · Online Security Bureau</title>
 <style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
@@ -523,7 +523,243 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
 }
 .theme-toggle:hover + .theme-toggle-tip{opacity:1;}
 
+
+/* ── DAY / NIGHT MODE ── */
+:root{
+  --r:#C1121F;
+  --b:#0B0B0D;
+  --w:#FFFFFF;
+  --off:#F8F6F2;
+  --g:#5A5A5A;
+  --m:#9A9A9A;
+  --br:#E4E1DB;
+  --rl:#FEF0F0;
+  --n:#060608;
+  /* Theme tokens */
+  --bg:#060608;
+  --surface:rgba(255,255,255,.025);
+  --surface2:rgba(255,255,255,.04);
+  --text:#FFFFFF;
+  --text2:rgba(255,255,255,.7);
+  --text3:rgba(255,255,255,.38);
+  --border:rgba(255,255,255,.08);
+  --nav-bg:rgba(6,6,8,.97);
+  --card-bg:rgba(255,255,255,.025);
+  --card-border:rgba(255,255,255,.07);
+  --section-dark:#060608;
+  --section-black:#0B0B0D;
+  --footer-bg:#060608;
+  --ticker2-bg:rgba(11,11,13,1);
+  --mega-bg:#060608;
+  --inp-bg:rgba(255,255,255,.05);
+  --inp-border:rgba(255,255,255,.1);
+}
+body.day-mode{
+  --bg:#F8F6F2;
+  --surface:rgba(0,0,0,.04);
+  --surface2:rgba(0,0,0,.06);
+  --text:#0B0B0D;
+  --text2:rgba(0,0,0,.65);
+  --text3:rgba(0,0,0,.38);
+  --border:rgba(0,0,0,.1);
+  --nav-bg:rgba(248,246,242,.97);
+  --card-bg:#FFFFFF;
+  --card-border:#E4E1DB;
+  --section-dark:#F0EDE8;
+  --section-black:#E8E5E0;
+  --footer-bg:#0B0B0D;
+  --ticker2-bg:#E4E1DB;
+  --mega-bg:#FFFFFF;
+  --inp-bg:rgba(0,0,0,.04);
+  --inp-border:rgba(0,0,0,.15);
+}
+
+/* Apply theme tokens */
+body{background:var(--bg);color:var(--text);}
+nav{background:var(--nav-bg);}
+.mega-drop{background:var(--mega-bg) !important;}
+body.day-mode .mega-drop a{color:var(--text);}
+body.day-mode .mega-drop a div[style*="color:#fff"]{color:#0B0B0D !important;}
+body.day-mode .mega-drop a div[style*="color:rgba(255,255,255,.3)"]{color:rgba(0,0,0,.4) !important;}
+
+/* Hero */
+.hero,.h-noise,.h-glow{background:var(--section-dark);}
+.h-h1{color:var(--text);}
+.h-sub{color:var(--text3);}
+body.day-mode .h-corner{border-color:rgba(193,18,31,.25);}
+body.day-mode .h-ey{color:rgba(0,0,0,.25);}
+body.day-mode .h-ey-line{background:rgba(193,18,31,.35);}
+
+/* Sections */
+.sd{background:var(--section-black);}
+.sn{background:var(--section-dark);}
+body.day-mode .sd{background:#FFFFFF;}
+body.day-mode .sn{background:#F0EDE8;}
+
+/* Text */
+.hw{color:var(--text);}
+.tw{color:var(--text2);}
+.tmt{color:var(--text3);}
+body.day-mode .hb{color:var(--text);}
+
+/* Cards */
+.pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
+  background:var(--card-bg);
+  border-color:var(--card-border);
+}
+body.day-mode .pbox-bg{color:rgba(0,0,0,.04);}
+body.day-mode .pdesc{color:rgba(0,0,0,.45);}
+body.day-mode .ptag{color:var(--r);}
+body.day-mode .pname{color:var(--text);}
+body.day-mode .pscore{color:var(--text);}
+
+/* Nav links */
+body.day-mode .nav-links a{color:rgba(0,0,0,.45);}
+body.day-mode .nav-links a:hover,body.day-mode .nav-links a.active{color:#0B0B0D;}
+body.day-mode .nbtn-join{border-color:rgba(0,0,0,.2);color:rgba(0,0,0,.55);}
+body.day-mode .nbtn-join:hover{border-color:var(--r);color:#0B0B0D;}
+
+/* Intelligence hub */
+body.day-mode .intel-hub-card{background:#FFFFFF;border-color:#E4E1DB;}
+
+/* Feed */
+body.day-mode .fi{border-color:rgba(0,0,0,.08);}
+body.day-mode .fi-num{color:rgba(0,0,0,.2);}
+body.day-mode .fi-title{color:var(--text);}
+body.day-mode .fi-exc{color:rgba(0,0,0,.4);}
+body.day-mode .fstat{color:rgba(0,0,0,.25);}
+
+/* Inputs */
+.finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
+  background:var(--inp-bg);
+  border-color:var(--inp-border);
+  color:var(--text);
+}
+body.day-mode .finp::placeholder,body.day-mode .fi3::placeholder{color:rgba(0,0,0,.3);}
+
+/* Tiers */
+body.day-mode .tier{background:#F8F6F2;}
+body.day-mode .tier:hover{background:#F0EDE8;}
+body.day-mode .tier-name{color:var(--text);}
+body.day-mode .tier-desc{color:rgba(0,0,0,.45);}
+body.day-mode .tier-act{color:rgba(0,0,0,.25);}
+body.day-mode .tiers-grid{background:rgba(0,0,0,.08);}
+
+/* Score card */
+body.day-mode .sc-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .sc-tag{color:rgba(0,0,0,.3);}
+body.day-mode .sc-big{color:var(--text);}
+body.day-mode .sc-bar{background:rgba(0,0,0,.08);}
+body.day-mode .sc-row{background:rgba(0,0,0,.025);border-color:rgba(0,0,0,.06);}
+body.day-mode .sc-rl{color:rgba(0,0,0,.4);}
+body.day-mode .sc-rv{color:var(--text);}
+body.day-mode .sp-feat{color:rgba(0,0,0,.45);}
+body.day-mode .sp-bg-word{color:rgba(193,18,31,.04);}
+
+/* Haven/Solace stages */
+body.day-mode .hs{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .hs:hover{background:rgba(193,18,31,.05);}
+body.day-mode .hs-n{color:rgba(193,18,31,.25);}
+body.day-mode .hs-t{color:rgba(0,0,0,.6);}
+
+/* Community */
+body.day-mode .signup-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .sc2-t{color:var(--text);}
+body.day-mode .sc2-s{color:rgba(0,0,0,.4);}
+body.day-mode .cs-box{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .cs-n{color:var(--text);}
+body.day-mode .cs-l{color:rgba(0,0,0,.3);}
+
+/* Map */
+body.day-mode .map-wrap{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .cstat{background:#FFFFFF;}
+body.day-mode .cstat-n{color:rgba(0,0,0,.3);}
+
+/* IFN cards */
+body.day-mode .icard{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .icard-hd{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .icard-id{color:var(--r);}
+body.day-mode .icard-p{color:rgba(0,0,0,.3);}
+body.day-mode .icard-t{color:var(--text);}
+body.day-mode .icard-e{color:rgba(0,0,0,.45);}
+body.day-mode .icard-ft{border-color:rgba(0,0,0,.06);}
+body.day-mode .icard-m{color:rgba(0,0,0,.3);}
+body.day-mode .icard-s{color:rgba(0,0,0,.3);}
+
+/* IC3 intel cards */
+body.day-mode .ic3{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .ic3-hd{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .ic3-t{color:var(--text);}
+body.day-mode .ic3-e{color:rgba(0,0,0,.45);}
+
+/* Ticker secondary */
+body.day-mode .ticker:not([style*="background:rgba(11"]){background:var(--r);}
+
+/* Footer always dark */
+footer{background:var(--footer-bg) !important;}
+body.day-mode footer{background:#0B0B0D !important;}
+
+/* Page hero */
+body.day-mode .pg-hero{background:#F0EDE8;}
+body.day-mode .pg-hero h1{color:var(--text);}
+
+/* Off section (timeline) */
+body.day-mode .so{background:var(--off);color:var(--b);}
+
+/* Pillar boxes day */
+body.day-mode .pbox{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .pbox:hover{background:rgba(193,18,31,.04);border-color:rgba(193,18,31,.2);}
+
+/* Trig strip */
+body.day-mode .trig-strip{background:rgba(193,18,31,.05);border-color:rgba(193,18,31,.15);}
+body.day-mode .trig-body{color:rgba(0,0,0,.6);}
+body.day-mode .trig-body strong{color:var(--text);}
+
+/* Mission strip stays red */
+.mission-strip{background:var(--r);}
+
+/* Hero intel preview */
+body.day-mode .hi-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .hi-card:hover{background:rgba(193,18,31,.04);border-top-color:var(--r);}
+body.day-mode .hi-title{color:var(--text);}
+body.day-mode .hi-meta{color:rgba(0,0,0,.3);}
+
+/* ── TOGGLE BUTTON ── */
+.theme-toggle{
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  z-index:999;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:var(--r);
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 20px rgba(193,18,31,.4);
+  transition:all .3s;
+}
+.theme-toggle:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(193,18,31,.5);}
+.theme-toggle svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s;}
+.theme-toggle .icon-moon{display:block;}
+.theme-toggle .icon-sun{display:none;}
+body.day-mode .theme-toggle .icon-moon{display:none;}
+body.day-mode .theme-toggle .icon-sun{display:block;}
+.theme-toggle-tip{
+  position:fixed;bottom:2rem;right:5rem;
+  background:var(--bg);border:1px solid var(--border);
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
+  color:var(--text2);letter-spacing:1px;text-transform:uppercase;
+  padding:.4rem .875rem;opacity:0;pointer-events:none;
+  transition:opacity .3s;white-space:nowrap;
+}
+.theme-toggle:hover + .theme-toggle-tip{opacity:1;}
+
 </style>
+<style></style>
 </head>
 <body>
 <div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div></div>
@@ -531,7 +767,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Online Security Bureau"></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
+    <a href="about.html" class="active">About</a>
     <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
       <a href="intelligence.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">Intelligence<span style="font-size:7px;opacity:.4;">▾</span></a>
       <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
@@ -554,7 +790,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
     <a href="score.html">SCORE</a>
     <a href="solace.html">Solace</a>
     <a href="community.html">Community</a>
-    <a href="contact.html" class="active">Contact</a>
+    <a href="contact.html">Contact</a>
   </div>
   <div class="nav-right">
     <a href="community.html" class="nbtn-join">Community</a>
@@ -583,39 +819,59 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
     <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
   </div>
 </div>
-</div>
-<div class="pg-hero">
-  <div class="si">
-    <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Contact OSB</div></div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.8rem);font-weight:600;line-height:.95;color:var(--w);letter-spacing:-1px;margin-bottom:1.25rem;">OSB is here.<br><em>No judgment.<br>No rush.</em></h1>
-    <p style="font-size:1rem;color:rgba(255,255,255,.42);max-width:540px;line-height:1.85;font-weight:300;">Whether you are in an active situation, coming through one, or want to share intelligence — reach out. Every message is reviewed personally by OSB.</p>
-  </div>
-</div>
-<div class="sd">
-  <div class="si">
-    <div class="two-col">
-      <div class="reveal">
-        <div class="cfw">
-          <form id="osb-form">
-            <div style="margin-bottom:1rem;"><label class="cfl">Your email <span>(optional — for a reply)</span></label><input type="email" class="cfi" id="cfe" placeholder="your@email.com"></div>
-            <div style="margin-bottom:1rem;"><label class="cfl">Why are you reaching out?</label><select class="cfs" id="cfr" style="background:rgba(255,255,255,.04);"><option value="" style="background:#111;">— Select —</option><option style="background:#111;">I think I am in a romance scam right now</option><option style="background:#111;">I recently left a scam situation</option><option style="background:#111;">I want to report a fraud technique</option><option style="background:#111;">I am a researcher or journalist</option><option style="background:#111;">I want to share a case with OSB</option><option style="background:#111;">RSEI Analyst Certification enquiry</option><option style="background:#111;">Other</option></select></div>
-            <div style="margin-bottom:1rem;"><label class="cfl">Your message</label><textarea class="cft" id="cfm" placeholder="Tell us what is happening. There is no right or wrong way to say it. Take your time."></textarea></div>
-            <button type="button" class="cfb" onclick="sendContact()">Send to OSB — Privately and Securely</button>
-          </form>
-          <div class="form-ok" id="form-ok"><p><strong>Message received.</strong><br>OSB will review your message personally. If you provided an email, you will hear from us.</p></div>
-          <p style="font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.875rem;line-height:1.5;">Nothing is sent until you click the button. Your message is seen only by OSB.</p>
-        </div>
-      </div>
-      <div class="ci-stack reveal d2">
-        <div class="ci-blk"><div class="ci-tag">Quora — Primary Platform</div><div class="ci-val">John Dee</div><div class="ci-sub">OSB's primary public presence. All published content, field notes and live interventions. Founder, OSB | RSEI Model™ Practitioner.</div></div>
-        <div class="ci-blk"><div class="ci-tag">RSEI Scoring Tool</div><div class="ci-val">Score your situation now</div><div class="ci-sub">Clear, evidence-based score in 2 minutes. Free. Private. No personal details required. Accessible for all ages — designed with seniors in mind.</div><a href="score.html" class="btn-r" style="display:inline-block;margin-top:1.125rem;font-size:.72rem;letter-spacing:1.5px;">Begin the Assessment</a></div>
-        <div class="ci-blk"><div class="ci-tag">Response</div><div class="ci-val">Personal review</div><div class="ci-sub">Every message is reviewed personally by OSB. If your situation is urgent — say so. Active cases are prioritised immediately.</div></div>
-        <div class="anon-blk"><div class="anon-t">A note on anonymity</div><div class="anon-s">OSB operates anonymously by design. We do not need your real name. Share only what you are comfortable sharing. Every level of disclosure is respected equally.</div></div>
+<div style="background:var(--off);color:var(--b);padding:5rem 3rem 4rem;border-bottom:3px solid var(--r);position:relative;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--r);margin-bottom:2rem;">Open Letter · Dating & Social Platform Industry · April 2026</div>
+    <div style="border-left:3px solid var(--r);padding-left:2rem;margin-bottom:2rem;">
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.5rem);font-weight:700;color:var(--b);line-height:.95;letter-spacing:-1.5px;margin-bottom:.5rem;">Your users are being targeted.<br><em style="color:var(--r);">What are you doing about it?</em></h1>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.1);">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,.4);"><strong style="color:rgba(0,0,0,.7);">John Dee</strong> · Founder & Director, Online Security Bureau · Published April 2026</div>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+        <a href="#" onclick="navigator.clipboard.writeText(window.location.href);this.textContent='Link copied ✓';return false;" style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,.4);border:1px solid rgba(0,0,0,.15);padding:.375rem .875rem;text-decoration:none;transition:all .2s;">Copy Link</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,.4);border:1px solid rgba(0,0,0,.15);padding:.375rem .875rem;text-decoration:none;">LinkedIn</a>
       </div>
     </div>
   </div>
 </div>
+<article style="max-width:800px;margin:0 auto;padding:5rem 3rem;">
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;"><span style="font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--r);float:left;line-height:.8;margin:.2rem .15rem 0 0;">T</span>o the leadership of every dating and social platform operating today — to your Trust &amp; Safety teams, your product teams, your legal and compliance teams, and to the executives who sign off on your safety posture:</p>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;">Romance fraud is not a fringe problem. It is not an edge case. It is not an acceptable operational tolerance. It is a <strong style="color:rgba(255,255,255,.85);">structured, systematic criminal enterprise</strong> operating on your platform, using your infrastructure, and targeting your users — every single day.</p>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;"><strong style="color:rgba(255,255,255,.85);">$74 billion.</strong> That is the estimated annual global cost of romance fraud. Behind that number are individuals who were targeted through platforms like yours — manipulated through four repeatable, documented behavioural patterns that have now been formally named, scored and published.</p>
+  <div style="border-left:3px solid var(--r);padding:1.5rem 2.5rem;margin:3rem 0;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:rgba(255,255,255,.8);line-height:1.3;font-style:italic;">"Romance fraud has a name now. It has a score. <em style="color:var(--r);">The only question is whether your platform has a response."</em></div>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;">Online Security Bureau developed the RSEI Model™ — the world's first and only structured behavioural scoring framework for romance fraud. It identifies four pillars through which every romance scammer operates: <strong style="color:rgba(255,255,255,.85);">Relationship Acceleration. Script Consistency. Emotional Manipulation. Incremental Extraction.</strong> Every documented case traces to one or more of these pillars.</p>
+  <div style="text-align:center;margin:3rem 0;display:flex;align-items:center;gap:1.5rem;"><div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);">The Standard</span><div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div></div>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;">We are not here to raise awareness. Awareness campaigns do not stop scammers. We built a framework. We built a scoring system. We built a certification standard. And we are asking — publicly, on the record — whether your platform is prepared to meet it.</p>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;">The RSEI Certified™ Platform Certification Programme is the first and only framework-backed safety standard for dating and social platforms specifically addressing romance fraud. There is a public registry. Right now, it is empty. No platform has yet achieved certification. <strong style="color:rgba(255,255,255,.85);">That emptiness is a record of where the industry currently stands on the safety of its own users.</strong></p>
+  <div style="border:1px solid rgba(193,18,31,.25);background:rgba(193,18,31,.04);padding:2.5rem 3rem;margin:3rem 0;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1rem;">The Public Challenge</div>
+    <p style="font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.9;">Every platform operating today is either on the RSEI Certified™ Registry or it is not. <strong style="color:rgba(255,255,255,.8);">There is no middle ground.</strong> Your users are beginning to ask: is this platform RSEI Certified? If it is not, they will draw their own conclusions. And they will be right to do so.</p>
+  </div>
+  <div style="text-align:center;margin:3rem 0;display:flex;align-items:center;gap:1.5rem;"><div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);">The Individuals</span><div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div></div>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;">I want to tell you about one case. We call it IFN-002. A person was targeted on a social platform. No money was ever exchanged — not a single payment. And yet the victim reached a point of suicidal ideation. <em style="color:var(--r);">No financial loss. Maximum psychological harm.</em> This is the case that established the E Pillar Independent Trigger — mandatory victim support referral at E ≥ 4, regardless of financial loss.</p>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;">This happened on a platform. It could have happened on yours. The question is not whether you can prevent every scammer from signing up. The question is whether you have a <em style="color:rgba(255,255,255,.85);">real framework</em> — not a set of community guidelines — that accounts for the behavioural reality of how romance fraud operates.</p>
+  <div style="text-align:center;margin:3rem 0;display:flex;align-items:center;gap:1.5rem;"><div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);">The Ask</span><div style="flex:1;height:1px;background:rgba(255,255,255,.06);"></div></div>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:2rem;"><strong style="color:rgba(255,255,255,.85);">Apply for RSEI Certification.</strong> Be assessed against a real framework by the organisation that built it. Put your platform on record as one that takes this seriously. The goal of Online Security Bureau is to make the RSEI Standard™ the industry-recommended baseline for dating and social platform safety. We will get there.</p>
+  <p style="font-size:1.05rem;color:rgba(255,255,255,.62);line-height:1.95;margin-bottom:3rem;">The registry is open. The standard is published. The assessment process is live. The question is which platforms will be first on the right side of it.</p>
+  <div style="padding-top:3rem;border-top:1px solid rgba(255,255,255,.06);">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin-bottom:.25rem;">John Dee</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);">Founder & Director · Online Security Bureau · Creator, RSEI Model™</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:.625rem;">April 2026 · Published on public record</div>
+  </div>
+</article>
 
+<div style="background:var(--n);padding:5rem 3rem;border-top:1px solid rgba(255,255,255,.04);">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.5rem;">For Platforms</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:600;line-height:1.05;margin-bottom:1.25rem;">Your response begins <em style="color:var(--r);font-style:italic;">here.</em></h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.38);line-height:1.85;max-width:480px;margin:0 auto 2.5rem;">The certification process starts with a single conversation. Contact Online Security Bureau to begin your assessment and secure your position on the RSEI Certified™ Registry.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="certification.html" class="btn-r" style="padding:13px 36px;">Apply for Certification</a>
+      <a href="standard.html" class="btn-g">Read the Standard</a>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.15);margin-top:2rem;">Online Security Bureau · OSB e-Consultancy · Est. 2021 · RSEI Model™ v2.0</div>
+  </div>
+</div>
 <footer>
   <div class="fg">
     <div>
@@ -683,14 +939,7 @@ window.addEventListener('scroll',function(){
   if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';
 });
 </script>
-<script>
-function sendContact(){
-  var email=document.getElementById('cfe').value,reason=document.getElementById('cfr').value,message=document.getElementById('cfm').value;
-  if(!message)return;
-  fetch('http://localhost:5000/api/contact',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'contact',email:email||'anonymous',reason:reason,message:message})})
-  .then(function(r){if(r.ok){document.getElementById('osb-form').style.display='none';document.getElementById('form-ok').style.display='block';}});
-}
-</script>
+
 <script>
 // Day/Night Mode
 function toggleTheme(){
