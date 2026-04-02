@@ -13,7 +13,7 @@ app.use(express.static(__dirname));
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 // ── ROOT ──────────────────────────────────────────────
@@ -296,12 +296,24 @@ app.get("/api/admin/stats", async (req, res) => {
   const msgData = messages.data || [];
 
   // Count by tier from result field
-  const critical = subData.filter(s =>
-    s.result && s.result.toLowerCase().includes("critical")).length;
-  const highProb = subData.filter(s =>
-    s.result && s.result.toLowerCase().includes("high probability")).length;
-  const lowRisk = subData.filter(s =>
-    s.result && s.result.toLowerCase().includes("low")).length;
+  // Tier classification — handles both result string and risk/score fields
+  function getTier(s) {
+    var r = (s.result || '').toLowerCase();
+    if (r.includes('critical')) return 'critical';
+    if (r.includes('high probability')) return 'high';
+    if (r.includes('low')) return 'low';
+    var rk = (s.risk || '').toLowerCase();
+    if (rk === 'high') return 'high';
+    if (rk === 'low') return 'low';
+    var sc = parseInt(s.score);
+    if (sc >= 17) return 'critical';
+    if (sc >= 12) return 'high';
+    if (sc > 0) return 'low';
+    return 'unknown';
+  }
+  const critical = subData.filter(s => getTier(s) === 'critical').length;
+  const highProb = subData.filter(s => getTier(s) === 'high').length;
+  const lowRisk  = subData.filter(s => getTier(s) === 'low').length;
 
   res.json({
     ok: true,

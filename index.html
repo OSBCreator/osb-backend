@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="description" content="The world's first behavioural intelligence framework for romance fraud.">
+<title>Online Security Bureau — RSEI Model™ | We named what they do — Online Security Bureau</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
+html{scroll-behavior:smooth;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--b);}::-webkit-scrollbar-thumb{background:var(--r);}
+body{font-family:'Figtree',sans-serif;background:var(--b);color:var(--w);overflow-x:hidden;padding-top:72px;line-height:1.6;font-size:16px;}
+/* TICKER */
+.ticker{background:var(--r);height:36px;overflow:hidden;display:flex;align-items:center;}
+.tt{display:flex;animation:tickS 55s linear infinite;white-space:nowrap;}
+.ti{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.85);letter-spacing:2px;text-transform:uppercase;padding:0 2.5rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0;}
+.ts{color:rgba(255,255,255,.3);}
+@keyframes tickS{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(6,6,8,.97);border-bottom:1px solid rgba(193,18,31,.25);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;transition:border-color .3s;}
+.nav-logo img{height:46px;width:auto;display:block;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:4px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--r);transition:width .25s;}
+.nav-links a:hover,.nav-links a.active{color:var(--w);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:.875rem;}
+.nbtn-score{background:var(--r);color:var(--w);padding:9px 22px;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s;}
+.nbtn-score:hover{background:#d01020;}
+.nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
+.nbtn-join:hover{border-color:var(--r);color:var(--w);}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
+.mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
+.mob-menu a:last-of-type{border-bottom:none;}
+.mob-menu a:hover{color:var(--r);}
+.mob-ctas{display:flex;gap:.875rem;margin-top:1.5rem;flex-wrap:wrap;}
+/* SECTIONS */
+.sd{background:var(--b);padding:6rem 3rem;}
+.sn{background:var(--n);padding:6rem 3rem;}
+.sr{background:var(--r);padding:6rem 3rem;}
+.so{background:var(--off);color:var(--b);padding:6rem 3rem;}
+.si{max-width:1160px;margin:0 auto;}
+/* LABELS */
+.lbl{display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.375rem;}
+.lbl-line{width:28px;height:1px;background:var(--r);}
+.lbl-text{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);font-weight:500;}
+.lbl-lt .lbl-text{color:rgba(255,255,255,.35);}
+.lbl-lt .lbl-line{background:rgba(255,255,255,.2);}
+/* HEADINGS */
+.hxl{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:600;line-height:.95;letter-spacing:-1.5px;}
+.hlg{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:600;line-height:1.05;letter-spacing:-.75px;}
+.hmd{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:600;line-height:1.15;letter-spacing:-.25px;}
+.hw{color:var(--w);} .hb{color:var(--b);}
+.hw em,.hb em{color:var(--r);font-style:italic;font-weight:400;}
+/* BODY TEXT */
+.blg{font-size:1.05rem;line-height:1.85;font-weight:300;}
+.bmd{font-size:.9rem;line-height:1.85;font-weight:300;}
+.tw{color:rgba(255,255,255,.7);}
+.tmt{color:rgba(255,255,255,.38);}
+.tdk{color:var(--g);}
+/* BUTTONS */
+.btn-r{background:var(--r);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-r:hover{background:#d01020;transform:translateY(-2px);box-shadow:0 6px 28px rgba(193,18,31,.4);}
+.btn-g{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);padding:13px 30px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-g:hover{border-color:var(--r);color:var(--w);}
+.btn-dk{background:var(--b);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-dk:hover{background:#111;}
+.btn-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
+/* INNER PAGE HERO */
+.pg-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;}
+.pg-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
+.pg-hero .si{}
+/* FOOTER */
+footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem 3rem 3rem;}
+.fg{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3.5rem;margin-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.flogo img{width:190px;height:auto;display:block;margin-bottom:1.375rem;}
+.fdesc{font-size:.8rem;color:rgba(255,255,255,.25);line-height:1.85;}
+.fcol-t{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
+.flinks{display:flex;flex-direction:column;gap:.5rem;}
+.flinks a{font-size:.8rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:var(--w);}
+.fbot{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fquote{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(255,255,255,.16);font-style:italic;max-width:500px;}
+.fcopy{font-size:.7rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
+/* MOBILE */
+@media(max-width:1000px){
+  nav{padding:0 1.5rem;}
+  .nav-links,.nbtn-join{display:none;}
+  .nav-ham{display:flex;}
+  .sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}
+  .pg-hero{padding:4rem 1.5rem 3.5rem;}
+  .fg{grid-template-columns:1fr 1fr;gap:2rem;}
+  footer{padding:4rem 1.5rem 2.5rem;}
+}
+@media(max-width:600px){
+  body{font-size:15px;}
+  nav{padding:0 1.25rem;}
+  .sd,.sn,.sr,.so{padding:3.5rem 1.25rem;}
+  .pg-hero{padding:3rem 1.25rem 2.5rem;}
+  .fg{grid-template-columns:1fr;}
+  .fbot{flex-direction:column;text-align:center;}
+  .btn-row{flex-direction:column;align-items:flex-start;}
+}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--n);position:relative;overflow:hidden;padding:5rem 2rem;text-align:center;}
+.h-noise{position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.012) 3px,rgba(255,255,255,.012) 4px);
+  pointer-events:none;}
+.h-glow{position:absolute;top:50%;left:50%;width:800px;height:800px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(193,18,31,.08) 0%,transparent 68%);
+  pointer-events:none;}
+.h-corner{position:absolute;width:64px;height:64px;border-color:rgba(193,18,31,.3);border-style:solid;}
+.hc-tl{top:2rem;left:2rem;border-width:1px 0 0 1px;}
+.hc-tr{top:2rem;right:2rem;border-width:1px 1px 0 0;}
+.hc-bl{bottom:2rem;left:2rem;border-width:0 0 1px 1px;}
+.hc-br{bottom:2rem;right:2rem;border-width:0 1px 1px 0;}
+.h-ey{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,.28);margin-bottom:3rem;
+  display:flex;align-items:center;justify-content:center;gap:1.25rem;
+  position:relative;z-index:1;animation:fU 1s ease .3s both;}
+.h-ey-line{width:44px;height:1px;background:rgba(193,18,31,.45);}
+.h-logo{position:relative;z-index:1;margin-bottom:2.5rem;animation:logoIn 1.2s ease .6s both;}
+.h-logo img{width:min(680px,88vw);height:auto;display:block;margin:0 auto;
+  filter:drop-shadow(0 0 80px rgba(193,18,31,.2)) drop-shadow(0 10px 50px rgba(0,0,0,.8));}
+@keyframes logoIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+.h-vline{width:1px;height:0;background:linear-gradient(var(--r),transparent);
+  margin:0 auto 2.75rem;position:relative;z-index:1;animation:vLine .8s ease 1.7s both;}
+@keyframes vLine{to{height:60px}}
+.h-h1{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5.5vw,5.2rem);font-weight:600;line-height:.96;
+  color:var(--w);letter-spacing:-1.5px;
+  max-width:880px;margin:0 auto 1.75rem;
+  position:relative;z-index:1;animation:fU .9s ease 2.1s both;}
+.h-h1 em{color:var(--r);font-style:italic;}
+.h-sub{font-size:clamp(.95rem,1.8vw,1.1rem);color:rgba(255,255,255,.42);
+  max-width:520px;margin:0 auto 3rem;line-height:1.85;font-weight:300;
+  position:relative;z-index:1;animation:fU .9s ease 2.4s both;}
+.h-btns{position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;gap:1.125rem;flex-wrap:wrap;
+  animation:fU .9s ease 2.7s both;}
+.h-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:1;
+  animation:fU .9s ease 3.1s both;}
+.h-scroll-line{width:1px;height:52px;background:linear-gradient(var(--r),transparent);
+  animation:sP 2.2s ease infinite;}
+@keyframes sP{0%,100%{opacity:.3}50%{opacity:1}}
+.h-scroll-t{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.2);}
+@keyframes fU{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* STAT BAND */
+.stat-band{background:var(--r);display:grid;grid-template-columns:repeat(4,1fr);}
+.sblk{padding:2.5rem 2rem;border-right:1px solid rgba(255,255,255,.15);text-align:center;}
+.sblk:last-child{border-right:none;}
+.snum{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4.5vw,3.8rem);
+  color:var(--w);display:block;line-height:1;margin-bottom:.35rem;}
+.slbl{font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  color:rgba(255,255,255,.7);letter-spacing:1.5px;text-transform:uppercase;line-height:1.5;}
+
+/* FRAMEWORK */
+.fw-hdr{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end;margin-bottom:4.5rem;}
+.fw-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1.125rem;}
+.pbox{position:relative;overflow:hidden;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  padding:2.5rem 1.75rem 5rem;transition:all .3s;cursor:default;}
+.pbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--r);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.pbox:hover{background:rgba(193,18,31,.055);border-color:rgba(193,18,31,.28);transform:translateY(-4px);}
+.pbox:hover::before{transform:scaleX(1);}
+.pbox-bg{position:absolute;bottom:-.5rem;right:.5rem;
+  font-family:'Bebas Neue',sans-serif;font-size:7rem;line-height:1;
+  color:rgba(255,255,255,.04);pointer-events:none;transition:color .3s;}
+.pbox:hover .pbox-bg{color:rgba(193,18,31,.12);}
+.ptag{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--r);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:.875rem;}
+.pscore{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--w);line-height:1;margin-bottom:.4rem;}
+.pname{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;
+  color:var(--w);margin-bottom:.625rem;line-height:1.2;}
+.pdesc{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.75;position:relative;z-index:1;}
+.trig-strip{background:rgba(193,18,31,.07);
+  border-top:1px solid rgba(193,18,31,.18);border-bottom:1px solid rgba(193,18,31,.18);
+  padding:1.75rem 3rem;}
+.trig-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.trig-icon{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--r);line-height:1;flex-shrink:0;}
+.trig-body{font-size:.9rem;color:rgba(255,255,255,.62);line-height:1.75;}
+.trig-body strong{color:var(--w);}
+
+/* TIERS */
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);margin-top:4rem;}
+.tier{background:var(--n);padding:3.5rem 2.5rem;position:relative;overflow:hidden;transition:background .3s;}
+.tier:hover{background:rgba(255,255,255,.02);}
+.tier-acc{position:absolute;top:0;left:0;right:0;height:3px;}
+.tier.low .tier-acc{background:#1B7A1B;}
+.tier.high .tier-acc{background:#B8720A;}
+.tier.crit .tier-acc{background:var(--r);}
+.tier-bnum{position:absolute;bottom:-.5rem;right:-.25rem;font-family:'Bebas Neue',sans-serif;
+  font-size:10rem;line-height:1;color:rgba(255,255,255,.025);pointer-events:none;user-select:none;}
+.tier-range{font-family:'Bebas Neue',sans-serif;font-size:4rem;line-height:1;margin-bottom:.4rem;}
+.tier.low .tier-range{color:#1B7A1B;}
+.tier.high .tier-range{color:#B8720A;}
+.tier.crit .tier-range{color:var(--r);}
+.tier-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--w);margin-bottom:.875rem;line-height:1.2;}
+.tier-desc{font-size:.85rem;color:rgba(255,255,255,.42);line-height:1.8;}
+.tier-act{margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.07);
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.22);
+  letter-spacing:.5px;line-height:1.55;}
+
+/* SCORE SECTION */
+.sp-sec{position:relative;overflow:hidden;}
+.sp-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;
+  font-size:28vw;line-height:.85;color:rgba(193,18,31,.04);
+  right:-1rem;top:50%;transform:translateY(-50%);
+  pointer-events:none;user-select:none;white-space:nowrap;letter-spacing:-5px;}
+.sp-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+  gap:6rem;align-items:center;position:relative;z-index:1;}
+.sc-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-top:2px solid var(--r);padding:2.5rem;}
+.sc-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(255,255,255,.22);
+  margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.sc-big{font-family:'Bebas Neue',sans-serif;font-size:6rem;line-height:1;color:var(--w);}
+.sc-den{font-size:1.5rem;color:rgba(255,255,255,.28);}
+.sc-bar{height:2px;background:rgba(255,255,255,.08);margin:.875rem 0;}
+.sc-fill{height:2px;background:var(--r);width:0;transition:width 1.8s ease;}
+.sc-tier{display:inline-block;background:rgba(193,18,31,.1);border-left:2px solid var(--r);
+  padding:4px 14px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+  color:var(--r);margin-bottom:1.5rem;letter-spacing:.5px;text-transform:uppercase;}
+.sc-rows{display:flex;flex-direction:column;gap:.35rem;}
+.sc-row{display:flex;justify-content:space-between;align-items:center;
+  padding:.5rem .875rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);}
+.sc-rl{font-size:.78rem;color:rgba(255,255,255,.38);}
+.sc-rv{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--w);font-weight:500;}
+.sc-rv.red{color:var(--r);}
+.sp-feats{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem;}
+.sp-feat{font-size:.85rem;color:rgba(255,255,255,.42);display:flex;align-items:center;gap:.875rem;}
+.sp-feat::before{content:'';width:14px;height:1px;background:var(--r);flex-shrink:0;}
+
+/* IFN CARDS */
+.ifn-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3.5rem;flex-wrap:wrap;}
+.ifn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.125rem;}
+.icard{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);
+  transition:all .3s;text-decoration:none;display:block;overflow:hidden;}
+.icard:hover{background:rgba(193,18,31,.055);border-color:rgba(193,18,31,.3);transform:translateY(-4px);}
+.icard-hd{background:rgba(255,255,255,.03);padding:.875rem 1.25rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.07);}
+.icard-id{font-family:'IBM Plex Mono',monospace;font-size:.9rem;color:var(--r);letter-spacing:1px;font-weight:500;}
+.icard-p{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.22);
+  letter-spacing:1.5px;text-transform:uppercase;}
+.icard-bd{padding:1.5rem 1.25rem;}
+.icard-t{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;
+  color:var(--w);margin-bottom:.625rem;line-height:1.3;}
+.icard-e{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.75;}
+.icard-ft{padding:.875rem 1.25rem;border-top:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;}
+.icard-m{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.22);}
+.icard-s{font-size:.75rem;color:rgba(255,255,255,.22);display:flex;gap:.875rem;}
+
+/* CONTINENT MAP */
+.map-hdr{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:3rem;}
+.map-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);}
+.map-wrap svg{width:100%;display:block;}
+.map-btm{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:rgba(255,255,255,.06);}
+.cstat{background:var(--b);padding:1.1rem;text-align:center;}
+.cstat-n{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1.5px;
+  text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:.3rem;}
+.cstat-v{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--r);line-height:1;}
+
+/* TIMELINE */
+.tl-hdr{margin-bottom:3.5rem;}
+.tl-nn{display:inline-block;background:rgba(193,18,31,.08);
+  border-left:3px solid var(--r);padding:.5rem 1rem;margin-top:1.25rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--r);letter-spacing:.5px;}
+.timeline{position:relative;padding-left:3.5rem;max-width:880px;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(0,0,0,.12);}
+.tli{margin-bottom:2.75rem;position:relative;}
+.tli:last-child{margin-bottom:0;}
+.tli-node{width:44px;height:44px;background:var(--r);display:flex;align-items:center;
+  justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  color:var(--w);font-weight:500;position:absolute;left:-3.5rem;top:0;
+  z-index:1;margin-left:-22px;text-align:center;line-height:1.3;}
+.tli-card{background:var(--w);border:1px solid var(--br);border-left:3px solid var(--r);
+  padding:1.75rem 2rem;}
+.tli-date{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--m);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;}
+.tli-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;
+  color:var(--b);margin-bottom:.625rem;line-height:1.25;}
+.tli-desc{font-size:.875rem;color:var(--g);line-height:1.8;}
+.tli-score{display:inline-block;margin-top:.875rem;font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;color:var(--r);background:var(--rl);padding:3px 10px;}
+
+/* HAVEN PROMO */
+.haven-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.haven-stages{display:flex;flex-direction:column;gap:.5rem;}
+.hs{display:flex;align-items:center;gap:1.25rem;padding:1rem 1.25rem;
+  background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);
+  border-left:2px solid transparent;transition:all .22s;cursor:default;}
+.hs:hover{background:rgba(193,18,31,.055);border-left-color:var(--r);transform:translateX(4px);}
+.hs-n{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(193,18,31,.3);
+  line-height:1;flex-shrink:0;width:2rem;transition:color .22s;}
+.hs:hover .hs-n{color:var(--r);}
+.hs-t{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.65);}
+
+/* COMMUNITY */
+.comm-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;}
+.live-badge{display:inline-flex;align-items:center;gap:.625rem;margin-bottom:1.5rem;
+  background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);padding:.375rem .875rem;}
+.live-dot{width:7px;height:7px;background:#16a34a;border-radius:50%;animation:ldot 2s ease infinite;flex-shrink:0;}
+@keyframes ldot{0%,100%{opacity:1}50%{opacity:.3}}
+.live-t{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#16a34a;letter-spacing:2px;text-transform:uppercase;}
+.feed-list{display:flex;flex-direction:column;}
+.fi{display:grid;grid-template-columns:58px 1fr auto;gap:1.125rem;align-items:start;
+  padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;}
+.fi:last-child{border-bottom:none;}
+.fi:hover .fi-title{color:var(--r);}
+.fi-num{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:rgba(255,255,255,.2);padding-top:2px;}
+.fi-tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--r);
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.35rem;}
+.fi-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;
+  color:var(--w);line-height:1.35;transition:color .18s;}
+.fi-exc{font-size:.8rem;color:rgba(255,255,255,.32);line-height:1.65;margin-top:.3rem;}
+.fi-stats{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;flex-shrink:0;}
+.fstat{font-size:.72rem;color:rgba(255,255,255,.2);}
+.comm-sidebar{}
+.signup-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-top:2px solid var(--r);padding:2rem;margin-bottom:1.125rem;}
+.sc2-t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--w);margin-bottom:.5rem;}
+.sc2-s{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.7;margin-bottom:1.5rem;}
+.finp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:var(--w);padding:11px 15px;font-family:'Figtree',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .2s;margin-bottom:.825rem;}
+.finp:focus{border-color:var(--r);}
+.finp::placeholder{color:rgba(255,255,255,.22);}
+.fbtn{width:100%;background:var(--r);color:var(--w);border:none;padding:12px;
+  font-family:'Figtree',sans-serif;font-size:.82rem;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.fbtn:hover{background:#d01020;}
+.fnote{font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.625rem;line-height:1.5;}
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:.625rem;}
+.cs-box{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);padding:1.1rem;text-align:center;}
+.cs-n{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--w);display:block;line-height:1;margin-bottom:.2rem;}
+.cs-l{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.5px;text-transform:uppercase;}
+
+/* MISSION STRIP */
+.mission-strip{background:var(--r);padding:5rem 3rem;text-align:center;}
+
+/* MOBILE OVERRIDES */
+@media(max-width:1000px){
+  .fw-pillars{grid-template-columns:1fr 1fr;}
+  .fw-hdr{grid-template-columns:1fr;gap:2.5rem;}
+  .tiers-grid{grid-template-columns:1fr;}
+  .sp-grid{grid-template-columns:1fr;gap:3rem;}
+  .sp-bg-word{font-size:50vw;}
+  .ifn-grid{grid-template-columns:1fr 1fr;}
+  .map-hdr{grid-template-columns:1fr;}
+  .map-btm{grid-template-columns:repeat(4,1fr);}
+  .haven-grid{grid-template-columns:1fr;gap:3rem;}
+  .comm-grid{grid-template-columns:1fr;gap:3rem;}
+  .stat-band{grid-template-columns:1fr 1fr;}
+  .sblk{border-right:none;border-bottom:1px solid rgba(255,255,255,.15);}
+  .sblk:last-child{border-bottom:none;}
+}
+@media(max-width:600px){
+  .fw-pillars{grid-template-columns:1fr;}
+  .ifn-grid{grid-template-columns:1fr;}
+  .trig-strip{padding:1.5rem 1.25rem;}
+  .map-btm{grid-template-columns:1fr 1fr;}
+  .timeline{padding-left:2.75rem;}
+  .tli-node{left:-2.75rem;margin-left:-22px;}
+}
+
+.nav-intel-wrap{position:relative;display:inline-block;}
+.nav-intel-wrap:hover .mega-drop{display:block !important;}
+
+
+/* ── DAY / NIGHT MODE ── */
+:root{
+  --r:#C1121F;
+  --b:#0B0B0D;
+  --w:#FFFFFF;
+  --off:#F8F6F2;
+  --g:#5A5A5A;
+  --m:#9A9A9A;
+  --br:#E4E1DB;
+  --rl:#FEF0F0;
+  --n:#060608;
+  /* Theme tokens */
+  --bg:#060608;
+  --surface:rgba(255,255,255,.025);
+  --surface2:rgba(255,255,255,.04);
+  --text:#FFFFFF;
+  --text2:rgba(255,255,255,.7);
+  --text3:rgba(255,255,255,.38);
+  --border:rgba(255,255,255,.08);
+  --nav-bg:rgba(6,6,8,.97);
+  --card-bg:rgba(255,255,255,.025);
+  --card-border:rgba(255,255,255,.07);
+  --section-dark:#060608;
+  --section-black:#0B0B0D;
+  --footer-bg:#060608;
+  --ticker2-bg:rgba(11,11,13,1);
+  --mega-bg:#060608;
+  --inp-bg:rgba(255,255,255,.05);
+  --inp-border:rgba(255,255,255,.1);
+}
+body.day-mode{
+  --bg:#F8F6F2;
+  --surface:rgba(0,0,0,.04);
+  --surface2:rgba(0,0,0,.06);
+  --text:#0B0B0D;
+  --text2:rgba(0,0,0,.65);
+  --text3:rgba(0,0,0,.38);
+  --border:rgba(0,0,0,.1);
+  --nav-bg:rgba(248,246,242,.97);
+  --card-bg:#FFFFFF;
+  --card-border:#E4E1DB;
+  --section-dark:#F0EDE8;
+  --section-black:#E8E5E0;
+  --footer-bg:#0B0B0D;
+  --ticker2-bg:#E4E1DB;
+  --mega-bg:#FFFFFF;
+  --inp-bg:rgba(0,0,0,.04);
+  --inp-border:rgba(0,0,0,.15);
+}
+
+/* Apply theme tokens */
+body{background:var(--bg);color:var(--text);}
+nav{background:var(--nav-bg);}
+.mega-drop{background:var(--mega-bg) !important;}
+body.day-mode .mega-drop a{color:var(--text);}
+body.day-mode .mega-drop a div[style*="color:#fff"]{color:#0B0B0D !important;}
+body.day-mode .mega-drop a div[style*="color:rgba(255,255,255,.3)"]{color:rgba(0,0,0,.4) !important;}
+
+/* Hero */
+.hero,.h-noise,.h-glow{background:var(--section-dark);}
+.h-h1{color:var(--text);}
+.h-sub{color:var(--text3);}
+body.day-mode .h-corner{border-color:rgba(193,18,31,.25);}
+body.day-mode .h-ey{color:rgba(0,0,0,.25);}
+body.day-mode .h-ey-line{background:rgba(193,18,31,.35);}
+
+/* Sections */
+.sd{background:var(--section-black);}
+.sn{background:var(--section-dark);}
+body.day-mode .sd{background:#FFFFFF;}
+body.day-mode .sn{background:#F0EDE8;}
+
+/* Text */
+.hw{color:var(--text);}
+.tw{color:var(--text2);}
+.tmt{color:var(--text3);}
+body.day-mode .hb{color:var(--text);}
+
+/* Cards */
+.pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
+  background:var(--card-bg);
+  border-color:var(--card-border);
+}
+body.day-mode .pbox-bg{color:rgba(0,0,0,.04);}
+body.day-mode .pdesc{color:rgba(0,0,0,.45);}
+body.day-mode .ptag{color:var(--r);}
+body.day-mode .pname{color:var(--text);}
+body.day-mode .pscore{color:var(--text);}
+
+/* Nav links */
+body.day-mode .nav-links a{color:rgba(0,0,0,.45);}
+body.day-mode .nav-links a:hover,body.day-mode .nav-links a.active{color:#0B0B0D;}
+body.day-mode .nbtn-join{border-color:rgba(0,0,0,.2);color:rgba(0,0,0,.55);}
+body.day-mode .nbtn-join:hover{border-color:var(--r);color:#0B0B0D;}
+
+/* Intelligence hub */
+body.day-mode .intel-hub-card{background:#FFFFFF;border-color:#E4E1DB;}
+
+/* Feed */
+body.day-mode .fi{border-color:rgba(0,0,0,.08);}
+body.day-mode .fi-num{color:rgba(0,0,0,.2);}
+body.day-mode .fi-title{color:var(--text);}
+body.day-mode .fi-exc{color:rgba(0,0,0,.4);}
+body.day-mode .fstat{color:rgba(0,0,0,.25);}
+
+/* Inputs */
+.finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
+  background:var(--inp-bg);
+  border-color:var(--inp-border);
+  color:var(--text);
+}
+body.day-mode .finp::placeholder,body.day-mode .fi3::placeholder{color:rgba(0,0,0,.3);}
+
+/* Tiers */
+body.day-mode .tier{background:#F8F6F2;}
+body.day-mode .tier:hover{background:#F0EDE8;}
+body.day-mode .tier-name{color:var(--text);}
+body.day-mode .tier-desc{color:rgba(0,0,0,.45);}
+body.day-mode .tier-act{color:rgba(0,0,0,.25);}
+body.day-mode .tiers-grid{background:rgba(0,0,0,.08);}
+
+/* Score card */
+body.day-mode .sc-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .sc-tag{color:rgba(0,0,0,.3);}
+body.day-mode .sc-big{color:var(--text);}
+body.day-mode .sc-bar{background:rgba(0,0,0,.08);}
+body.day-mode .sc-row{background:rgba(0,0,0,.025);border-color:rgba(0,0,0,.06);}
+body.day-mode .sc-rl{color:rgba(0,0,0,.4);}
+body.day-mode .sc-rv{color:var(--text);}
+body.day-mode .sp-feat{color:rgba(0,0,0,.45);}
+body.day-mode .sp-bg-word{color:rgba(193,18,31,.04);}
+
+/* Haven/Solace stages */
+body.day-mode .hs{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .hs:hover{background:rgba(193,18,31,.05);}
+body.day-mode .hs-n{color:rgba(193,18,31,.25);}
+body.day-mode .hs-t{color:rgba(0,0,0,.6);}
+
+/* Community */
+body.day-mode .signup-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .sc2-t{color:var(--text);}
+body.day-mode .sc2-s{color:rgba(0,0,0,.4);}
+body.day-mode .cs-box{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .cs-n{color:var(--text);}
+body.day-mode .cs-l{color:rgba(0,0,0,.3);}
+
+/* Map */
+body.day-mode .map-wrap{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .cstat{background:#FFFFFF;}
+body.day-mode .cstat-n{color:rgba(0,0,0,.3);}
+
+/* IFN cards */
+body.day-mode .icard{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .icard-hd{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .icard-id{color:var(--r);}
+body.day-mode .icard-p{color:rgba(0,0,0,.3);}
+body.day-mode .icard-t{color:var(--text);}
+body.day-mode .icard-e{color:rgba(0,0,0,.45);}
+body.day-mode .icard-ft{border-color:rgba(0,0,0,.06);}
+body.day-mode .icard-m{color:rgba(0,0,0,.3);}
+body.day-mode .icard-s{color:rgba(0,0,0,.3);}
+
+/* IC3 intel cards */
+body.day-mode .ic3{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .ic3-hd{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .ic3-t{color:var(--text);}
+body.day-mode .ic3-e{color:rgba(0,0,0,.45);}
+
+/* Ticker secondary */
+body.day-mode .ticker:not([style*="background:rgba(11"]){background:var(--r);}
+
+/* Footer always dark */
+footer{background:var(--footer-bg) !important;}
+body.day-mode footer{background:#0B0B0D !important;}
+
+/* Page hero */
+body.day-mode .pg-hero{background:#F0EDE8;}
+body.day-mode .pg-hero h1{color:var(--text);}
+
+/* Off section (timeline) */
+body.day-mode .so{background:var(--off);color:var(--b);}
+
+/* Pillar boxes day */
+body.day-mode .pbox{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .pbox:hover{background:rgba(193,18,31,.04);border-color:rgba(193,18,31,.2);}
+
+/* Trig strip */
+body.day-mode .trig-strip{background:rgba(193,18,31,.05);border-color:rgba(193,18,31,.15);}
+body.day-mode .trig-body{color:rgba(0,0,0,.6);}
+body.day-mode .trig-body strong{color:var(--text);}
+
+/* Mission strip stays red */
+.mission-strip{background:var(--r);}
+
+/* Hero intel preview */
+body.day-mode .hi-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .hi-card:hover{background:rgba(193,18,31,.04);border-top-color:var(--r);}
+body.day-mode .hi-title{color:var(--text);}
+body.day-mode .hi-meta{color:rgba(0,0,0,.3);}
+
+/* ── TOGGLE BUTTON ── */
+.theme-toggle{
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  z-index:999;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:var(--r);
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 20px rgba(193,18,31,.4);
+  transition:all .3s;
+}
+.theme-toggle:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(193,18,31,.5);}
+.theme-toggle svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s;}
+.theme-toggle .icon-moon{display:block;}
+.theme-toggle .icon-sun{display:none;}
+body.day-mode .theme-toggle .icon-moon{display:none;}
+body.day-mode .theme-toggle .icon-sun{display:block;}
+.theme-toggle-tip{
+  position:fixed;bottom:2rem;right:5rem;
+  background:var(--bg);border:1px solid var(--border);
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
+  color:var(--text2);letter-spacing:1px;text-transform:uppercase;
+  padding:.4rem .875rem;opacity:0;pointer-events:none;
+  transition:opacity .3s;white-space:nowrap;
+}
+.theme-toggle:hover + .theme-toggle-tip{opacity:1;}
+
+</style>
+</head>
+<body>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Online Security Bureau"></a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
+      <a href="intelligence.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">Intelligence<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
+        <a href="rsei-model.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Framework</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Model™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The world's only behavioural scoring framework</div></a>
+        <a href="intelligence.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Case Library</div><div style="font-size:.88rem;font-weight:600;color:#fff;">IFN Intelligence Library</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Field intelligence — named, documented, published</div></a>
+        <a href="platform-index.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Platform Ratings</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Platform Safety Index</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB rates every major dating platform</div></a>
+        <a href="report.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Annual Report</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Global Fraud Report 2026</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The definitive annual intelligence report — free to cite</div></a>
+      </div>
+    </div>
+    <a href="score.html">SCORE</a>
+    <a href="solace.html">Solace</a>
+    <a href="community.html">Community</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a href="community.html" class="nbtn-join">Community</a>
+    <a href="score.html" class="nbtn-score">SCORE Now</a>
+  </div>
+  <button class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="about.html" onclick="closeMob()">About</a>
+  <a href="rsei-model.html" onclick="closeMob()">RSEI Model™</a>
+  <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
+  <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
+  <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
+  <a href="score.html" onclick="closeMob()">SCORE</a>
+  <a href="solace.html" onclick="closeMob()">Solace</a>
+  <a href="community.html" onclick="closeMob()">Community</a>
+  <a href="contact.html" onclick="closeMob()">Contact</a>
+  <div class="mob-ctas">
+    <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">SCORE Now</a>
+    <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
+  </div>
+</div>
+</div>
+
+<div class="hero">
+  <div class="h-noise"></div>
+  <div class="h-glow"></div>
+  <div class="h-corner hc-tl"></div><div class="h-corner hc-tr"></div>
+  <div class="h-corner hc-bl"></div><div class="h-corner hc-br"></div>
+  <div class="h-ey"><div class="h-ey-line"></div>Behavioural Intelligence · RSEI Model™ · Est. 2021<div class="h-ey-line"></div></div>
+  <div class="h-logo"><img src="logo.png" alt="Online Security Bureau"></div>
+  <div class="h-vline"></div>
+  <h1 class="h-h1">Romance fraud has a name.<br>It has a score.<br><em>Only one organisation built both.</em></h1>
+  <p class="h-sub">Online Security Bureau developed the world's first and only behavioural scoring framework for romance fraud. We do not raise awareness. We score. We intervene. We stop it.</p>
+  <div class="h-btns">
+    <a href="score.html" class="btn-r">Score Your Situation Now</a>
+    <a href="rsei-model.html" class="btn-g">Read the Framework</a>
+  </div>
+  <div class="h-scroll"><div class="h-scroll-line"></div><div class="h-scroll-t">Scroll</div></div>
+</div>
+
+<div class="ticker" style="background:rgba(11,11,13,1);border-top:1px solid rgba(193,18,31,.15);">
+  <div class="tt"><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering Fraud Intelligence<span class="ts">◆</span></div><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering Fraud Intelligence<span class="ts">◆</span></div></div>
+</div>
+
+<div class="stat-band">
+  <div class="sblk reveal"><span class="snum" data-target="74" data-prefix="$" data-suffix="B+">$0</span><div class="slbl">Annual global romance fraud losses</div></div>
+  <div class="sblk reveal d1"><span class="snum" data-target="20700" data-prefix="" data-suffix="+">0</span><div class="slbl">OSB platform reach and growing</div></div>
+  <div class="sblk reveal d2"><span class="snum" data-target="5" data-prefix="" data-suffix="">0</span><div class="slbl">Intelligence field notes documented</div></div>
+  <div class="sblk reveal d3"><span class="snum" data-target="1" data-prefix="" data-suffix="">0</span><div class="slbl">Framework of its kind in the world</div></div>
+</div>
+
+<div class="sd" style="padding-top:7rem;padding-bottom:0;">
+  <div class="si">
+    <div class="fw-hdr">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">The Framework</div></div>
+        <h2 class="hlg hw">Four pillars.<br><em>One score. Zero ambiguity.</em></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="blg tw" style="margin-bottom:2rem;">The RSEI Model™ is the world's only structured behavioural scoring system built specifically for romance fraud. Every scammer uses these four pillars — whether they know it or not.</p>
+        <a href="rsei-model.html" class="btn-g" style="font-size:10px;">Read the full framework →</a>
+      </div>
+    </div>
+    <div class="fw-pillars">
+      <div class="pbox reveal d1"><div class="pbox-bg">R</div><div class="ptag">Pillar 01</div><div class="pscore">1—5</div><div class="pname">Relationship Acceleration</div><div class="pdesc">How fast the scammer engineers false intimacy, emotional dependency and premature declarations of love and commitment.</div></div>
+      <div class="pbox reveal d2"><div class="pbox-bg">S</div><div class="ptag">Pillar 02</div><div class="pscore">1—5</div><div class="pname">Script Consistency</div><div class="pdesc">The rehearsed persona — occupation, location, backstory and financial credibility props designed to feel verifiable.</div></div>
+      <div class="pbox reveal d3"><div class="pbox-bg">E</div><div class="ptag">Pillar 03</div><div class="pscore">1—5</div><div class="pname">Emotional Manipulation</div><div class="pdesc">Exploitation of trust, guilt, love and fear. E ≥ 4 triggers mandatory support — regardless of financial loss.</div></div>
+      <div class="pbox reveal d4"><div class="pbox-bg">I</div><div class="ptag">Pillar 04</div><div class="pscore">1—5</div><div class="pname">Incremental Extraction</div><div class="pdesc">Escalating financial asks — mule recruitment, gift cards, wire transfers, cryptocurrency. Small begins. Large follows.</div></div>
+    </div>
+  </div>
+</div>
+<div class="trig-strip">
+  <div class="trig-inner">
+    <div class="trig-icon">E≥4</div>
+    <div class="trig-body"><strong>E Pillar Independent Trigger — Active at E ≥ 4:</strong> OSB mandates victim support referral regardless of total Core Score and regardless of whether any financial loss has occurred. <strong>Emotional harm is real harm.</strong> This trigger is unique to the RSEI Model™ and was established through field case IFN-002.</div>
+  </div>
+</div>
+
+<div class="sn" style="padding-top:7rem;padding-bottom:7rem;">
+  <div class="si">
+    <div class="reveal">
+      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Risk Classification</div></div>
+      <h2 class="hlg hw" style="margin-bottom:4rem;">Three tiers.<br><em>No ambiguity. No softening.</em></h2>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier low reveal d1"><div class="tier-acc"></div><div class="tier-bnum">4</div><div class="tier-range">4—11</div><div class="tier-name">Low Behavioural Risk</div><div class="tier-desc">Patterns present but below confirmed fraud threshold. Monitoring required. Stay alert — particularly around financial requests and inability to verify identity in person.</div><div class="tier-act">Protocol: Monitor · Document · Stay alert to escalation</div></div>
+      <div class="tier high reveal d2"><div class="tier-acc"></div><div class="tier-bnum">12</div><div class="tier-range">12—16</div><div class="tier-name">High Probability Romance Scam</div><div class="tier-desc">Multiple confirmed fraud indicators present. Hallmarks of a professional, organised operation. Do not send money. Screenshot all evidence. Contact OSB now.</div><div class="tier-act">Protocol: Do not send money · Screenshot · Contact OSB</div></div>
+      <div class="tier crit reveal d3"><div class="tier-acc"></div><div class="tier-bnum">17</div><div class="tier-range">17—20</div><div class="tier-name">Critical Exploitation</div><div class="tier-desc">Advanced exploitation in active progress. Immediate action required. Stop all financial transactions. Secure your evidence. Contact your bank and OSB without delay.</div><div class="tier-act">Protocol: Stop all transactions · Contact bank · Contact OSB immediately</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sp-sec sd" style="padding:7rem 3rem;">
+  <div class="sp-bg-word">SCORE</div>
+  <div class="sp-grid">
+    <div class="reveal">
+      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Free · Private · 2 Minutes</div></div>
+      <h2 class="hlg hw" style="margin-bottom:1.5rem;">Score your situation<br><em>right now.</em></h2>
+      <p class="blg tw" style="margin-bottom:1rem;">8 questions. Evidence-based results built on the RSEI Model™. No personal details required. The only scoring tool of its kind on the planet.</p>
+      <p class="bmd tmt" style="margin-bottom:2.5rem;">Designed for everyone — seniors, families, anyone who suspects something is wrong. Clear. Simple. Free forever.</p>
+      <div class="btn-row" style="margin-bottom:2rem;">
+        <a href="score.html" class="btn-r">Begin the Assessment</a>
+        <a href="community.html" class="btn-g">Share with someone</a>
+      </div>
+      <div class="sp-feats">
+        <div class="sp-feat">Completely private — no data stored without consent</div>
+        <div class="sp-feat">Results in under 2 minutes</div>
+        <div class="sp-feat">Clear action guidance for every tier</div>
+        <div class="sp-feat">Accessible for all ages including seniors</div>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="sc-card">
+        <div class="sc-tag">Sample RSEI Assessment · IFN-001</div>
+        <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.5rem;">
+          <span class="sc-big">16</span><span class="sc-den">/ 20</span>
+        </div>
+        <div class="sc-bar"><div class="sc-fill" id="sc-fill"></div></div>
+        <div class="sc-tier">High Probability Romance Scam</div>
+        <div class="sc-rows">
+          <div class="sc-row"><div class="sc-rl">R — Relationship Acceleration</div><div class="sc-rv">4 / 5</div></div>
+          <div class="sc-row"><div class="sc-rl">S — Script Consistency</div><div class="sc-rv">5 / 5</div></div>
+          <div class="sc-row"><div class="sc-rl">E — Emotional Manipulation</div><div class="sc-rv">4 / 5</div></div>
+          <div class="sc-row"><div class="sc-rl">I — Incremental Extraction</div><div class="sc-rv">3 / 5</div></div>
+          <div class="sc-row" style="border-top:1px solid rgba(255,255,255,.08);margin-top:.25rem;">
+            <div class="sc-rl" style="color:rgba(255,255,255,.65);font-weight:500;">ESI — Velocity Indicator</div>
+            <div class="sc-rv red">4 / 5</div>
+          </div>
+        </div>
+        <a href="score.html" class="btn-r" style="display:block;text-align:center;margin-top:1.75rem;font-size:10px;letter-spacing:2px;">Score your own situation →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sn" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="ifn-hdr">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Intelligence Library</div></div>
+        <h2 class="hlg hw">Field intelligence.<br><em>Named. Documented. Published.</em></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="bmd tw" style="margin-bottom:1.5rem;max-width:360px;">All cases referenced by IFN number only — no victim names or identifying details ever published by OSB.</p>
+        <a href="intelligence.html" class="btn-g" style="font-size:10px;">View full library</a>
+      </div>
+    </div>
+    <div class="ifn-grid">
+      <a href="intelligence.html" class="icard reveal d1"><div class="icard-hd"><div class="icard-id">IFN-005</div><div class="icard-p">S-Pillar · New</div></div><div class="icard-bd"><div class="icard-t">The Facade Bank Page — Staged Financial Interface</div><div class="icard-e">A fake bank portal used to show fabricated wealth before any financial request was made. First documented globally by OSB.</div></div><div class="icard-ft"><div class="icard-m">March 2026 · Quora</div><div class="icard-s"><span>♥ 6</span><span>◎ 1K+</span></div></div></a>
+      <a href="intelligence.html" class="icard reveal d2"><div class="icard-hd"><div class="icard-id">IFN-001</div><div class="icard-p">S-Pillar · Active</div></div><div class="icard-bd"><div class="icard-t">The Automated Bank Verification Exploit</div><div class="icard-e">Defeats the standard advice to verify independently. The victim's own due diligence became part of the trap.</div></div><div class="icard-ft"><div class="icard-m">13 Mar 2026</div><div class="icard-s"><span>♥ 8</span><span>◎ 1,234</span></div></div></a>
+      <a href="intelligence.html" class="icard reveal d3"><div class="icard-hd"><div class="icard-id">IFN-002</div><div class="icard-p">E-Pillar · E Score 5</div></div><div class="icard-bd"><div class="icard-t">The Suicidal Ideation Script — Zero Financial Loss</div><div class="icard-e">Established the E Pillar Independent Trigger. Emotional harm mandates support regardless of financial loss.</div></div><div class="icard-ft"><div class="icard-m">March 2026</div><div class="icard-s"><span>♥ 12</span><span>◎ 890</span></div></div></a>
+    </div>
+  </div>
+</div>
+
+<div class="sd" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="map-hdr">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Global Intelligence Index</div></div>
+        <h2 class="hlg hw">Romance fraud operates<br>on <em>every continent.</em></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="bmd tw" style="margin-bottom:2rem;">Every RSEI assessment contributes to the OSB Global Romance Fraud Index — the world's first live behavioural fraud mapping system. No borders. No exceptions.</p>
+        <a href="score.html" class="btn-r" style="font-size:10px;letter-spacing:2px;">Contribute Your Assessment</a>
+      </div>
+    </div>
+    <div class="map-wrap reveal">
+      <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1100" height="480" fill="#040406"/>
+        <line x1="0" y1="120" x2="1100" y2="120" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="0" y1="240" x2="1100" y2="240" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="0" y1="360" x2="1100" y2="360" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="275" y1="0" x2="275" y2="480" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="550" y1="0" x2="550" y2="480" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="825" y1="0" x2="825" y2="480" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <!-- Continent shapes -->
+        <path d="M95,62 L255,52 L292,98 L278,178 L228,222 L178,228 L128,202 L92,158 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M172,258 L272,246 L308,288 L292,378 L242,414 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M375,56 L528,48 L562,92 L542,152 L488,178 L428,172 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M442,192 L618,185 L668,238 L658,368 L578,418 L488,398 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M578,52 L918,42 L968,118 L938,238 L838,278 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M848,302 L978,295 L1002,338 L968,392 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <!-- Continent labels -->
+        <text x="182" y="38" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">NORTH AMERICA</text>
+        <text x="240" y="298" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">SOUTH AMERICA</text>
+        <text x="468" y="36" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">EUROPE</text>
+        <text x="556" y="295" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">AFRICA</text>
+        <text x="790" y="36" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">ASIA</text>
+        <text x="918" y="352" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">OCEANIA</text>
+        <!-- North America -->
+        <circle cx="182" cy="142" r="6" fill="#C1121F" opacity=".9"><animate attributeName="r" values="6;9;6" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="162" cy="158" r="4" fill="#C1121F" opacity=".6"><animate attributeName="r" values="4;6;4" dur="2.6s" repeatCount="indefinite" begin=".5s"/></circle>
+        <circle cx="208" cy="132" r="3" fill="#C1121F" opacity=".55"><animate attributeName="r" values="3;5;3" dur="3.8s" repeatCount="indefinite" begin="1.1s"/></circle>
+        <!-- South America -->
+        <circle cx="232" cy="318" r="5" fill="#C1121F" opacity=".75"><animate attributeName="r" values="5;7;5" dur="3.2s" repeatCount="indefinite" begin=".8s"/></circle>
+        <circle cx="215" cy="342" r="3" fill="#C1121F" opacity=".5"><animate attributeName="r" values="3;4;3" dur="4.2s" repeatCount="indefinite" begin="1.4s"/></circle>
+        <!-- Europe -->
+        <circle cx="452" cy="108" r="5" fill="#C1121F" opacity=".85"><animate attributeName="r" values="5;8;5" dur="2.8s" repeatCount="indefinite" begin=".3s"/></circle>
+        <circle cx="488" cy="122" r="4" fill="#C1121F" opacity=".62"><animate attributeName="r" values="4;6;4" dur="3.4s" repeatCount="indefinite" begin=".9s"/></circle>
+        <circle cx="518" cy="105" r="3" fill="#C1121F" opacity=".5"><animate attributeName="r" values="3;5;3" dur="4.1s" repeatCount="indefinite" begin="1.2s"/></circle>
+        <!-- Africa — biggest cluster -->
+        <circle cx="556" cy="252" r="8" fill="#C1121F" opacity="1"><animate attributeName="r" values="8;12;8" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="575" cy="268" r="6" fill="#C1121F" opacity=".78"><animate attributeName="r" values="6;9;6" dur="3s" repeatCount="indefinite" begin=".4s"/></circle>
+        <circle cx="535" cy="258" r="5" fill="#C1121F" opacity=".68"><animate attributeName="r" values="5;7;5" dur="3.5s" repeatCount="indefinite" begin=".7s"/></circle>
+        <circle cx="565" cy="288" r="4" fill="#C1121F" opacity=".6"><animate attributeName="r" values="4;6;4" dur="4s" repeatCount="indefinite" begin="1s"/></circle>
+        <circle cx="592" cy="308" r="4" fill="#C1121F" opacity=".55"><animate attributeName="r" values="4;5;4" dur="3.2s" repeatCount="indefinite" begin="1.3s"/></circle>
+        <circle cx="545" cy="338" r="3" fill="#C1121F" opacity=".48"><animate attributeName="r" values="3;5;3" dur="4s" repeatCount="indefinite" begin=".6s"/></circle>
+        <!-- Asia -->
+        <circle cx="798" cy="148" r="6" fill="#C1121F" opacity=".85"><animate attributeName="r" values="6;9;6" dur="3.1s" repeatCount="indefinite" begin="1s"/></circle>
+        <circle cx="838" cy="168" r="5" fill="#C1121F" opacity=".72"><animate attributeName="r" values="5;7;5" dur="2.8s" repeatCount="indefinite" begin=".5s"/></circle>
+        <circle cx="872" cy="152" r="4" fill="#C1121F" opacity=".65"><animate attributeName="r" values="4;6;4" dur="3.5s" repeatCount="indefinite" begin=".9s"/></circle>
+        <circle cx="768" cy="172" r="4" fill="#C1121F" opacity=".58"><animate attributeName="r" values="4;6;4" dur="4s" repeatCount="indefinite" begin="1.4s"/></circle>
+        <circle cx="748" cy="138" r="3" fill="#C1121F" opacity=".48"><animate attributeName="r" values="3;5;3" dur="3.8s" repeatCount="indefinite" begin=".8s"/></circle>
+        <!-- Oceania -->
+        <circle cx="928" cy="342" r="5" fill="#C1121F" opacity=".72"><animate attributeName="r" values="5;7;5" dur="3.3s" repeatCount="indefinite" begin=".9s"/></circle>
+        <circle cx="908" cy="358" r="3" fill="#C1121F" opacity=".5"><animate attributeName="r" values="3;5;3" dur="4s" repeatCount="indefinite" begin="1.2s"/></circle>
+        <circle cx="28" cy="458" r="5" fill="#C1121F"/>
+        <text x="40" y="462" font-family="IBM Plex Mono,monospace" font-size="9" fill="rgba(255,255,255,.28)">Documented case — anonymised · All continents affected</text>
+        <text x="1072" y="462" font-family="IBM Plex Mono,monospace" font-size="9" fill="rgba(193,18,31,.45)" text-anchor="end">OSB GLOBAL INDEX · LIVE</text>
+      </svg>
+    </div>
+    <div class="map-btm">
+      <div class="cstat"><div class="cstat-n">N. America</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">S. America</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Europe</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Africa</div><div class="cstat-v">Hub</div></div>
+      <div class="cstat"><div class="cstat-n">Asia</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Oceania</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Global</div><div class="cstat-v">$74B+</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="so" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="tl-hdr reveal">
+      <div class="lbl"><div class="lbl-line"></div><div class="lbl-text">Intervention Record</div></div>
+      <h2 class="hlg hb">OSB shows up.<br><em>Every time. On record.</em></h2>
+      <p class="bmd tdk" style="margin-top:1rem;max-width:540px;">Not case studies. A body of work.</p>
+      <div class="tl-nn">All cases referenced by IFN number only — no victim names, usernames or identifying details published by OSB.</div>
+    </div>
+    <div class="timeline reveal">
+      <div class="tli"><div class="tli-node">IFN<br>003</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">First Live Exit — Active Scam Exited in Real Time</div><div class="tli-desc">OSB intervened in an active scam on Quora. Subject exited the same day. Both R and E pillars at maximum. First documented live OSB exit intervention.</div><div class="tli-score">Outcome: Successful · R Score 5/5 · E Score 5/5</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>002</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">E Score 5 — Crisis Language with Zero Financial Loss</div><div class="tli-desc">Suicidal ideation language produced directly by scammer manipulation. No money lost at time of documentation. Established the E Pillar Independent Trigger in RSEI v2.0.</div><div class="tli-score">E Score: 5/5 · Zero financial loss · E Independent Trigger formalised</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>001</div><div class="tli-card"><div class="tli-date">13 March 2026 · Quora — Scam Watch Space</div><div class="tli-title">The Automated Bank Verification Exploit — First Global Documentation</div><div class="tli-desc">Subject called a real bank using a real number and received confirmation of a large balance — using stolen credentials supplied by the scammer. The victim's own verification became the trap. OSB documented this technique first globally. 1,234+ combined reach.</div><div class="tli-score">RSEI: 16/20 · ESI: 4/5 · First global documentation</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>005</div><div class="tli-card"><div class="tli-date">March 2026 · Quora — John Dee</div><div class="tli-title">The Facade Bank Page — Staged Financial Interface</div><div class="tli-desc">A fake bank portal used to display fabricated wealth before any financial request was made. Distinct from IFN-001 — visual fabrication versus automated phone confirmation. First documented by OSB. 1,000+ views in 3 days.</div><div class="tli-score">S Score: 5/5 · Staged interface · New technique documented</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sn" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="haven-grid">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">OSB Solace — Emotional Recovery</div></div>
+        <h2 class="hlg hw" style="margin-bottom:1.5rem;">You were not foolish.<br><em>You were targeted.</em></h2>
+        <p class="blg tw" style="margin-bottom:1rem;">Romance scammers exploit the best of you — your capacity to love, to trust, to hope. OSB Solace walks you through six stages of emotional recovery. At your pace. No judgment. No rush.</p>
+        <p class="bmd tmt" style="margin-bottom:2.5rem;">Designed with seniors in mind. Clear. Compassionate. The truth that what happened to you was not your fault.</p>
+        <a href="solace.html" class="btn-r">Enter OSB Solace</a>
+      </div>
+      <div class="haven-stages reveal d2">
+        <div class="hs"><div class="hs-n">01</div><div class="hs-t">Confusion and Disbelief</div></div>
+        <div class="hs"><div class="hs-n">02</div><div class="hs-t">Shame and Self-Blame</div></div>
+        <div class="hs"><div class="hs-n">03</div><div class="hs-t">Anger</div></div>
+        <div class="hs"><div class="hs-n">04</div><div class="hs-t">Grief</div></div>
+        <div class="hs"><div class="hs-n">05</div><div class="hs-t">Acceptance</div></div>
+        <div class="hs"><div class="hs-n">06</div><div class="hs-t">Reclamation</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sd" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="comm-grid">
+      <div class="reveal">
+        <div class="live-badge"><div class="live-dot"></div><div class="live-t">Live Intelligence Feed</div></div>
+        <h2 class="hlg hw" style="margin-bottom:1.5rem;">The intelligence community.<br><em>Join it.</em></h2>
+        <p class="bmd tw" style="margin-bottom:2.5rem;">Every OSB field note and intelligence brief — published here, permanently archived. Read without an account. Sign up to engage and receive briefings direct to your inbox.</p>
+        <div class="feed-list">
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-005</div><div><div class="fi-tag">S-Pillar · New</div><div class="fi-title">The Facade Bank Page — Staged Financial Interface</div><div class="fi-exc">First documented globally by OSB. 1,000+ views in 3 days.</div></div><div class="fi-stats"><span class="fstat">♥ 6</span><span class="fstat">◎ 1K+</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-001</div><div><div class="fi-tag">S-Pillar · Active</div><div class="fi-title">The Automated Bank Verification Exploit</div><div class="fi-exc">Defeats "verify independently." The victim's own action became the trap.</div></div><div class="fi-stats"><span class="fstat">♥ 8</span><span class="fstat">◎ 1,234</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-002</div><div><div class="fi-tag">E-Pillar · E Score 5</div><div class="fi-title">The Suicidal Ideation Script — Zero Financial Loss</div><div class="fi-exc">Established the E Pillar Independent Trigger. Emotional harm is real harm.</div></div><div class="fi-stats"><span class="fstat">♥ 12</span><span class="fstat">◎ 890</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-004</div><div><div class="fi-tag">I-Pillar · $28,000</div><div class="fi-title">$28,000 Over 3 Years — The Slow-Burn Pattern</div><div class="fi-exc">Low velocity. High duration. Maximum damage.</div></div><div class="fi-stats"><span class="fstat">♥ 24</span><span class="fstat">◎ 3,400</span></div></div>
+        </div>
+        <div style="margin-top:2rem;">
+          <a href="community.html" class="btn-r" style="font-size:10px;letter-spacing:2px;">Join the Community</a>
+        </div>
+      </div>
+      <div class="comm-sidebar reveal d2">
+        <div class="signup-card">
+          <div class="sc2-t">Create Your Account</div>
+          <div class="sc2-s">No real name required or displayed. Comment and engage once your account reaches trust level 1.</div>
+          <input type="text" class="finp" placeholder="Choose a username" id="cu">
+          <input type="email" class="finp" placeholder="your@email.com" id="ce">
+          <button class="fbtn" onclick="joinCom()">Create Account — Free</button>
+          <div class="fnote">Private · Secure · No personal data sold</div>
+          <div id="jmsg" style="display:none;margin-top:.75rem;font-size:.8rem;"></div>
+        </div>
+        <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;margin-bottom:1.125rem;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:1rem;">Intelligence Briefings</div>
+          <p style="font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.7;margin-bottom:1.125rem;">Every new OSB publication delivered directly. No algorithm. Your list. Forever.</p>
+          <input type="email" class="finp" placeholder="your@email.com" id="nle">
+          <button class="fbtn" style="background:rgba(255,255,255,.07);" onmouseover="this.style.background='var(--r)'" onmouseout="this.style.background='rgba(255,255,255,.07)'" onclick="nlSub()">Subscribe Free</button>
+          <div id="nlmsg" style="display:none;margin-top:.625rem;font-size:.78rem;"></div>
+        </div>
+        <div class="cs-grid">
+          <div class="cs-box"><span class="cs-n" data-target="5">0</span><div class="cs-l">Field Notes</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="847">0</span><div class="cs-l">Assessments</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="7634">0</span><div class="cs-l">Total Views</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="63">0</span><div class="cs-l">Engagements</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mission-strip">
+  <div style="max-width:820px;margin:0 auto;" class="reveal">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3.5rem);font-weight:600;color:var(--w);line-height:1.1;font-style:italic;margin-bottom:1.25rem;">"Clarity is not defeat. It is the first step to freedom."</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:2px;text-transform:uppercase;">— John Dee · Founder, Online Security Bureau · RSEI Model™</div>
+  </div>
+</div>
+
+<footer>
+  <div class="fg">
+    <div>
+      <div class="flogo"><img src="logo.png" alt="Online Security Bureau"></div>
+      <p class="fdesc">Online Security Bureau is the world's first behavioural intelligence organisation built to identify, document and stop romance fraud using the RSEI Model™. Pioneering the future of fraud intelligence since 2021.</p>
+    </div>
+    <div>
+      <div class="fcol-t">Navigate</div>
+      <div class="flinks">
+        <a href="index.html">Home</a><a href="about.html">About OSB</a>
+        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">SCORE</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report</a>
+        <a href="intelligence.html">Intelligence</a><a href="solace.html">Solace</a>
+        <a href="community.html">Community</a><a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Intelligence</div>
+      <div class="flinks">
+        <a href="rsei-model.html">RSEI Model™ v2.0</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report 2026</a>
+        <a href="intelligence.html">IFN Case Library</a>
+        <a href="score.html">Scoring Tool</a>
+        <a href="solace.html">Solace Guide™</a>
+        <a href="contact.html">Analyst Certification (Coming)</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Field Notes</div>
+      <div class="flinks">
+        <a href="intelligence.html">IFN-005 · Facade Bank Page</a>
+        <a href="intelligence.html">IFN-001 · Bank Exploit</a>
+        <a href="intelligence.html">IFN-002 · E Score 5</a>
+        <a href="intelligence.html">IFN-003 · Live Exit</a>
+        <a href="intelligence.html">IFN-004 · $28K Case</a>
+        <a href="contact.html">Submit a Case</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="fquote" id="fq"></div>
+    <div class="fcopy">© 2021–2026 OSB e-Consultancy · Online Security Bureau · RSEI Model™</div>
+  </div>
+</footer>
+<script>
+var QQ = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — Online Security Bureau', '"The feelings were real. The person was not." — OSB Solace', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™', '"She called the bank herself. She was still being set up." — IFN-001 · OSB', '"Romance fraud has a name. It has a score. Only one organisation built both." — OSB'];
+function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
+function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mob'),h=document.querySelector('.nav-ham');
+  if(m&&h&&!m.contains(e.target)&&!h.contains(e.target))m.style.display='none';
+});
+var ro=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});
+},{threshold:.08});
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  var fq=document.getElementById('fq');
+  if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];
+});
+window.addEventListener('scroll',function(){
+  var n=document.getElementById('nav');
+  if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';
+});
+</script>
+<script>
+function animNum(el){
+  var t=parseInt(el.dataset.target),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',cur=0,step=t/60;
+  var tm=setInterval(function(){cur=Math.min(cur+step,t);var v=t>=1000?Math.round(cur).toLocaleString():Math.round(cur);el.textContent=pre+v+suf;if(cur>=t)clearInterval(tm);},33);
+}
+var cObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){document.querySelectorAll('[data-target]').forEach(animNum);cObs.disconnect();}},{threshold:.2});
+var bObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){setTimeout(function(){var f=document.getElementById('sc-fill');if(f)f.style.width='80%';},400);bObs.disconnect();}},{threshold:.5});
+window.addEventListener('DOMContentLoaded',function(){
+  var sb=document.querySelector('.stat-band');if(sb)cObs.observe(sb);
+  var sf=document.getElementById('sc-fill');if(sf)bObs.observe(sf);
+  var ccObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){document.querySelectorAll('.cs-n[data-target]').forEach(animNum);ccObs.disconnect();}},{threshold:.3});
+  var cg=document.querySelector('.cs-grid');if(cg)ccObs.observe(cg);
+});
+function joinCom(){
+  var u=document.getElementById('cu').value,e=document.getElementById('ce').value;
+  var msg=document.getElementById('jmsg');
+  if(!u||!e){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Please enter a username and email.';return;}
+  fetch('http://localhost:5000/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'community-signup',username:u,email:e})})
+  .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Registration received — check your email.':'Something went wrong.';});
+}
+function nlSub(){
+  var e=document.getElementById('nle').value;var msg=document.getElementById('nlmsg');if(!e)return;
+  fetch('http://localhost:5000/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'newsletter',email:e})})
+  .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Subscribed — check your email.':'Something went wrong.';});
+}
+</script>
+<script>
+// Day/Night Mode
+function toggleTheme(){
+  var d=document.body;
+  var isDay=d.classList.toggle('day-mode');
+  localStorage.setItem('osb-theme',isDay?'day':'night');
+  var tip=document.querySelector('.theme-toggle-tip');
+  if(tip)tip.textContent=isDay?'Switch to night mode':'Switch to day mode';
+}
+(function(){
+  var t=localStorage.getItem('osb-theme');
+  if(t==='day')document.body.classList.add('day-mode');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
+html{scroll-behavior:smooth;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--b);}::-webkit-scrollbar-thumb{background:var(--r);}
+body{font-family:'Figtree',sans-serif;background:var(--b);color:var(--w);overflow-x:hidden;padding-top:72px;line-height:1.6;font-size:16px;}
+/* TICKER */
+.ticker{background:var(--r);height:36px;overflow:hidden;display:flex;align-items:center;}
+.tt{display:flex;animation:tickS 55s linear infinite;white-space:nowrap;}
+.ti{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.85);letter-spacing:2px;text-transform:uppercase;padding:0 2.5rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0;}
+.ts{color:rgba(255,255,255,.3);}
+@keyframes tickS{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(6,6,8,.97);border-bottom:1px solid rgba(193,18,31,.25);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;transition:border-color .3s;}
+.nav-logo img{height:46px;width:auto;display:block;}
+.nav-links{display:flex;align-items:center;gap:0;flex-wrap:nowrap;}
+.nav-links a{font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;padding:0 1.125rem;height:72px;display:inline-flex;align-items:center;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:.75rem;right:.75rem;width:auto;height:1px;background:var(--r);transform:scaleX(0);transition:width .25s;}
+.nav-links a:hover,.nav-links a.active{color:var(--w);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-right{display:flex;align-items:center;gap:.875rem;}
+.nbtn-score{background:var(--r);color:var(--w);padding:9px 22px;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s;}
+.nbtn-score:hover{background:#d01020;}
+.nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
+.nbtn-join:hover{border-color:var(--r);color:var(--w);}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
+.mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
+.mob-menu a:last-of-type{border-bottom:none;}
+.mob-menu a:hover{color:var(--r);}
+.mob-ctas{display:flex;gap:.875rem;margin-top:1.5rem;flex-wrap:wrap;}
+/* SECTIONS */
+.sd{background:var(--b);padding:6rem 3rem;}
+.sn{background:var(--n);padding:6rem 3rem;}
+.sr{background:var(--r);padding:6rem 3rem;}
+.so{background:var(--off);color:var(--b);padding:6rem 3rem;}
+.si{max-width:1160px;margin:0 auto;}
+/* LABELS */
+.lbl{display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.375rem;}
+.lbl-line{width:28px;height:1px;background:var(--r);}
+.lbl-text{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);font-weight:500;}
+.lbl-lt .lbl-text{color:rgba(255,255,255,.35);}
+.lbl-lt .lbl-line{background:rgba(255,255,255,.2);}
+/* HEADINGS */
+.hlg{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:600;line-height:1.05;letter-spacing:-.75px;}
+.hmd{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:600;line-height:1.15;letter-spacing:-.25px;}
+.hw{color:var(--w);} .hb{color:var(--b);}
+.hw em,.hb em{color:var(--r);font-style:italic;font-weight:400;}
+/* BODY TEXT */
+.blg{font-size:1.05rem;line-height:1.85;font-weight:300;}
+.bmd{font-size:.9rem;line-height:1.85;font-weight:300;}
+.tw{color:rgba(255,255,255,.7);}
+.tmt{color:rgba(255,255,255,.38);}
+.tdk{color:var(--g);}
+/* BUTTONS */
+.btn-r{background:var(--r);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-r:hover{background:#d01020;transform:translateY(-2px);box-shadow:0 6px 28px rgba(193,18,31,.4);}
+.btn-g{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);padding:13px 30px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-g:hover{border-color:var(--r);color:var(--w);}
+.btn-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
+/* INNER PAGE HERO */
+.pg-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;}
+.pg-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
+/* FOOTER */
+footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem 3rem 3rem;}
+.fg{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3.5rem;margin-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.flogo img{width:190px;height:auto;display:block;margin-bottom:1.375rem;}
+.fdesc{font-size:.8rem;color:rgba(255,255,255,.25);line-height:1.85;}
+.fcol-t{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
+.flinks{display:flex;flex-direction:column;gap:.5rem;}
+.flinks a{font-size:.8rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:var(--w);}
+.fbot{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fquote{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(255,255,255,.16);font-style:italic;max-width:500px;}
+.fcopy{font-size:.7rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
+/* MEGA NAV */
+.nav-intel-wrap{position:relative;display:inline-flex;align-items:center;height:72px;}
+.nav-intel-wrap:hover .mega-drop{display:block !important;}
+/* MOBILE */
+@media(max-width:1000px){nav{padding:0 1.5rem;}.nav-links,.nbtn-join{display:none;}.nav-ham{display:flex;}.sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}.pg-hero{padding:4rem 1.5rem 3.5rem;}.fg{grid-template-columns:1fr 1fr;gap:2rem;}footer{padding:4rem 1.5rem 2.5rem;}}
+@media(max-width:600px){body{font-size:15px;}nav{padding:0 1.25rem;}.sd,.sn,.sr,.so{padding:3.5rem 1.25rem;}.pg-hero{padding:3rem 1.25rem 2.5rem;}.fg{grid-template-columns:1fr;}.fbot{flex-direction:column;text-align:center;}.btn-row{flex-direction:column;align-items:flex-start;}}
+
+
+/* Page hero */
+.page-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
+.page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(193,18,31,.06) 0%,transparent 70%);pointer-events:none;}
+.ph-inner{max-width:1160px;margin:0 auto;position:relative;z-index:1;}
+.ph-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.375rem;display:flex;align-items:center;gap:.75rem;}
+.ph-eyebrow::before{content:'';width:28px;height:1px;background:var(--r);}
+.ph-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:600;line-height:.95;letter-spacing:-1.5px;color:var(--w);margin-bottom:1.25rem;}
+.ph-h1 em{color:var(--r);font-style:italic;}
+.ph-sub{font-size:1.05rem;color:rgba(255,255,255,.42);max-width:600px;line-height:1.85;font-weight:300;}
+/* Section */
+.sec{padding:6rem 3rem;}
+.si{max-width:1160px;margin:0 auto;}
+.stag{display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.375rem;}
+.stl{width:28px;height:1px;background:var(--r);}
+.stt{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);font-weight:500;}
+.sh2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:600;line-height:1.05;letter-spacing:-.75px;color:var(--w);}
+.sh2 em{color:var(--r);font-style:italic;}
+.ssub{font-size:1rem;color:rgba(255,255,255,.42);line-height:1.85;font-weight:300;}
+/* Method box */
+.method-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-left:3px solid var(--r);padding:2rem;}
+/* Platform grid */
+.pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem;}
+.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem;}
+@media(max-width:1000px){.pf-grid{grid-template-columns:1fr 1fr;}.review-grid{grid-template-columns:1fr;}.sec{padding:4.5rem 1.5rem;}}
+@media(max-width:600px){.pf-grid{grid-template-columns:1fr;}}
+
+
+/* ── DAY / NIGHT MODE ── */
+:root{
+  --r:#C1121F;
+  --b:#0B0B0D;
+  --w:#FFFFFF;
+  --off:#F8F6F2;
+  --g:#5A5A5A;
+  --m:#9A9A9A;
+  --br:#E4E1DB;
+  --rl:#FEF0F0;
+  --n:#060608;
+  /* Theme tokens */
+  --bg:#060608;
+  --surface:rgba(255,255,255,.025);
+  --surface2:rgba(255,255,255,.04);
+  --text:#FFFFFF;
+  --text2:rgba(255,255,255,.7);
+  --text3:rgba(255,255,255,.38);
+  --border:rgba(255,255,255,.08);
+  --nav-bg:rgba(6,6,8,.97);
+  --card-bg:rgba(255,255,255,.025);
+  --card-border:rgba(255,255,255,.07);
+  --section-dark:#060608;
+  --section-black:#0B0B0D;
+  --footer-bg:#060608;
+  --ticker2-bg:rgba(11,11,13,1);
+  --mega-bg:#060608;
+  --inp-bg:rgba(255,255,255,.05);
+  --inp-border:rgba(255,255,255,.1);
+}
+body.day-mode{
+  --bg:#F8F6F2;
+  --surface:rgba(0,0,0,.04);
+  --surface2:rgba(0,0,0,.06);
+  --text:#0B0B0D;
+  --text2:rgba(0,0,0,.65);
+  --text3:rgba(0,0,0,.38);
+  --border:rgba(0,0,0,.1);
+  --nav-bg:rgba(248,246,242,.97);
+  --card-bg:#FFFFFF;
+  --card-border:#E4E1DB;
+  --section-dark:#F0EDE8;
+  --section-black:#E8E5E0;
+  --footer-bg:#0B0B0D;
+  --ticker2-bg:#E4E1DB;
+  --mega-bg:#FFFFFF;
+  --inp-bg:rgba(0,0,0,.04);
+  --inp-border:rgba(0,0,0,.15);
+}
+
+/* Apply theme tokens */
+body{background:var(--bg);color:var(--text);}
+nav{background:var(--nav-bg);}
+.mega-drop{background:var(--mega-bg) !important;}
+body.day-mode .mega-drop a{color:var(--text);}
+body.day-mode .mega-drop a div[style*="color:#fff"]{color:#0B0B0D !important;}
+body.day-mode .mega-drop a div[style*="color:rgba(255,255,255,.3)"]{color:rgba(0,0,0,.4) !important;}
+
+/* Hero */
+.hero,.h-noise,.h-glow{background:var(--section-dark);}
+.h-h1{color:var(--text);}
+.h-sub{color:var(--text3);}
+body.day-mode .h-corner{border-color:rgba(193,18,31,.25);}
+body.day-mode .h-ey{color:rgba(0,0,0,.25);}
+body.day-mode .h-ey-line{background:rgba(193,18,31,.35);}
+
+/* Sections */
+.sd{background:var(--section-black);}
+.sn{background:var(--section-dark);}
+body.day-mode .sd{background:#FFFFFF;}
+body.day-mode .sn{background:#F0EDE8;}
+
+/* Text */
+.hw{color:var(--text);}
+.tw{color:var(--text2);}
+.tmt{color:var(--text3);}
+body.day-mode .hb{color:var(--text);}
+
+/* Cards */
+.pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
+  background:var(--card-bg);
+  border-color:var(--card-border);
+}
+body.day-mode .pbox-bg{color:rgba(0,0,0,.04);}
+body.day-mode .pdesc{color:rgba(0,0,0,.45);}
+body.day-mode .ptag{color:var(--r);}
+body.day-mode .pname{color:var(--text);}
+body.day-mode .pscore{color:var(--text);}
+
+/* Nav links */
+body.day-mode .nav-links a{color:rgba(0,0,0,.45);}
+body.day-mode .nav-links a:hover,body.day-mode .nav-links a.active{color:#0B0B0D;}
+body.day-mode .nbtn-join{border-color:rgba(0,0,0,.2);color:rgba(0,0,0,.55);}
+body.day-mode .nbtn-join:hover{border-color:var(--r);color:#0B0B0D;}
+
+/* Intelligence hub */
+body.day-mode .intel-hub-card{background:#FFFFFF;border-color:#E4E1DB;}
+
+/* Feed */
+body.day-mode .fi{border-color:rgba(0,0,0,.08);}
+body.day-mode .fi-num{color:rgba(0,0,0,.2);}
+body.day-mode .fi-title{color:var(--text);}
+body.day-mode .fi-exc{color:rgba(0,0,0,.4);}
+body.day-mode .fstat{color:rgba(0,0,0,.25);}
+
+/* Inputs */
+.finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
+  background:var(--inp-bg);
+  border-color:var(--inp-border);
+  color:var(--text);
+}
+body.day-mode .finp::placeholder,body.day-mode .fi3::placeholder{color:rgba(0,0,0,.3);}
+
+/* Tiers */
+body.day-mode .tier{background:#F8F6F2;}
+body.day-mode .tier:hover{background:#F0EDE8;}
+body.day-mode .tier-name{color:var(--text);}
+body.day-mode .tier-desc{color:rgba(0,0,0,.45);}
+body.day-mode .tier-act{color:rgba(0,0,0,.25);}
+body.day-mode .tiers-grid{background:rgba(0,0,0,.08);}
+
+/* Score card */
+body.day-mode .sc-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .sc-tag{color:rgba(0,0,0,.3);}
+body.day-mode .sc-big{color:var(--text);}
+body.day-mode .sc-bar{background:rgba(0,0,0,.08);}
+body.day-mode .sc-row{background:rgba(0,0,0,.025);border-color:rgba(0,0,0,.06);}
+body.day-mode .sc-rl{color:rgba(0,0,0,.4);}
+body.day-mode .sc-rv{color:var(--text);}
+body.day-mode .sp-feat{color:rgba(0,0,0,.45);}
+body.day-mode .sp-bg-word{color:rgba(193,18,31,.04);}
+
+/* Haven/Solace stages */
+body.day-mode .hs{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .hs:hover{background:rgba(193,18,31,.05);}
+body.day-mode .hs-n{color:rgba(193,18,31,.25);}
+body.day-mode .hs-t{color:rgba(0,0,0,.6);}
+
+/* Community */
+body.day-mode .signup-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .sc2-t{color:var(--text);}
+body.day-mode .sc2-s{color:rgba(0,0,0,.4);}
+body.day-mode .cs-box{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .cs-n{color:var(--text);}
+body.day-mode .cs-l{color:rgba(0,0,0,.3);}
+
+/* Map */
+body.day-mode .map-wrap{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .cstat{background:#FFFFFF;}
+body.day-mode .cstat-n{color:rgba(0,0,0,.3);}
+
+/* IFN cards */
+body.day-mode .icard{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .icard-hd{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .icard-id{color:var(--r);}
+body.day-mode .icard-p{color:rgba(0,0,0,.3);}
+body.day-mode .icard-t{color:var(--text);}
+body.day-mode .icard-e{color:rgba(0,0,0,.45);}
+body.day-mode .icard-ft{border-color:rgba(0,0,0,.06);}
+body.day-mode .icard-m{color:rgba(0,0,0,.3);}
+body.day-mode .icard-s{color:rgba(0,0,0,.3);}
+
+/* IC3 intel cards */
+body.day-mode .ic3{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .ic3-hd{background:#F8F6F2;border-color:#E4E1DB;}
+body.day-mode .ic3-t{color:var(--text);}
+body.day-mode .ic3-e{color:rgba(0,0,0,.45);}
+
+/* Ticker secondary */
+body.day-mode .ticker:not([style*="background:rgba(11"]){background:var(--r);}
+
+/* Footer always dark */
+footer{background:var(--footer-bg) !important;}
+body.day-mode footer{background:#0B0B0D !important;}
+
+/* Page hero */
+body.day-mode .pg-hero{background:#F0EDE8;}
+body.day-mode .pg-hero h1{color:var(--text);}
+
+/* Off section (timeline) */
+body.day-mode .so{background:var(--off);color:var(--b);}
+
+/* Pillar boxes day */
+body.day-mode .pbox{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .pbox:hover{background:rgba(193,18,31,.04);border-color:rgba(193,18,31,.2);}
+
+/* Trig strip */
+body.day-mode .trig-strip{background:rgba(193,18,31,.05);border-color:rgba(193,18,31,.15);}
+body.day-mode .trig-body{color:rgba(0,0,0,.6);}
+body.day-mode .trig-body strong{color:var(--text);}
+
+/* Mission strip stays red */
+.mission-strip{background:var(--r);}
+
+/* Hero intel preview */
+body.day-mode .hi-card{background:#FFFFFF;border-color:#E4E1DB;}
+body.day-mode .hi-card:hover{background:rgba(193,18,31,.04);border-top-color:var(--r);}
+body.day-mode .hi-title{color:var(--text);}
+body.day-mode .hi-meta{color:rgba(0,0,0,.3);}
+
+/* ── TOGGLE BUTTON ── */
+.theme-toggle{
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  z-index:999;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:var(--r);
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 20px rgba(193,18,31,.4);
+  transition:all .3s;
+}
+.theme-toggle:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(193,18,31,.5);}
+.theme-toggle svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s;}
+.theme-toggle .icon-moon{display:block;}
+.theme-toggle .icon-sun{display:none;}
+body.day-mode .theme-toggle .icon-moon{display:none;}
+body.day-mode .theme-toggle .icon-sun{display:block;}
+.theme-toggle-tip{
+  position:fixed;bottom:2rem;right:5rem;
+  background:var(--bg);border:1px solid var(--border);
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
+  color:var(--text2);letter-spacing:1px;text-transform:uppercase;
+  padding:.4rem .875rem;opacity:0;pointer-events:none;
+  transition:opacity .3s;white-space:nowrap;
+}
+.theme-toggle:hover + .theme-toggle-tip{opacity:1;}
+
+</style>
+<title>Platform Safety Index — Online Security Bureau</title>
+<meta name="description" content="OSB rates major dating and social platforms on their romance fraud prevention measures.">
+</head>
+<body>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Online Security Bureau"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <div class="nav-intel-wrap">
+      <a href="intelligence.html" class="active" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;padding:0 1.125rem;height:72px;">Intelligence<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
+        <a href="rsei-model.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Framework</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Model™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The world's only behavioural scoring framework</div></a>
+        <a href="intelligence.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Case Library</div><div style="font-size:.88rem;font-weight:600;color:#fff;">IFN Intelligence Library</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Field intelligence — named, documented, published</div></a>
+        <a href="platform-index.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Platform Ratings</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Platform Safety Index</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB rates every major dating platform</div></a>
+        <a href="report.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Annual Report</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Global Fraud Report 2026</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The definitive annual intelligence report — free to cite</div></a>
+      </div>
+    </div>
+    <a href="score.html">SCORE</a>
+    <a href="solace.html">Solace</a>
+    <a href="community.html">Community</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a href="community.html" class="nbtn-join">Community</a>
+    <a href="score.html" class="nbtn-score">SCORE Now</a>
+  </div>
+  <button class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="about.html" onclick="closeMob()">About</a>
+  <a href="rsei-model.html" onclick="closeMob()">RSEI Model™</a>
+  <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
+  <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
+  <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
+  <a href="score.html" onclick="closeMob()">SCORE</a>
+  <a href="solace.html" onclick="closeMob()">Solace</a>
+  <a href="community.html" onclick="closeMob()">Community</a>
+  <a href="contact.html" onclick="closeMob()">Contact</a>
+  <div class="mob-ctas">
+    <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">SCORE Now</a>
+    <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
+  </div>
+</div>
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="ph-inner">
+    <div class="ph-eyebrow">Platform Safety Index</div>
+    <h1 class="ph-h1">We rate the platforms<br><em>where scams begin.</em></h1>
+    <p class="ph-sub">OSB assesses every major dating and social platform on its fraud prevention measures. Romance scammers find victims on these platforms. The platforms have a responsibility. OSB holds them to account.</p>
+  </div>
+</div>
+
+<section class="sec" style="border-top:1px solid var(--border);">
+  <div class="si">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:5rem;" class="reveal">
+      <div>
+        <div class="stag"><div class="stl"></div><div class="stt">Why This Matters</div></div>
+        <h2 class="sh2">Platforms create the conditions.<br><em>OSB measures the responsibility.</em></h2>
+        <p class="ssub" style="margin-top:1.25rem;margin-bottom:1.25rem;">Romance scammers do not operate in a vacuum. They operate on platforms that profit from user engagement — including engagement manufactured by scammers.</p>
+        <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:1.25rem;">The OSB Platform Safety Index is the world's first systematic assessment of dating and social platforms on their anti-romance-fraud measures. Each platform is rated on five criteria and given an OSB Safety Score out of 100.</p>
+        <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;">This index will be updated annually. Platforms that improve will see their scores rise. Platforms that do not will remain on record.</p>
+      </div>
+      <div class="method-box">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.25rem;">OSB Assessment Criteria</div>
+        <div style="display:flex;align-items:flex-start;gap:.875rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+          <div style="width:28px;height:28px;background:var(--b);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#fff;flex-shrink:0;">01</div>
+          <div><div style="font-size:.9rem;font-weight:600;color:var(--b);margin-bottom:.2rem;">Identity Verification</div><div style="font-size:.8rem;color:var(--gray);line-height:1.6;">Does the platform require users to verify who they are before contacting others?</div></div>
+        </div><div style="display:flex;align-items:flex-start;gap:.875rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+          <div style="width:28px;height:28px;background:var(--b);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#fff;flex-shrink:0;">02</div>
+          <div><div style="font-size:.9rem;font-weight:600;color:var(--b);margin-bottom:.2rem;">AI Fraud Detection</div><div style="font-size:.8rem;color:var(--gray);line-height:1.6;">Does the platform use automated tools to detect romance scam behaviour?</div></div>
+        </div><div style="display:flex;align-items:flex-start;gap:.875rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+          <div style="width:28px;height:28px;background:var(--b);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#fff;flex-shrink:0;">03</div>
+          <div><div style="font-size:.9rem;font-weight:600;color:var(--b);margin-bottom:.2rem;">Abuse Reporting</div><div style="font-size:.8rem;color:var(--gray);line-height:1.6;">How fast and effective is response to fraud reports?</div></div>
+        </div><div style="display:flex;align-items:flex-start;gap:.875rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+          <div style="width:28px;height:28px;background:var(--b);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#fff;flex-shrink:0;">04</div>
+          <div><div style="font-size:.9rem;font-weight:600;color:var(--b);margin-bottom:.2rem;">Scam-Specific Tools</div><div style="font-size:.8rem;color:var(--gray);line-height:1.6;">Are there tools specifically built to detect and stop romance fraud?</div></div>
+        </div><div style="display:flex;align-items:flex-start;gap:.875rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+          <div style="width:28px;height:28px;background:var(--b);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#fff;flex-shrink:0;">05</div>
+          <div><div style="font-size:.9rem;font-weight:600;color:var(--b);margin-bottom:.2rem;">User Education</div><div style="font-size:.8rem;color:var(--gray);line-height:1.6;">Does the platform actively warn users about romance fraud risk?</div></div>
+        </div>
+        <div style="font-size:.78rem;color:var(--mid);line-height:1.6;">Grading: A (80–100) · B (65–79) · C (50–64) · D (35–49) · F (0–34)</div>
+      </div>
+    </div>
+
+    <div class="stag reveal"><div class="stl"></div><div class="stt">2026 Platform Ratings</div></div>
+    <h2 class="sh2 reveal" style="margin-bottom:2.5rem;">Current OSB Safety Scores</h2>
+    <div class="pf-grid">
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:2rem;transition:all .25s;position:relative;" onmouseover="this.style.borderColor='#C1121F';this.style.boxShadow='0 6px 24px rgba(0,0,0,.07)'" onmouseout="this.style.borderColor='#E2E0DC';this.style.boxShadow='none'" class="reveal d1">
+  <div style="position:absolute;top:.875rem;right:.875rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.7);background:#0B0B0D;padding:3px 8px;letter-spacing:1px;">OSB Rated</div>
+  <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#0B0B0D;margin-bottom:.25rem;">Tinder</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.25rem;">Dating Platform</div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:#C1121F;line-height:1;">22</div>
+    <div style="font-size:.78rem;color:#8A8A8A;line-height:1.5;">OSB Safety Score<br>out of 100<br><strong style="color:#0B0B0D;">Grade: F</strong></div>
+  </div>
+  <div style="height:4px;background:#EEECEA;margin-bottom:1.25rem;"><div style="height:4px;background:#C1121F;width:22%;"></div></div>
+  <div style="font-size:.875rem;color:#4A4A4A;line-height:1.8;margin-bottom:1.25rem;">Basic reporting exists but identity verification is extremely weak. Romance scammers operate with minimal resistance. No AI-based fraud detection. Slow response to abuse reports.</div>
+  <div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Identity Verification</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>AI Fraud Detection</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>Abuse Reporting</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Scam-Specific Tools</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>User Education</div></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:2rem;transition:all .25s;position:relative;" onmouseover="this.style.borderColor='#C1121F';this.style.boxShadow='0 6px 24px rgba(0,0,0,.07)'" onmouseout="this.style.borderColor='#E2E0DC';this.style.boxShadow='none'" class="reveal d2">
+  <div style="position:absolute;top:.875rem;right:.875rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.7);background:#0B0B0D;padding:3px 8px;letter-spacing:1px;">OSB Rated</div>
+  <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#0B0B0D;margin-bottom:.25rem;">Facebook</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.25rem;">Social Platform</div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:#C1121F;line-height:1;">18</div>
+    <div style="font-size:.78rem;color:#8A8A8A;line-height:1.5;">OSB Safety Score<br>out of 100<br><strong style="color:#0B0B0D;">Grade: F</strong></div>
+  </div>
+  <div style="height:4px;background:#EEECEA;margin-bottom:1.25rem;"><div style="height:4px;background:#C1121F;width:18%;"></div></div>
+  <div style="font-size:.875rem;color:#4A4A4A;line-height:1.8;margin-bottom:1.25rem;">The highest-volume source of romance scam first contact globally. Fake profiles take minutes to create. Reporting is slow and often ineffective. Despite scale, anti-fraud investment remains inadequate.</div>
+  <div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Identity Verification</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>AI Fraud Detection</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Abuse Reporting</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Scam-Specific Tools</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>User Education</div></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:2rem;transition:all .25s;position:relative;" onmouseover="this.style.borderColor='#C1121F';this.style.boxShadow='0 6px 24px rgba(0,0,0,.07)'" onmouseout="this.style.borderColor='#E2E0DC';this.style.boxShadow='none'" class="reveal d3">
+  <div style="position:absolute;top:.875rem;right:.875rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.7);background:#0B0B0D;padding:3px 8px;letter-spacing:1px;">OSB Rated</div>
+  <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#0B0B0D;margin-bottom:.25rem;">Instagram</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.25rem;">Social Platform</div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:#C1121F;line-height:1;">21</div>
+    <div style="font-size:.78rem;color:#8A8A8A;line-height:1.5;">OSB Safety Score<br>out of 100<br><strong style="color:#0B0B0D;">Grade: F</strong></div>
+  </div>
+  <div style="height:4px;background:#EEECEA;margin-bottom:1.25rem;"><div style="height:4px;background:#C1121F;width:21%;"></div></div>
+  <div style="font-size:.875rem;color:#4A4A4A;line-height:1.8;margin-bottom:1.25rem;">Photo verification is absent. Direct messages are a primary scammer contact channel. Young users and seniors are both frequently targeted. Little proactive romance fraud detection.</div>
+  <div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Identity Verification</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>AI Fraud Detection</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>Abuse Reporting</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Scam-Specific Tools</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>User Education</div></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:2rem;transition:all .25s;position:relative;" onmouseover="this.style.borderColor='#C1121F';this.style.boxShadow='0 6px 24px rgba(0,0,0,.07)'" onmouseout="this.style.borderColor='#E2E0DC';this.style.boxShadow='none'" class="reveal d1">
+  <div style="position:absolute;top:.875rem;right:.875rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.7);background:#0B0B0D;padding:3px 8px;letter-spacing:1px;">OSB Rated</div>
+  <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#0B0B0D;margin-bottom:.25rem;">Bumble</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.25rem;">Dating Platform</div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:#B8720A;line-height:1;">61</div>
+    <div style="font-size:.78rem;color:#8A8A8A;line-height:1.5;">OSB Safety Score<br>out of 100<br><strong style="color:#0B0B0D;">Grade: C</strong></div>
+  </div>
+  <div style="height:4px;background:#EEECEA;margin-bottom:1.25rem;"><div style="height:4px;background:#B8720A;width:61%;"></div></div>
+  <div style="font-size:.875rem;color:#4A4A4A;line-height:1.8;margin-bottom:1.25rem;">Photo verification and stronger moderation policies give Bumble a better foundation than most competitors. Not immune to romance fraud, but demonstrably safer.</div>
+  <div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#1B7A1B;flex-shrink:0;"></div>Identity Verification</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>AI Fraud Detection</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#1B7A1B;flex-shrink:0;"></div>Abuse Reporting</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>Scam-Specific Tools</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#1B7A1B;flex-shrink:0;"></div>User Education</div></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:2rem;transition:all .25s;position:relative;" onmouseover="this.style.borderColor='#C1121F';this.style.boxShadow='0 6px 24px rgba(0,0,0,.07)'" onmouseout="this.style.borderColor='#E2E0DC';this.style.boxShadow='none'" class="reveal d2">
+  <div style="position:absolute;top:.875rem;right:.875rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.7);background:#0B0B0D;padding:3px 8px;letter-spacing:1px;">OSB Rated</div>
+  <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#0B0B0D;margin-bottom:.25rem;">Match.com</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.25rem;">Dating Platform</div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:#C8620A;line-height:1;">34</div>
+    <div style="font-size:.78rem;color:#8A8A8A;line-height:1.5;">OSB Safety Score<br>out of 100<br><strong style="color:#0B0B0D;">Grade: D</strong></div>
+  </div>
+  <div style="height:4px;background:#EEECEA;margin-bottom:1.25rem;"><div style="height:4px;background:#C8620A;width:34%;"></div></div>
+  <div style="font-size:.875rem;color:#4A4A4A;line-height:1.8;margin-bottom:1.25rem;">A fraud reporting system exists but effectiveness is limited. No real-time identity verification. Slower users — including many seniors — are targeted here disproportionately.</div>
+  <div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>Identity Verification</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>AI Fraud Detection</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>Abuse Reporting</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Scam-Specific Tools</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#B8720A;flex-shrink:0;"></div>User Education</div></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:2rem;transition:all .25s;position:relative;" onmouseover="this.style.borderColor='#C1121F';this.style.boxShadow='0 6px 24px rgba(0,0,0,.07)'" onmouseout="this.style.borderColor='#E2E0DC';this.style.boxShadow='none'" class="reveal d3">
+  <div style="position:absolute;top:.875rem;right:.875rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.7);background:#0B0B0D;padding:3px 8px;letter-spacing:1px;">OSB Rated</div>
+  <div style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#0B0B0D;margin-bottom:.25rem;">WhatsApp</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.25rem;">Messaging Platform</div>
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:#C1121F;line-height:1;">15</div>
+    <div style="font-size:.78rem;color:#8A8A8A;line-height:1.5;">OSB Safety Score<br>out of 100<br><strong style="color:#0B0B0D;">Grade: F</strong></div>
+  </div>
+  <div style="height:4px;background:#EEECEA;margin-bottom:1.25rem;"><div style="height:4px;background:#C1121F;width:15%;"></div></div>
+  <div style="font-size:.875rem;color:#4A4A4A;line-height:1.8;margin-bottom:1.25rem;">End-to-end encryption makes fraud detection almost impossible. Scammers move contact here from dating platforms within days. No fraud-specific tools exist on the platform.</div>
+  <div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Identity Verification</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>AI Fraud Detection</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Abuse Reporting</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>Scam-Specific Tools</div><div style="display:flex;align-items:center;gap:.625rem;font-size:.75rem;color:#8A8A8A;margin-bottom:.3rem;"><div style="width:8px;height:8px;border-radius:50%;background:#C1121F;flex-shrink:0;"></div>User Education</div></div>
+</div></div>
+
+    <div style="margin-top:5rem;" class="reveal">
+      <div class="stag"><div class="stl"></div><div class="stt">Community Reports</div></div>
+      <h2 class="sh2" style="margin-bottom:.875rem;">What users experienced.</h2>
+      <p class="ssub" style="margin-bottom:2.5rem;">Anonymised accounts from people who encountered romance fraud on these platforms and reported to OSB. No names. No usernames. No identifying details. Ever.</p>
+    </div>
+    <div class="review-grid">
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:1.75rem;border-left:3px solid transparent;transition:border-left-color .2s;" onmouseover="this.style.borderLeftColor='#C1121F'" onmouseout="this.style.borderLeftColor='transparent'" class="reveal d1">
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="width:42px;height:42px;background:#0B0B0D;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#fff;flex-shrink:0;">F·ID</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:.5px;">Facebook · Reported March 2026<br>IFN-001 related technique</div>
+  </div>
+  <div style="font-size:.9rem;color:#4A4A4A;line-height:1.8;font-style:italic;">"He was a military officer stationed overseas. Within three days he was calling me his soulmate. The bank account he showed me looked completely real. I nearly sent $3,000. I scored my situation on OSB — 17 out of 20. That number saved me."</div>
+  <div style="color:#C1121F;font-size:.875rem;margin-top:.625rem;">★★★★★ — OSB Scoring Tool</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:1.75rem;border-left:3px solid transparent;transition:border-left-color .2s;" onmouseover="this.style.borderLeftColor='#C1121F'" onmouseout="this.style.borderLeftColor='transparent'" class="reveal d2">
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="width:42px;height:42px;background:#0B0B0D;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#fff;flex-shrink:0;">T·ID</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:.5px;">Tinder → WhatsApp · Reported 2025<br>IFN-003 related case</div>
+  </div>
+  <div style="font-size:.9rem;color:#4A4A4A;line-height:1.8;font-style:italic;">"They always moved to WhatsApp within the first week. Said it was more private. By the time I understood what had happened, three months had passed. The platform did nothing. OSB was the only place that understood."</div>
+  <div style="color:#C1121F;font-size:.875rem;margin-top:.625rem;">★★★★★ — OSB Solace</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:1.75rem;border-left:3px solid transparent;transition:border-left-color .2s;" onmouseover="this.style.borderLeftColor='#C1121F'" onmouseout="this.style.borderLeftColor='transparent'" class="reveal d3">
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="width:42px;height:42px;background:#0B0B0D;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#fff;flex-shrink:0;">M·ID</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:.5px;">Match.com · Reported 2025<br>IFN-004 slow-burn case</div>
+  </div>
+  <div style="font-size:.9rem;color:#4A4A4A;line-height:1.8;font-style:italic;">"Over two and a half years. Small amounts each time — never more than $500. I reported him three times to the platform. Nothing happened. When I added it all up it was over $22,000."</div>
+  <div style="color:#C1121F;font-size:.875rem;margin-top:.625rem;">★★★★★ — OSB Intelligence Library</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E2E0DC;padding:1.75rem;border-left:3px solid transparent;transition:border-left-color .2s;" onmouseover="this.style.borderLeftColor='#C1121F'" onmouseout="this.style.borderLeftColor='transparent'" class="reveal d4">
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.875rem;">
+    <div style="width:42px;height:42px;background:#0B0B0D;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#fff;flex-shrink:0;">I·ID</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8A8A8A;letter-spacing:.5px;">Instagram · Reported 2026<br>E-Pillar trigger — zero financial loss</div>
+  </div>
+  <div style="font-size:.9rem;color:#4A4A4A;line-height:1.8;font-style:italic;">"He told me he would end his life if I stopped talking to him. No money changed hands. But I could not sleep for weeks. OSB was the first place that confirmed this was still a scam — emotional harm counts."</div>
+  <div style="color:#C1121F;font-size:.875rem;margin-top:.625rem;">★★★★★ — OSB Solace · E Pillar Trigger</div>
+</div></div>
+
+    <div style="background:var(--rlt);border:1px solid rgba(193,18,31,.2);padding:1.5rem 2rem;margin-top:3rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;" class="reveal">
+      <div style="font-size:.95rem;color:var(--b);line-height:1.7;flex:1;">Have you experienced romance fraud on a platform not listed here? Your account — shared anonymously — helps OSB build the most complete platform safety picture in the world.</div>
+      <a href="contact.html" class="btn-r" style="font-size:.8rem;flex-shrink:0;">Submit Your Experience</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="ft">
+      <div>
+        <div class="flogo"><img src="logo.png" alt="Online Security Bureau"></div>
+        <p class="fdesc">Online Security Bureau is the world's first behavioural intelligence organisation built to identify, document and stop romance fraud globally. Operating under the RSEI Model™ since 2021. Pioneering the future of fraud intelligence.</p>
+      </div>
+      <div>
+        <div class="fcolt">Navigate</div>
+        <div class="flinks">
+          <a href="index.html">Home</a>
+          <a href="score.html">SCORE</a>
+          <a href="rsei.html">RSEI Model™</a>
+          <a href="intel.html">Intelligence</a>
+          <a href="reclaim.html">Reclaim</a>
+          <a href="community.html">Community</a>
+          <a href="bureau.html">Bureau</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="fcolt">Ecosystem</div>
+        <div class="flinks">
+          <a href="rsei.html">RSEI Model™ v2.0</a>
+          <a href="rsei.html">RSEI-IEF™ v1.0</a>
+          <a href="rsei.html">RSEI CBAE™</a>
+          <a href="score.html">Scoring Tool</a>
+          <a href="intel.html">Global Fraud Index</a>
+          <a href="reclaim.html">Reclaim Guide™</a>
+          <a href="bureau.html">Analyst Certification</a>
+        </div>
+      </div>
+      <div>
+        <div class="fcolt">Intelligence</div>
+        <div class="flinks">
+          <a href="intel.html">IFN-001 · Bank Exploit</a>
+          <a href="intel.html">IFN-002 · E Score 5</a>
+          <a href="intel.html">IFN-003 · Live Exit</a>
+          <a href="intel.html">IFN-004 · $28K Case</a>
+          <a href="intel.html">IFN-005 · Facade Page</a>
+          <a href="contact.html">Submit a Case</a>
+        </div>
+      </div>
+    </div>
+    <div class="fbot">
+      <div class="fquote" id="fq"></div>
+      <div class="fcopy">© 2021–2026 OSB e-Consultancy · Online Security Bureau · RSEI Model™ · All rights reserved</div>
+    </div>
+  </div>
+</footer>
+<script>
+var QUOTES = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — Online Security Bureau', '"The feelings were real. The person was not." — RSEI Model™', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI v2.0', '"She found the number herself. She was still being set up." — IFN-001'];
+function toggleMob(){
+  var m = document.getElementById('mob-menu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+}
+function closeMob(){
+  var m = document.getElementById('mob-menu');
+  if (m) m.style.display = 'none';
+}
+document.addEventListener('click', function(e){
+  var m = document.getElementById('mob-menu');
+  var h = document.querySelector('.nav-ham');
+  if (m && h && !m.contains(e.target) && !h.contains(e.target)) m.style.display = 'none';
+});
+var revObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ revObs.observe(el); });
+  var fq = document.getElementById('fq');
+  if (fq) fq.textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+});
+</script>
+<footer>
+  <div class="fg">
+    <div>
+      <div class="flogo"><img src="logo.png" alt="Online Security Bureau"></div>
+      <p class="fdesc">Online Security Bureau is the world's first behavioural intelligence organisation built to identify, document and stop romance fraud using the RSEI Model™. Pioneering the future of fraud intelligence since 2021.</p>
+    </div>
+    <div>
+      <div class="fcol-t">Navigate</div>
+      <div class="flinks">
+        <a href="index.html">Home</a><a href="about.html">About OSB</a>
+        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">SCORE</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report</a>
+        <a href="intelligence.html">Intelligence</a><a href="solace.html">Solace</a>
+        <a href="community.html">Community</a><a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Intelligence</div>
+      <div class="flinks">
+        <a href="rsei-model.html">RSEI Model™ v2.0</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report 2026</a>
+        <a href="intelligence.html">IFN Case Library</a>
+        <a href="score.html">Scoring Tool</a>
+        <a href="solace.html">Solace Guide™</a>
+        <a href="contact.html">Analyst Certification (Coming)</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Field Notes</div>
+      <div class="flinks">
+        <a href="intelligence.html">IFN-005 · Facade Bank Page</a>
+        <a href="intelligence.html">IFN-001 · Bank Exploit</a>
+        <a href="intelligence.html">IFN-002 · E Score 5</a>
+        <a href="intelligence.html">IFN-003 · Live Exit</a>
+        <a href="intelligence.html">IFN-004 · $28K Case</a>
+        <a href="contact.html">Submit a Case</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="fquote" id="fq"></div>
+    <div class="fcopy">© 2021–2026 OSB e-Consultancy · Online Security Bureau · RSEI Model™</div>
+  </div>
+</footer>
+<script>
+var QQ=['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB','"We named what they do. Now we stop it." — Online Security Bureau','"The feelings were real. The person was not." — OSB Solace','"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™','"She called the bank herself. She was still being set up." — IFN-001 · OSB','"Romance fraud has a name. It has a score. Only one organisation built both." — OSB'];
+function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
+function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
+document.addEventListener('click',function(e){var m=document.getElementById('mob'),h=document.querySelector('.nav-ham');if(m&&h&&!m.contains(e.target)&&!h.contains(e.target))m.style.display='none';});
+var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
+document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});var fq=document.getElementById('fq');if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];});
+window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';});
+</script>
+<script>
+// Day/Night Mode
+function toggleTheme(){
+  var d=document.body;
+  var isDay=d.classList.toggle('day-mode');
+  localStorage.setItem('osb-theme',isDay?'day':'night');
+  var tip=document.querySelector('.theme-toggle-tip');
+  if(tip)tip.textContent=isDay?'Switch to night mode':'Switch to day mode';
+}
+(function(){
+  var t=localStorage.getItem('osb-theme');
+  if(t==='day')document.body.classList.add('day-mode');
+})();
+</script>
+</body>
+</html>
