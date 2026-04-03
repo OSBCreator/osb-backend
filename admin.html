@@ -336,6 +336,11 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--syne);font-s
         <svg class="nav-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 8h13M8 1.5c-2 2-3 4-3 6.5s1 4.5 3 6.5M8 1.5c2 2 3 4 3 6.5s-1 4.5-3 6.5" stroke="currentColor" stroke-width="1.4"/></svg>
         Global Index
       </div>
+      <div class="nav-item" onclick="nav(this,'stats-update')">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14M4 4l4-3 4 3M4 12l4 3 4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Update Stats
+        <span class="nav-badge dim" id="bd-su">Live</span>
+      </div>
     </div>
 
     <div class="sidebar-footer">
@@ -530,6 +535,117 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--syne);font-s
         </div>
       </div>
 
+
+      <!-- STATS UPDATE PAGE -->
+      <div class="page" id="page-stats-update">
+        <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start;">
+
+          <div class="panel">
+            <div class="panel-head">
+              <div class="panel-title">Update Live Stats</div>
+              <span class="panel-tag" id="su-last-updated">Loading…</span>
+            </div>
+            <div class="form-panel">
+              <div style="padding:16px 22px 0;font-family:var(--mono);font-size:10px;color:var(--white-muted);letter-spacing:1px;line-height:1.8;">
+                These numbers display live on the homepage. Update them whenever your Quora stats grow.
+              </div>
+              <div style="padding:16px 22px;display:flex;flex-direction:column;gap:14px;">
+                <div class="form-field">
+                  <div class="form-label">Quora Platform Reach <span style="color:var(--white-muted);font-size:9px;">(total content reach / views)</span></div>
+                  <input class="form-input" id="su-reach" type="number" placeholder="e.g. 20700">
+                </div>
+                <div class="form-field">
+                  <div class="form-label">Total Answer Views</div>
+                  <input class="form-input" id="su-views" type="number" placeholder="e.g. 7634">
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <div class="form-label">Assessments Completed</div>
+                    <input class="form-input" id="su-assessments" type="number" placeholder="e.g. 847">
+                  </div>
+                  <div class="form-field">
+                    <div class="form-label">Engagements</div>
+                    <input class="form-input" id="su-engagements" type="number" placeholder="e.g. 63">
+                  </div>
+                </div>
+                <div class="form-field">
+                  <div class="form-label">IFN Field Notes Published</div>
+                  <input class="form-input" id="su-ifn" type="number" placeholder="e.g. 5">
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;padding-top:4px;">
+                  <button class="btn btn-primary" onclick="saveStats()">
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 3 8a5 5 0 0 1 10 0z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Save & Publish Live
+                  </button>
+                  <div class="form-msg" id="su-msg"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="panel">
+              <div class="panel-head"><div class="panel-title">Current Live Values</div><span class="panel-tag">Homepage</span></div>
+              <div style="padding:0;">
+                <div style="display:flex;justify-content:space-between;padding:13px 22px;border-bottom:1px solid var(--border);align-items:center;">
+                  <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);letter-spacing:1px;text-transform:uppercase;">Platform Reach</span>
+                  <span style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--white);" id="cv-reach">—</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:13px 22px;border-bottom:1px solid var(--border);align-items:center;">
+                  <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);letter-spacing:1px;text-transform:uppercase;">Total Views</span>
+                  <span style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--white);" id="cv-views">—</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:13px 22px;border-bottom:1px solid var(--border);align-items:center;">
+                  <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);letter-spacing:1px;text-transform:uppercase;">Assessments</span>
+                  <span style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--white);" id="cv-assessments">—</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:13px 22px;border-bottom:1px solid var(--border);align-items:center;">
+                  <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);letter-spacing:1px;text-transform:uppercase;">Engagements</span>
+                  <span style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--white);" id="cv-engagements">—</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:13px 22px;align-items:center;">
+                  <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);letter-spacing:1px;text-transform:uppercase;">IFN Notes</span>
+                  <span style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--white);" id="cv-ifn">—</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head"><div class="panel-title">Quora Growth</div><span class="panel-tag">Reach Tracker</span></div>
+              <div style="padding:20px 22px;">
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                    <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);">PLATFORM REACH</span>
+                    <span style="font-family:var(--mono);font-size:11px;color:var(--white);" id="bar-reach-n">—</span>
+                  </div>
+                  <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;">
+                    <div id="bar-reach" style="height:100%;background:var(--red);border-radius:3px;width:0%;transition:width 1s ease;"></div>
+                  </div>
+                </div>
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                    <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);">ANSWER VIEWS</span>
+                    <span style="font-family:var(--mono);font-size:11px;color:var(--white);" id="bar-views-n">—</span>
+                  </div>
+                  <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;">
+                    <div id="bar-views" style="height:100%;background:#5BA3E8;border-radius:3px;width:0%;transition:width 1s ease;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+                    <span style="font-family:var(--mono);font-size:10px;color:var(--white-muted);">ENGAGEMENTS</span>
+                    <span style="font-family:var(--mono);font-size:11px;color:var(--white);" id="bar-eng-n">—</span>
+                  </div>
+                  <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;">
+                    <div id="bar-eng" style="height:100%;background:#3AC98A;border-radius:3px;width:0%;transition:width 1s ease;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -644,7 +760,7 @@ function doLogin(){
 function logout(){KEY='';if(rfTimer)clearInterval(rfTimer);if(cdTimer)clearInterval(cdTimer);INITED=false;document.getElementById('app').style.display='none';document.getElementById('login-overlay').style.display='flex';document.getElementById('lo-key').value='';}
 
 // NAV
-var pageInfo={dashboard:{title:'Command Dashboard',sub:'RSEI MODEL™ v2.0 · LIVE INTELLIGENCE'},submissions:{title:'RSEI Submissions',sub:'ALL SCORING DATA · SUPABASE LIVE'},community:{title:'Community Room',sub:'MODERATION · PUBLISH · MANAGE'},newsletter:{title:'Newsletter',sub:'SUBSCRIBER LIST · BRIEFINGS'},messages:{title:'Direct Messages',sub:'CONTACT FORM INBOX'},global:{title:'Global Intelligence Index',sub:'FRAUD DISTRIBUTION · CONTINENTS'}};
+var pageInfo={dashboard:{title:'Command Dashboard',sub:'RSEI MODEL™ v2.0 · LIVE INTELLIGENCE'},submissions:{title:'RSEI Submissions',sub:'ALL SCORING DATA · SUPABASE LIVE'},community:{title:'Community Room',sub:'MODERATION · PUBLISH · MANAGE'},newsletter:{title:'Newsletter',sub:'SUBSCRIBER LIST · BRIEFINGS'},messages:{title:'Direct Messages',sub:'CONTACT FORM INBOX'},global:{title:'Global Intelligence Index',sub:'FRAUD DISTRIBUTION · CONTINENTS'},'stats-update':{title:'Update Live Stats',sub:'QUORA · HOMEPAGE STATS · LIVE SYNC'}};
 function nav(el,page){
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
   if(el)el.classList.add('active');
@@ -658,6 +774,7 @@ function nav(el,page){
   if(page==='newsletter')loadNL();
   if(page==='messages')loadMsgs();
   if(page==='global')loadGlobal();
+  if(page==='stats-update')loadStatsUpdate();
 }
 
 // INIT
@@ -724,6 +841,72 @@ function markR(id){fetch(API+'/api/admin/messages/'+id+'/read',{method:'POST',he
 
 // GLOBAL
 function loadGlobal(){fetch(API+'/api/submissions',{headers:{'x-admin-key':KEY}}).then(function(r){return r.json();}).then(function(d){if(!d.data||!d.data.length)return;var cm={'USA':'N.America','United States':'N.America','Canada':'N.America','UK':'Europe','England':'Europe','Scotland':'Europe','France':'Europe','Germany':'Europe','Sweden':'Europe','Finland':'Europe','Denmark':'Europe','Switzerland':'Europe','Italy':'Europe','Spain':'Europe','Nigeria':'Africa','Ghana':'Africa','Africa':'Africa','South Africa':'Africa','Australia':'Oceania','New Zealand':'Oceania','India':'Asia','China':'Asia','Japan':'Asia','Korea':'Asia','Asia':'Asia','Philippines':'Asia','Brazil':'S.America','Argentina':'S.America','South America':'S.America','North America':'N.America','Europe':'Europe'};var co={},pl={},ct=new Set();d.data.forEach(function(s){var c=s.country||'Unknown',cn=cm[c]||(c!=='Not provided'&&c!=='Unknown'?'Other':null);if(cn)co[cn]=(co[cn]||0)+1;var p=s.platform||'Unknown';if(p&&p!=='Not provided')pl[p]=(pl[p]||0)+1;if(c&&c!=='Not provided'&&c!=='Unknown')ct.add(c);});var mc=Math.max.apply(null,Object.values(co).concat([1]));document.getElementById('ch-cont').innerHTML=Object.entries(co).sort(function(a,b){return b[1]-a[1];}).map(function(e){var h=Math.max(20,(e[1]/mc)*130);return '<div class="cbar"><div class="cbar-n">'+e[1]+'</div><div class="cbar-f" style="height:0;background:var(--red);border-radius:4px 4px 0 0;"></div><div class="cbar-l">'+e[0]+'</div></div>';}).join('');var mp=Math.max.apply(null,Object.values(pl).concat([1]));document.getElementById('ch-plat').innerHTML=Object.entries(pl).sort(function(a,b){return b[1]-a[1];}).slice(0,8).map(function(e){return '<div class="cbar"><div class="cbar-n">'+e[1]+'</div><div class="cbar-f" style="height:0;background:#5BA3E8;border-radius:4px 4px 0 0;"></div><div class="cbar-l">'+e[0].substring(0,8)+'</div></div>';}).join('');document.getElementById('ch-ctry').innerHTML=[...ct].sort().map(function(c){return '<span style="background:var(--white-ghost);border:1px solid var(--border);border-radius:6px;font-family:var(--mono);font-size:10px;color:var(--white-dim);padding:4px 10px;">'+c+'</span>';}).join('');setTimeout(function(){document.querySelectorAll('.cbar-f').forEach(function(el,i){var items=Object.entries(co).sort(function(a,b){return b[1]-a[1];});var platItems=Object.entries(pl).sort(function(a,b){return b[1]-a[1];}).slice(0,8);var isPlat=i>=items.length;var arr=isPlat?platItems:items;var idx=isPlat?i-items.length:i;var entry=arr[idx];var max=isPlat?mp:mc;if(entry){var h=Math.max(20,(entry[1]/max)*130);el.style.height=h+'px';}});},100);}).catch(function(){});}
+
+// STATS UPDATE
+function loadStatsUpdate(){
+  fetch(API+'/api/platform-stats')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(!d.ok||!d.stats)return;
+      var s=d.stats;
+      // Fill form
+      document.getElementById('su-reach').value=s.quora_reach||'';
+      document.getElementById('su-views').value=s.quora_views||'';
+      document.getElementById('su-assessments').value=s.quora_assessments||'';
+      document.getElementById('su-engagements').value=s.quora_engagements||'';
+      document.getElementById('su-ifn').value=s.ifn_count||'';
+      // Current values panel
+      sv('cv-reach',(s.quora_reach||0).toLocaleString());
+      sv('cv-views',(s.quora_views||0).toLocaleString());
+      sv('cv-assessments',(s.quora_assessments||0).toLocaleString());
+      sv('cv-engagements',(s.quora_engagements||0).toLocaleString());
+      sv('cv-ifn',s.ifn_count||0);
+      // Last updated
+      var upd=s.updated_at?'Updated '+ft(s.updated_at):'Never updated';
+      sv('su-last-updated',upd);
+      // Bar chart (relative to reach as max)
+      var max=Math.max(s.quora_reach||1,1);
+      function setBar(id,nid,val,max){
+        var el=document.getElementById(id);
+        var nel=document.getElementById(nid);
+        if(el)setTimeout(function(){el.style.width=Math.min(100,Math.round((val/max)*100))+'%';},200);
+        if(nel)nel.textContent=(val||0).toLocaleString();
+      }
+      setBar('bar-reach','bar-reach-n',s.quora_reach,max);
+      setBar('bar-views','bar-views-n',s.quora_views,max);
+      setBar('bar-eng','bar-eng-n',s.quora_engagements,max);
+    }).catch(function(){});
+}
+
+function saveStats(){
+  var payload={
+    quora_reach:parseInt(document.getElementById('su-reach').value)||0,
+    quora_views:parseInt(document.getElementById('su-views').value)||0,
+    quora_assessments:parseInt(document.getElementById('su-assessments').value)||0,
+    quora_engagements:parseInt(document.getElementById('su-engagements').value)||0,
+    ifn_count:parseInt(document.getElementById('su-ifn').value)||0
+  };
+  var msg=document.getElementById('su-msg');
+  fetch(API+'/api/admin/platform-stats',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-admin-key':KEY},
+    body:JSON.stringify(payload)
+  }).then(function(r){return r.json();})
+  .then(function(d){
+    if(d.ok){
+      sm(msg,'✓ Stats updated — homepage is now live','ok');
+      sv('cv-reach',payload.quora_reach.toLocaleString());
+      sv('cv-views',payload.quora_views.toLocaleString());
+      sv('cv-assessments',payload.quora_assessments.toLocaleString());
+      sv('cv-engagements',payload.quora_engagements.toLocaleString());
+      sv('cv-ifn',payload.ifn_count);
+      sv('su-last-updated','Updated just now');
+      snd('ok');
+    }else{
+      sm(msg,'Error: '+d.error,'er');
+    }
+  }).catch(function(){sm(msg,'Connection error','er');});
+}
 
 // HELPERS
 function sv(id,v){var el=document.getElementById(id);if(el)el.textContent=v;}
