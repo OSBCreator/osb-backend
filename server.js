@@ -277,6 +277,43 @@ app.post("/api/admin/messages/:id/read", async (req, res) => {
   res.json({ ok: true });
 });
 
+// ── PUBLIC: GET PLATFORM STATS ───────────────────────
+app.get("/api/platform-stats", async (req, res) => {
+  const { data, error } = await supabase
+    .from("platform_stats")
+    .select("*")
+    .eq("id", 1)
+    .single();
+
+  if (error) return res.status(500).json({ ok: false, error: error.message });
+  res.json({ ok: true, stats: data });
+});
+
+// ── ADMIN: UPDATE PLATFORM STATS ─────────────────────
+app.post("/api/admin/platform-stats", async (req, res) => {
+  const adminKey = req.headers["x-admin-key"];
+  if (adminKey !== process.env.ADMIN_KEY) {
+    return res.status(401).json({ ok: false, error: "Unauthorized" });
+  }
+
+  const { quora_reach, quora_views, quora_assessments, quora_engagements, ifn_count } = req.body;
+
+  const { error } = await supabase
+    .from("platform_stats")
+    .upsert([{
+      id: 1,
+      quora_reach: parseInt(quora_reach) || 0,
+      quora_views: parseInt(quora_views) || 0,
+      quora_assessments: parseInt(quora_assessments) || 0,
+      quora_engagements: parseInt(quora_engagements) || 0,
+      ifn_count: parseInt(ifn_count) || 0,
+      updated_at: new Date().toISOString()
+    }], { onConflict: "id" });
+
+  if (error) return res.status(500).json({ ok: false, error: error.message });
+  res.json({ ok: true, message: "Stats updated successfully" });
+});
+
 // ── ADMIN: STATS OVERVIEW ─────────────────────────────
 app.get("/api/admin/stats", async (req, res) => {
   const adminKey = req.headers["x-admin-key"];
