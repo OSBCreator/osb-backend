@@ -1067,12 +1067,12 @@ function joinCom(){
   var u=document.getElementById('cu').value,e=document.getElementById('ce').value;
   var msg=document.getElementById('jmsg');
   if(!u||!e){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Please enter a username and email.';return;}
-  fetch('http://localhost:5000/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'community-signup',username:u,email:e})})
+  fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'community-signup',username:u,email:e})})
   .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Registration received — check your email.':'Something went wrong.';});
 }
 function nlSub(){
   var e=document.getElementById('nle').value;var msg=document.getElementById('nlmsg');if(!e)return;
-  fetch('http://localhost:5000/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'newsletter',email:e})})
+  fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'newsletter',email:e})})
   .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Subscribed — check your email.':'Something went wrong.';});
 }
 </script>
