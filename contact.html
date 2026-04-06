@@ -551,11 +551,42 @@ window.addEventListener('scroll',function(){
 });
 </script>
 <script>
+var BACKEND_URL="https://osb-backend-production.up.railway.app";
 function sendContact(){
   var email=document.getElementById('cfe').value,reason=document.getElementById('cfr').value,message=document.getElementById('cfm').value;
   if(!message)return;
-  fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'contact',email:email||'anonymous',reason:reason,message:message})})
-  .then(function(r){if(r.ok){document.getElementById('osb-form').style.display='none';document.getElementById('form-ok').style.display='block';}});
+  var btn=document.querySelector('.cfb');
+  btn.disabled=true;
+  btn.textContent='Sending…';
+  var controller=new AbortController();
+  var timeout=setTimeout(function(){controller.abort();},20000);
+  fetch(BACKEND_URL+'/api/contact',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({type:'contact',email:email||'anonymous',reason:reason,message:message}),
+    signal:controller.signal
+  })
+  .then(function(r){
+    clearTimeout(timeout);
+    if(r.ok){
+      document.getElementById('osb-form').style.display='none';
+      document.getElementById('form-ok').style.display='block';
+    } else {
+      btn.disabled=false;
+      btn.textContent='Send to OSB — Privately and Securely';
+      alert('Something went wrong. Please try again.');
+    }
+  })
+  .catch(function(err){
+    clearTimeout(timeout);
+    btn.disabled=false;
+    btn.textContent='Send to OSB — Privately and Securely';
+    if(err.name==='AbortError'){
+      alert('The server is waking up — please wait 20 seconds and try again.');
+    } else {
+      alert('Connection error. Please check your internet and try again.');
+    }
+  });
 }
 </script>
 
