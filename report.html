@@ -29,7 +29,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(
 .nbtn-score:hover{background:#d01020;}
 .nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
 .nbtn-join:hover{border-color:var(--r);color:var(--w);}
-.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;z-index:1000;position:relative;}
 .nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
 .mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
 .mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
@@ -88,7 +88,7 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .nav-intel-wrap{position:relative;display:inline-flex;align-items:center;height:72px;}
 .nav-intel-wrap:hover .mega-drop{display:block !important;}
 /* MOBILE */
-@media(max-width:1000px){nav{padding:0 1.5rem;}.nav-links,.nbtn-join{display:none;}.nav-ham{display:flex;}.sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}.pg-hero{padding:4rem 1.5rem 3.5rem;}.fg{grid-template-columns:1fr 1fr;gap:2rem;}footer{padding:4rem 1.5rem 2.5rem;}}
+@media(max-width:1000px){nav{padding:0 1.5rem;}.nav-links,.nbtn-join,.nbtn-score{display:none;}.nav-ham{display:flex;}.sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}.pg-hero{padding:4rem 1.5rem 3.5rem;}.fg{grid-template-columns:1fr 1fr;gap:2rem;}footer{padding:4rem 1.5rem 2.5rem;}}
 @media(max-width:600px){body{font-size:15px;}nav{padding:0 1.25rem;}.sd,.sn,.sr,.so{padding:3.5rem 1.25rem;}.pg-hero{padding:3rem 1.25rem 2.5rem;}.fg{grid-template-columns:1fr;}.fbot{flex-direction:column;text-align:center;}.btn-row{flex-direction:column;align-items:flex-start;}}
 
 .page-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
