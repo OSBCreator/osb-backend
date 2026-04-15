@@ -30,9 +30,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(
 .nbtn-score:hover{background:#d01020;}
 .nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
 .nbtn-join:hover{border-color:var(--r);color:var(--w);}
-.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;z-index:1000;position:relative;}
 .nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
-.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;max-height:calc(100vh - 72px);overflow-y:auto;}
 .mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
 .mob-menu a:last-of-type{border-bottom:none;}
 .mob-menu a:hover{color:var(--r);}
@@ -92,7 +92,7 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 /* MOBILE */
 @media(max-width:1000px){
   nav{padding:0 1.5rem;}
-  .nav-links,.nbtn-join{display:none;}
+  .nav-links,.nbtn-join,.nbtn-score{display:none;}
   .nav-ham{display:flex;}
   .sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}
   .pg-hero{padding:4rem 1.5rem 3.5rem;}
@@ -384,7 +384,6 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .nav-intel-wrap{position:relative;display:inline-block;}
 .nav-intel-wrap:hover .mega-drop{display:block !important;}
 
-
 /* ── DAY / NIGHT MODE ── */
 :root{
   --r:#C1121F;
@@ -415,80 +414,37 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
   --inp-bg:rgba(255,255,255,.05);
   --inp-border:rgba(255,255,255,.1);
 }
-body.day-mode{
-  --bg:#F8F6F2;
-  --surface:rgba(0,0,0,.04);
-  --surface2:rgba(0,0,0,.06);
-  --text:#0B0B0D;
-  --text2:rgba(0,0,0,.65);
-  --text3:rgba(0,0,0,.38);
-  --border:rgba(0,0,0,.1);
-  --nav-bg:rgba(248,246,242,.97);
-  --card-bg:#FFFFFF;
-  --card-border:#E4E1DB;
-  --section-dark:#F0EDE8;
-  --section-black:#E8E5E0;
-  --footer-bg:#0B0B0D;
-  --ticker2-bg:#E4E1DB;
-  --mega-bg:#FFFFFF;
-  --inp-bg:rgba(0,0,0,.04);
-  --inp-border:rgba(0,0,0,.15);
-}
 
 /* Apply theme tokens */
 body{background:var(--bg);color:var(--text);}
 nav{background:var(--nav-bg);}
 .mega-drop{background:var(--mega-bg) !important;}
-body.day-mode .mega-drop a{color:var(--text);}
-body.day-mode .mega-drop a div[style*="color:#fff"]{color:#0B0B0D !important;}
-body.day-mode .mega-drop a div[style*="color:rgba(255,255,255,.3)"]{color:rgba(0,0,0,.4) !important;}
 
 /* Hero */
 .hero,.h-noise,.h-glow{background:var(--section-dark);}
 .h-h1{color:var(--text);}
 .h-sub{color:var(--text3);}
-body.day-mode .h-corner{border-color:rgba(193,18,31,.25);}
-body.day-mode .h-ey{color:rgba(0,0,0,.25);}
-body.day-mode .h-ey-line{background:rgba(193,18,31,.35);}
 
 /* Sections */
 .sd{background:var(--section-black);}
 .sn{background:var(--section-dark);}
-body.day-mode .sd{background:#FFFFFF;}
-body.day-mode .sn{background:#F0EDE8;}
 
 /* Text */
 .hw{color:var(--text);}
 .tw{color:var(--text2);}
 .tmt{color:var(--text3);}
-body.day-mode .hb{color:var(--text);}
 
 /* Cards */
 .pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
   background:var(--card-bg);
   border-color:var(--card-border);
 }
-body.day-mode .pbox-bg{color:rgba(0,0,0,.04);}
-body.day-mode .pdesc{color:rgba(0,0,0,.45);}
-body.day-mode .ptag{color:var(--r);}
-body.day-mode .pname{color:var(--text);}
-body.day-mode .pscore{color:var(--text);}
 
 /* Nav links */
-body.day-mode .nav-links a{color:rgba(0,0,0,.45);}
-body.day-mode .nav-links a:hover,body.day-mode .nav-links a.active{color:#0B0B0D;}
-body.day-mode .nbtn-join{border-color:rgba(0,0,0,.2);color:rgba(0,0,0,.55);}
-body.day-mode .nbtn-join:hover{border-color:var(--r);color:#0B0B0D;}
 
 /* Intelligence hub */
-body.day-mode .intel-hub-card{background:#FFFFFF;border-color:#E4E1DB;}
 
 /* Feed */
-body.day-mode .fi{border-color:rgba(0,0,0,.08);}
-body.day-mode .fi-num{color:rgba(0,0,0,.2);}
-body.day-mode .fi-title{color:var(--text);}
-body.day-mode .fi-exc{color:rgba(0,0,0,.4);}
-body.day-mode .fstat{color:rgba(0,0,0,.25);}
 
 /* Inputs */
 .finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
@@ -496,133 +452,43 @@ body.day-mode .fstat{color:rgba(0,0,0,.25);}
   border-color:var(--inp-border);
   color:var(--text);
 }
-body.day-mode .finp::placeholder,body.day-mode .fi3::placeholder{color:rgba(0,0,0,.3);}
 
 /* Tiers */
-body.day-mode .tier{background:#F8F6F2;}
-body.day-mode .tier:hover{background:#F0EDE8;}
-body.day-mode .tier-name{color:var(--text);}
-body.day-mode .tier-desc{color:rgba(0,0,0,.45);}
-body.day-mode .tier-act{color:rgba(0,0,0,.25);}
-body.day-mode .tiers-grid{background:rgba(0,0,0,.08);}
 
 /* Score card */
-body.day-mode .sc-card{background:#FFFFFF;border-color:#E4E1DB;}
-body.day-mode .sc-tag{color:rgba(0,0,0,.3);}
-body.day-mode .sc-big{color:var(--text);}
-body.day-mode .sc-bar{background:rgba(0,0,0,.08);}
-body.day-mode .sc-row{background:rgba(0,0,0,.025);border-color:rgba(0,0,0,.06);}
-body.day-mode .sc-rl{color:rgba(0,0,0,.4);}
-body.day-mode .sc-rv{color:var(--text);}
-body.day-mode .sp-feat{color:rgba(0,0,0,.45);}
-body.day-mode .sp-bg-word{color:rgba(193,18,31,.04);}
 
 /* Haven/Solace stages */
-body.day-mode .hs{background:#F8F6F2;border-color:#E4E1DB;}
-body.day-mode .hs:hover{background:rgba(193,18,31,.05);}
-body.day-mode .hs-n{color:rgba(193,18,31,.25);}
-body.day-mode .hs-t{color:rgba(0,0,0,.6);}
 
 /* Community */
-body.day-mode .signup-card{background:#FFFFFF;border-color:#E4E1DB;}
-body.day-mode .sc2-t{color:var(--text);}
-body.day-mode .sc2-s{color:rgba(0,0,0,.4);}
-body.day-mode .cs-box{background:#F8F6F2;border-color:#E4E1DB;}
-body.day-mode .cs-n{color:var(--text);}
-body.day-mode .cs-l{color:rgba(0,0,0,.3);}
 
 /* Map */
-body.day-mode .map-wrap{background:#F8F6F2;border-color:#E4E1DB;}
-body.day-mode .cstat{background:#FFFFFF;}
-body.day-mode .cstat-n{color:rgba(0,0,0,.3);}
 
 /* IFN cards */
-body.day-mode .icard{background:#FFFFFF;border-color:#E4E1DB;}
-body.day-mode .icard-hd{background:#F8F6F2;border-color:#E4E1DB;}
-body.day-mode .icard-id{color:var(--r);}
-body.day-mode .icard-p{color:rgba(0,0,0,.3);}
-body.day-mode .icard-t{color:var(--text);}
-body.day-mode .icard-e{color:rgba(0,0,0,.45);}
-body.day-mode .icard-ft{border-color:rgba(0,0,0,.06);}
-body.day-mode .icard-m{color:rgba(0,0,0,.3);}
-body.day-mode .icard-s{color:rgba(0,0,0,.3);}
 
 /* IC3 intel cards */
-body.day-mode .ic3{background:#FFFFFF;border-color:#E4E1DB;}
-body.day-mode .ic3-hd{background:#F8F6F2;border-color:#E4E1DB;}
-body.day-mode .ic3-t{color:var(--text);}
-body.day-mode .ic3-e{color:rgba(0,0,0,.45);}
 
 /* Ticker secondary */
-body.day-mode .ticker:not([style*="background:rgba(11"]){background:var(--r);}
 
 /* Footer always dark */
 footer{background:var(--footer-bg) !important;}
-body.day-mode footer{background:#0B0B0D !important;}
 
 /* Page hero */
-body.day-mode .pg-hero{background:#F0EDE8;}
-body.day-mode .pg-hero h1{color:var(--text);}
 
 /* Off section (timeline) */
-body.day-mode .so{background:var(--off);color:var(--b);}
 
 /* Pillar boxes day */
-body.day-mode .pbox{background:#FFFFFF;border-color:#E4E1DB;}
-body.day-mode .pbox:hover{background:rgba(193,18,31,.04);border-color:rgba(193,18,31,.2);}
 
 /* Trig strip */
-body.day-mode .trig-strip{background:rgba(193,18,31,.05);border-color:rgba(193,18,31,.15);}
-body.day-mode .trig-body{color:rgba(0,0,0,.6);}
-body.day-mode .trig-body strong{color:var(--text);}
 
 /* Mission strip stays red */
 .mission-strip{background:var(--r);}
 
 /* Hero intel preview */
-body.day-mode .hi-card{background:#FFFFFF;border-color:#E4E1DB;}
-body.day-mode .hi-card:hover{background:rgba(193,18,31,.04);border-top-color:var(--r);}
-body.day-mode .hi-title{color:var(--text);}
-body.day-mode .hi-meta{color:rgba(0,0,0,.3);}
-
-/* ── TOGGLE BUTTON ── */
-.theme-toggle{
-  position:fixed;
-  bottom:2rem;
-  right:2rem;
-  z-index:999;
-  width:52px;
-  height:52px;
-  border-radius:50%;
-  background:var(--r);
-  border:none;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 4px 20px rgba(193,18,31,.4);
-  transition:all .3s;
-}
-.theme-toggle:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(193,18,31,.5);}
-.theme-toggle svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s;}
-.theme-toggle .icon-moon{display:block;}
-.theme-toggle .icon-sun{display:none;}
-body.day-mode .theme-toggle .icon-moon{display:none;}
-body.day-mode .theme-toggle .icon-sun{display:block;}
-.theme-toggle-tip{
-  position:fixed;bottom:2rem;right:5rem;
-  background:var(--bg);border:1px solid var(--border);
-  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
-  color:var(--text2);letter-spacing:1px;text-transform:uppercase;
-  padding:.4rem .875rem;opacity:0;pointer-events:none;
-  transition:opacity .3s;white-space:nowrap;
-}
-.theme-toggle:hover + .theme-toggle-tip{opacity:1;}
 
 </style>
 </head>
 <body>
-<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$74 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div></div>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div></div>
 <nav id="nav">
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Online Security Bureau"></a>
   <div class="nav-links">
@@ -635,6 +501,16 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
         <a href="intelligence.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Case Library</div><div style="font-size:.88rem;font-weight:600;color:#fff;">IFN Intelligence Library</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Field intelligence — named, documented, published</div></a>
         <a href="platform-index.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Platform Ratings</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Platform Safety Index</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB rates every major dating platform</div></a>
         <a href="report.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Annual Report</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Global Fraud Report 2026</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The definitive annual intelligence report — free to cite</div></a>
+      </div>
+    </div>
+    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
+      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:300px;z-index:200;">
+        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Certification</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certified™ Programme</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Get your platform certified</div></a>
+        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Registry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certified Platform Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The public record — who is certified</div></a>
+        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">The Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Standard™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The formal citable framework document</div></a>
+        <a href="press.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Press & Media</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Media Kit & Press Resources</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">For journalists and researchers</div></a>
+        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Open Letter</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's public challenge to platforms</div></a>
       </div>
     </div>
     <a href="score.html">SCORE</a>
@@ -655,6 +531,11 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
   <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
   <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
   <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
+  <a href="certification.html" onclick="closeMob()">Certification</a>
+  <a href="registry.html" onclick="closeMob()">Registry</a>
+  <a href="standard.html" onclick="closeMob()">The Standard</a>
+  <a href="press.html" onclick="closeMob()">Press &amp; Media</a>
+  <a href="open-letter.html" onclick="closeMob()">Open Letter</a>
   <a href="score.html" onclick="closeMob()">SCORE</a>
   <a href="solace.html" onclick="closeMob()">Solace</a>
   <a href="community.html" onclick="closeMob()">Community</a>
@@ -663,6 +544,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
     <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">SCORE Now</a>
     <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
   </div>
+</div>
 </div>
 </div>
 
@@ -688,7 +570,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
 </div>
 
 <div class="stat-band">
-  <div class="sblk reveal"><span class="snum" data-target="74" data-prefix="$" data-suffix="B+">$0</span><div class="slbl">Annual global romance fraud losses</div></div>
+  <div class="sblk reveal"><span class="snum" data-target="42" data-prefix="$" data-suffix="B+">$0</span><div class="slbl">Annual global romance fraud losses</div></div>
   <div class="sblk reveal d1"><span class="snum" data-target="20700" data-prefix="" data-suffix="+">0</span><div class="slbl">OSB platform reach and growing</div></div>
   <div class="sblk reveal d2"><span class="snum" data-target="5" data-prefix="" data-suffix="">0</span><div class="slbl">Intelligence field notes documented</div></div>
   <div class="sblk reveal d3"><span class="snum" data-target="1" data-prefix="" data-suffix="">0</span><div class="slbl">Framework of its kind in the world</div></div>
@@ -792,7 +674,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
     </div>
     <div class="ifn-grid">
       <a href="intelligence.html" class="icard reveal d1"><div class="icard-hd"><div class="icard-id">IFN-005</div><div class="icard-p">S-Pillar · New</div></div><div class="icard-bd"><div class="icard-t">The Facade Bank Page — Staged Financial Interface</div><div class="icard-e">A fake bank portal used to show fabricated wealth before any financial request was made. First documented globally by OSB.</div></div><div class="icard-ft"><div class="icard-m">March 2026 · Quora</div><div class="icard-s"><span>♥ 6</span><span>◎ 1K+</span></div></div></a>
-      <a href="intelligence.html" class="icard reveal d2"><div class="icard-hd"><div class="icard-id">IFN-001</div><div class="icard-p">S-Pillar · Active</div></div><div class="icard-bd"><div class="icard-t">The Automated Bank Verification Exploit</div><div class="icard-e">Defeats the standard advice to verify independently. The victim's own due diligence became part of the trap.</div></div><div class="icard-ft"><div class="icard-m">13 Mar 2026</div><div class="icard-s"><span>♥ 8</span><span>◎ 1,234</span></div></div></a>
+      <a href="intelligence.html" class="icard reveal d2"><div class="icard-hd"><div class="icard-id">IFN-001</div><div class="icard-p">S-Pillar · Active</div></div><div class="icard-bd"><div class="icard-t">The Proxy Caller Exploit</div><div class="icard-e">Defeats the standard advice to verify independently. The victim's own due diligence became part of the trap.</div></div><div class="icard-ft"><div class="icard-m">13 Mar 2026</div><div class="icard-s"><span>♥ 8</span><span>◎ 1,234</span></div></div></a>
       <a href="intelligence.html" class="icard reveal d3"><div class="icard-hd"><div class="icard-id">IFN-002</div><div class="icard-p">E-Pillar · E Score 5</div></div><div class="icard-bd"><div class="icard-t">The Suicidal Ideation Script — Zero Financial Loss</div><div class="icard-e">Established the E Pillar Independent Trigger. Emotional harm mandates support regardless of financial loss.</div></div><div class="icard-ft"><div class="icard-m">March 2026</div><div class="icard-s"><span>♥ 12</span><span>◎ 890</span></div></div></a>
     </div>
   </div>
@@ -872,7 +754,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
       <div class="cstat"><div class="cstat-n">Africa</div><div class="cstat-v">Hub</div></div>
       <div class="cstat"><div class="cstat-n">Asia</div><div class="cstat-v">Active</div></div>
       <div class="cstat"><div class="cstat-n">Oceania</div><div class="cstat-v">Active</div></div>
-      <div class="cstat"><div class="cstat-n">Global</div><div class="cstat-v">$74B+</div></div>
+      <div class="cstat"><div class="cstat-n">Global</div><div class="cstat-v">$42B+</div></div>
     </div>
   </div>
 </div>
@@ -888,7 +770,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
     <div class="timeline reveal">
       <div class="tli"><div class="tli-node">IFN<br>003</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">First Live Exit — Active Scam Exited in Real Time</div><div class="tli-desc">OSB intervened in an active scam on Quora. Subject exited the same day. Both R and E pillars at maximum. First documented live OSB exit intervention.</div><div class="tli-score">Outcome: Successful · R Score 5/5 · E Score 5/5</div></div></div>
       <div class="tli"><div class="tli-node">IFN<br>002</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">E Score 5 — Crisis Language with Zero Financial Loss</div><div class="tli-desc">Suicidal ideation language produced directly by scammer manipulation. No money lost at time of documentation. Established the E Pillar Independent Trigger in RSEI v2.0.</div><div class="tli-score">E Score: 5/5 · Zero financial loss · E Independent Trigger formalised</div></div></div>
-      <div class="tli"><div class="tli-node">IFN<br>001</div><div class="tli-card"><div class="tli-date">13 March 2026 · Quora — Scam Watch Space</div><div class="tli-title">The Automated Bank Verification Exploit — First Global Documentation</div><div class="tli-desc">Subject called a real bank using a real number and received confirmation of a large balance — using stolen credentials supplied by the scammer. The victim's own verification became the trap. OSB documented this technique first globally. 1,234+ combined reach.</div><div class="tli-score">RSEI: 16/20 · ESI: 4/5 · First global documentation</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>001</div><div class="tli-card"><div class="tli-date">13 March 2026 · Quora — Scam Watch Space</div><div class="tli-title">The Proxy Caller Exploit — First Global Documentation</div><div class="tli-desc">Scammer in possession of stolen account credentials — real money, real account, no flags raised. Cannot call the bank themselves. Engineers the victim — an American, innocent, credible — to call instead. Arms them with scripted questions. The balance the victim confirms is real and deliberately staggering. Greed and trust converge. The victim clears the path for stolen funds to move, unknowingly becoming a money mule proxy. First documented globally by OSB. 1,234+ combined reach.</div><div class="tli-score">RSEI: 16/20 · ESI: 4/5 · First global documentation</div></div></div>
       <div class="tli"><div class="tli-node">IFN<br>005</div><div class="tli-card"><div class="tli-date">March 2026 · Quora — John Dee</div><div class="tli-title">The Facade Bank Page — Staged Financial Interface</div><div class="tli-desc">A fake bank portal used to display fabricated wealth before any financial request was made. Distinct from IFN-001 — visual fabrication versus automated phone confirmation. First documented by OSB. 1,000+ views in 3 days.</div><div class="tli-score">S Score: 5/5 · Staged interface · New technique documented</div></div></div>
     </div>
   </div>
@@ -925,7 +807,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
         <p class="bmd tw" style="margin-bottom:2.5rem;">Every OSB field note and intelligence brief — published here, permanently archived. Read without an account. Sign up to engage and receive briefings direct to your inbox.</p>
         <div class="feed-list">
           <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-005</div><div><div class="fi-tag">S-Pillar · New</div><div class="fi-title">The Facade Bank Page — Staged Financial Interface</div><div class="fi-exc">First documented globally by OSB. 1,000+ views in 3 days.</div></div><div class="fi-stats"><span class="fstat">♥ 6</span><span class="fstat">◎ 1K+</span></div></div>
-          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-001</div><div><div class="fi-tag">S-Pillar · Active</div><div class="fi-title">The Automated Bank Verification Exploit</div><div class="fi-exc">Defeats "verify independently." The victim's own action became the trap.</div></div><div class="fi-stats"><span class="fstat">♥ 8</span><span class="fstat">◎ 1,234</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-001</div><div><div class="fi-tag">S-Pillar · Active</div><div class="fi-title">The Proxy Caller Exploit</div><div class="fi-exc">The victim called the bank. The money was real. So was the trap. They were the instrument — not the target.</div></div><div class="fi-stats"><span class="fstat">♥ 8</span><span class="fstat">◎ 1,234</span></div></div>
           <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-002</div><div><div class="fi-tag">E-Pillar · E Score 5</div><div class="fi-title">The Suicidal Ideation Script — Zero Financial Loss</div><div class="fi-exc">Established the E Pillar Independent Trigger. Emotional harm is real harm.</div></div><div class="fi-stats"><span class="fstat">♥ 12</span><span class="fstat">◎ 890</span></div></div>
           <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-004</div><div><div class="fi-tag">I-Pillar · $28,000</div><div class="fi-title">$28,000 Over 3 Years — The Slow-Burn Pattern</div><div class="fi-exc">Low velocity. High duration. Maximum damage.</div></div><div class="fi-stats"><span class="fstat">♥ 24</span><span class="fstat">◎ 3,400</span></div></div>
         </div>
@@ -949,7 +831,7 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
           <input type="email" class="finp" placeholder="your@email.com" id="nle">
           <button class="fbtn" style="background:rgba(255,255,255,.07);" onmouseover="this.style.background='var(--r)'" onmouseout="this.style.background='rgba(255,255,255,.07)'" onclick="nlSub()">Subscribe Free</button>
           <div id="nlmsg" style="display:none;margin-top:.625rem;font-size:.78rem;"></div>
-          <p style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);margin-top:.75rem;letter-spacing:.3px;">By subscribing you agree to our <a href='privacy.html' style='color:rgba(193,18,31,.7);text-decoration:none;'>Privacy Policy</a>. Unsubscribe at any time.</p>
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);margin-top:.75rem;letter-spacing:.3px;">By subscribing you agree to our <a href='privacy.html' style='color:rgba(193,18,31,.6);text-decoration:none;'>Privacy Policy</a>. Unsubscribe anytime.</p>
         </div>
         <div class="cs-grid">
           <div class="cs-box"><span class="cs-n" data-target="5">0</span><div class="cs-l">Field Notes</div></div>
@@ -1013,25 +895,22 @@ body.day-mode .theme-toggle .icon-sun{display:block;}
   <div class="fbot">
     <div class="fquote" id="fq"></div>
     <div class="fcopy">© 2021–2026 OSB e-Consultancy · Online Security Bureau · RSEI Model™</div>
-    <div style="margin-top:12px;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
-      <a href="privacy.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#C1121F'" onmouseout="this.style.color='rgba(255,255,255,.3)'">Privacy Policy</a>
-      <span style="color:rgba(255,255,255,.15);font-size:9px;">·</span>
-      <a href="cookies.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#C1121F'" onmouseout="this.style.color='rgba(255,255,255,.3)'">Cookie Policy</a>
-      <span style="color:rgba(255,255,255,.15);font-size:9px;">·</span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);">OSB/LEGAL/PP/001/2026</span>
-    </div>
+  </div>
+  <div style="max-width:1160px;margin:0 auto;padding:1rem 0 1.5rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <a href="privacy.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);text-decoration:none;" onmouseover="this.style.color='#C1121F'" onmouseout="this.style.color='rgba(255,255,255,.25)'">Privacy Policy</a>
+    <span style="color:rgba(255,255,255,.1);font-size:9px;">·</span>
+    <a href="cookies.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);text-decoration:none;" onmouseover="this.style.color='#C1121F'" onmouseout="this.style.color='rgba(255,255,255,.25)'">Cookie Policy</a>
+    <span style="color:rgba(255,255,255,.1);font-size:9px;">·</span>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.12);">OSB/LEGAL/PP/001/2026</span>
   </div>
 </footer>
 
 <!-- COOKIE CONSENT BANNER -->
-<div id="osb-cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0F0F1A;border-top:1px solid #C1121F;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
-  <div style="display:flex;align-items:center;gap:16px;">
-    <span style="width:6px;height:6px;border-radius:50%;background:#C1121F;flex-shrink:0;"></span>
-    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.5px;">We use essential cookies to operate this platform. No tracking. No advertising. <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a> · <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a></p>
-  </div>
+<div id="osb-cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0F0F1A;border-top:2px solid #C1121F;padding:14px 32px;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">We use essential cookies to operate this platform. No tracking. No advertising. <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a> &nbsp;·&nbsp; <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a></p>
   <div style="display:flex;gap:10px;flex-shrink:0;">
-    <button onclick="osbAcceptCookies()" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 20px;background:#C1121F;color:#fff;border:none;cursor:pointer;">Accept</button>
-    <button onclick="osbDeclineCookies()" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);cursor:pointer;">Essential Only</button>
+    <button onclick="osbAccept()" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 20px;background:#C1121F;color:#fff;border:none;cursor:pointer;">Accept</button>
+    <button onclick="osbDecline()" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;background:transparent;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.15);cursor:pointer;">Essential Only</button>
   </div>
 </div>
 <script>
@@ -1081,35 +960,21 @@ function nlSub(){
   .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Subscribed — check your email.':'Something went wrong.';});
 }
 </script>
-<script>
-// Day/Night Mode
-function toggleTheme(){
-  var d=document.body;
-  var isDay=d.classList.toggle('day-mode');
-  localStorage.setItem('osb-theme',isDay?'day':'night');
-  var tip=document.querySelector('.theme-toggle-tip');
-  if(tip)tip.textContent=isDay?'Switch to night mode':'Switch to day mode';
-}
-(function(){
-  var t=localStorage.getItem('osb-theme');
-  if(t==='day')document.body.classList.add('day-mode');
-})();
-</script>
 
 <script>
 (function(){
-  if(!localStorage.getItem('osb-cookies-accepted')){
+  if(!localStorage.getItem('osb-cookie-consent')){
     var b=document.getElementById('osb-cookie-banner');
-    if(b)b.style.display='flex';
+    if(b){b.style.display='flex';}
   }
 })();
-function osbAcceptCookies(){
-  localStorage.setItem('osb-cookies-accepted','all');
+function osbAccept(){
+  localStorage.setItem('osb-cookie-consent','accepted');
   var b=document.getElementById('osb-cookie-banner');
   if(b)b.style.display='none';
 }
-function osbDeclineCookies(){
-  localStorage.setItem('osb-cookies-accepted','essential');
+function osbDecline(){
+  localStorage.setItem('osb-cookie-consent','essential');
   var b=document.getElementById('osb-cookie-banner');
   if(b)b.style.display='none';
 }
