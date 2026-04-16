@@ -8,6 +8,36 @@
 -->
 <script>
   var BACKEND_URL = "https://osb-backend-production.up.railway.app";
+
+// Consent validation
+function updateConsentBtn() {
+  var c1 = document.getElementById('consent-1');
+  var c2 = document.getElementById('consent-2');
+  var c3 = document.getElementById('consent-3');
+  var btn = document.getElementById('osb-submit-btn');
+  if(!c1||!c2||!c3||!btn) return;
+  var allChecked = c1.checked && c2.checked && c3.checked;
+  btn.disabled = !allChecked;
+  btn.style.opacity = allChecked ? '1' : '0.45';
+  btn.style.cursor = allChecked ? 'pointer' : 'not-allowed';
+}
+function checkConsentAndSend(resultText) {
+  var c1 = document.getElementById('consent-1');
+  var c2 = document.getElementById('consent-2');
+  var c3 = document.getElementById('consent-3');
+  if(!c1.checked || !c2.checked || !c3.checked) {
+    alert('Please confirm all three consent statements before submitting.');
+    return;
+  }
+  sendResult(resultText);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  ['consent-1','consent-2','consent-3'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('change', updateConsentBtn);
+  });
+  updateConsentBtn();
+});
 </script>
 
 <html lang="en">
