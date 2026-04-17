@@ -29,9 +29,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(
 .nbtn-score:hover{background:#d01020;}
 .nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
 .nbtn-join:hover{border-color:var(--r);color:var(--w);}
-.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;z-index:1000;position:relative;}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
 .nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
-.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;max-height:calc(100vh - 72px);overflow-y:auto;}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
 .mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
 .mob-menu a:last-of-type{border-bottom:none;}
 .mob-menu a:hover{color:var(--r);}
@@ -88,8 +88,9 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .nav-intel-wrap{position:relative;display:inline-flex;align-items:center;height:72px;}
 .nav-intel-wrap:hover .mega-drop{display:block !important;}
 /* MOBILE */
-@media(max-width:1000px){nav{padding:0 1.5rem;}.nav-links,.nbtn-join,.nbtn-score{display:none;}.nav-ham{display:flex;}.sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}.pg-hero{padding:4rem 1.5rem 3.5rem;}.fg{grid-template-columns:1fr 1fr;gap:2rem;}footer{padding:4rem 1.5rem 2.5rem;}}
+@media(max-width:1000px){nav{padding:0 1.5rem;}.nav-links,.nbtn-join{display:none;}.nav-ham{display:flex;}.sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}.pg-hero{padding:4rem 1.5rem 3.5rem;}.fg{grid-template-columns:1fr 1fr;gap:2rem;}footer{padding:4rem 1.5rem 2.5rem;}}
 @media(max-width:600px){body{font-size:15px;}nav{padding:0 1.25rem;}.sd,.sn,.sr,.so{padding:3.5rem 1.25rem;}.pg-hero{padding:3rem 1.25rem 2.5rem;}.fg{grid-template-columns:1fr;}.fbot{flex-direction:column;text-align:center;}.btn-row{flex-direction:column;align-items:flex-start;}}
+
 
 .page-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
 .page-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
@@ -120,7 +121,8 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .toc-t{font-size:.9rem;color:rgba(255,255,255,.55);}
 @media(max-width:1000px){.report-layout{grid-template-columns:1fr;}.report-cover{position:static;}.sec{padding:4.5rem 1.5rem;}.data-grid{grid-template-columns:1fr;}}
 
-/* ── DAY / NIGHT MODE ── */
+
+/* ── THEME TOKENS (permanent dark) ── */
 :root{
   --r:#C1121F;
   --b:#0B0B0D;
@@ -131,7 +133,6 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
   --br:#E4E1DB;
   --rl:#FEF0F0;
   --n:#060608;
-  /* Theme tokens */
   --bg:#060608;
   --surface:rgba(255,255,255,.025);
   --surface2:rgba(255,255,255,.04);
@@ -156,77 +157,46 @@ body{background:var(--bg);color:var(--text);}
 nav{background:var(--nav-bg);}
 .mega-drop{background:var(--mega-bg) !important;}
 
-/* Hero */
-.hero,.h-noise,.h-glow{background:var(--section-dark);}
-.h-h1{color:var(--text);}
-.h-sub{color:var(--text3);}
-
 /* Sections */
 .sd{background:var(--section-black);}
 .sn{background:var(--section-dark);}
 
-/* Text */
-.hw{color:var(--text);}
-.tw{color:var(--text2);}
-.tmt{color:var(--text3);}
-
-/* Cards */
-.pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
-  background:var(--card-bg);
-  border-color:var(--card-border);
-}
-
-/* Nav links */
-
-/* Intelligence hub */
-
-/* Feed */
-
-/* Inputs */
-.finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
-  background:var(--inp-bg);
-  border-color:var(--inp-border);
-  color:var(--text);
-}
-
-/* Tiers */
-
-/* Score card */
-
-/* Haven/Solace stages */
-
-/* Community */
-
-/* Map */
-
-/* IFN cards */
-
-/* IC3 intel cards */
-
-/* Ticker secondary */
-
 /* Footer always dark */
 footer{background:var(--footer-bg) !important;}
-
-/* Page hero */
-
-/* Off section (timeline) */
-
-/* Pillar boxes day */
-
-/* Trig strip */
 
 /* Mission strip stays red */
 .mission-strip{background:var(--r);}
 
-/* Hero intel preview */
+/* ── FORM / CONSENT STYLES ── */
+.rcn-form{margin-top:2.5rem;}
+.rcn-inp{width:100%;background:var(--inp-bg);border:1px solid var(--inp-border);color:var(--text);font-family:'Figtree',sans-serif;font-size:.9rem;padding:.875rem 1.125rem;margin-bottom:1rem;outline:none;transition:border-color .2s;}
+.rcn-inp:focus{border-color:var(--r);}
+.rcn-inp::placeholder{color:var(--text3);}
+.rcn-ta{resize:vertical;min-height:120px;}
+.rcn-consent{border:1.5px solid var(--r);background:rgba(193,18,31,.04);padding:1.375rem 1.5rem;margin-bottom:1.5rem;}
+.rcn-consent-hd{display:flex;align-items:center;gap:.875rem;margin-bottom:1.125rem;}
+.rcn-consent-ref{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--r);}
+.rcn-consent-title{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--text);font-weight:500;}
+.rcn-check-row{display:flex;align-items:flex-start;gap:.875rem;margin-bottom:.875rem;cursor:pointer;}
+.rcn-check-row:last-of-type{margin-bottom:0;}
+.rcn-check-row input[type="checkbox"]{width:16px;height:16px;min-width:16px;margin-top:2px;accent-color:var(--r);cursor:pointer;}
+.rcn-check-label{font-size:.82rem;color:var(--text2);line-height:1.65;}
+.rcn-check-label a{color:var(--r);text-decoration:none;}
+.rcn-check-label a:hover{text-decoration:underline;}
+.rcn-pbyd{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text3);letter-spacing:.5px;margin-top:1rem;padding-top:.875rem;border-top:1px solid rgba(255,255,255,.06);}
+.rcn-submit{background:var(--r);color:#fff;border:none;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:14px 36px;cursor:pointer;transition:all .25s;width:100%;}
+.rcn-submit:hover:not(:disabled){background:#d01020;transform:translateY(-1px);box-shadow:0 6px 28px rgba(193,18,31,.4);}
+.rcn-submit:disabled{opacity:.4;cursor:not-allowed;}
+.rcn-msg{display:none;margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:1px;padding:.75rem 1rem;border:1px solid;}
+.rcn-msg.success{color:#4caf50;border-color:rgba(76,175,80,.3);background:rgba(76,175,80,.06);}
+.rcn-msg.error{color:var(--r);border-color:rgba(193,18,31,.3);background:rgba(193,18,31,.04);}
 
 </style>
 <title>Global Fraud Report 2026 — Online Security Bureau</title>
 <meta name="description" content="The definitive annual intelligence report on romance fraud. Published by OSB. Free to access. Free to cite.">
 </head>
 <body>
-<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42 Billion+ Annual Global Romance Fraud Losses — Every Continent<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div>
 <nav id="nav">
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Online Security Bureau"></a>
   <div class="nav-links">
@@ -241,17 +211,7 @@ footer{background:var(--footer-bg) !important;}
         <a href="report.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Annual Report</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Global Fraud Report 2026</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The definitive annual intelligence report — free to cite</div></a>
       </div>
     </div>
-    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
-      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
-      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:300px;z-index:200;">
-        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Certification</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certified™ Programme</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Get your platform certified</div></a>
-        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Registry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certified Platform Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The public record — who is certified</div></a>
-        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">The Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Standard™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The formal citable framework document</div></a>
-        <a href="press.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Press &amp; Media</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Media Kit &amp; Press Resources</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">For journalists and researchers</div></a>
-        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Open Letter</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's public challenge to platforms</div></a>
-      </div>
-    </div>
-        <a href="score.html">SCORE</a>
+    <a href="score.html">SCORE</a>
     <a href="solace.html">Solace</a>
     <a href="community.html">Community</a>
     <a href="contact.html">Contact</a>
@@ -269,11 +229,6 @@ footer{background:var(--footer-bg) !important;}
   <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
   <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
   <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
-  <a href="certification.html" onclick="closeMob()">Certification</a>
-  <a href="registry.html" onclick="closeMob()">Registry</a>
-  <a href="standard.html" onclick="closeMob()">The Standard</a>
-  <a href="press.html" onclick="closeMob()">Press &amp; Media</a>
-  <a href="open-letter.html" onclick="closeMob()">Open Letter</a>
   <a href="score.html" onclick="closeMob()">SCORE</a>
   <a href="solace.html" onclick="closeMob()">Solace</a>
   <a href="community.html" onclick="closeMob()">Community</a>
@@ -282,7 +237,6 @@ footer{background:var(--footer-bg) !important;}
     <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">SCORE Now</a>
     <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
   </div>
-</div>
 </div>
 <div class="page-hero">
   <div class="page-hero-bg"></div>
@@ -301,12 +255,12 @@ footer{background:var(--footer-bg) !important;}
           <div class="rs-tag">Executive Summary</div>
           <div class="rs-h">The 2026 findings.</div>
           <div class="data-grid">
-            <div class="data-box"><span class="data-num">Billions Lost</span><div class="data-lbl">Annual global romance fraud losses — 2026</div></div>
+            <div class="data-box"><span class="data-num">$42B+</span><div class="data-lbl">Annual global romance fraud losses — 2026</div></div>
             <div class="data-box"><span class="data-num">15–20%</span><div class="data-lbl">Annual growth rate of reported fraud cases</div></div>
             <div class="data-box"><span class="data-num">5</span><div class="data-lbl">Intelligence Field Notes filed by OSB</div></div>
             <div class="data-box"><span class="data-num">2</span><div class="data-lbl">New techniques documented globally first by OSB</div></div>
           </div>
-          <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:1rem;">Romance fraud is not slowing. Confirmed and reported losses represent only a fraction of true losses. The true figure — accounting for shame-driven non-reporting — is significantly higher. OSB field intelligence confirms that the operational sophistication of romance fraud networks is increasing year on year.</p>
+          <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:1rem;">Romance fraud is not slowing. The $42 billion annual figure represents only confirmed and reported cases. The true figure — accounting for shame-driven non-reporting — is significantly higher. OSB field intelligence confirms that the operational sophistication of romance fraud networks is increasing year on year.</p>
           <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;">In 2026, OSB documented two new globally-significant S-Pillar techniques. The first (IFN-001) defeated the standard advice to "verify independently." The second (IFN-005) defeated "I saw the money with my own eyes." Together they represent a new class of financial credibility engineering that existing fraud prevention guidance does not address.</p>
         </div>
 
@@ -324,7 +278,7 @@ footer{background:var(--footer-bg) !important;}
         <div class="report-sec reveal">
           <div class="rs-tag">Section 3 · New Techniques Documented</div>
           <div class="rs-h">What OSB found first — globally.</div>
-          <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:1rem;"><strong style="color:var(--b);">The Proxy Caller Exploit (IFN-001)</strong> — The scammer provides real stolen account credentials. The victim independently calls the real bank and receives confirmation of a large balance from the automated system. The victim's own verification step was the trap. This defeats the primary fraud prevention advice in circulation globally. First documented by OSB.</p>
+          <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:1rem;"><strong style="color:var(--b);">The Automated Bank Verification Exploit (IFN-001)</strong> — The scammer provides real stolen account credentials. The victim independently calls the real bank and receives confirmation of a large balance from the automated system. The victim's own verification step was the trap. This defeats the primary fraud prevention advice in circulation globally. First documented by OSB.</p>
           <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;"><strong style="color:var(--b);">The Facade Bank Page (IFN-005)</strong> — A fake bank portal interface showing fabricated wealth, displayed to the victim before any financial request is made. Distinct from IFN-001 — this uses visual fabrication rather than automated phone confirmation. The victim sees the "money" before being asked for anything. First documented by OSB.</p>
         </div>
 
@@ -351,8 +305,41 @@ footer{background:var(--footer-bg) !important;}
             <div style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--r);margin-bottom:.75rem;">Citation Format</div>
             <div style="font-size:.85rem;color:var(--gray);line-height:1.8;font-family:'JetBrains Mono',monospace;">Dee, J. (2026). <em>State of Romance Fraud: 2026 Annual Intelligence Report.</em><br>Online Security Bureau / OSB e-Consultancy. RSEI Model™.</div>
           </div>
-          <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:1.5rem;">For research partnerships, data requests, media interviews or institutional briefings — contact OSB directly. OSB operates anonymously by design. All media contact is handled through John Dee, Founder.</p>
-          <a href="contact.html" class="btn-r" style="font-size:.85rem;">Contact OSB</a>
+          <p style="font-size:.95rem;color:var(--gray);line-height:1.85;font-weight:300;margin-bottom:1.5rem;">For research partnerships, data requests, media interviews or institutional briefings — submit an enquiry below. OSB operates anonymously by design. All media contact is handled through John Dee, Founder.</p>
+
+          <div class="rcn-form">
+            <input class="rcn-inp" type="text" id="rcn-name" placeholder="Full name / Organisation" autocomplete="off">
+            <input class="rcn-inp" type="email" id="rcn-email" placeholder="Contact email address" autocomplete="off">
+            <input class="rcn-inp" type="text" id="rcn-role" placeholder="Role / Title (e.g. Investigative Journalist, Academic Researcher)" autocomplete="off">
+            <textarea class="rcn-inp rcn-ta" id="rcn-msg" placeholder="Nature of your enquiry — data request, media interview, research partnership, institutional briefing..."></textarea>
+
+            <!-- CONSENT BLOCK — OSB/LEGAL/RCN/001/2026 -->
+            <div class="rcn-consent">
+              <div class="rcn-consent-hd">
+                <div>
+                  <div class="rcn-consent-ref">OSB/LEGAL/RCN/001/2026</div>
+                  <div class="rcn-consent-title">Researcher &amp; Contact Notice — Privacy by Design</div>
+                </div>
+              </div>
+              <label class="rcn-check-row" id="chk-row-1">
+                <input type="checkbox" id="chk1" onchange="updateSubmit()">
+                <span class="rcn-check-label">I confirm that the information I am submitting is accurate and relates to a genuine research, journalistic, or institutional enquiry. I understand that OSB reserves the right to verify my credentials before responding.</span>
+              </label>
+              <label class="rcn-check-row" id="chk-row-2">
+                <input type="checkbox" id="chk2" onchange="updateSubmit()">
+                <span class="rcn-check-label">I have read and accept the <a href="privacy.html">Privacy Policy</a> (OSB/LEGAL/PP/001/2026) and the <a href="cookies.html">Data Retention Policy</a>. I consent to OSB e-Consultancy processing the personal data submitted in this form solely for the purpose of responding to my enquiry.</span>
+              </label>
+              <label class="rcn-check-row" id="chk-row-3">
+                <input type="checkbox" id="chk3" onchange="updateSubmit()">
+                <span class="rcn-check-label">I understand that any data shared with OSB in connection with this enquiry is treated as confidential by default. OSB operates a Privacy by Design standard — data is not retained beyond the purpose for which it was collected, is not sold or shared with third parties, and may be requested for deletion at any time.</span>
+              </label>
+              <div class="rcn-pbyd">PRIVACY BY DESIGN · DATA MINIMISATION STANDARD · OSB e-CONSULTANCY · RSEI Model™<br>Collected data is encrypted in transit · Retained for enquiry resolution only · Deletion available on request</div>
+            </div>
+            <!-- END CONSENT BLOCK -->
+
+            <button class="rcn-submit" id="rcn-submit" disabled onclick="submitRCN()">Submit Enquiry</button>
+            <div class="rcn-msg" id="rcn-msg-status"></div>
+          </div>
         </div>
       </div>
 
@@ -372,9 +359,8 @@ footer{background:var(--footer-bg) !important;}
           <div class="toc-item"><div class="toc-num">02</div><div class="toc-t">RSEI Scoring Data</div></div>
           <div class="toc-item"><div class="toc-num">03</div><div class="toc-t">New Techniques Documented</div></div>
           <div class="toc-item"><div class="toc-num">04</div><div class="toc-t">Continental Distribution</div></div>
-          <a href="platform-index.html" style="text-decoration:none;display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.06);"><div class="toc-num">05</div><div class="toc-t" style="color:rgba(255,255,255,.55);">Platform Safety Index <span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--r);letter-spacing:1.5px;margin-left:.5rem;">↗</span></div></a>
-          <a href="certification.html" style="text-decoration:none;display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.06);"><div class="toc-num">06</div><div class="toc-t" style="color:rgba(255,255,255,.55);">RSEI Certification Standard <span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--r);letter-spacing:1.5px;margin-left:.5rem;">↗</span></div></a>
-          <div class="toc-item"><div class="toc-num">07</div><div class="toc-t">For Researchers & Institutions</div></div>
+          <div class="toc-item"><div class="toc-num">05</div><div class="toc-t">Platform Accountability</div></div>
+          <div class="toc-item"><div class="toc-num">06</div><div class="toc-t">For Researchers</div></div>
         </div>
       </div>
     </div>
@@ -392,17 +378,7 @@ footer{background:var(--footer-bg) !important;}
         <div class="fcolt">Navigate</div>
         <div class="flinks">
           <a href="index.html">Home</a>
-          <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
-      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
-      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:300px;z-index:200;">
-        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Certification</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certified™ Programme</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Get your platform certified</div></a>
-        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Registry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certified Platform Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The public record — who is certified</div></a>
-        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">The Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Standard™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The formal citable framework document</div></a>
-        <a href="press.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Press &amp; Media</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Media Kit &amp; Press Resources</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">For journalists and researchers</div></a>
-        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Open Letter</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's public challenge to platforms</div></a>
-      </div>
-    </div>
-        <a href="score.html">SCORE</a>
+          <a href="score.html">SCORE</a>
           <a href="rsei.html">RSEI Model™</a>
           <a href="intel.html">Intelligence</a>
           <a href="reclaim.html">Reclaim</a>
@@ -519,7 +495,34 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
 document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});var fq=document.getElementById('fq');if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];});
 window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';});
-</script>
 
+function updateSubmit(){
+  var all=[document.getElementById('chk1'),document.getElementById('chk2'),document.getElementById('chk3')];
+  document.getElementById('rcn-submit').disabled=!all.every(function(c){return c&&c.checked;});
+}
+
+function submitRCN(){
+  var name=document.getElementById('rcn-name').value.trim();
+  var email=document.getElementById('rcn-email').value.trim();
+  var role=document.getElementById('rcn-role').value.trim();
+  var msg=document.getElementById('rcn-msg').value.trim();
+  var status=document.getElementById('rcn-msg-status');
+  if(!name||!email||!msg){status.className='rcn-msg error';status.style.display='block';status.textContent='Please complete all required fields before submitting.';return;}
+  var btn=document.getElementById('rcn-submit');
+  btn.disabled=true;btn.textContent='Submitting...';
+  fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,role:role,message:msg,source:'report-rcn-001-2026',consent:true})})
+  .then(function(r){return r.json();})
+  .then(function(){
+    status.className='rcn-msg success';status.style.display='block';
+    status.textContent='Enquiry received. OSB will respond through secure channels. Reference: OSB/LEGAL/RCN/001/2026.';
+    btn.textContent='Enquiry Submitted';
+  })
+  .catch(function(){
+    status.className='rcn-msg error';status.style.display='block';
+    status.textContent='Submission failed. Please email OSB directly via the Contact page.';
+    btn.disabled=false;btn.textContent='Submit Enquiry';
+  });
+}
+</script>
 </body>
 </html>
