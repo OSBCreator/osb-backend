@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RSEI Scoring Tool™ — OSB | Behavioural Threat Detection</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --black: #0B0B0D;
@@ -43,31 +43,34 @@ body {
   min-height: 100vh;
   font-size: 15px;
   line-height: 1.6;
+  padding-top: 72px;
 }
 
-/* TOP HEADER */
-.site-header {
-  background: var(--black);
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 68px;
-  border-bottom: 3px solid var(--red);
-}
-.site-header .logo-area { display: flex; align-items: center; gap: 12px; }
-.osb-mark {
-  background: var(--red);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'DM Serif Display', serif;
-  font-size: 11px; color: white; font-weight: 400;
-  letter-spacing: 1px;
-  padding: 6px 8px;
-  border-radius: 3px;
-}
-.osb-name { color: white; font-size: 13px; font-weight: 500; letter-spacing: .5px; }
-.osb-tagline { color: var(--red); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-top: 1px; }
-.header-right { color: #666; font-size: 12px; }
+/* ── SENTINEL NAV ─────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(6,6,8,.97);border-bottom:1px solid rgba(193,18,31,.25);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;}
+.nav-logo img{height:46px;width:auto;display:block;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:4px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:#C1121F;transition:width .25s;}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:.875rem;}
+.nbtn-score{background:#C1121F;color:#fff;padding:9px 22px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s;}
+.nbtn-score:hover{background:#d01020;}
+.nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-family:'Figtree',sans-serif;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
+.nbtn-join:hover{border-color:#C1121F;color:#fff;}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid #C1121F;padding:1.75rem 2rem;z-index:998;}
+.mob-menu a{display:block;padding:.75rem 0;font-family:'Figtree',sans-serif;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
+.mob-menu a:last-of-type{border-bottom:none;}
+.mob-menu a:hover{color:#C1121F;}
+.mob-ctas{display:flex;gap:.875rem;margin-top:1.5rem;flex-wrap:wrap;}
+.btn-r-sm{background:#C1121F;color:#fff;padding:11px 22px;font-family:'Figtree',sans-serif;font-size:10px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;}
+.btn-g-sm{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);padding:10px 20px;font-family:'Figtree',sans-serif;font-size:10px;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;}
+.nav-intel-wrap:hover .mega-drop{display:block !important;}
+@media(max-width:1000px){nav{padding:0 1.5rem;}.nav-links,.nbtn-join{display:none;}.nav-ham{display:flex;}}
+@media(max-width:600px){nav{padding:0 1.25rem;}}
 
 /* HERO */
 .hero {
@@ -93,12 +96,12 @@ body {
 .hero-logo-wrap {
   position: relative;
   z-index: 1;
-  background: var(--white);
+  background: transparent;
   padding: 2.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 4px solid var(--red);
+  border-bottom: 1px solid rgba(193,18,31,.2);
 }
 #hero-logo {
   width: 100%;
@@ -657,16 +660,57 @@ select.email-input { cursor: pointer; }
 </head>
 <body>
 
-<header class="site-header">
-    <div class="logo-area">
-    <div class="osb-mark">OSB</div>
-    <div>
-      <div class="osb-name">ONLINE SECURITY BUREAU</div>
-      <div class="osb-tagline">RSEI Model™ · Behavioural Intelligence</div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="OSB"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
+      <a href="intelligence.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">Intelligence<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
+        <a href="rsei-model.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Framework</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Model™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The world's only behavioural threat detection system</div></a>
+        <a href="intelligence.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Case Library</div><div style="font-size:.88rem;font-weight:600;color:#fff;">IFN Intelligence Library</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Field intelligence — named, documented, published</div></a>
+        <a href="platform-index.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Platform Ratings</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Platform Safety Index</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB rates every major dating platform</div></a>
+        <a href="report.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Annual Report</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Global Fraud Report 2026</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The definitive annual intelligence report — free to cite</div></a>
+      </div>
     </div>
+    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
+      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:380px;z-index:200;">
+        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Get Certified</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certification</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The industry standard for platform fraud safety</div></a>
+        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Verified Platforms</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certification Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Every RSEI-certified platform, publicly listed</div></a>
+        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">The Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certification Standard</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">What we assess, how we score, what it means</div></a>
+        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Open Letter</div><div style="font-size:.88rem;font-weight:600;color:#fff;">To Platform Leadership</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's direct message to the platforms that need to act</div></a>
+      </div>
+    </div>
+    <a href="score.html" class="active">SCORE</a>
+    <a href="solace.html">Solace</a>
+    <a href="community.html">Community</a>
+    <a href="contact.html">Contact</a>
   </div>
-  <div class="header-right">Est. 2021</div>
-</header>
+  <div class="nav-right">
+    <a href="community.html" class="nbtn-join">Community</a>
+    <a href="score.html" class="nbtn-score">SCORE Now</a>
+  </div>
+  <button class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="about.html" onclick="closeMob()">About</a>
+  <a href="rsei-model.html" onclick="closeMob()">RSEI Model™</a>
+  <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
+  <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
+  <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
+  <a href="certification.html" onclick="closeMob()">RSEI Certification</a>
+  <a href="score.html" onclick="closeMob()">SCORE</a>
+  <a href="solace.html" onclick="closeMob()">Solace</a>
+  <a href="community.html" onclick="closeMob()">Community</a>
+  <a href="contact.html" onclick="closeMob()">Contact</a>
+  <div class="mob-ctas">
+    <a href="score.html" class="btn-r-sm">SCORE Now</a>
+    <a href="community.html" class="btn-g-sm">Community</a>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-logo-wrap">
@@ -1107,6 +1151,8 @@ async function sendResult(resultText){
 }
 
 function restart(){ step=0; answers={}; render(); }
+function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
+function closeMob(){document.getElementById('mob').style.display='none';}
 render();
 </script>
 
