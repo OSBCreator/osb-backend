@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
-<meta name="description" content="The world's first behavioural intelligence framework for romance fraud.">
-<title>Online Security Bureau — RSEI Model™ | We named what they do — Online Security Bureau</title>
+<meta name="description" content="OSB — the world's first behavioural threat intelligence organisation. The RSEI Model™ is the only detection system built for social engineering fraud.">
+<title>OSB — RSEI Model™ | The World's First Behavioural Threat Detection System for Romance Fraud</title>
 <style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
@@ -30,9 +30,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(
 .nbtn-score:hover{background:#d01020;}
 .nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
 .nbtn-join:hover{border-color:var(--r);color:var(--w);}
-.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;z-index:1000;position:relative;}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
 .nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
-.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;max-height:calc(100vh - 72px);overflow-y:auto;}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
 .mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
 .mob-menu a:last-of-type{border-bottom:none;}
 .mob-menu a:hover{color:var(--r);}
@@ -92,7 +92,7 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 /* MOBILE */
 @media(max-width:1000px){
   nav{padding:0 1.5rem;}
-  .nav-links,.nbtn-join,.nbtn-score{display:none;}
+  .nav-links,.nbtn-join{display:none;}
   .nav-ham{display:flex;}
   .sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}
   .pg-hero{padding:4rem 1.5rem 3.5rem;}
@@ -384,7 +384,8 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .nav-intel-wrap{position:relative;display:inline-block;}
 .nav-intel-wrap:hover .mega-drop{display:block !important;}
 
-/* ── DAY / NIGHT MODE ── */
+
+/* ── THEME TOKENS (permanent dark) ── */
 :root{
   --r:#C1121F;
   --b:#0B0B0D;
@@ -395,10 +396,8 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
   --br:#E4E1DB;
   --rl:#FEF0F0;
   --n:#060608;
-  /* Theme tokens */
   --bg:#060608;
   --surface:rgba(255,255,255,.025);
-  --surface2:rgba(255,255,255,.04);
   --text:#FFFFFF;
   --text2:rgba(255,255,255,.7);
   --text3:rgba(255,255,255,.38);
@@ -406,33 +405,39 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
   --nav-bg:rgba(6,6,8,.97);
   --card-bg:rgba(255,255,255,.025);
   --card-border:rgba(255,255,255,.07);
-  --section-dark:#060608;
-  --section-black:#0B0B0D;
-  --footer-bg:#060608;
-  --ticker2-bg:rgba(11,11,13,1);
   --mega-bg:#060608;
   --inp-bg:rgba(255,255,255,.05);
   --inp-border:rgba(255,255,255,.1);
 }
+
 
 /* Apply theme tokens */
 body{background:var(--bg);color:var(--text);}
 nav{background:var(--nav-bg);}
 .mega-drop{background:var(--mega-bg) !important;}
 
+
+
+
 /* Hero */
 .hero,.h-noise,.h-glow{background:var(--section-dark);}
 .h-h1{color:var(--text);}
 .h-sub{color:var(--text3);}
 
+
+
+
 /* Sections */
 .sd{background:var(--section-black);}
 .sn{background:var(--section-dark);}
+
+
 
 /* Text */
 .hw{color:var(--text);}
 .tw{color:var(--text2);}
 .tmt{color:var(--text3);}
+
 
 /* Cards */
 .pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
@@ -440,11 +445,26 @@ nav{background:var(--nav-bg);}
   border-color:var(--card-border);
 }
 
+
+
+
+
+
 /* Nav links */
+
+
+
+
 
 /* Intelligence hub */
 
+
 /* Feed */
+
+
+
+
+
 
 /* Inputs */
 .finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
@@ -453,44 +473,102 @@ nav{background:var(--nav-bg);}
   color:var(--text);
 }
 
+
 /* Tiers */
+
+
+
+
+
+
 
 /* Score card */
 
+
+
+
+
+
+
+
+
+
 /* Haven/Solace stages */
+
+
+
+
 
 /* Community */
 
+
+
+
+
+
+
 /* Map */
+
+
+
 
 /* IFN cards */
 
+
+
+
+
+
+
+
+
+
 /* IC3 intel cards */
 
+
+
+
+
 /* Ticker secondary */
+
 
 /* Footer always dark */
 footer{background:var(--footer-bg) !important;}
 
+
 /* Page hero */
+
+
 
 /* Off section (timeline) */
 
+
 /* Pillar boxes day */
 
+
+
 /* Trig strip */
+
+
+
 
 /* Mission strip stays red */
 .mission-strip{background:var(--r);}
 
 /* Hero intel preview */
 
+
+
+
+
+
+
 </style>
 </head>
 <body>
-<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Intelligence Framework<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering the Future of Fraud Intelligence<span class="ts">◆</span></div></div></div></div>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Romance Fraud Losses — GASA 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Romance Fraud Losses — GASA 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div></div></div></div>
 <nav id="nav">
-  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Online Security Bureau"></a>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="OSB"></a>
   <div class="nav-links">
     <a href="index.html" class="active">Home</a>
     <a href="about.html">About</a>
@@ -504,13 +582,13 @@ footer{background:var(--footer-bg) !important;}
       </div>
     </div>
     <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
-      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
-      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:300px;z-index:200;">
-        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Certification</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certified™ Programme</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Get your platform certified</div></a>
-        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Registry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certified Platform Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The public record — who is certified</div></a>
-        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">The Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Standard™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The formal citable framework document</div></a>
-        <a href="press.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Press & Media</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Media Kit & Press Resources</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">For journalists and researchers</div></a>
-        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Open Letter</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's public challenge to platforms</div></a>
+      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;padding:0 1.125rem;height:72px;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
+        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Certification</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certified™ Programme</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Get your platform assessed and certified</div></a>
+        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Registry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certified Platform Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Platforms that have earned RSEI Certification</div></a>
+        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Standard™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The behavioural detection framework for platforms</div></a>
+        <a href="press.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Press</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Media Kit & Press Resources</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Assets and contacts for journalists and media</div></a>
+        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Industry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's open call to dating platforms globally</div></a>
       </div>
     </div>
     <a href="score.html">SCORE</a>
@@ -529,13 +607,9 @@ footer{background:var(--footer-bg) !important;}
   <a href="about.html" onclick="closeMob()">About</a>
   <a href="rsei-model.html" onclick="closeMob()">RSEI Model™</a>
   <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
+  <a href="certification.html" onclick="closeMob()">RSEI Certified™ — For Platforms</a>
   <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
   <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
-  <a href="certification.html" onclick="closeMob()">Certification</a>
-  <a href="registry.html" onclick="closeMob()">Registry</a>
-  <a href="standard.html" onclick="closeMob()">The Standard</a>
-  <a href="press.html" onclick="closeMob()">Press &amp; Media</a>
-  <a href="open-letter.html" onclick="closeMob()">Open Letter</a>
   <a href="score.html" onclick="closeMob()">SCORE</a>
   <a href="solace.html" onclick="closeMob()">Solace</a>
   <a href="community.html" onclick="closeMob()">Community</a>
@@ -545,19 +619,17 @@ footer{background:var(--footer-bg) !important;}
     <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
   </div>
 </div>
-</div>
-</div>
 
 <div class="hero">
   <div class="h-noise"></div>
   <div class="h-glow"></div>
   <div class="h-corner hc-tl"></div><div class="h-corner hc-tr"></div>
   <div class="h-corner hc-bl"></div><div class="h-corner hc-br"></div>
-  <div class="h-ey"><div class="h-ey-line"></div>Behavioural Intelligence · RSEI Model™ · Est. 2021<div class="h-ey-line"></div></div>
-  <div class="h-logo"><img src="logo.png" alt="Online Security Bureau"></div>
+  <div class="h-ey"><div class="h-ey-line"></div>Behavioural Threat Intelligence · RSEI Model™ · Est. 2021<div class="h-ey-line"></div></div>
+  <div class="h-logo"><img src="logo.png" alt="OSB"></div>
   <div class="h-vline"></div>
   <h1 class="h-h1">Romance fraud has a name.<br>It has a score.<br><em>Only one organisation built both.</em></h1>
-  <p class="h-sub">Online Security Bureau developed the world's first and only behavioural scoring framework for romance fraud. We do not raise awareness. We score. We intervene. We stop it.</p>
+  <p class="h-sub">OSB built the world's first behavioural threat detection system for social engineering fraud. The RSEI Model™ doesn't raise awareness — it detects, scores, and stops.</p>
   <div class="h-btns">
     <a href="score.html" class="btn-r">Score Your Situation Now</a>
     <a href="rsei-model.html" class="btn-g">Read the Framework</a>
@@ -566,11 +638,11 @@ footer{background:var(--footer-bg) !important;}
 </div>
 
 <div class="ticker" style="background:rgba(11,11,13,1);border-top:1px solid rgba(193,18,31,.15);">
-  <div class="tt"><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering Fraud Intelligence<span class="ts">◆</span></div><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB e-Consultancy · Est. 2021 · Pioneering Fraud Intelligence<span class="ts">◆</span></div></div>
+  <div class="tt"><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div></div>
 </div>
 
 <div class="stat-band">
-  <div class="sblk reveal"><span class="snum" data-target="42" data-prefix="$" data-suffix="B+">$0</span><div class="slbl">Annual global romance fraud losses</div></div>
+  <div class="sblk reveal"><span class="snum" data-target="42" data-prefix="$" data-suffix="B+">$0</span><div class="slbl">Annual global romance fraud losses — GASA 2025</div></div>
   <div class="sblk reveal d1"><span class="snum" data-target="20700" data-prefix="" data-suffix="+">0</span><div class="slbl">OSB platform reach and growing</div></div>
   <div class="sblk reveal d2"><span class="snum" data-target="5" data-prefix="" data-suffix="">0</span><div class="slbl">Intelligence field notes documented</div></div>
   <div class="sblk reveal d3"><span class="snum" data-target="1" data-prefix="" data-suffix="">0</span><div class="slbl">Framework of its kind in the world</div></div>
@@ -584,7 +656,7 @@ footer{background:var(--footer-bg) !important;}
         <h2 class="hlg hw">Four pillars.<br><em>One score. Zero ambiguity.</em></h2>
       </div>
       <div class="reveal d1">
-        <p class="blg tw" style="margin-bottom:2rem;">The RSEI Model™ is the world's only structured behavioural scoring system built specifically for romance fraud. Every scammer uses these four pillars — whether they know it or not.</p>
+        <p class="blg tw" style="margin-bottom:2rem;">The RSEI Model™ is the world's only behavioural threat detection system built for social engineering fraud. Four detection modules. One Core RSEI Rating. Every exploitation follows the same behavioural sequence — RSEI detects it.</p>
         <a href="rsei-model.html" class="btn-g" style="font-size:10px;">Read the full framework →</a>
       </div>
     </div>
@@ -674,7 +746,7 @@ footer{background:var(--footer-bg) !important;}
     </div>
     <div class="ifn-grid">
       <a href="intelligence.html" class="icard reveal d1"><div class="icard-hd"><div class="icard-id">IFN-005</div><div class="icard-p">S-Pillar · New</div></div><div class="icard-bd"><div class="icard-t">The Facade Bank Page — Staged Financial Interface</div><div class="icard-e">A fake bank portal used to show fabricated wealth before any financial request was made. First documented globally by OSB.</div></div><div class="icard-ft"><div class="icard-m">March 2026 · Quora</div><div class="icard-s"><span>♥ 6</span><span>◎ 1K+</span></div></div></a>
-      <a href="intelligence.html" class="icard reveal d2"><div class="icard-hd"><div class="icard-id">IFN-001</div><div class="icard-p">S-Pillar · Active</div></div><div class="icard-bd"><div class="icard-t">The Proxy Caller Exploit</div><div class="icard-e">Defeats the standard advice to verify independently. The victim's own due diligence became part of the trap.</div></div><div class="icard-ft"><div class="icard-m">13 Mar 2026</div><div class="icard-s"><span>♥ 8</span><span>◎ 1,234</span></div></div></a>
+      <a href="intelligence.html" class="icard reveal d2"><div class="icard-hd"><div class="icard-id">IFN-001</div><div class="icard-p">S-Pillar · Active</div></div><div class="icard-bd"><div class="icard-t">The Automated Bank Verification Exploit</div><div class="icard-e">Defeats the standard advice to verify independently. The victim's own due diligence became part of the trap.</div></div><div class="icard-ft"><div class="icard-m">13 Mar 2026</div><div class="icard-s"><span>♥ 8</span><span>◎ 1,234</span></div></div></a>
       <a href="intelligence.html" class="icard reveal d3"><div class="icard-hd"><div class="icard-id">IFN-002</div><div class="icard-p">E-Pillar · E Score 5</div></div><div class="icard-bd"><div class="icard-t">The Suicidal Ideation Script — Zero Financial Loss</div><div class="icard-e">Established the E Pillar Independent Trigger. Emotional harm mandates support regardless of financial loss.</div></div><div class="icard-ft"><div class="icard-m">March 2026</div><div class="icard-s"><span>♥ 12</span><span>◎ 890</span></div></div></a>
     </div>
   </div>
@@ -770,7 +842,7 @@ footer{background:var(--footer-bg) !important;}
     <div class="timeline reveal">
       <div class="tli"><div class="tli-node">IFN<br>003</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">First Live Exit — Active Scam Exited in Real Time</div><div class="tli-desc">OSB intervened in an active scam on Quora. Subject exited the same day. Both R and E pillars at maximum. First documented live OSB exit intervention.</div><div class="tli-score">Outcome: Successful · R Score 5/5 · E Score 5/5</div></div></div>
       <div class="tli"><div class="tli-node">IFN<br>002</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">E Score 5 — Crisis Language with Zero Financial Loss</div><div class="tli-desc">Suicidal ideation language produced directly by scammer manipulation. No money lost at time of documentation. Established the E Pillar Independent Trigger in RSEI v2.0.</div><div class="tli-score">E Score: 5/5 · Zero financial loss · E Independent Trigger formalised</div></div></div>
-      <div class="tli"><div class="tli-node">IFN<br>001</div><div class="tli-card"><div class="tli-date">13 March 2026 · Quora — Scam Watch Space</div><div class="tli-title">The Proxy Caller Exploit — First Global Documentation</div><div class="tli-desc">Scammer in possession of stolen account credentials — real money, real account, no flags raised. Cannot call the bank themselves. Engineers the victim — an American, innocent, credible — to call instead. Arms them with scripted questions. The balance the victim confirms is real and deliberately staggering. Greed and trust converge. The victim clears the path for stolen funds to move, unknowingly becoming a money mule proxy. First documented globally by OSB. 1,234+ combined reach.</div><div class="tli-score">RSEI: 16/20 · ESI: 4/5 · First global documentation</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>001</div><div class="tli-card"><div class="tli-date">13 March 2026 · Quora — Scam Watch Space</div><div class="tli-title">The Automated Bank Verification Exploit — First Global Documentation</div><div class="tli-desc">Subject called a real bank using a real number and received confirmation of a large balance — using stolen credentials supplied by the scammer. The victim's own verification became the trap. OSB documented this technique first globally. 1,234+ combined reach.</div><div class="tli-score">RSEI: 16/20 · ESI: 4/5 · First global documentation</div></div></div>
       <div class="tli"><div class="tli-node">IFN<br>005</div><div class="tli-card"><div class="tli-date">March 2026 · Quora — John Dee</div><div class="tli-title">The Facade Bank Page — Staged Financial Interface</div><div class="tli-desc">A fake bank portal used to display fabricated wealth before any financial request was made. Distinct from IFN-001 — visual fabrication versus automated phone confirmation. First documented by OSB. 1,000+ views in 3 days.</div><div class="tli-score">S Score: 5/5 · Staged interface · New technique documented</div></div></div>
     </div>
   </div>
@@ -807,7 +879,7 @@ footer{background:var(--footer-bg) !important;}
         <p class="bmd tw" style="margin-bottom:2.5rem;">Every OSB field note and intelligence brief — published here, permanently archived. Read without an account. Sign up to engage and receive briefings direct to your inbox.</p>
         <div class="feed-list">
           <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-005</div><div><div class="fi-tag">S-Pillar · New</div><div class="fi-title">The Facade Bank Page — Staged Financial Interface</div><div class="fi-exc">First documented globally by OSB. 1,000+ views in 3 days.</div></div><div class="fi-stats"><span class="fstat">♥ 6</span><span class="fstat">◎ 1K+</span></div></div>
-          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-001</div><div><div class="fi-tag">S-Pillar · Active</div><div class="fi-title">The Proxy Caller Exploit</div><div class="fi-exc">The victim called the bank. The money was real. So was the trap. They were the instrument — not the target.</div></div><div class="fi-stats"><span class="fstat">♥ 8</span><span class="fstat">◎ 1,234</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-001</div><div><div class="fi-tag">S-Pillar · Active</div><div class="fi-title">The Automated Bank Verification Exploit</div><div class="fi-exc">Defeats "verify independently." The victim's own action became the trap.</div></div><div class="fi-stats"><span class="fstat">♥ 8</span><span class="fstat">◎ 1,234</span></div></div>
           <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-002</div><div><div class="fi-tag">E-Pillar · E Score 5</div><div class="fi-title">The Suicidal Ideation Script — Zero Financial Loss</div><div class="fi-exc">Established the E Pillar Independent Trigger. Emotional harm is real harm.</div></div><div class="fi-stats"><span class="fstat">♥ 12</span><span class="fstat">◎ 890</span></div></div>
           <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-004</div><div><div class="fi-tag">I-Pillar · $28,000</div><div class="fi-title">$28,000 Over 3 Years — The Slow-Burn Pattern</div><div class="fi-exc">Low velocity. High duration. Maximum damage.</div></div><div class="fi-stats"><span class="fstat">♥ 24</span><span class="fstat">◎ 3,400</span></div></div>
         </div>
@@ -822,7 +894,7 @@ footer{background:var(--footer-bg) !important;}
           <input type="text" class="finp" placeholder="Choose a username" id="cu">
           <input type="email" class="finp" placeholder="your@email.com" id="ce">
           <button class="fbtn" onclick="joinCom()">Create Account — Free</button>
-          <div class="fnote">Private · Secure · No personal data sold</div>
+          <div class="fnote">By joining you agree to our <a href="privacy.html" style="color:rgba(255,255,255,.4);">Privacy Policy</a> (OSB/LEGAL/PP/001/2026) &amp; <a href="cookies.html" style="color:rgba(255,255,255,.4);">Cookie Policy</a>. Your username and email are collected solely for account creation. No personal data sold. Deletion available on request.</div>
           <div id="jmsg" style="display:none;margin-top:.75rem;font-size:.8rem;"></div>
         </div>
         <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;margin-bottom:1.125rem;">
@@ -831,7 +903,7 @@ footer{background:var(--footer-bg) !important;}
           <input type="email" class="finp" placeholder="your@email.com" id="nle">
           <button class="fbtn" style="background:rgba(255,255,255,.07);" onmouseover="this.style.background='var(--r)'" onmouseout="this.style.background='rgba(255,255,255,.07)'" onclick="nlSub()">Subscribe Free</button>
           <div id="nlmsg" style="display:none;margin-top:.625rem;font-size:.78rem;"></div>
-          <p style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);margin-top:.75rem;letter-spacing:.3px;">By subscribing you agree to our <a href='privacy.html' style='color:rgba(193,18,31,.6);text-decoration:none;'>Privacy Policy</a>. Unsubscribe anytime.</p>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.625rem;line-height:1.6;">By subscribing you agree to our <a href="privacy.html" style="color:rgba(255,255,255,.38);text-decoration:underline;">Privacy Policy</a> (OSB/LEGAL/PP/001/2026) &amp; <a href="cookies.html" style="color:rgba(255,255,255,.38);text-decoration:underline;">Cookie Policy</a>. We use your email only to send OSB intelligence briefings. You can unsubscribe at any time. No personal data sold.</div>
         </div>
         <div class="cs-grid">
           <div class="cs-box"><span class="cs-n" data-target="5">0</span><div class="cs-l">Field Notes</div></div>
@@ -847,15 +919,15 @@ footer{background:var(--footer-bg) !important;}
 <div class="mission-strip">
   <div style="max-width:820px;margin:0 auto;" class="reveal">
     <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3.5rem);font-weight:600;color:var(--w);line-height:1.1;font-style:italic;margin-bottom:1.25rem;">"Clarity is not defeat. It is the first step to freedom."</div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:2px;text-transform:uppercase;">— John Dee · Founder, Online Security Bureau · RSEI Model™</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:2px;text-transform:uppercase;">— John Dee · Founder, OSB · RSEI Model™</div>
   </div>
 </div>
 
 <footer>
   <div class="fg">
     <div>
-      <div class="flogo"><img src="logo.png" alt="Online Security Bureau"></div>
-      <p class="fdesc">Online Security Bureau is the world's first behavioural intelligence organisation built to identify, document and stop romance fraud using the RSEI Model™. Pioneering the future of fraud intelligence since 2021.</p>
+      <div class="flogo"><img src="logo.png" alt="OSB"></div>
+      <p class="fdesc">OSB is the world's first behavioural threat intelligence organisation. We built the RSEI Model™ — the only detection system purpose-built for social engineering fraud. Operational since 2021.</p>
     </div>
     <div>
       <div class="fcol-t">Navigate</div>
@@ -894,27 +966,11 @@ footer{background:var(--footer-bg) !important;}
   </div>
   <div class="fbot">
     <div class="fquote" id="fq"></div>
-    <div class="fcopy">© 2021–2026 OSB e-Consultancy · Online Security Bureau · RSEI Model™</div>
-  </div>
-  <div style="max-width:1160px;margin:0 auto;padding:1rem 0 1.5rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
-    <a href="privacy.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);text-decoration:none;" onmouseover="this.style.color='#C1121F'" onmouseout="this.style.color='rgba(255,255,255,.25)'">Privacy Policy</a>
-    <span style="color:rgba(255,255,255,.1);font-size:9px;">·</span>
-    <a href="cookies.html" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);text-decoration:none;" onmouseover="this.style.color='#C1121F'" onmouseout="this.style.color='rgba(255,255,255,.25)'">Cookie Policy</a>
-    <span style="color:rgba(255,255,255,.1);font-size:9px;">·</span>
-    <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.12);">OSB/LEGAL/PP/001/2026</span>
+    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved &nbsp;·&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a><a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a></div>
   </div>
 </footer>
-
-<!-- COOKIE CONSENT BANNER -->
-<div id="osb-cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0F0F1A;border-top:2px solid #C1121F;padding:14px 32px;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
-  <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.5px;">We use essential cookies to operate this platform. No tracking. No advertising. <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a> &nbsp;·&nbsp; <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a></p>
-  <div style="display:flex;gap:10px;flex-shrink:0;">
-    <button onclick="osbAccept()" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 20px;background:#C1121F;color:#fff;border:none;cursor:pointer;">Accept</button>
-    <button onclick="osbDecline()" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;background:transparent;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.15);cursor:pointer;">Essential Only</button>
-  </div>
-</div>
 <script>
-var QQ = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — Online Security Bureau', '"The feelings were real. The person was not." — OSB Solace', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™', '"She called the bank herself. She was still being set up." — IFN-001 · OSB', '"Romance fraud has a name. It has a score. Only one organisation built both." — OSB'];
+var QQ = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — OSB', '"The feelings were real. The person was not." — OSB Solace', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™', '"She called the bank herself. She was still being set up." — IFN-001 · OSB', '"Romance fraud has a name. It has a score. Only one organisation built both." — OSB'];
 function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
 function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
 document.addEventListener('click',function(e){
@@ -961,23 +1017,39 @@ function nlSub(){
 }
 </script>
 
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="osb-cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(6,6,8,.98);border-top:2px solid rgba(193,18,31,.4);backdrop-filter:blur(24px);padding:1.25rem 2rem;box-shadow:0 -4px 32px rgba(0,0,0,.5);">
+  <div style="max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#C1121F;margin-bottom:.5rem;">OSB/LEGAL/CP/001/2026</div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.65;">OSB uses essential cookies to operate this site and functional cookies to improve your experience. We do not use advertising or tracking cookies. <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a> &nbsp;·&nbsp; <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a></p>
+    </div>
+    <div style="display:flex;gap:.75rem;flex-shrink:0;flex-wrap:wrap;">
+      <button onclick="osbAcceptCookies()" style="background:#C1121F;color:#fff;border:none;padding:10px 24px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#d01020'" onmouseout="this.style.background='#C1121F'">Accept All</button>
+      <button onclick="osbEssentialOnly()" style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:9px 20px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='rgba(193,18,31,.5)';this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.5)'">Essential Only</button>
+    </div>
+  </div>
+</div>
 <script>
 (function(){
-  if(!localStorage.getItem('osb-cookie-consent')){
-    var b=document.getElementById('osb-cookie-banner');
-    if(b){b.style.display='flex';}
+  var consent = localStorage.getItem('osb-cookie-consent');
+  if(!consent){
+    var b = document.getElementById('osb-cookie-banner');
+    if(b) b.style.display = 'block';
   }
 })();
-function osbAccept(){
+function osbAcceptCookies(){
   localStorage.setItem('osb-cookie-consent','accepted');
-  var b=document.getElementById('osb-cookie-banner');
-  if(b)b.style.display='none';
+  var b = document.getElementById('osb-cookie-banner');
+  if(b){ b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
 }
-function osbDecline(){
+function osbEssentialOnly(){
   localStorage.setItem('osb-cookie-consent','essential');
-  var b=document.getElementById('osb-cookie-banner');
-  if(b)b.style.display='none';
+  var b = document.getElementById('osb-cookie-banner');
+  if(b){ b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
 }
 </script>
+<!-- END COOKIE CONSENT BANNER -->
 </body>
 </html>
