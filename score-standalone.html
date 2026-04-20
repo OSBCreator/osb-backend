@@ -814,6 +814,30 @@ body {
 }
 .btn-submit:hover { background: #a00f19; }
 .privacy-note { font-size: 11px; color: var(--mid); margin-top: 8px; }
+/* CONSENT BLOCK */
+.consent-block{border:1px solid rgba(193,18,31,.35);border-radius:8px;padding:1rem 1.125rem;margin-bottom:.875rem;background:rgba(193,18,31,.04);}
+.consent-ref{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.4rem;}
+.consent-title{font-size:13px;font-weight:600;color:var(--black);margin-bottom:.5rem;}
+.consent-body{font-size:12px;color:var(--gray);line-height:1.65;margin-bottom:.75rem;}
+.consent-body a{color:#C1121F;text-decoration:none;}
+.consent-body a:hover{text-decoration:underline;}
+.consent-check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:.5rem;cursor:pointer;}
+.consent-check-row input[type="checkbox"]{width:15px;height:15px;min-width:15px;margin-top:2px;accent-color:#C1121F;cursor:pointer;}
+.consent-check-label{font-size:12px;color:var(--gray);line-height:1.6;}
+.consent-check-label a{color:#C1121F;text-decoration:none;}
+.consent-pbyd{font-size:10px;color:var(--mid);letter-spacing:.5px;margin-top:.625rem;padding-top:.625rem;border-top:1px solid var(--border);}
+.intel-opt{background:var(--off-white);border:1px solid var(--border);border-radius:8px;padding:.875rem 1.125rem;margin-bottom:.875rem;}
+.intel-opt-title{font-size:12px;font-weight:600;color:var(--black);margin-bottom:.3rem;}
+.intel-opt-body{font-size:11px;color:var(--gray);line-height:1.6;}
+/* COOKIE BANNER */
+#osb-cookie-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(11,11,13,.97);border-top:2px solid #C1121F;z-index:9999;padding:.875rem 1.5rem;}
+.osb-cb-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.osb-cb-text{font-size:12px;color:rgba(255,255,255,.65);line-height:1.6;flex:1;}
+.osb-cb-text a{color:#C1121F;text-decoration:none;}
+.osb-cb-ref{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.2rem;}
+.osb-cb-btns{display:flex;gap:.5rem;flex-shrink:0;}
+.osb-cb-accept{background:#C1121F;color:#fff;border:none;padding:8px 16px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:4px;}
+.osb-cb-essential{background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);padding:8px 16px;font-size:11px;cursor:pointer;border-radius:4px;}
 .intake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: .5rem; }
 .intake-field { display: flex; flex-direction: column; gap: 6px; }
 .intake-field.full-width { grid-column: 1 / -1; }
@@ -1367,8 +1391,30 @@ function showResult(){
 
       </div>
 
-      <button class="btn-submit" style="width:100%;margin-top:1rem" onclick="sendResult('${resultText}')">Send to OSB — privately and securely</button>
-      <div class="privacy-note">Nothing is sent until you click the button. Your information is seen only by OSB and used solely to help you and protect others.</div>
+      <!-- CONSENT BLOCK — OSB/LEGAL/SCT/001/2026 -->
+      <div class="consent-block">
+        <div class="consent-ref">OSB/LEGAL/SCT/001/2026 — Scoring Tool Data Notice</div>
+        <div class="consent-title">What happens when you submit</div>
+        <div class="consent-body">
+          If you click the button below, the following information is sent securely to OSB: your RSEI score and pillar breakdown, and any optional details you chose to share above (email, country, platform, financial status, your story). Your email — if provided — is used only to reply to you. Everything else is used to help us understand your situation and, where you consent below, to improve our intelligence on how romance fraud operates. Nothing is sold. Nothing is shared publicly. You can request deletion at any time by contacting OSB at <a href="mailto:contact@onlinesecuritybureau.com">contact@onlinesecuritybureau.com</a>. See our <a href="https://osb-backend-production.up.railway.app/privacy.html" target="_blank">Privacy Policy</a> and <a href="https://osb-backend-production.up.railway.app/cookies.html" target="_blank">Cookie Policy</a>.
+        </div>
+        <label class="consent-check-row" id="score-consent-row">
+          <input type="checkbox" id="score-consent" onchange="updateScoreSubmit()">
+          <span class="consent-check-label">I understand that the information above will be sent securely to OSB and used to help me and to improve OSB's fraud detection intelligence. I have read the <a href="https://osb-backend-production.up.railway.app/privacy.html" target="_blank">Privacy Policy</a> and <a href="https://osb-backend-production.up.railway.app/cookies.html" target="_blank">Cookie Policy</a>.</span>
+        </label>
+        <div class="consent-pbyd">PRIVACY BY DESIGN &middot; DATA MINIMISATION STANDARD &middot; OSB &middot; RSEI Model&trade;<br>Data encrypted in transit &middot; Used only for the stated purpose &middot; Deletion available on request</div>
+      </div>
+      <!-- INTELLIGENCE OPT-IN -->
+      <div class="intel-opt">
+        <div class="intel-opt-title">Help protect others (optional)</div>
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-top:.4rem;">
+          <input type="checkbox" id="intel-optin" style="width:15px;height:15px;min-width:15px;margin-top:2px;accent-color:#C1121F;">
+          <div class="intel-opt-body">I consent to OSB using my anonymised case data — with all personally identifying information removed — to build intelligence on romance fraud patterns. This helps OSB protect others. My name, email, and personal details will never appear in any published output.</div>
+        </div>
+      </div>
+      <!-- END CONSENT -->
+      <button class="btn-submit" id="score-submit-btn" style="width:100%;margin-top:.5rem;opacity:.4;cursor:not-allowed;" onclick="sendResult('${resultText}')" disabled>Send to OSB — privately and securely</button>
+      <div class="privacy-note" style="margin-top:.625rem;">Nothing is sent until you click the button above. Consent checkbox required before sending.</div>
       <div id="sent-msg"></div>
     </div>
 
@@ -1392,7 +1438,15 @@ function showResult(){
   }, 150);
 }
 
+function updateScoreSubmit(){
+  var btn=document.getElementById('score-submit-btn');
+  var checked=document.getElementById('score-consent')?document.getElementById('score-consent').checked:false;
+  if(btn){btn.disabled=!checked;btn.style.opacity=checked?'1':'0.4';btn.style.cursor=checked?'pointer':'not-allowed';}
+}
 async function sendResult(resultText){
+  var consentBox=document.getElementById('score-consent');
+  if(!consentBox||!consentBox.checked){return;}
+  var intelOpt=document.getElementById('intel-optin');
   const email    = document.getElementById('user-email').value;
   const country  = document.getElementById('user-country').value;
   const platform = document.getElementById('user-platform').value;
@@ -1405,7 +1459,9 @@ async function sendResult(resultText){
     platform:  platform || 'Not provided',
     money:     money    || 'Not provided',
     story:     story    || 'Not provided',
-    timestamp: new Date().toLocaleString()
+    intel_consent: intelOpt ? intelOpt.checked : false,
+    timestamp: new Date().toLocaleString(),
+    consent:   true
   };
   const msgDiv = document.getElementById('sent-msg');
   msgDiv.innerHTML = '<p style="font-size:13px;color:var(--mid);margin-top:8px">Sending...</p>';
@@ -1773,8 +1829,30 @@ function showResult(){
 
       </div>
 
-      <button class="btn-submit" style="width:100%;margin-top:1rem" onclick="sendResult('${resultText}')">Send to OSB — privately and securely</button>
-      <div class="privacy-note">Nothing is sent until you click the button. Your information is seen only by OSB and used solely to help you and protect others.</div>
+      <!-- CONSENT BLOCK — OSB/LEGAL/SCT/001/2026 -->
+      <div class="consent-block">
+        <div class="consent-ref">OSB/LEGAL/SCT/001/2026 — Scoring Tool Data Notice</div>
+        <div class="consent-title">What happens when you submit</div>
+        <div class="consent-body">
+          If you click the button below, the following information is sent securely to OSB: your RSEI score and pillar breakdown, and any optional details you chose to share above (email, country, platform, financial status, your story). Your email — if provided — is used only to reply to you. Everything else is used to help us understand your situation and, where you consent below, to improve our intelligence on how romance fraud operates. Nothing is sold. Nothing is shared publicly. You can request deletion at any time by contacting OSB at <a href="mailto:contact@onlinesecuritybureau.com">contact@onlinesecuritybureau.com</a>. See our <a href="https://osb-backend-production.up.railway.app/privacy.html" target="_blank">Privacy Policy</a> and <a href="https://osb-backend-production.up.railway.app/cookies.html" target="_blank">Cookie Policy</a>.
+        </div>
+        <label class="consent-check-row" id="score-consent-row">
+          <input type="checkbox" id="score-consent" onchange="updateScoreSubmit()">
+          <span class="consent-check-label">I understand that the information above will be sent securely to OSB and used to help me and to improve OSB's fraud detection intelligence. I have read the <a href="https://osb-backend-production.up.railway.app/privacy.html" target="_blank">Privacy Policy</a> and <a href="https://osb-backend-production.up.railway.app/cookies.html" target="_blank">Cookie Policy</a>.</span>
+        </label>
+        <div class="consent-pbyd">PRIVACY BY DESIGN &middot; DATA MINIMISATION STANDARD &middot; OSB &middot; RSEI Model&trade;<br>Data encrypted in transit &middot; Used only for the stated purpose &middot; Deletion available on request</div>
+      </div>
+      <!-- INTELLIGENCE OPT-IN -->
+      <div class="intel-opt">
+        <div class="intel-opt-title">Help protect others (optional)</div>
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-top:.4rem;">
+          <input type="checkbox" id="intel-optin" style="width:15px;height:15px;min-width:15px;margin-top:2px;accent-color:#C1121F;">
+          <div class="intel-opt-body">I consent to OSB using my anonymised case data — with all personally identifying information removed — to build intelligence on romance fraud patterns. This helps OSB protect others. My name, email, and personal details will never appear in any published output.</div>
+        </div>
+      </div>
+      <!-- END CONSENT -->
+      <button class="btn-submit" id="score-submit-btn" style="width:100%;margin-top:.5rem;opacity:.4;cursor:not-allowed;" onclick="sendResult('${resultText}')" disabled>Send to OSB — privately and securely</button>
+      <div class="privacy-note" style="margin-top:.625rem;">Nothing is sent until you click the button above. Consent checkbox required before sending.</div>
       <div id="sent-msg"></div>
     </div>
 
@@ -1798,7 +1876,15 @@ function showResult(){
   }, 150);
 }
 
+function updateScoreSubmit(){
+  var btn=document.getElementById('score-submit-btn');
+  var checked=document.getElementById('score-consent')?document.getElementById('score-consent').checked:false;
+  if(btn){btn.disabled=!checked;btn.style.opacity=checked?'1':'0.4';btn.style.cursor=checked?'pointer':'not-allowed';}
+}
 async function sendResult(resultText){
+  var consentBox=document.getElementById('score-consent');
+  if(!consentBox||!consentBox.checked){return;}
+  var intelOpt=document.getElementById('intel-optin');
   const email    = document.getElementById('user-email').value;
   const country  = document.getElementById('user-country').value;
   const platform = document.getElementById('user-platform').value;
@@ -1811,7 +1897,9 @@ async function sendResult(resultText){
     platform:  platform || 'Not provided',
     money:     money    || 'Not provided',
     story:     story    || 'Not provided',
-    timestamp: new Date().toLocaleString()
+    intel_consent: intelOpt ? intelOpt.checked : false,
+    timestamp: new Date().toLocaleString(),
+    consent:   true
   };
   const msgDiv = document.getElementById('sent-msg');
   msgDiv.innerHTML = '<p style="font-size:13px;color:var(--mid);margin-top:8px">Sending...</p>';
@@ -1836,5 +1924,33 @@ function restart(){ step=0; answers={}; render(); }
 render();
 </script>
 
+<div id="osb-cookie-banner">
+  <div class="osb-cb-inner">
+    <div class="osb-cb-text">
+      <div class="osb-cb-ref">OSB/LEGAL/CP/001/2026</div>
+      OSB uses essential cookies to operate this tool and functional cookies to improve your experience. We do not use advertising or tracking cookies.
+      <a href="https://osb-backend-production.up.railway.app/cookies.html" target="_blank">Cookie Policy</a> &nbsp;&middot;&nbsp; <a href="https://osb-backend-production.up.railway.app/privacy.html" target="_blank">Privacy Policy</a>
+    </div>
+    <div class="osb-cb-btns">
+      <button class="osb-cb-essential" onclick="osbEssentialOnly()">Essential Only</button>
+      <button class="osb-cb-accept" onclick="osbAcceptAll()">Accept All</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('osb-cookie-consent')){
+    document.getElementById('osb-cookie-banner').style.display='block';
+  }
+})();
+function osbAcceptAll(){
+  localStorage.setItem('osb-cookie-consent','accepted');
+  document.getElementById('osb-cookie-banner').style.display='none';
+}
+function osbEssentialOnly(){
+  localStorage.setItem('osb-cookie-consent','essential');
+  document.getElementById('osb-cookie-banner').style.display='none';
+}
+</script>
 </body>
 </html>
