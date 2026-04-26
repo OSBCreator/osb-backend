@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocVault — OSB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+  <style>
+    :root {
+      --bg:      #07070E;
+      --surface: #0F0F1A;
+      --border:  #1E1E32;
+      --red:     #C0272D;
+      --text:    #E8E8F0;
+      --muted:   #555570;
+      --warn:    #C09B27;
+      --ok:      #27C070;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; }
+    input, button, select { font-family: 'Syne', sans-serif; }
+
+    /* AUTH */
+    #auth-screen { min-height:100vh; display:flex; align-items:center; justify-content:center; }
+    .auth-box { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:40px 36px; width:100%; max-width:380px; }
+    .auth-logo { display:flex; align-items:center; gap:12px; margin-bottom:28px; }
+    .auth-logo-icon { width:40px; height:40px; border-radius:10px; background:var(--red); display:flex; align-items:center; justify-content:center; }
+    .auth-box h2 { font-size:22px; font-weight:700; color:#fff; margin-bottom:6px; }
+    .auth-box p  { font-size:13px; color:var(--muted); margin-bottom:24px; }
+    .field { margin-bottom:14px; }
+    .field label { display:block; font-size:11px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.07em; }
+    .field input { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:11px 14px; color:var(--text); font-size:14px; outline:none; transition:border-color .2s; }
+    .field input:focus { border-color:var(--red); }
+    .btn-primary { width:100%; background:var(--red); border:none; color:#fff; padding:12px; border-radius:9px; font-size:14px; font-weight:700; cursor:pointer; margin-top:4px; }
+    .auth-error { font-size:12px; color:#E86060; margin-top:10px; text-align:center; min-height:18px; }
+
+    /* LAYOUT */
+    #app { display:none; flex-direction:column; min-height:100vh; }
+    .header { border-bottom:1px solid var(--border); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; background:var(--surface); position:sticky; top:0; z-index:20; }
+    .header-left { display:flex; align-items:center; gap:12px; }
+    .logo-icon { width:34px; height:34px; border-radius:8px; background:var(--red); display:flex; align-items:center; justify-content:center; }
+    .header-name { font-size:16px; font-weight:700; color:#fff; }
+    .header-sub  { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; }
+    .header-right { display:flex; align-items:center; gap:8px; }
+    .user-badge { font-size:11px; color:var(--muted); background:#0A0A18; border:1px solid var(--border); border-radius:6px; padding:4px 12px; font-family:'JetBrains Mono',monospace; }
+    .btn-sm { background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:7px; padding:6px 14px; font-size:12px; cursor:pointer; transition:all .15s; }
+    .btn-sm:hover { border-color:var(--red); color:#E86060; }
+    .btn-upload { background:var(--red); border:none; color:#fff; border-radius:8px; padding:8px 18px; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; }
+
+    .body { display:flex; flex:1; }
+
+    /* SIDEBAR */
+    .sidebar { width:220px; border-right:1px solid var(--border); background:var(--surface); display:flex; flex-direction:column; position:sticky; top:69px; height:calc(100vh - 69px); }
+    .sidebar-nav { flex:1; padding:14px 0; overflow-y:auto; }
+    .cat-btn { width:100%; text-align:left; background:transparent; border:none; border-left:3px solid transparent; color:#666680; padding:10px 18px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-size:13px; transition:all .15s; }
+    .cat-btn.active { background:#16162A; color:#fff; font-weight:600; }
+    .cat-btn-left { display:flex; align-items:center; gap:9px; }
+    .cat-badge { font-size:10px; background:#1E1E32; color:var(--muted); border-radius:20px; padding:1px 8px; font-weight:600; }
+    .cat-btn.active .cat-badge { color:#fff; }
+    .storage-bar { padding:14px 16px; border-top:1px solid var(--border); }
+    .sb-header { display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:6px; }
+    .sb-track { height:5px; background:var(--border); border-radius:99px; overflow:hidden; }
+    .sb-fill  { height:100%; border-radius:99px; transition:width .4s; }
+    .sb-meta  { display:flex; justify-content:space-between; font-size:10px; color:#444460; margin-top:5px; }
+
+    /* MAIN */
+    .main { flex:1; padding:22px 26px; overflow:auto; }
+    .top-bar { display:flex; gap:10px; margin-bottom:16px; }
+    .search-wrap { position:relative; flex:1; }
+    .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.35; pointer-events:none; }
+    .search-wrap input { width:100%; background:var(--surface); border:1px solid var(--border); border-radius:9px; padding:10px 14px 10px 36px; color:var(--text); font-size:13px; outline:none; transition:border-color .2s; }
+    .search-wrap input:focus { border-color:var(--red); }
+    .filter-select { background:var(--surface); border:1px solid var(--border); color:var(--muted); border-radius:9px; padding:9px 12px; font-size:12px; outline:none; cursor:pointer; }
+
+    .drop-zone { border:2px dashed var(--border); border-radius:10px; padding:16px; text-align:center; cursor:pointer; transition:all .2s; margin-bottom:18px; font-size:13px; color:var(--muted); }
+    .drop-zone.hover { border-color:var(--red); background:#1A0A0B; }
+    .drop-zone span { color:var(--red); }
+
+    /* FILE CARDS */
+    .file-list { display:flex; flex-direction:column; gap:8px; }
+    .file-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 14px; display:flex; align-items:center; gap:11px; transition:border-color .2s; }
+    .file-card:hover { border-color:#303050; }
+    .file-card.expiring { border-color:#5C4A00; }
+    .file-card.expired  { border-color:#5C1010; }
+    .file-bar { width:4px; height:42px; border-radius:4px; flex-shrink:0; }
+    .file-icon { font-size:20px; flex-shrink:0; }
+    .file-info { flex:1; min-width:0; }
+    .file-name { font-weight:600; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px; }
+    .version-tag { font-size:10px; background:#1E1E32; color:var(--muted); border-radius:4px; padding:1px 6px; font-family:'JetBrains Mono',monospace; flex-shrink:0; }
+    .expiry-tag { font-size:10px; border-radius:4px; padding:1px 7px; flex-shrink:0; font-weight:600; }
+    .expiry-tag.warn   { background:#2A2000; color:var(--warn); }
+    .expiry-tag.danger { background:#2A0000; color:#E86060; }
+    .file-meta { font-size:11px; color:var(--muted); margin-top:3px; display:flex; gap:7px; flex-wrap:wrap; }
+    .file-actions { display:flex; gap:6px; flex-shrink:0; flex-wrap:wrap; justify-content:flex-end; }
+    .btn-action { background:transparent; border:1px solid var(--border); color:#A0A0C0; border-radius:7px; padding:4px 11px; font-size:11px; cursor:pointer; transition:all .15s; white-space:nowrap; }
+    .btn-action:hover { border-color:#4040A0; color:var(--text); }
+    .btn-del { background:transparent; border:1px solid #3A1010; color:#803030; border-radius:7px; padding:4px 9px; font-size:11px; cursor:pointer; transition:all .15s; }
+    .btn-del:hover { background:#3A1010; color:var(--red); }
+    .empty { text-align:center; color:var(--muted); padding:52px 0; font-size:14px; }
+
+    /* AUDIT */
+    .audit-list { display:flex; flex-direction:column; gap:6px; }
+    .audit-row { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 14px; display:flex; gap:12px; align-items:center; font-size:12px; }
+    .audit-action { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; border-radius:4px; padding:2px 8px; flex-shrink:0; font-family:'JetBrains Mono',monospace; }
+    .audit-action.upload   { background:#0A2A18; color:#50C080; }
+    .audit-action.download { background:#0A1A3A; color:#5090E0; }
+    .audit-action.delete   { background:#2A0A0A; color:#E86060; }
+    .audit-action.preview  { background:#1A1A0A; color:#C0B050; }
+    .audit-action.version  { background:#1A0A2A; color:#A060E0; }
+    .audit-info { flex:1; min-width:0; }
+    .audit-file { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text); }
+    .audit-time { font-size:10px; color:var(--muted); margin-top:2px; font-family:'JetBrains Mono',monospace; }
+
+    /* MODALS */
+    .overlay { position:fixed; inset:0; background:rgba(0,0,0,.78); display:flex; align-items:center; justify-content:center; z-index:100; padding:16px; }
+    .modal { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:26px 28px; width:100%; }
+    .modal h3 { font-size:16px; font-weight:700; color:#fff; margin-bottom:6px; }
+    .modal p  { font-size:12px; color:#666680; margin-bottom:16px; }
+    .modal-actions { display:flex; gap:10px; margin-top:18px; }
+    .btn-cancel  { flex:1; padding:9px; border-radius:8px; border:1px solid var(--border); background:transparent; color:#888899; cursor:pointer; font-size:13px; }
+    .btn-confirm { flex:1; padding:9px; border-radius:8px; border:none; background:var(--red); color:#fff; cursor:pointer; font-weight:700; font-size:13px; }
+
+    #upload-modal .modal { max-width:400px; }
+    .cat-options { display:flex; flex-direction:column; gap:7px; }
+    .cat-option { display:flex; align-items:center; gap:10px; padding:9px 13px; border-radius:8px; cursor:pointer; border:1px solid var(--border); transition:all .15s; }
+    .cat-option-label { font-size:13px; font-weight:500; color:#888899; }
+    .expiry-row { display:flex; align-items:center; gap:10px; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
+    .expiry-row label { font-size:12px; color:var(--muted); flex-shrink:0; }
+    .expiry-row input[type=date] { background:var(--bg); border:1px solid var(--border); border-radius:7px; padding:7px 11px; color:var(--text); font-size:12px; outline:none; flex:1; }
+
+    #version-modal .modal { max-width:480px; max-height:80vh; display:flex; flex-direction:column; }
+    .version-list { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:7px; margin-bottom:4px; }
+    .version-row { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:10px 13px; display:flex; align-items:center; gap:10px; }
+    .v-num { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); flex-shrink:0; }
+    .v-info { flex:1; font-size:12px; }
+    .v-date { color:var(--muted); font-size:11px; }
+    .v-current { font-size:10px; background:#0A2A18; color:#50C080; border-radius:4px; padding:1px 7px; font-weight:600; }
+
+    #preview-modal .modal { max-width:700px; max-height:88vh; display:flex; flex-direction:column; }
+    .preview-body { flex:1; overflow-y:auto; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:20px 24px; margin-bottom:12px; font-size:14px; line-height:1.75; color:var(--text); }
+    .preview-body h1,.preview-body h2,.preview-body h3 { color:#fff; margin:16px 0 8px; }
+    .preview-body p { margin-bottom:10px; }
+    .preview-body table { border-collapse:collapse; width:100%; margin-bottom:12px; }
+    .preview-body td,.preview-body th { border:1px solid var(--border); padding:6px 10px; font-size:12px; }
+    .preview-loading { text-align:center; color:var(--muted); padding:40px; }
+
+    #delete-modal .modal { max-width:340px; text-align:center; }
+
+    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); padding:9px 22px; border-radius:9px; font-size:13px; font-weight:500; z-index:300; box-shadow:0 4px 20px rgba(0,0,0,.5); pointer-events:none; }
+    .toast.success { background:#0F2A1A; border:1px solid #1A5C32; color:#50C080; }
+    .toast.error   { background:#3A1010; border:1px solid var(--red); color:#E86060; }
+    .toast.info    { background:#0A1A3A; border:1px solid #1A3A7A; color:#70A0E0; }
+
+    input::placeholder { color:#3A3A55; }
+    @media(max-width:640px){ .sidebar{display:none} .user-badge,.header-sub{display:none} }
+  </style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+          <path d="M4 4h10l6 6v10a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M14 4v6h6M9 13h6M9 17h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:17px;color:#fff">DocVault</div>
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">OSB Document Library</div>
+      </div>
+    </div>
+    <h2>Sign In</h2>
+    <p>Access restricted to authorised OSB personnel.</p>
+    <div class="field"><label>Email</label><input type="email" id="email" placeholder="you@osb.com" onkeydown="if(event.key==='Enter')signIn()" /></div>
+    <div class="field"><label>Password</label><input type="password" id="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')signIn()" /></div>
+    <button class="btn-primary" onclick="signIn()">Sign In</button>
+    <div class="auth-error" id="auth-error"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-icon">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+          <path d="M4 4h10l6 6v10a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M14 4v6h6M9 13h6M9 17h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="header-name">DocVault</div>
+        <div class="header-sub">OSB Secure Document Library</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="user-badge" id="user-email">—</div>
+      <button class="btn-sm" onclick="signOut()">Sign out</button>
+      <button class="btn-upload" onclick="document.getElementById('file-input').click()">
+        <span style="font-size:15px">+</span> Upload
+      </button>
+      <input type="file" id="file-input" accept=".doc,.docx" multiple style="display:none" onchange="openUploadModal(this.files)" />
+    </div>
+  </header>
+
+  <div class="body">
+    <aside class="sidebar">
+      <nav class="sidebar-nav" id="sidebar-nav"></nav>
+      <div class="storage-bar">
+        <div class="sb-header"><span>Storage</span><span id="storage-pct" style="font-weight:600">0%</span></div>
+        <div class="sb-track"><div class="sb-fill" id="storage-fill" style="width:0%;background:var(--ok)"></div></div>
+        <div class="sb-meta"><span id="storage-used">0 B used</span><span>1 GB cap</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="top-bar">
+        <div class="search-wrap">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke="#E8E8F0" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="#E8E8F0" stroke-width="2" stroke-linecap="round"/></svg>
+          <input id="search-input" placeholder="Search documents…" oninput="renderFiles()" />
+        </div>
+        <select class="filter-select" id="expiry-filter" onchange="renderFiles()">
+          <option value="all">All statuses</option>
+          <option value="expiring">Expiring soon</option>
+          <option value="expired">Expired</option>
+          <option value="ok">Valid</option>
+        </select>
+      </div>
+      <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+        📄 Drop <strong>.docx</strong> files here or <span>click to browse</span>
+      </div>
+      <div id="file-list" class="file-list"></div>
+    </main>
+  </div>
+</div>
+
+<!-- UPLOAD MODAL -->
+<div class="overlay" id="upload-modal" style="display:none">
+  <div class="modal">
+    <h3>Choose a Category</h3>
+    <p id="modal-filenames"></p>
+    <div class="cat-options" id="modal-cat-options"></div>
+    <div class="expiry-row">
+      <label>Expiry date (optional)</label>
+      <input type="date" id="expiry-input" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('upload-modal')">Cancel</button>
+      <button class="btn-confirm" onclick="confirmUpload()">Save Here</button>
+    </div>
+  </div>
+</div>
+
+<!-- VERSION MODAL -->
+<div class="overlay" id="version-modal" style="display:none">
+  <div class="modal">
+    <h3>Version History</h3>
+    <p id="version-modal-name"></p>
+    <div class="version-list" id="version-list"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('version-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="overlay" id="preview-modal" style="display:none">
+  <div class="modal">
+    <h3 id="preview-title">Document Preview</h3>
+    <p>Read-only — formatting may vary slightly from the original.</p>
+    <div class="preview-body" id="preview-body"><div class="preview-loading">Loading…</div></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('preview-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="overlay" id="delete-modal" style="display:none">
+  <div class="modal">
+    <div style="font-size:28px;margin-bottom:10px">🗑️</div>
+    <h3>Remove this file?</h3>
+    <p>All versions will be permanently deleted from storage.</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('delete-modal')">Cancel</button>
+      <button class="btn-confirm" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" style="display:none"></div>
+
+<script>
+const SUPABASE_URL  = 'https://ufnityyhmfzahxkjmlgo.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_Lvf1d3Yw2BTcQbxfz7Gjhw_1N9rVLWZ';
+const BUCKET = 'docvault';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+const CATEGORIES = [
+  { id:'all',      label:'All Files',  icon:'🗂️', color:'#6060A0' },
+  { id:'rsei',     label:'RSEI / OSB', icon:'🛡️', color:'#C0272D' },
+  { id:'business', label:'Business',   icon:'💼', color:'#2D7FC0' },
+  { id:'legal',    label:'Legal',      icon:'⚖️', color:'#C09B27' },
+  { id:'general',  label:'General',    icon:'📁', color:'#808099' },
+  { id:'audit',    label:'Audit Log',  icon:'📋', color:'#50A090' },
+];
+
+let files=[], auditLogs=[], activeTab='all', pendingFiles=[], uploadCat='general', deleteTarget=null, currentUser=null;
+
+// AUTH
+async function signIn() {
+  const email=document.getElementById('email').value.trim();
+  const pass=document.getElementById('password').value;
+  const errEl=document.getElementById('auth-error'); errEl.textContent='';
+  const {error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){errEl.textContent=error.message;return;}
+  await showApp();
+}
+async function signOut(){await sb.auth.signOut();document.getElementById('app').style.display='none';document.getElementById('auth-screen').style.display='flex';}
+async function showApp(){
+  const {data:{user}}=await sb.auth.getUser();
+  if(!user)return;
+  currentUser=user;
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('app').style.flexDirection='column';
+  document.getElementById('user-email').textContent=user.email;
+  buildSidebar(); await loadFiles();
+}
+
+// SIDEBAR
+function buildSidebar(){
+  document.getElementById('sidebar-nav').innerHTML=CATEGORIES.map(cat=>`
+    <button class="cat-btn ${cat.id===activeTab?'active':''}" style="border-left-color:${cat.id===activeTab?cat.color:'transparent'}" onclick="setTab('${cat.id}')">
+      <span class="cat-btn-left"><span>${cat.icon}</span>${cat.label}</span>
+      <span class="cat-badge" id="badge-${cat.id}">0</span>
+    </button>`).join('');
+  updateBadges();
+}
+function setTab(id){activeTab=id;buildSidebar();id==='audit'?renderAudit():renderFiles();}
+function updateBadges(){
+  CATEGORIES.forEach(cat=>{
+    const el=document.getElementById('badge-'+cat.id);if(!el)return;
+    if(cat.id==='audit')el.textContent=auditLogs.length;
+    else if(cat.id==='all')el.textContent=getLatest().length;
+    else el.textContent=getLatest().filter(f=>f.category===cat.id).length;
+  });
+}
+
+// LOAD
+async function loadFiles(){
+  const [fr,ar]=await Promise.all([
+    sb.from('docvault_files').select('*').order('created_at',{ascending:false}),
+    sb.from('docvault_audit').select('*').order('created_at',{ascending:false}).limit(300)
+  ]);
+  files=fr.data||[]; auditLogs=ar.data||[];
+  updateBadges(); updateStorage();
+  activeTab==='audit'?renderAudit():renderFiles();
+}
+function updateStorage(){
+  const total=files.reduce((s,f)=>s+(f.size||0),0);
+  const cap=1073741824; const pct=Math.min((total/cap)*100,100);
+  const color=pct>80?'#C0272D':pct>50?'#C09B27':'#27C070';
+  document.getElementById('storage-pct').textContent=pct.toFixed(2)+'%';
+  document.getElementById('storage-pct').style.color=color;
+  document.getElementById('storage-fill').style.width=pct+'%';
+  document.getElementById('storage-fill').style.background=color;
+  document.getElementById('storage-used').textContent=fmtSize(total)+' used';
+}
+
+// LATEST VERSIONS
+function getLatest(){
+  const map={};
+  files.forEach(f=>{
+    const key=f.name+'|'+f.category;
+    if(!map[key]||f.version>map[key].version)map[key]=f;
+  });
+  return Object.values(map);
+}
+
+// EXPIRY
+function expiryStatus(exp){
+  if(!exp)return null;
+  const now=Date.now(),date=new Date(exp).getTime();
+  if(date<now)return'expired';
+  if(date-now<30*864e5)return'expiring';
+  return'ok';
+}
+
+// RENDER FILES
+function renderFiles(){
+  if(activeTab==='audit'){renderAudit();return;}
+  const q=(document.getElementById('search-input').value||'').toLowerCase();
+  const filter=document.getElementById('expiry-filter').value;
+  let list=getLatest().filter(f=>{
+    const matchCat=activeTab==='all'||f.category===activeTab;
+    const matchName=f.name.toLowerCase().includes(q);
+    const st=expiryStatus(f.expires_at);
+    const matchExp=filter==='all'||(filter==='expired'&&st==='expired')||(filter==='expiring'&&st==='expiring')||(filter==='ok'&&(st==='ok'||!st));
+    return matchCat&&matchName&&matchExp;
+  });
+  const el=document.getElementById('file-list');
+  if(!list.length){el.innerHTML=`<div class="empty">${q?`No files match "${q}"`:'No documents here yet.'}</div>`;return;}
+  el.innerHTML=list.map(f=>{
+    const cat=CATEGORIES.find(c=>c.id===f.category)||CATEGORIES[CATEGORIES.length-2];
+    const st=expiryStatus(f.expires_at);
+    const cardCls='file-card'+(st==='expired'?' expired':st==='expiring'?' expiring':'');
+    const expiryBadge=st==='expired'?`<span class="expiry-tag danger">EXPIRED</span>`:st==='expiring'?`<span class="expiry-tag warn">EXP ${fmtDate(f.expires_at)}</span>`:f.expires_at?`<span style="font-size:10px;color:var(--muted)">exp ${fmtDate(f.expires_at)}</span>`:'';
+    const vTag=f.version>1?`<span class="version-tag">v${f.version}</span>`:'';
+    const allVersions=files.filter(o=>o.name===f.name&&o.category===f.category);
+    const hasHistory=allVersions.length>1;
+    return `<div class="${cardCls}">
+      <div class="file-bar" style="background:${cat.color}"></div>
+      <div class="file-icon">${cat.icon}</div>
+      <div class="file-info">
+        <div class="file-name">${escHtml(f.name)}${vTag}${expiryBadge}</div>
+        <div class="file-meta">
+          <span>${fmtSize(f.size)}</span><span>·</span>
+          <span>${fmtDate(f.created_at)}</span><span>·</span>
+          <span style="color:${cat.color}">${cat.label}</span>
+          ${hasHistory?`<span>·</span><span>${allVersions.length} versions</span>`:''}
+        </div>
+      </div>
+      <div class="file-actions">
+        <button class="btn-action" onclick="previewFile('${f.id}','${escAttr(f.name)}','${escAttr(f.path)}')">👁 Preview</button>
+        <button class="btn-action" onclick="downloadFile('${f.id}','${escAttr(f.name)}','${escAttr(f.path)}')">↓ Download</button>
+        ${hasHistory?`<button class="btn-action" onclick="openVersionModal('${escAttr(f.name)}','${f.category}')">🕓 History</button>`:''}
+        <button class="btn-del" onclick="openDeleteModal('${f.id}','${escAttr(f.path)}','${escAttr(f.name)}','${f.category}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// RENDER AUDIT
+function renderAudit(){
+  const el=document.getElementById('file-list');
+  if(!auditLogs.length){el.innerHTML='<div class="empty">No activity recorded yet.</div>';return;}
+  el.innerHTML=`<div class="audit-list">${auditLogs.map(a=>`
+    <div class="audit-row">
+      <span class="audit-action ${a.action}">${a.action}</span>
+      <div class="audit-info">
+        <div class="audit-file">${escHtml(a.file_name||'—')}</div>
+        <div class="audit-time">${fmtDateTime(a.created_at)} · ${escHtml(a.user_email||'unknown')}</div>
+      </div>
+      ${a.category?`<span style="font-size:10px;color:var(--muted)">${a.category}</span>`:''}
+    </div>`).join('')}</div>`;
+}
+
+// UPLOAD
+function openUploadModal(fileList){
+  const allowed=Array.from(fileList).filter(f=>f.name.match(/\.docx?$/i));
+  if(!allowed.length){showToast('Only .doc / .docx files accepted.','error');return;}
+  pendingFiles=allowed;
+  uploadCat=activeTab==='all'||activeTab==='audit'?'general':activeTab;
+  document.getElementById('modal-filenames').textContent=`Where should ${allowed.map(f=>f.name).join(', ')} go?`;
+  document.getElementById('expiry-input').value='';
+  document.getElementById('modal-cat-options').innerHTML=CATEGORIES.filter(c=>c.id!=='all'&&c.id!=='audit').map(cat=>`
+    <label class="cat-option" style="border-color:${uploadCat===cat.id?cat.color:'var(--border)'}">
+      <input type="radio" name="upcat" value="${cat.id}" ${uploadCat===cat.id?'checked':''}
+        onchange="uploadCat=this.value;document.querySelectorAll('.cat-option').forEach(e=>e.style.borderColor='var(--border)');this.closest('.cat-option').style.borderColor='${cat.color}'" />
+      <span style="font-size:15px">${cat.icon}</span>
+      <span class="cat-option-label">${cat.label}</span>
+    </label>`).join('');
+  document.getElementById('upload-modal').style.display='flex';
+  document.getElementById('file-input').value='';
+}
+
+async function confirmUpload(){
+  closeModal('upload-modal');
+  const expiresAt=document.getElementById('expiry-input').value?new Date(document.getElementById('expiry-input').value).toISOString():null;
+  for(const file of pendingFiles){
+    const existing=files.filter(f=>f.name===file.name&&f.category===uploadCat);
+    const newVersion=existing.length?Math.max(...existing.map(f=>f.version))+1:1;
+    const parentId=existing.length?existing.reduce((a,b)=>a.version>b.version?a:b).id:null;
+    const path=`${currentUser.id}/${Date.now()}-${file.name}`;
+    const {error:upErr}=await sb.storage.from(BUCKET).upload(path,file);
+    if(upErr){showToast(`Upload failed: ${file.name}`,'error');continue;}
+    const {error:dbErr}=await sb.from('docvault_files').insert({name:file.name,size:file.size,category:uploadCat,path,user_id:currentUser.id,version:newVersion,parent_id:parentId,expires_at:expiresAt});
+    if(dbErr){showToast(`DB error: ${file.name}`,'error');continue;}
+    await logAudit(newVersion>1?'version':'upload',file.name,null,uploadCat);
+  }
+  showToast(`${pendingFiles.length} file(s) saved.`);
+  pendingFiles=[];
+  await loadFiles();
+}
+
+// VERSION HISTORY
+function openVersionModal(name,category){
+  const versions=files.filter(f=>f.name===name&&f.category===category).sort((a,b)=>b.version-a.version);
+  document.getElementById('version-modal-name').textContent=name;
+  const maxV=Math.max(...versions.map(v=>v.version));
+  document.getElementById('version-list').innerHTML=versions.map(v=>`
+    <div class="version-row">
+      <span class="v-num">v${v.version}</span>
+      <div class="v-info"><div>${fmtSize(v.size)}</div><div class="v-date">${fmtDateTime(v.created_at)}</div></div>
+      ${v.version===maxV?'<span class="v-current">CURRENT</span>':''}
+      <button class="btn-action" style="margin-left:auto" onclick="downloadFile('${v.id}','${escAttr(v.name)}','${escAttr(v.path)}')">↓</button>
+    </div>`).join('');
+  document.getElementById('version-modal').style.display='flex';
+}
+
+// PREVIEW
+async function previewFile(id,name,path){
+  document.getElementById('preview-title').textContent=name;
+  document.getElementById('preview-body').innerHTML='<div class="preview-loading">Loading preview…</div>';
+  document.getElementById('preview-modal').style.display='flex';
+  await logAudit('preview',name,id,null);
+  const {data,error}=await sb.storage.from(BUCKET).download(path);
+  if(error){document.getElementById('preview-body').innerHTML='<div class="preview-loading">Preview failed.</div>';return;}
+  try{
+    const result=await mammoth.convertToHtml({arrayBuffer:await data.arrayBuffer()});
+    document.getElementById('preview-body').innerHTML=result.value||'<p style="color:var(--muted)">Empty document.</p>';
+  }catch{document.getElementById('preview-body').innerHTML='<div class="preview-loading">Could not render this document.</div>';}
+}
+
+// DOWNLOAD
+async function downloadFile(id,name,path){
+  showToast('Preparing download…','info');
+  const {data,error}=await sb.storage.from(BUCKET).download(path);
+  if(error){showToast('Download failed.','error');return;}
+  const url=URL.createObjectURL(data);
+  const a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
+  await logAudit('download',name,id,null);
+}
+
+// DELETE
+function openDeleteModal(id,path,name,category){deleteTarget={id,path,name,category};document.getElementById('delete-modal').style.display='flex';}
+async function confirmDelete(){
+  if(!deleteTarget)return;
+  const {name,category}=deleteTarget;
+  const all=files.filter(f=>f.name===name&&f.category===category);
+  for(const v of all){await sb.storage.from(BUCKET).remove([v.path]);await sb.from('docvault_files').delete().eq('id',v.id);}
+  await logAudit('delete',name,deleteTarget.id,category);
+  showToast('File and all versions removed.');
+  closeModal('delete-modal');deleteTarget=null;await loadFiles();
+}
+
+// AUDIT
+async function logAudit(action,fileName,fileId,category){
+  await sb.from('docvault_audit').insert({user_id:currentUser.id,user_email:currentUser.email,action,file_name:fileName,file_id:fileId,category});
+}
+
+// DRAG & DROP
+const dz=document.getElementById('drop-zone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('hover');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('hover'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('hover');openUploadModal(e.dataTransfer.files);});
+
+// HELPERS
+function closeModal(id){document.getElementById(id).style.display='none';}
+function fmtSize(b){if(!b)return'—';if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(2)+' MB';}
+function fmtDate(iso){return new Date(iso).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});}
+function fmtDateTime(iso){return new Date(iso).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});}
+function escHtml(s=''){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function escAttr(s=''){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+let toastTimer;
+function showToast(msg,type='success'){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast '+type;el.style.display='block';
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.style.display='none',3500);
+}
+
+// INIT
+sb.auth.getSession().then(({data:{session}})=>{if(session)showApp();});
+</script>
+</body>
+</html>
