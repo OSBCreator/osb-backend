@@ -18,7 +18,7 @@ const supabase = createClient(
 
 // ── ROOT ──────────────────────────────────────────────
 app.get("/", (req, res) => {
-  res.send("OSB Backend running ✅");
+  res.sendFile(__dirname + "/index.html");
 });
 
 // ── SCORE SUBMISSION ──────────────────────────────────
