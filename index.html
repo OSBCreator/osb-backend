@@ -1,1938 +1,1055 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OSB Command Centre | The Sentinel</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --osb-red: #dc2626;
-      --osb-red-glow: rgba(220, 38, 38, 0.4);
-      --osb-dark: #0a0a0a;
-      --osb-darker: #050505;
-      --osb-panel: #111111;
-      --osb-panel-light: #1a1a1a;
-      --osb-border: #2a2a2a;
-      --osb-text: #e5e5e5;
-      --osb-text-dim: #888888;
-      --osb-green: #22c55e;
-      --osb-amber: #f59e0b;
-      --terminal-green: #00ff41;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Barlow Condensed', sans-serif;
-      background: var(--osb-darker);
-      color: var(--osb-text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Scanline overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.15),
-        rgba(0, 0, 0, 0.15) 1px,
-        transparent 1px,
-        transparent 2px
-      );
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.3;
-    }
-
-    /* Login Screen */
-    #loginScreen {
-      position: fixed;
-      inset: 0;
-      background: var(--osb-darker);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    #loginScreen.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .login-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, var(--osb-red-glow) 0%, transparent 70%);
-      animation: pulse-glow 4s ease-in-out infinite;
-    }
-
-    @keyframes pulse-glow {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-    }
-
-    .login-container {
-      position: relative;
-      background: var(--osb-panel);
-      border: 1px solid var(--osb-border);
-      padding: 60px 80px;
-      text-align: center;
-      clip-path: polygon(
-        20px 0, 100% 0, 100% calc(100% - 20px),
-        calc(100% - 20px) 100%, 0 100%, 0 20px
-      );
-    }
-
-    .login-container::before,
-    .login-container::after {
-      content: '';
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border: 2px solid var(--osb-red);
-    }
-
-    .login-container::before {
-      top: -2px;
-      left: -2px;
-      border-right: none;
-      border-bottom: none;
-    }
-
-    .login-container::after {
-      bottom: -2px;
-      right: -2px;
-      border-left: none;
-      border-top: none;
-    }
-
-    .osb-logo {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 30px;
-      filter: drop-shadow(0 0 20px var(--osb-red-glow));
-    }
-
-    .login-title {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .login-subtitle {
-      font-size: 14px;
-      color: var(--osb-text-dim);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
-
-    .login-input {
-      width: 100%;
-      max-width: 300px;
-      background: var(--osb-darker);
-      border: 1px solid var(--osb-border);
-      padding: 15px 20px;
-      color: var(--osb-text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-align: center;
-      outline: none;
-      transition: all 0.3s ease;
-      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-    }
-
-    .login-input:focus {
-      border-color: var(--osb-red);
-      box-shadow: 0 0 20px var(--osb-red-glow);
-    }
-
-    .login-btn {
-      margin-top: 25px;
-      padding: 15px 50px;
-      background: var(--osb-red);
-      border: none;
-      color: white;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-    }
-
-    .login-btn:hover {
-      background: #b91c1c;
-      box-shadow: 0 0 30px var(--osb-red-glow);
-    }
-
-    .login-error {
-      color: var(--osb-red);
-      font-size: 12px;
-      margin-top: 15px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .login-error.show {
-      opacity: 1;
-    }
-
-    .security-status {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      color: var(--osb-text-dim);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--osb-green);
-      border-radius: 50%;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* Main Dashboard */
-    #dashboard {
-      display: none;
-      min-height: 100vh;
-    }
-
-    #dashboard.active {
-      display: flex;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: 80px;
-      background: var(--osb-panel);
-      border-right: 1px solid var(--osb-border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0;
-      transition: width 0.3s ease;
-      position: fixed;
-      height: 100vh;
-      z-index: 100;
-    }
-
-    .sidebar:hover {
-      width: 240px;
-    }
-
-    .sidebar-logo {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 40px;
-      transition: transform 0.3s ease;
-    }
-
-    .sidebar:hover .sidebar-logo {
-      transform: scale(1.1);
-    }
-
-    .nav-item {
-      width: 100%;
-      padding: 18px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border-left: 3px solid transparent;
-      position: relative;
-    }
-
-    .nav-item:hover,
-    .nav-item.active {
-      background: rgba(220, 38, 38, 0.1);
-      border-left-color: var(--osb-red);
-    }
-
-    .nav-item svg {
-      width: 24px;
-      height: 24px;
-      fill: var(--osb-text-dim);
-      transition: all 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .nav-item:hover svg,
-    .nav-item.active svg {
-      fill: var(--osb-red);
-      filter: drop-shadow(0 0 8px var(--osb-red-glow));
-    }
-
-    .nav-label {
-      position: absolute;
-      left: 70px;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--osb-text-dim);
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .sidebar:hover .nav-label {
-      opacity: 1;
-    }
-
-    .nav-item:hover .nav-label,
-    .nav-item.active .nav-label {
-      color: var(--osb-text);
-    }
-
-    .nav-badge {
-      position: absolute;
-      right: 15px;
-      background: var(--osb-red);
-      color: white;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 10px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .sidebar:hover .nav-badge {
-      opacity: 1;
-    }
-
-    /* Main Content */
-    .main-content {
-      flex: 1;
-      margin-left: 80px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Topbar */
-    .topbar {
-      height: 70px;
-      background: var(--osb-panel);
-      border-bottom: 1px solid var(--osb-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 30px;
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .page-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .threat-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid var(--osb-green);
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--osb-green);
-    }
-
-    .threat-indicator::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--osb-green);
-      border-radius: 50%;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .system-time {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      color: var(--osb-text-dim);
-      letter-spacing: 1px;
-    }
-
-    .admin-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
-      background: var(--osb-panel-light);
-      border: 1px solid var(--osb-border);
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .admin-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: var(--osb-red);
-      border-radius: 50%;
-    }
-
-    /* Content Area */
-    .content-area {
-      flex: 1;
-      padding: 30px;
-      overflow-y: auto;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-      animation: fade-in 0.3s ease;
-    }
-
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .stat-card {
-      background: var(--osb-panel);
-      border: 1px solid var(--osb-border);
-      padding: 25px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 0;
-      background: var(--osb-red);
-      transition: height 0.3s ease;
-    }
-
-    .stat-card:hover::before {
-      height: 100%;
-    }
-
-    .stat-card:hover {
-      border-color: var(--osb-red);
-      box-shadow: 0 0 30px rgba(220, 38, 38, 0.1);
-    }
-
-    .stat-ghost {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 80px;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.02);
-      font-family: 'Barlow Condensed', sans-serif;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: var(--osb-text-dim);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .stat-value {
-      font-size: 42px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-    }
-
-    .stat-change {
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .stat-change.positive {
-      color: var(--osb-green);
-    }
-
-    .stat-change.negative {
-      color: var(--osb-red);
-    }
-
-    /* Alert Strip */
-    .alert-strip {
-      background: linear-gradient(90deg, rgba(220, 38, 38, 0.2), rgba(220, 38, 38, 0.05));
-      border: 1px solid var(--osb-red);
-      border-left-width: 4px;
-      padding: 15px 20px;
-      margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .alert-icon {
-      width: 24px;
-      height: 24px;
-      fill: var(--osb-red);
-    }
-
-    .alert-text {
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
-
-    .alert-text strong {
-      color: var(--osb-red);
-    }
-
-    /* Charts Row */
-    .charts-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .chart-card {
-      background: var(--osb-panel);
-      border: 1px solid var(--osb-border);
-      padding: 25px;
-    }
-
-    .chart-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .chart-title {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .chart-canvas {
-      height: 200px;
-      display: flex;
-      align-items: flex-end;
-      gap: 15px;
-      padding-top: 20px;
-    }
-
-    .bar-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .bar {
-      width: 100%;
-      background: linear-gradient(180deg, var(--osb-red), rgba(220, 38, 38, 0.3));
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .bar:hover {
-      filter: brightness(1.3);
-    }
-
-    .bar-label {
-      font-size: 11px;
-      color: var(--osb-text-dim);
-      letter-spacing: 1px;
-    }
-
-    /* Tables */
-    .table-card {
-      background: var(--osb-panel);
-      border: 1px solid var(--osb-border);
-      overflow: hidden;
-    }
-
-    .table-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 25px;
-      border-bottom: 1px solid var(--osb-border);
-    }
-
-    .table-title {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .table-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .table-btn {
-      padding: 8px 16px;
-      background: var(--osb-panel-light);
-      border: 1px solid var(--osb-border);
-      color: var(--osb-text);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .table-btn:hover {
-      border-color: var(--osb-red);
-      color: var(--osb-red);
-    }
-
-    .table-btn.primary {
-      background: var(--osb-red);
-      border-color: var(--osb-red);
-      color: white;
-    }
-
-    .table-btn.primary:hover {
-      background: #b91c1c;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th {
-      text-align: left;
-      padding: 15px 25px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--osb-text-dim);
-      border-bottom: 1px solid var(--osb-border);
-    }
-
-    td {
-      padding: 18px 25px;
-      font-size: 13px;
-      border-bottom: 1px solid var(--osb-border);
-    }
-
-    tr:hover td {
-      background: rgba(220, 38, 38, 0.05);
-    }
-
-    .tier-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .tier-critical {
-      background: rgba(220, 38, 38, 0.2);
-      color: var(--osb-red);
-      border: 1px solid var(--osb-red);
-    }
-
-    .tier-high {
-      background: rgba(245, 158, 11, 0.2);
-      color: var(--osb-amber);
-      border: 1px solid var(--osb-amber);
-    }
-
-    .tier-low {
-      background: rgba(34, 197, 94, 0.2);
-      color: var(--osb-green);
-      border: 1px solid var(--osb-green);
-    }
-
-    .action-btns {
-      display: flex;
-      gap: 8px;
-    }
-
-    .action-btn {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--osb-panel-light);
-      border: 1px solid var(--osb-border);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .action-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: var(--osb-text-dim);
-    }
-
-    .action-btn:hover {
-      border-color: var(--osb-red);
-    }
-
-    .action-btn:hover svg {
-      fill: var(--osb-red);
-    }
-
-    .action-btn.approve:hover {
-      border-color: var(--osb-green);
-    }
-
-    .action-btn.approve:hover svg {
-      fill: var(--osb-green);
-    }
-
-    /* Newsletter Composer */
-    .composer-area {
-      background: var(--osb-panel);
-      border: 1px solid var(--osb-border);
-      padding: 25px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 11px;
-      color: var(--osb-text-dim);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .form-input,
-    .form-textarea {
-      width: 100%;
-      background: var(--osb-darker);
-      border: 1px solid var(--osb-border);
-      padding: 15px 20px;
-      color: var(--osb-text);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    .form-input:focus,
-    .form-textarea:focus {
-      border-color: var(--osb-red);
-    }
-
-    .form-textarea {
-      min-height: 200px;
-      resize: vertical;
-    }
-
-    .composer-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--osb-border);
-    }
-
-    .subscriber-count {
-      font-size: 13px;
-      color: var(--osb-text-dim);
-    }
-
-    .subscriber-count span {
-      color: var(--osb-red);
-      font-weight: 700;
-    }
-
-    /* Messages */
-    .message-list {
-      background: var(--osb-panel);
-      border: 1px solid var(--osb-border);
-    }
-
-    .message-item {
-      padding: 20px 25px;
-      border-bottom: 1px solid var(--osb-border);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .message-item:hover {
-      background: rgba(220, 38, 38, 0.05);
-    }
-
-    .message-item.unread {
-      border-left: 3px solid var(--osb-red);
-    }
-
-    .message-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .message-sender {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .message-time {
-      font-size: 11px;
-      color: var(--osb-text-dim);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .message-subject {
-      font-size: 13px;
-      color: var(--osb-text-dim);
-      margin-bottom: 5px;
-    }
-
-    .message-preview {
-      font-size: 12px;
-      color: var(--osb-text-dim);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Threat Ticker */
-    .threat-ticker {
-      position: fixed;
-      bottom: 0;
-      left: 80px;
-      right: 0;
-      height: 40px;
-      background: var(--osb-panel);
-      border-top: 1px solid var(--osb-border);
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .ticker-label {
-      padding: 0 20px;
-      background: var(--osb-red);
-      height: 100%;
-      display: flex;
-      align-items: center;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      white-space: nowrap;
-      z-index: 10;
-    }
-
-    .ticker-content {
-      flex: 1;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .ticker-scroll {
-      display: flex;
-      gap: 50px;
-      animation: ticker-scroll 30s linear infinite;
-      white-space: nowrap;
-      padding: 0 20px;
-    }
-
-    @keyframes ticker-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .ticker-item {
-      font-size: 12px;
-      color: var(--osb-text-dim);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ticker-item::before {
-      content: '◆';
-      color: var(--osb-red);
-      font-size: 8px;
-    }
-
-    /* Modal */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal {
-      background: var(--osb-panel);
-      border: 1px solid var(--osb-border);
-      width: 90%;
-      max-width: 600px;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-
-    .modal-header {
-      padding: 20px 25px;
-      border-bottom: 1px solid var(--osb-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .modal-title {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .modal-close {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: 1px solid var(--osb-border);
-      color: var(--osb-text);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .modal-close:hover {
-      border-color: var(--osb-red);
-      color: var(--osb-red);
-    }
-
-    .modal-body {
-      padding: 25px;
-    }
-
-    .modal-field {
-      margin-bottom: 15px;
-    }
-
-    .modal-label {
-      font-size: 11px;
-      color: var(--osb-text-dim);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .modal-value {
-      font-size: 14px;
-    }
-
-    /* Loading State */
-    .loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      color: var(--osb-text-dim);
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    .loading::after {
-      content: '';
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--osb-border);
-      border-top-color: var(--osb-red);
-      border-radius: 50%;
-      margin-left: 15px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Empty State */
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--osb-text-dim);
-    }
-
-    .empty-state svg {
-      width: 48px;
-      height: 48px;
-      fill: var(--osb-border);
-      margin-bottom: 20px;
-    }
-
-    .empty-state p {
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .charts-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 60px;
-      }
-      .sidebar:hover {
-        width: 60px;
-      }
-      .main-content {
-        margin-left: 60px;
-      }
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-      .threat-ticker {
-        left: 60px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="description" content="OSB — the world's first behavioural threat intelligence organisation. The RSEI Model™ is the only detection system built for social engineering fraud.">
+<title>OSB — RSEI Model™ | The World's First Behavioural Threat Detection System for Romance Fraud</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
+html{scroll-behavior:smooth;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--b);}::-webkit-scrollbar-thumb{background:var(--r);}
+body{font-family:'Figtree',sans-serif;background:var(--b);color:var(--w);overflow-x:hidden;padding-top:72px;line-height:1.6;font-size:16px;}
+/* TICKER */
+.ticker{background:var(--r);height:36px;overflow:hidden;display:flex;align-items:center;}
+.tt{display:flex;animation:tickS 55s linear infinite;white-space:nowrap;}
+.ti{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.85);letter-spacing:2px;text-transform:uppercase;padding:0 2.5rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0;}
+.ts{color:rgba(255,255,255,.3);}
+@keyframes tickS{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(6,6,8,.97);border-bottom:1px solid rgba(193,18,31,.25);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;transition:border-color .3s;}
+.nav-logo img{height:46px;width:auto;display:block;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:4px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--r);transition:width .25s;}
+.nav-links a:hover,.nav-links a.active{color:var(--w);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:.875rem;}
+.nbtn-score{background:var(--r);color:var(--w);padding:9px 22px;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s;}
+.nbtn-score:hover{background:#d01020;}
+.nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
+.nbtn-join:hover{border-color:var(--r);color:var(--w);}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
+.mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
+.mob-menu a:last-of-type{border-bottom:none;}
+.mob-menu a:hover{color:var(--r);}
+.mob-ctas{display:flex;gap:.875rem;margin-top:1.5rem;flex-wrap:wrap;}
+/* SECTIONS */
+.sd{background:var(--b);padding:6rem 3rem;}
+.sn{background:var(--n);padding:6rem 3rem;}
+.sr{background:var(--r);padding:6rem 3rem;}
+.so{background:var(--off);color:var(--b);padding:6rem 3rem;}
+.si{max-width:1160px;margin:0 auto;}
+/* LABELS */
+.lbl{display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.375rem;}
+.lbl-line{width:28px;height:1px;background:var(--r);}
+.lbl-text{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);font-weight:500;}
+.lbl-lt .lbl-text{color:rgba(255,255,255,.35);}
+.lbl-lt .lbl-line{background:rgba(255,255,255,.2);}
+/* HEADINGS */
+.hxl{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:600;line-height:.95;letter-spacing:-1.5px;}
+.hlg{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:600;line-height:1.05;letter-spacing:-.75px;}
+.hmd{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:600;line-height:1.15;letter-spacing:-.25px;}
+.hw{color:var(--w);} .hb{color:var(--b);}
+.hw em,.hb em{color:var(--r);font-style:italic;font-weight:400;}
+/* BODY TEXT */
+.blg{font-size:1.05rem;line-height:1.85;font-weight:300;}
+.bmd{font-size:.9rem;line-height:1.85;font-weight:300;}
+.tw{color:rgba(255,255,255,.7);}
+.tmt{color:rgba(255,255,255,.38);}
+.tdk{color:var(--g);}
+/* BUTTONS */
+.btn-r{background:var(--r);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-r:hover{background:#d01020;transform:translateY(-2px);box-shadow:0 6px 28px rgba(193,18,31,.4);}
+.btn-g{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);padding:13px 30px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-g:hover{border-color:var(--r);color:var(--w);}
+.btn-dk{background:var(--b);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-dk:hover{background:#111;}
+.btn-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
+/* INNER PAGE HERO */
+.pg-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;}
+.pg-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
+.pg-hero .si{}
+/* FOOTER */
+footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem 3rem 3rem;}
+.fg{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3.5rem;margin-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.flogo img{width:190px;height:auto;display:block;margin-bottom:1.375rem;}
+.fdesc{font-size:.8rem;color:rgba(255,255,255,.25);line-height:1.85;}
+.fcol-t{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
+.flinks{display:flex;flex-direction:column;gap:.5rem;}
+.flinks a{font-size:.8rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:var(--w);}
+.fbot{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fquote{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(255,255,255,.16);font-style:italic;max-width:500px;}
+.fcopy{font-size:.7rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
+/* MOBILE */
+@media(max-width:1000px){
+  nav{padding:0 1.5rem;}
+  .nav-links,.nbtn-join{display:none;}
+  .nav-ham{display:flex;}
+  .sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}
+  .pg-hero{padding:4rem 1.5rem 3.5rem;}
+  .fg{grid-template-columns:1fr 1fr;gap:2rem;}
+  footer{padding:4rem 1.5rem 2.5rem;}
+}
+@media(max-width:600px){
+  body{font-size:15px;}
+  nav{padding:0 1.25rem;}
+  .sd,.sn,.sr,.so{padding:3.5rem 1.25rem;}
+  .pg-hero{padding:3rem 1.25rem 2.5rem;}
+  .fg{grid-template-columns:1fr;}
+  .fbot{flex-direction:column;text-align:center;}
+  .btn-row{flex-direction:column;align-items:flex-start;}
+}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--n);position:relative;overflow:hidden;padding:5rem 2rem;text-align:center;}
+.h-noise{position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.012) 3px,rgba(255,255,255,.012) 4px);
+  pointer-events:none;}
+.h-glow{position:absolute;top:50%;left:50%;width:800px;height:800px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(193,18,31,.08) 0%,transparent 68%);
+  pointer-events:none;}
+.h-corner{position:absolute;width:64px;height:64px;border-color:rgba(193,18,31,.3);border-style:solid;}
+.hc-tl{top:2rem;left:2rem;border-width:1px 0 0 1px;}
+.hc-tr{top:2rem;right:2rem;border-width:1px 1px 0 0;}
+.hc-bl{bottom:2rem;left:2rem;border-width:0 0 1px 1px;}
+.hc-br{bottom:2rem;right:2rem;border-width:0 1px 1px 0;}
+.h-ey{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,.28);margin-bottom:3rem;
+  display:flex;align-items:center;justify-content:center;gap:1.25rem;
+  position:relative;z-index:1;animation:fU 1s ease .3s both;}
+.h-ey-line{width:44px;height:1px;background:rgba(193,18,31,.45);}
+.h-logo{position:relative;z-index:1;margin-bottom:2.5rem;animation:logoIn 1.2s ease .6s both;}
+.h-logo img{width:min(680px,88vw);height:auto;display:block;margin:0 auto;
+  filter:drop-shadow(0 0 80px rgba(193,18,31,.2)) drop-shadow(0 10px 50px rgba(0,0,0,.8));}
+@keyframes logoIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+.h-vline{width:1px;height:0;background:linear-gradient(var(--r),transparent);
+  margin:0 auto 2.75rem;position:relative;z-index:1;animation:vLine .8s ease 1.7s both;}
+@keyframes vLine{to{height:60px}}
+.h-h1{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5.5vw,5.2rem);font-weight:600;line-height:.96;
+  color:var(--w);letter-spacing:-1.5px;
+  max-width:880px;margin:0 auto 1.75rem;
+  position:relative;z-index:1;animation:fU .9s ease 2.1s both;}
+.h-h1 em{color:var(--r);font-style:italic;}
+.h-sub{font-size:clamp(.95rem,1.8vw,1.1rem);color:rgba(255,255,255,.42);
+  max-width:520px;margin:0 auto 3rem;line-height:1.85;font-weight:300;
+  position:relative;z-index:1;animation:fU .9s ease 2.4s both;}
+.h-btns{position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;gap:1.125rem;flex-wrap:wrap;
+  animation:fU .9s ease 2.7s both;}
+.h-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:1;
+  animation:fU .9s ease 3.1s both;}
+.h-scroll-line{width:1px;height:52px;background:linear-gradient(var(--r),transparent);
+  animation:sP 2.2s ease infinite;}
+@keyframes sP{0%,100%{opacity:.3}50%{opacity:1}}
+.h-scroll-t{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.2);}
+@keyframes fU{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* STAT BAND */
+.stat-band{background:var(--r);display:grid;grid-template-columns:repeat(4,1fr);}
+.sblk{padding:2.5rem 2rem;border-right:1px solid rgba(255,255,255,.15);text-align:center;}
+.sblk:last-child{border-right:none;}
+.snum{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4.5vw,3.8rem);
+  color:var(--w);display:block;line-height:1;margin-bottom:.35rem;}
+.slbl{font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  color:rgba(255,255,255,.7);letter-spacing:1.5px;text-transform:uppercase;line-height:1.5;}
+
+/* FRAMEWORK */
+.fw-hdr{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end;margin-bottom:4.5rem;}
+.fw-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1.125rem;}
+.pbox{position:relative;overflow:hidden;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  padding:2.5rem 1.75rem 5rem;transition:all .3s;cursor:default;}
+.pbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--r);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.pbox:hover{background:rgba(193,18,31,.055);border-color:rgba(193,18,31,.28);transform:translateY(-4px);}
+.pbox:hover::before{transform:scaleX(1);}
+.pbox-bg{position:absolute;bottom:-.5rem;right:.5rem;
+  font-family:'Bebas Neue',sans-serif;font-size:7rem;line-height:1;
+  color:rgba(255,255,255,.04);pointer-events:none;transition:color .3s;}
+.pbox:hover .pbox-bg{color:rgba(193,18,31,.12);}
+.ptag{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--r);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:.875rem;}
+.pscore{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--w);line-height:1;margin-bottom:.4rem;}
+.pname{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;
+  color:var(--w);margin-bottom:.625rem;line-height:1.2;}
+.pdesc{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.75;position:relative;z-index:1;}
+.trig-strip{background:rgba(193,18,31,.07);
+  border-top:1px solid rgba(193,18,31,.18);border-bottom:1px solid rgba(193,18,31,.18);
+  padding:1.75rem 3rem;}
+.trig-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.trig-icon{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--r);line-height:1;flex-shrink:0;}
+.trig-body{font-size:.9rem;color:rgba(255,255,255,.62);line-height:1.75;}
+.trig-body strong{color:var(--w);}
+
+/* TIERS */
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);margin-top:4rem;}
+.tier{background:var(--n);padding:3.5rem 2.5rem;position:relative;overflow:hidden;transition:background .3s;}
+.tier:hover{background:rgba(255,255,255,.02);}
+.tier-acc{position:absolute;top:0;left:0;right:0;height:3px;}
+.tier.low .tier-acc{background:#1B7A1B;}
+.tier.high .tier-acc{background:#B8720A;}
+.tier.crit .tier-acc{background:var(--r);}
+.tier-bnum{position:absolute;bottom:-.5rem;right:-.25rem;font-family:'Bebas Neue',sans-serif;
+  font-size:10rem;line-height:1;color:rgba(255,255,255,.025);pointer-events:none;user-select:none;}
+.tier-range{font-family:'Bebas Neue',sans-serif;font-size:4rem;line-height:1;margin-bottom:.4rem;}
+.tier.low .tier-range{color:#1B7A1B;}
+.tier.high .tier-range{color:#B8720A;}
+.tier.crit .tier-range{color:var(--r);}
+.tier-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--w);margin-bottom:.875rem;line-height:1.2;}
+.tier-desc{font-size:.85rem;color:rgba(255,255,255,.42);line-height:1.8;}
+.tier-act{margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.07);
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.22);
+  letter-spacing:.5px;line-height:1.55;}
+
+/* SCORE SECTION */
+.sp-sec{position:relative;overflow:hidden;}
+.sp-bg-word{position:absolute;font-family:'Bebas Neue',sans-serif;
+  font-size:28vw;line-height:.85;color:rgba(193,18,31,.04);
+  right:-1rem;top:50%;transform:translateY(-50%);
+  pointer-events:none;user-select:none;white-space:nowrap;letter-spacing:-5px;}
+.sp-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+  gap:6rem;align-items:center;position:relative;z-index:1;}
+.sc-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-top:2px solid var(--r);padding:2.5rem;}
+.sc-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(255,255,255,.22);
+  margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.sc-big{font-family:'Bebas Neue',sans-serif;font-size:6rem;line-height:1;color:var(--w);}
+.sc-den{font-size:1.5rem;color:rgba(255,255,255,.28);}
+.sc-bar{height:2px;background:rgba(255,255,255,.08);margin:.875rem 0;}
+.sc-fill{height:2px;background:var(--r);width:0;transition:width 1.8s ease;}
+.sc-tier{display:inline-block;background:rgba(193,18,31,.1);border-left:2px solid var(--r);
+  padding:4px 14px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+  color:var(--r);margin-bottom:1.5rem;letter-spacing:.5px;text-transform:uppercase;}
+.sc-rows{display:flex;flex-direction:column;gap:.35rem;}
+.sc-row{display:flex;justify-content:space-between;align-items:center;
+  padding:.5rem .875rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);}
+.sc-rl{font-size:.78rem;color:rgba(255,255,255,.38);}
+.sc-rv{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--w);font-weight:500;}
+.sc-rv.red{color:var(--r);}
+.sp-feats{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem;}
+.sp-feat{font-size:.85rem;color:rgba(255,255,255,.42);display:flex;align-items:center;gap:.875rem;}
+.sp-feat::before{content:'';width:14px;height:1px;background:var(--r);flex-shrink:0;}
+
+/* IFN CARDS */
+.ifn-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3.5rem;flex-wrap:wrap;}
+.ifn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.125rem;}
+.icard{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);
+  transition:all .3s;text-decoration:none;display:block;overflow:hidden;}
+.icard:hover{background:rgba(193,18,31,.055);border-color:rgba(193,18,31,.3);transform:translateY(-4px);}
+.icard-hd{background:rgba(255,255,255,.03);padding:.875rem 1.25rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.07);}
+.icard-id{font-family:'IBM Plex Mono',monospace;font-size:.9rem;color:var(--r);letter-spacing:1px;font-weight:500;}
+.icard-p{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.22);
+  letter-spacing:1.5px;text-transform:uppercase;}
+.icard-bd{padding:1.5rem 1.25rem;}
+.icard-t{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;
+  color:var(--w);margin-bottom:.625rem;line-height:1.3;}
+.icard-e{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.75;}
+.icard-ft{padding:.875rem 1.25rem;border-top:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;}
+.icard-m{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.22);}
+.icard-s{font-size:.75rem;color:rgba(255,255,255,.22);display:flex;gap:.875rem;}
+
+/* CONTINENT MAP */
+.map-hdr{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:3rem;}
+.map-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);}
+.map-wrap svg{width:100%;display:block;}
+.map-btm{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:rgba(255,255,255,.06);}
+.cstat{background:var(--b);padding:1.1rem;text-align:center;}
+.cstat-n{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1.5px;
+  text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:.3rem;}
+.cstat-v{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--r);line-height:1;}
+
+/* TIMELINE */
+.tl-hdr{margin-bottom:3.5rem;}
+.tl-nn{display:inline-block;background:rgba(193,18,31,.08);
+  border-left:3px solid var(--r);padding:.5rem 1rem;margin-top:1.25rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--r);letter-spacing:.5px;}
+.timeline{position:relative;padding-left:3.5rem;max-width:880px;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(0,0,0,.12);}
+.tli{margin-bottom:2.75rem;position:relative;}
+.tli:last-child{margin-bottom:0;}
+.tli-node{width:44px;height:44px;background:var(--r);display:flex;align-items:center;
+  justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  color:var(--w);font-weight:500;position:absolute;left:-3.5rem;top:0;
+  z-index:1;margin-left:-22px;text-align:center;line-height:1.3;}
+.tli-card{background:var(--w);border:1px solid var(--br);border-left:3px solid var(--r);
+  padding:1.75rem 2rem;}
+.tli-date{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--m);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:.4rem;}
+.tli-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;
+  color:var(--b);margin-bottom:.625rem;line-height:1.25;}
+.tli-desc{font-size:.875rem;color:var(--g);line-height:1.8;}
+.tli-score{display:inline-block;margin-top:.875rem;font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;color:var(--r);background:var(--rl);padding:3px 10px;}
+
+/* HAVEN PROMO */
+.haven-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.haven-stages{display:flex;flex-direction:column;gap:.5rem;}
+.hs{display:flex;align-items:center;gap:1.25rem;padding:1rem 1.25rem;
+  background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);
+  border-left:2px solid transparent;transition:all .22s;cursor:default;}
+.hs:hover{background:rgba(193,18,31,.055);border-left-color:var(--r);transform:translateX(4px);}
+.hs-n{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(193,18,31,.3);
+  line-height:1;flex-shrink:0;width:2rem;transition:color .22s;}
+.hs:hover .hs-n{color:var(--r);}
+.hs-t{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.65);}
+
+/* COMMUNITY */
+.comm-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;}
+.live-badge{display:inline-flex;align-items:center;gap:.625rem;margin-bottom:1.5rem;
+  background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);padding:.375rem .875rem;}
+.live-dot{width:7px;height:7px;background:#16a34a;border-radius:50%;animation:ldot 2s ease infinite;flex-shrink:0;}
+@keyframes ldot{0%,100%{opacity:1}50%{opacity:.3}}
+.live-t{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#16a34a;letter-spacing:2px;text-transform:uppercase;}
+.feed-list{display:flex;flex-direction:column;}
+.fi{display:grid;grid-template-columns:58px 1fr auto;gap:1.125rem;align-items:start;
+  padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;}
+.fi:last-child{border-bottom:none;}
+.fi:hover .fi-title{color:var(--r);}
+.fi-num{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:rgba(255,255,255,.2);padding-top:2px;}
+.fi-tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--r);
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.35rem;}
+.fi-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;
+  color:var(--w);line-height:1.35;transition:color .18s;}
+.fi-exc{font-size:.8rem;color:rgba(255,255,255,.32);line-height:1.65;margin-top:.3rem;}
+.fi-stats{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;flex-shrink:0;}
+.fstat{font-size:.72rem;color:rgba(255,255,255,.2);}
+.comm-sidebar{}
+.signup-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-top:2px solid var(--r);padding:2rem;margin-bottom:1.125rem;}
+.sc2-t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;
+  color:var(--w);margin-bottom:.5rem;}
+.sc2-s{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.7;margin-bottom:1.5rem;}
+.finp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:var(--w);padding:11px 15px;font-family:'Figtree',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .2s;margin-bottom:.825rem;}
+.finp:focus{border-color:var(--r);}
+.finp::placeholder{color:rgba(255,255,255,.22);}
+.fbtn{width:100%;background:var(--r);color:var(--w);border:none;padding:12px;
+  font-family:'Figtree',sans-serif;font-size:.82rem;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.fbtn:hover{background:#d01020;}
+.fnote{font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.625rem;line-height:1.5;}
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:.625rem;}
+.cs-box{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);padding:1.1rem;text-align:center;}
+.cs-n{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--w);display:block;line-height:1;margin-bottom:.2rem;}
+.cs-l{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.28);letter-spacing:.5px;text-transform:uppercase;}
+
+/* MISSION STRIP */
+.mission-strip{background:var(--r);padding:5rem 3rem;text-align:center;}
+
+/* MOBILE OVERRIDES */
+@media(max-width:1000px){
+  .fw-pillars{grid-template-columns:1fr 1fr;}
+  .fw-hdr{grid-template-columns:1fr;gap:2.5rem;}
+  .tiers-grid{grid-template-columns:1fr;}
+  .sp-grid{grid-template-columns:1fr;gap:3rem;}
+  .sp-bg-word{font-size:50vw;}
+  .ifn-grid{grid-template-columns:1fr 1fr;}
+  .map-hdr{grid-template-columns:1fr;}
+  .map-btm{grid-template-columns:repeat(4,1fr);}
+  .haven-grid{grid-template-columns:1fr;gap:3rem;}
+  .comm-grid{grid-template-columns:1fr;gap:3rem;}
+  .stat-band{grid-template-columns:1fr 1fr;}
+  .sblk{border-right:none;border-bottom:1px solid rgba(255,255,255,.15);}
+  .sblk:last-child{border-bottom:none;}
+}
+@media(max-width:600px){
+  .fw-pillars{grid-template-columns:1fr;}
+  .ifn-grid{grid-template-columns:1fr;}
+  .trig-strip{padding:1.5rem 1.25rem;}
+  .map-btm{grid-template-columns:1fr 1fr;}
+  .timeline{padding-left:2.75rem;}
+  .tli-node{left:-2.75rem;margin-left:-22px;}
+}
+
+.nav-intel-wrap{position:relative;display:inline-block;}
+.nav-intel-wrap:hover .mega-drop{display:block !important;}
+
+
+/* ── THEME TOKENS (permanent dark) ── */
+:root{
+  --r:#C1121F;
+  --b:#0B0B0D;
+  --w:#FFFFFF;
+  --off:#F8F6F2;
+  --g:#5A5A5A;
+  --m:#9A9A9A;
+  --br:#E4E1DB;
+  --rl:#FEF0F0;
+  --n:#060608;
+  --bg:#060608;
+  --surface:rgba(255,255,255,.025);
+  --text:#FFFFFF;
+  --text2:rgba(255,255,255,.7);
+  --text3:rgba(255,255,255,.38);
+  --border:rgba(255,255,255,.08);
+  --nav-bg:rgba(6,6,8,.97);
+  --card-bg:rgba(255,255,255,.025);
+  --card-border:rgba(255,255,255,.07);
+  --mega-bg:#060608;
+  --inp-bg:rgba(255,255,255,.05);
+  --inp-border:rgba(255,255,255,.1);
+}
+
+
+/* Apply theme tokens */
+body{background:var(--bg);color:var(--text);}
+nav{background:var(--nav-bg);}
+.mega-drop{background:var(--mega-bg) !important;}
+
+
+
+
+/* Hero */
+.hero,.h-noise,.h-glow{background:var(--section-dark);}
+.h-h1{color:var(--text);}
+.h-sub{color:var(--text3);}
+
+
+
+
+/* Sections */
+.sd{background:var(--section-black);}
+.sn{background:var(--section-dark);}
+
+
+
+/* Text */
+.hw{color:var(--text);}
+.tw{color:var(--text2);}
+.tmt{color:var(--text3);}
+
+
+/* Cards */
+.pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
+  background:var(--card-bg);
+  border-color:var(--card-border);
+}
+
+
+
+
+
+
+/* Nav links */
+
+
+
+
+
+/* Intelligence hub */
+
+
+/* Feed */
+
+
+
+
+
+
+/* Inputs */
+.finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
+  background:var(--inp-bg);
+  border-color:var(--inp-border);
+  color:var(--text);
+}
+
+
+/* Tiers */
+
+
+
+
+
+
+
+/* Score card */
+
+
+
+
+
+
+
+
+
+
+/* Haven/Solace stages */
+
+
+
+
+
+/* Community */
+
+
+
+
+
+
+
+/* Map */
+
+
+
+
+/* IFN cards */
+
+
+
+
+
+
+
+
+
+
+/* IC3 intel cards */
+
+
+
+
+
+/* Ticker secondary */
+
+
+/* Footer always dark */
+footer{background:var(--footer-bg) !important;}
+
+
+/* Page hero */
+
+
+
+/* Off section (timeline) */
+
+
+/* Pillar boxes day */
+
+
+
+/* Trig strip */
+
+
+
+
+/* Mission strip stays red */
+.mission-strip{background:var(--r);}
+
+/* Hero intel preview */
+
+
+
+
+
+
+
+</style>
 </head>
 <body>
-  <!-- Login Screen -->
-  <div id="loginScreen">
-    <div class="login-glow"></div>
-    <div class="login-container">
-      <!-- OSB Logo SVG -->
-      <svg class="osb-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <!-- Shield -->
-        <path d="M50 5 L90 20 V50 C90 75 50 95 50 95 C50 95 10 75 10 50 V20 L50 5Z" 
-              fill="none" stroke="#dc2626" stroke-width="2"/>
-        <!-- Inner shield -->
-        <path d="M50 15 L80 27 V50 C80 68 50 83 50 83 C50 83 20 68 20 50 V27 L50 15Z" 
-              fill="none" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
-        <!-- Eye -->
-        <ellipse cx="50" cy="50" rx="20" ry="12" fill="none" stroke="#dc2626" stroke-width="2"/>
-        <circle cx="50" cy="50" r="8" fill="#dc2626" opacity="0.3"/>
-        <circle cx="50" cy="50" r="4" fill="#dc2626"/>
-        <!-- Scan lines -->
-        <line x1="30" y1="50" x2="20" y2="50" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
-        <line x1="70" y1="50" x2="80" y2="50" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
-        <!-- Target brackets -->
-        <path d="M35 35 L40 35 L40 40" fill="none" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
-        <path d="M65 35 L60 35 L60 40" fill="none" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
-        <path d="M35 65 L40 65 L40 60" fill="none" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
-        <path d="M65 65 L60 65 L60 60" fill="none" stroke="#dc2626" stroke-width="1" opacity="0.5"/>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Romance Fraud Losses — GASA 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Romance Fraud Losses — GASA 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div></div></div></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="OSB"></a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
+      <a href="intelligence.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">Intelligence<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
+        <a href="rsei-model.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Framework</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Model™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The world's only behavioural scoring framework</div></a>
+        <a href="intelligence.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Case Library</div><div style="font-size:.88rem;font-weight:600;color:#fff;">IFN Intelligence Library</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Field intelligence — named, documented, published</div></a>
+        <a href="platform-index.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Platform Ratings</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Platform Safety Index</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB rates every major dating platform</div></a>
+        <a href="report.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Annual Report</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Global Fraud Report 2026</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The definitive annual intelligence report — free to cite</div></a>
+      </div>
+    </div>
+    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
+      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;padding:0 1.125rem;height:72px;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
+      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
+        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Certification</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certified™ Programme</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Get your platform assessed and certified</div></a>
+        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Registry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certified Platform Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Platforms that have earned RSEI Certification</div></a>
+        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Standard™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The behavioural detection framework for platforms</div></a>
+        <a href="press.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Press</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Media Kit & Press Resources</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Assets and contacts for journalists and media</div></a>
+        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Industry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's open call to dating platforms globally</div></a>
+      </div>
+    </div>
+    <a href="score.html">SCORE</a>
+    <a href="solace.html">Solace</a>
+    <a href="community.html">Community</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a href="community.html" class="nbtn-join">Community</a>
+    <a href="score.html" class="nbtn-score">SCORE Now</a>
+  </div>
+  <button class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="about.html" onclick="closeMob()">About</a>
+  <a href="rsei-model.html" onclick="closeMob()">RSEI Model™</a>
+  <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
+  <a href="certification.html" onclick="closeMob()">RSEI Certified™ — For Platforms</a>
+  <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
+  <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
+  <a href="score.html" onclick="closeMob()">SCORE</a>
+  <a href="solace.html" onclick="closeMob()">Solace</a>
+  <a href="community.html" onclick="closeMob()">Community</a>
+  <a href="contact.html" onclick="closeMob()">Contact</a>
+  <div class="mob-ctas">
+    <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">SCORE Now</a>
+    <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="h-noise"></div>
+  <div class="h-glow"></div>
+  <div class="h-corner hc-tl"></div><div class="h-corner hc-tr"></div>
+  <div class="h-corner hc-bl"></div><div class="h-corner hc-br"></div>
+  <div class="h-ey"><div class="h-ey-line"></div>Behavioural Threat Intelligence · RSEI Model™ · Est. 2021<div class="h-ey-line"></div></div>
+  <div class="h-logo"><img src="logo.png" alt="OSB"></div>
+  <div class="h-vline"></div>
+  <h1 class="h-h1">Romance fraud has a name.<br>It has a score.<br><em>Only one organisation built both.</em></h1>
+  <p class="h-sub">OSB built the world's first behavioural threat detection system for social engineering fraud. The RSEI Model™ doesn't raise awareness — it detects, scores, and stops.</p>
+  <div class="h-btns">
+    <a href="score.html" class="btn-r">Score Your Situation Now</a>
+    <a href="rsei-model.html" class="btn-g">Read the Framework</a>
+  </div>
+  <div class="h-scroll"><div class="h-scroll-line"></div><div class="h-scroll-t">Scroll</div></div>
+</div>
+
+<div class="ticker" style="background:rgba(11,11,13,1);border-top:1px solid rgba(193,18,31,.15);">
+  <div class="tt"><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div><div class="ti">The world's first behavioural scoring framework for romance fraud<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0<span class="ts">◆</span></div><div class="ti">R · Relationship Acceleration<span class="ts">◆</span></div><div class="ti">S · Script Consistency<span class="ts">◆</span></div><div class="ti">E · Emotional Manipulation<span class="ts">◆</span></div><div class="ti">I · Incremental Extraction<span class="ts">◆</span></div><div class="ti">Score 4–20 · Three risk tiers<span class="ts">◆</span></div><div class="ti">E ≥ 4 triggers mandatory support<span class="ts">◆</span></div><div class="ti">OSB · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div></div>
+</div>
+
+<div class="stat-band">
+  <div class="sblk reveal"><span class="snum" data-target="42" data-prefix="$" data-suffix="B+">$0</span><div class="slbl">Annual global romance fraud losses — GASA 2025</div></div>
+  <div class="sblk reveal d1"><span class="snum" data-target="20700" data-prefix="" data-suffix="+">0</span><div class="slbl">OSB platform reach and growing</div></div>
+  <div class="sblk reveal d2"><span class="snum" data-target="5" data-prefix="" data-suffix="">0</span><div class="slbl">Intelligence field notes documented</div></div>
+  <div class="sblk reveal d3"><span class="snum" data-target="1" data-prefix="" data-suffix="">0</span><div class="slbl">Framework of its kind in the world</div></div>
+</div>
+
+<div class="sd" style="padding-top:7rem;padding-bottom:0;">
+  <div class="si">
+    <div class="fw-hdr">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">The Framework</div></div>
+        <h2 class="hlg hw">Four pillars.<br><em>One score. Zero ambiguity.</em></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="blg tw" style="margin-bottom:2rem;">The RSEI Model™ is the world's only behavioural threat detection system built for social engineering fraud. Four detection modules. One Core RSEI Rating. Every exploitation follows the same behavioural sequence — RSEI detects it.</p>
+        <a href="rsei-model.html" class="btn-g" style="font-size:10px;">Read the full framework →</a>
+      </div>
+    </div>
+    <div class="fw-pillars">
+      <div class="pbox reveal d1"><div class="pbox-bg">R</div><div class="ptag">Pillar 01</div><div class="pscore">1—5</div><div class="pname">Relationship Acceleration</div><div class="pdesc">How fast the scammer engineers false intimacy, emotional dependency and premature declarations of love and commitment.</div></div>
+      <div class="pbox reveal d2"><div class="pbox-bg">S</div><div class="ptag">Pillar 02</div><div class="pscore">1—5</div><div class="pname">Script Consistency</div><div class="pdesc">The rehearsed persona — occupation, location, backstory and financial credibility props designed to feel verifiable.</div></div>
+      <div class="pbox reveal d3"><div class="pbox-bg">E</div><div class="ptag">Pillar 03</div><div class="pscore">1—5</div><div class="pname">Emotional Manipulation</div><div class="pdesc">Exploitation of trust, guilt, love and fear. E ≥ 4 triggers mandatory support — regardless of financial loss.</div></div>
+      <div class="pbox reveal d4"><div class="pbox-bg">I</div><div class="ptag">Pillar 04</div><div class="pscore">1—5</div><div class="pname">Incremental Extraction</div><div class="pdesc">Escalating financial asks — mule recruitment, gift cards, wire transfers, cryptocurrency. Small begins. Large follows.</div></div>
+    </div>
+  </div>
+</div>
+<div class="trig-strip">
+  <div class="trig-inner">
+    <div class="trig-icon">E≥4</div>
+    <div class="trig-body"><strong>E Pillar Independent Trigger — Active at E ≥ 4:</strong> OSB mandates victim support referral regardless of total Core Score and regardless of whether any financial loss has occurred. <strong>Emotional harm is real harm.</strong> This trigger is unique to the RSEI Model™ and was established through field case IFN-002.</div>
+  </div>
+</div>
+
+<div class="sn" style="padding-top:7rem;padding-bottom:7rem;">
+  <div class="si">
+    <div class="reveal">
+      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Risk Classification</div></div>
+      <h2 class="hlg hw" style="margin-bottom:4rem;">Three tiers.<br><em>No ambiguity. No softening.</em></h2>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier low reveal d1"><div class="tier-acc"></div><div class="tier-bnum">4</div><div class="tier-range">4—11</div><div class="tier-name">Low Behavioural Risk</div><div class="tier-desc">Patterns present but below confirmed fraud threshold. Monitoring required. Stay alert — particularly around financial requests and inability to verify identity in person.</div><div class="tier-act">Protocol: Monitor · Document · Stay alert to escalation</div></div>
+      <div class="tier high reveal d2"><div class="tier-acc"></div><div class="tier-bnum">12</div><div class="tier-range">12—16</div><div class="tier-name">High Probability Romance Scam</div><div class="tier-desc">Multiple confirmed fraud indicators present. Hallmarks of a professional, organised operation. Do not send money. Screenshot all evidence. Contact OSB now.</div><div class="tier-act">Protocol: Do not send money · Screenshot · Contact OSB</div></div>
+      <div class="tier crit reveal d3"><div class="tier-acc"></div><div class="tier-bnum">17</div><div class="tier-range">17—20</div><div class="tier-name">Critical Exploitation</div><div class="tier-desc">Advanced exploitation in active progress. Immediate action required. Stop all financial transactions. Secure your evidence. Contact your bank and OSB without delay.</div><div class="tier-act">Protocol: Stop all transactions · Contact bank · Contact OSB immediately</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sp-sec sd" style="padding:7rem 3rem;">
+  <div class="sp-bg-word">SCORE</div>
+  <div class="sp-grid">
+    <div class="reveal">
+      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Free · Private · 2 Minutes</div></div>
+      <h2 class="hlg hw" style="margin-bottom:1.5rem;">Score your situation<br><em>right now.</em></h2>
+      <p class="blg tw" style="margin-bottom:1rem;">8 questions. Evidence-based results built on the RSEI Model™. No personal details required. The only scoring tool of its kind on the planet.</p>
+      <p class="bmd tmt" style="margin-bottom:2.5rem;">Designed for everyone — seniors, families, anyone who suspects something is wrong. Clear. Simple. Free forever.</p>
+      <div class="btn-row" style="margin-bottom:2rem;">
+        <a href="score.html" class="btn-r">Begin the Assessment</a>
+        <a href="community.html" class="btn-g">Share with someone</a>
+      </div>
+      <div class="sp-feats">
+        <div class="sp-feat">Completely private — no data stored without consent</div>
+        <div class="sp-feat">Results in under 2 minutes</div>
+        <div class="sp-feat">Clear action guidance for every tier</div>
+        <div class="sp-feat">Accessible for all ages including seniors</div>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="sc-card">
+        <div class="sc-tag">Sample RSEI Assessment · IFN-001</div>
+        <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.5rem;">
+          <span class="sc-big">16</span><span class="sc-den">/ 20</span>
+        </div>
+        <div class="sc-bar"><div class="sc-fill" id="sc-fill"></div></div>
+        <div class="sc-tier">High Probability Romance Scam</div>
+        <div class="sc-rows">
+          <div class="sc-row"><div class="sc-rl">R — Relationship Acceleration</div><div class="sc-rv">4 / 5</div></div>
+          <div class="sc-row"><div class="sc-rl">S — Script Consistency</div><div class="sc-rv">5 / 5</div></div>
+          <div class="sc-row"><div class="sc-rl">E — Emotional Manipulation</div><div class="sc-rv">4 / 5</div></div>
+          <div class="sc-row"><div class="sc-rl">I — Incremental Extraction</div><div class="sc-rv">3 / 5</div></div>
+          <div class="sc-row" style="border-top:1px solid rgba(255,255,255,.08);margin-top:.25rem;">
+            <div class="sc-rl" style="color:rgba(255,255,255,.65);font-weight:500;">ESI — Velocity Indicator</div>
+            <div class="sc-rv red">4 / 5</div>
+          </div>
+        </div>
+        <a href="score.html" class="btn-r" style="display:block;text-align:center;margin-top:1.75rem;font-size:10px;letter-spacing:2px;">Score your own situation →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sn" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="ifn-hdr">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Intelligence Library</div></div>
+        <h2 class="hlg hw">Field intelligence.<br><em>Named. Documented. Published.</em></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="bmd tw" style="margin-bottom:1.5rem;max-width:360px;">All cases referenced by IFN number only — no victim names or identifying details ever published by OSB.</p>
+        <a href="intelligence.html" class="btn-g" style="font-size:10px;">View full library</a>
+      </div>
+    </div>
+    <div class="ifn-grid">
+      <a href="intelligence.html" class="icard reveal d1"><div class="icard-hd"><div class="icard-id">IFN-005</div><div class="icard-p">S-Pillar · New</div></div><div class="icard-bd"><div class="icard-t">The Facade Bank Page — Staged Financial Interface</div><div class="icard-e">A fake bank portal used to show fabricated wealth before any financial request was made. First documented globally by OSB.</div></div><div class="icard-ft"><div class="icard-m">March 2026 · Quora</div><div class="icard-s"><span>♥ 6</span><span>◎ 1K+</span></div></div></a>
+      <a href="intelligence.html" class="icard reveal d2"><div class="icard-hd"><div class="icard-id">IFN-001</div><div class="icard-p">S-Pillar · Active</div></div><div class="icard-bd"><div class="icard-t">The Automated Bank Verification Exploit</div><div class="icard-e">Defeats the standard advice to verify independently. The victim's own due diligence became part of the trap.</div></div><div class="icard-ft"><div class="icard-m">13 Mar 2026</div><div class="icard-s"><span>♥ 8</span><span>◎ 1,234</span></div></div></a>
+      <a href="intelligence.html" class="icard reveal d3"><div class="icard-hd"><div class="icard-id">IFN-002</div><div class="icard-p">E-Pillar · E Score 5</div></div><div class="icard-bd"><div class="icard-t">The Suicidal Ideation Script — Zero Financial Loss</div><div class="icard-e">Established the E Pillar Independent Trigger. Emotional harm mandates support regardless of financial loss.</div></div><div class="icard-ft"><div class="icard-m">March 2026</div><div class="icard-s"><span>♥ 12</span><span>◎ 890</span></div></div></a>
+    </div>
+  </div>
+</div>
+
+<div class="sd" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="map-hdr">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Global Intelligence Index</div></div>
+        <h2 class="hlg hw">Romance fraud operates<br>on <em>every continent.</em></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="bmd tw" style="margin-bottom:2rem;">Every RSEI assessment contributes to the OSB Global Romance Fraud Index — the world's first live behavioural fraud mapping system. No borders. No exceptions.</p>
+        <a href="score.html" class="btn-r" style="font-size:10px;letter-spacing:2px;">Contribute Your Assessment</a>
+      </div>
+    </div>
+    <div class="map-wrap reveal">
+      <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1100" height="480" fill="#040406"/>
+        <line x1="0" y1="120" x2="1100" y2="120" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="0" y1="240" x2="1100" y2="240" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="0" y1="360" x2="1100" y2="360" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="275" y1="0" x2="275" y2="480" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="550" y1="0" x2="550" y2="480" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <line x1="825" y1="0" x2="825" y2="480" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+        <!-- Continent shapes -->
+        <path d="M95,62 L255,52 L292,98 L278,178 L228,222 L178,228 L128,202 L92,158 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M172,258 L272,246 L308,288 L292,378 L242,414 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M375,56 L528,48 L562,92 L542,152 L488,178 L428,172 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M442,192 L618,185 L668,238 L658,368 L578,418 L488,398 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M578,52 L918,42 L968,118 L938,238 L838,278 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <path d="M848,302 L978,295 L1002,338 L968,392 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+        <!-- Continent labels -->
+        <text x="182" y="38" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">NORTH AMERICA</text>
+        <text x="240" y="298" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">SOUTH AMERICA</text>
+        <text x="468" y="36" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">EUROPE</text>
+        <text x="556" y="295" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">AFRICA</text>
+        <text x="790" y="36" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">ASIA</text>
+        <text x="918" y="352" font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(255,255,255,.1)" text-anchor="middle" letter-spacing="2">OCEANIA</text>
+        <!-- North America -->
+        <circle cx="182" cy="142" r="6" fill="#C1121F" opacity=".9"><animate attributeName="r" values="6;9;6" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="162" cy="158" r="4" fill="#C1121F" opacity=".6"><animate attributeName="r" values="4;6;4" dur="2.6s" repeatCount="indefinite" begin=".5s"/></circle>
+        <circle cx="208" cy="132" r="3" fill="#C1121F" opacity=".55"><animate attributeName="r" values="3;5;3" dur="3.8s" repeatCount="indefinite" begin="1.1s"/></circle>
+        <!-- South America -->
+        <circle cx="232" cy="318" r="5" fill="#C1121F" opacity=".75"><animate attributeName="r" values="5;7;5" dur="3.2s" repeatCount="indefinite" begin=".8s"/></circle>
+        <circle cx="215" cy="342" r="3" fill="#C1121F" opacity=".5"><animate attributeName="r" values="3;4;3" dur="4.2s" repeatCount="indefinite" begin="1.4s"/></circle>
+        <!-- Europe -->
+        <circle cx="452" cy="108" r="5" fill="#C1121F" opacity=".85"><animate attributeName="r" values="5;8;5" dur="2.8s" repeatCount="indefinite" begin=".3s"/></circle>
+        <circle cx="488" cy="122" r="4" fill="#C1121F" opacity=".62"><animate attributeName="r" values="4;6;4" dur="3.4s" repeatCount="indefinite" begin=".9s"/></circle>
+        <circle cx="518" cy="105" r="3" fill="#C1121F" opacity=".5"><animate attributeName="r" values="3;5;3" dur="4.1s" repeatCount="indefinite" begin="1.2s"/></circle>
+        <!-- Africa — biggest cluster -->
+        <circle cx="556" cy="252" r="8" fill="#C1121F" opacity="1"><animate attributeName="r" values="8;12;8" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="575" cy="268" r="6" fill="#C1121F" opacity=".78"><animate attributeName="r" values="6;9;6" dur="3s" repeatCount="indefinite" begin=".4s"/></circle>
+        <circle cx="535" cy="258" r="5" fill="#C1121F" opacity=".68"><animate attributeName="r" values="5;7;5" dur="3.5s" repeatCount="indefinite" begin=".7s"/></circle>
+        <circle cx="565" cy="288" r="4" fill="#C1121F" opacity=".6"><animate attributeName="r" values="4;6;4" dur="4s" repeatCount="indefinite" begin="1s"/></circle>
+        <circle cx="592" cy="308" r="4" fill="#C1121F" opacity=".55"><animate attributeName="r" values="4;5;4" dur="3.2s" repeatCount="indefinite" begin="1.3s"/></circle>
+        <circle cx="545" cy="338" r="3" fill="#C1121F" opacity=".48"><animate attributeName="r" values="3;5;3" dur="4s" repeatCount="indefinite" begin=".6s"/></circle>
+        <!-- Asia -->
+        <circle cx="798" cy="148" r="6" fill="#C1121F" opacity=".85"><animate attributeName="r" values="6;9;6" dur="3.1s" repeatCount="indefinite" begin="1s"/></circle>
+        <circle cx="838" cy="168" r="5" fill="#C1121F" opacity=".72"><animate attributeName="r" values="5;7;5" dur="2.8s" repeatCount="indefinite" begin=".5s"/></circle>
+        <circle cx="872" cy="152" r="4" fill="#C1121F" opacity=".65"><animate attributeName="r" values="4;6;4" dur="3.5s" repeatCount="indefinite" begin=".9s"/></circle>
+        <circle cx="768" cy="172" r="4" fill="#C1121F" opacity=".58"><animate attributeName="r" values="4;6;4" dur="4s" repeatCount="indefinite" begin="1.4s"/></circle>
+        <circle cx="748" cy="138" r="3" fill="#C1121F" opacity=".48"><animate attributeName="r" values="3;5;3" dur="3.8s" repeatCount="indefinite" begin=".8s"/></circle>
+        <!-- Oceania -->
+        <circle cx="928" cy="342" r="5" fill="#C1121F" opacity=".72"><animate attributeName="r" values="5;7;5" dur="3.3s" repeatCount="indefinite" begin=".9s"/></circle>
+        <circle cx="908" cy="358" r="3" fill="#C1121F" opacity=".5"><animate attributeName="r" values="3;5;3" dur="4s" repeatCount="indefinite" begin="1.2s"/></circle>
+        <circle cx="28" cy="458" r="5" fill="#C1121F"/>
+        <text x="40" y="462" font-family="IBM Plex Mono,monospace" font-size="9" fill="rgba(255,255,255,.28)">Documented case — anonymised · All continents affected</text>
+        <text x="1072" y="462" font-family="IBM Plex Mono,monospace" font-size="9" fill="rgba(193,18,31,.45)" text-anchor="end">OSB GLOBAL INDEX · LIVE</text>
       </svg>
-      
-      <h1 class="login-title">OSB Command</h1>
-      <p class="login-subtitle">Authorized Personnel Only</p>
-      
-      <input type="password" class="login-input" id="adminKey" placeholder="ENTER ACCESS KEY">
-      <p class="login-error" id="loginError">Invalid access key</p>
-      <button class="login-btn" onclick="authenticate()">Authenticate</button>
     </div>
-    
-    <div class="security-status">
-      <div class="status-dot"></div>
-      <span>System Secure</span>
+    <div class="map-btm">
+      <div class="cstat"><div class="cstat-n">N. America</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">S. America</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Europe</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Africa</div><div class="cstat-v">Hub</div></div>
+      <div class="cstat"><div class="cstat-n">Asia</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Oceania</div><div class="cstat-v">Active</div></div>
+      <div class="cstat"><div class="cstat-n">Global</div><div class="cstat-v">$42B+</div></div>
     </div>
   </div>
+</div>
 
-  <!-- Main Dashboard -->
-  <div id="dashboard">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <svg class="sidebar-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 5 L90 20 V50 C90 75 50 95 50 95 C50 95 10 75 10 50 V20 L50 5Z" 
-              fill="none" stroke="#dc2626" stroke-width="2"/>
-        <ellipse cx="50" cy="50" rx="15" ry="9" fill="none" stroke="#dc2626" stroke-width="1.5"/>
-        <circle cx="50" cy="50" r="5" fill="#dc2626"/>
-      </svg>
-      
-      <div class="nav-item active" data-section="overview" onclick="showSection('overview')">
-        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-        <span class="nav-label">Overview</span>
-      </div>
-      
-      <div class="nav-item" data-section="submissions" onclick="showSection('submissions')">
-        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-        <span class="nav-label">Submissions</span>
-        <span class="nav-badge" id="submissionsBadge">0</span>
-      </div>
-      
-      <div class="nav-item" data-section="community" onclick="showSection('community')">
-        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-        <span class="nav-label">Community</span>
-        <span class="nav-badge" id="communityBadge">0</span>
-      </div>
-      
-      <div class="nav-item" data-section="newsletter" onclick="showSection('newsletter')">
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <span class="nav-label">Newsletter</span>
-      </div>
-      
-      <div class="nav-item" data-section="messages" onclick="showSection('messages')">
-        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
-        <span class="nav-label">Messages</span>
-        <span class="nav-badge" id="messagesBadge">0</span>
-      </div>
-      
-      <div class="nav-item" data-section="global" onclick="showSection('global')">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-        <span class="nav-label">Global Index</span>
-      </div>
-    </nav>
+<div class="so" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="tl-hdr reveal">
+      <div class="lbl"><div class="lbl-line"></div><div class="lbl-text">Intervention Record</div></div>
+      <h2 class="hlg hb">OSB shows up.<br><em>Every time. On record.</em></h2>
+      <p class="bmd tdk" style="margin-top:1rem;max-width:540px;">Not case studies. A body of work.</p>
+      <div class="tl-nn">All cases referenced by IFN number only — no victim names, usernames or identifying details published by OSB.</div>
+    </div>
+    <div class="timeline reveal">
+      <div class="tli"><div class="tli-node">IFN<br>003</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">First Live Exit — Active Scam Exited in Real Time</div><div class="tli-desc">OSB intervened in an active scam on Quora. Subject exited the same day. Both R and E pillars at maximum. First documented live OSB exit intervention.</div><div class="tli-score">Outcome: Successful · R Score 5/5 · E Score 5/5</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>002</div><div class="tli-card"><div class="tli-date">2025 · Quora Platform</div><div class="tli-title">E Score 5 — Crisis Language with Zero Financial Loss</div><div class="tli-desc">Suicidal ideation language produced directly by scammer manipulation. No money lost at time of documentation. Established the E Pillar Independent Trigger in RSEI v2.0.</div><div class="tli-score">E Score: 5/5 · Zero financial loss · E Independent Trigger formalised</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>001</div><div class="tli-card"><div class="tli-date">13 March 2026 · Quora — Scam Watch Space</div><div class="tli-title">The Automated Bank Verification Exploit — First Global Documentation</div><div class="tli-desc">Subject called a real bank using a real number and received confirmation of a large balance — using stolen credentials supplied by the scammer. The victim's own verification became the trap. OSB documented this technique first globally. 1,234+ combined reach.</div><div class="tli-score">RSEI: 16/20 · ESI: 4/5 · First global documentation</div></div></div>
+      <div class="tli"><div class="tli-node">IFN<br>005</div><div class="tli-card"><div class="tli-date">March 2026 · Quora — John Dee</div><div class="tli-title">The Facade Bank Page — Staged Financial Interface</div><div class="tli-desc">A fake bank portal used to display fabricated wealth before any financial request was made. Distinct from IFN-001 — visual fabrication versus automated phone confirmation. First documented by OSB. 1,000+ views in 3 days.</div><div class="tli-score">S Score: 5/5 · Staged interface · New technique documented</div></div></div>
+    </div>
+  </div>
+</div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <header class="topbar">
-        <div class="topbar-left">
-          <h2 class="page-title" id="pageTitle">Overview</h2>
-          <div class="threat-indicator">Threat Monitor Active</div>
+<div class="sn" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="haven-grid">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">OSB Solace — Emotional Recovery</div></div>
+        <h2 class="hlg hw" style="margin-bottom:1.5rem;">You were not foolish.<br><em>You were targeted.</em></h2>
+        <p class="blg tw" style="margin-bottom:1rem;">Romance scammers exploit the best of you — your capacity to love, to trust, to hope. OSB Solace walks you through six stages of emotional recovery. At your pace. No judgment. No rush.</p>
+        <p class="bmd tmt" style="margin-bottom:2.5rem;">Designed with seniors in mind. Clear. Compassionate. The truth that what happened to you was not your fault.</p>
+        <a href="solace.html" class="btn-r">Enter OSB Solace</a>
+      </div>
+      <div class="haven-stages reveal d2">
+        <div class="hs"><div class="hs-n">01</div><div class="hs-t">Confusion and Disbelief</div></div>
+        <div class="hs"><div class="hs-n">02</div><div class="hs-t">Shame and Self-Blame</div></div>
+        <div class="hs"><div class="hs-n">03</div><div class="hs-t">Anger</div></div>
+        <div class="hs"><div class="hs-n">04</div><div class="hs-t">Grief</div></div>
+        <div class="hs"><div class="hs-n">05</div><div class="hs-t">Acceptance</div></div>
+        <div class="hs"><div class="hs-n">06</div><div class="hs-t">Reclamation</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sd" style="padding:7rem 3rem;">
+  <div class="si">
+    <div class="comm-grid">
+      <div class="reveal">
+        <div class="live-badge"><div class="live-dot"></div><div class="live-t">Live Intelligence Feed</div></div>
+        <h2 class="hlg hw" style="margin-bottom:1.5rem;">The intelligence community.<br><em>Join it.</em></h2>
+        <p class="bmd tw" style="margin-bottom:2.5rem;">Every OSB field note and intelligence brief — published here, permanently archived. Read without an account. Sign up to engage and receive briefings direct to your inbox.</p>
+        <div class="feed-list">
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-005</div><div><div class="fi-tag">S-Pillar · New</div><div class="fi-title">The Facade Bank Page — Staged Financial Interface</div><div class="fi-exc">First documented globally by OSB. 1,000+ views in 3 days.</div></div><div class="fi-stats"><span class="fstat">♥ 6</span><span class="fstat">◎ 1K+</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-001</div><div><div class="fi-tag">S-Pillar · Active</div><div class="fi-title">The Automated Bank Verification Exploit</div><div class="fi-exc">Defeats "verify independently." The victim's own action became the trap.</div></div><div class="fi-stats"><span class="fstat">♥ 8</span><span class="fstat">◎ 1,234</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-002</div><div><div class="fi-tag">E-Pillar · E Score 5</div><div class="fi-title">The Suicidal Ideation Script — Zero Financial Loss</div><div class="fi-exc">Established the E Pillar Independent Trigger. Emotional harm is real harm.</div></div><div class="fi-stats"><span class="fstat">♥ 12</span><span class="fstat">◎ 890</span></div></div>
+          <div class="fi" onclick="location.href='intelligence.html'"><div class="fi-num">IFN-004</div><div><div class="fi-tag">I-Pillar · $28,000</div><div class="fi-title">$28,000 Over 3 Years — The Slow-Burn Pattern</div><div class="fi-exc">Low velocity. High duration. Maximum damage.</div></div><div class="fi-stats"><span class="fstat">♥ 24</span><span class="fstat">◎ 3,400</span></div></div>
         </div>
-        <div class="topbar-right">
-          <span class="system-time" id="systemTime">00:00:00 UTC</span>
-          <div class="admin-badge">Administrator</div>
+        <div style="margin-top:2rem;">
+          <a href="community.html" class="btn-r" style="font-size:10px;letter-spacing:2px;">Join the Community</a>
         </div>
-      </header>
-
-      <!-- Content Area -->
-      <div class="content-area">
-        <!-- Overview Section -->
-        <section id="overview" class="section active">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <span class="stat-ghost">S</span>
-              <div class="stat-label">Total Submissions</div>
-              <div class="stat-value" id="totalSubmissions">--</div>
-              <div class="stat-change positive">
-                <span>+12%</span> from last week
-              </div>
-            </div>
-            <div class="stat-card">
-              <span class="stat-ghost">U</span>
-              <div class="stat-label">Active Users</div>
-              <div class="stat-value" id="activeUsers">--</div>
-              <div class="stat-change positive">
-                <span>+8%</span> from last week
-              </div>
-            </div>
-            <div class="stat-card">
-              <span class="stat-ghost">P</span>
-              <div class="stat-label">Pending Review</div>
-              <div class="stat-value" id="pendingReview">--</div>
-              <div class="stat-change negative">
-                <span>Requires attention</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <span class="stat-ghost">G</span>
-              <div class="stat-label">Global Score</div>
-              <div class="stat-value" id="globalScore">--</div>
-              <div class="stat-change positive">
-                <span>Stable</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="alert-strip" id="alertStrip" style="display: none;">
-            <svg class="alert-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-            <span class="alert-text" id="alertText"></span>
-          </div>
-
-          <div class="charts-row">
-            <div class="chart-card">
-              <div class="chart-header">
-                <h3 class="chart-title">Submissions by Continent</h3>
-              </div>
-              <div class="chart-canvas" id="continentChart">
-                <div class="loading">Loading data...</div>
-              </div>
-            </div>
-            <div class="chart-card">
-              <div class="chart-header">
-                <h3 class="chart-title">Platform Distribution</h3>
-              </div>
-              <div class="chart-canvas" id="platformChart">
-                <div class="loading">Loading data...</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Submissions Section -->
-        <section id="submissions" class="section">
-          <div class="table-card">
-            <div class="table-header">
-              <h3 class="table-title">All Submissions</h3>
-              <div class="table-actions">
-                <button class="table-btn" onclick="exportSubmissions()">Export CSV</button>
-                <button class="table-btn primary" onclick="refreshSubmissions()">Refresh</button>
-              </div>
-            </div>
-            <div id="submissionsTable">
-              <div class="loading">Loading submissions...</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Community Section -->
-        <section id="community" class="section">
-          <div class="table-card">
-            <div class="table-header">
-              <h3 class="table-title">Moderation Queue</h3>
-              <div class="table-actions">
-                <button class="table-btn primary" onclick="refreshCommunity()">Refresh</button>
-              </div>
-            </div>
-            <div id="communityTable">
-              <div class="loading">Loading posts...</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section id="newsletter" class="section">
-          <div class="composer-area">
-            <div class="form-group">
-              <label class="form-label">Subject Line</label>
-              <input type="text" class="form-input" id="nlSubject" placeholder="Enter newsletter subject...">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Message Content</label>
-              <textarea class="form-textarea" id="nlContent" placeholder="Compose your newsletter message..."></textarea>
-            </div>
-            <div class="composer-footer">
-              <span class="subscriber-count"><span id="subscriberCount">--</span> active subscribers</span>
-              <button class="table-btn primary" onclick="sendNewsletter()">Send Newsletter</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- Messages Section -->
-        <section id="messages" class="section">
-          <div class="message-list" id="messageList">
-            <div class="loading">Loading messages...</div>
-          </div>
-        </section>
-
-        <!-- Global Index Section -->
-        <section id="global" class="section">
-          <div class="table-card">
-            <div class="table-header">
-              <h3 class="table-title">Global Threat Index</h3>
-              <div class="table-actions">
-                <button class="table-btn primary" onclick="refreshGlobal()">Refresh Data</button>
-              </div>
-            </div>
-            <div id="globalTable">
-              <div class="loading">Loading global index...</div>
-            </div>
-          </div>
-        </section>
       </div>
-    </main>
-
-    <!-- Threat Ticker -->
-    <div class="threat-ticker">
-      <div class="ticker-label">Intel Feed</div>
-      <div class="ticker-content">
-        <div class="ticker-scroll" id="tickerScroll">
-          <span class="ticker-item">New submission from Finland - Platform: Instagram</span>
-          <span class="ticker-item">Threat level elevated in APAC region</span>
-          <span class="ticker-item">Community post approved - User ID: 8472</span>
-          <span class="ticker-item">New subscriber from Germany</span>
-          <span class="ticker-item">RSEI score updated - North America</span>
-          <span class="ticker-item">System backup completed successfully</span>
-          <span class="ticker-item">New submission from Brazil - Platform: TikTok</span>
-          <span class="ticker-item">Moderation queue cleared</span>
-          <!-- Duplicate for seamless loop -->
-          <span class="ticker-item">New submission from Finland - Platform: Instagram</span>
-          <span class="ticker-item">Threat level elevated in APAC region</span>
-          <span class="ticker-item">Community post approved - User ID: 8472</span>
-          <span class="ticker-item">New subscriber from Germany</span>
-          <span class="ticker-item">RSEI score updated - North America</span>
-          <span class="ticker-item">System backup completed successfully</span>
-          <span class="ticker-item">New submission from Brazil - Platform: TikTok</span>
-          <span class="ticker-item">Moderation queue cleared</span>
+      <div class="comm-sidebar reveal d2">
+        <div class="signup-card">
+          <div class="sc2-t">Create Your Account</div>
+          <div class="sc2-s">No real name required or displayed. Comment and engage once your account reaches trust level 1.</div>
+          <input type="text" class="finp" placeholder="Choose a username" id="cu">
+          <input type="email" class="finp" placeholder="your@email.com" id="ce">
+          <button class="fbtn" onclick="joinCom()">Create Account — Free</button>
+          <div class="fnote">By joining you agree to our <a href="privacy.html" style="color:rgba(255,255,255,.4);">Privacy Policy</a> (OSB/LEGAL/PP/001/2026) &amp; <a href="cookies.html" style="color:rgba(255,255,255,.4);">Cookie Policy</a>. Your username and email are collected solely for account creation. No personal data sold. Deletion available on request.</div>
+          <div id="jmsg" style="display:none;margin-top:.75rem;font-size:.8rem;"></div>
+        </div>
+        <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;margin-bottom:1.125rem;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:1rem;">Intelligence Briefings</div>
+          <p style="font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.7;margin-bottom:1.125rem;">Every new OSB publication delivered directly. No algorithm. Your list. Forever.</p>
+          <input type="email" class="finp" placeholder="your@email.com" id="nle">
+          <button class="fbtn" style="background:rgba(255,255,255,.07);" onmouseover="this.style.background='var(--r)'" onmouseout="this.style.background='rgba(255,255,255,.07)'" onclick="nlSub()">Subscribe Free</button>
+          <div id="nlmsg" style="display:none;margin-top:.625rem;font-size:.78rem;"></div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.625rem;line-height:1.6;">By subscribing you agree to our <a href="privacy.html" style="color:rgba(255,255,255,.38);text-decoration:underline;">Privacy Policy</a> (OSB/LEGAL/PP/001/2026) &amp; <a href="cookies.html" style="color:rgba(255,255,255,.38);text-decoration:underline;">Cookie Policy</a>. We use your email only to send OSB intelligence briefings. You can unsubscribe at any time. No personal data sold.</div>
+        </div>
+        <div class="cs-grid">
+          <div class="cs-box"><span class="cs-n" data-target="5">0</span><div class="cs-l">Field Notes</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="847">0</span><div class="cs-l">Assessments</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="7634">0</span><div class="cs-l">Total Views</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="63">0</span><div class="cs-l">Engagements</div></div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Message Modal -->
-  <div class="modal-overlay" id="messageModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 class="modal-title">Message Details</h3>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
+<div class="mission-strip">
+  <div style="max-width:820px;margin:0 auto;" class="reveal">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3.5rem);font-weight:600;color:var(--w);line-height:1.1;font-style:italic;margin-bottom:1.25rem;">"Clarity is not defeat. It is the first step to freedom."</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:2px;text-transform:uppercase;">— John Dee · Founder, OSB · RSEI Model™</div>
+  </div>
+</div>
+
+<footer>
+  <div class="fg">
+    <div>
+      <div class="flogo"><img src="logo.png" alt="OSB"></div>
+      <p class="fdesc">OSB is the world's first behavioural threat intelligence organisation. We built the RSEI Model™ — the only detection system purpose-built for social engineering fraud. Operational since 2021.</p>
+    </div>
+    <div>
+      <div class="fcol-t">Navigate</div>
+      <div class="flinks">
+        <a href="index.html">Home</a><a href="about.html">About OSB</a>
+        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">SCORE</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report</a>
+        <a href="intelligence.html">Intelligence</a><a href="solace.html">Solace</a>
+        <a href="community.html">Community</a><a href="contact.html">Contact</a>
       </div>
-      <div class="modal-body" id="modalBody">
-        <!-- Dynamic content -->
+    </div>
+    <div>
+      <div class="fcol-t">Intelligence</div>
+      <div class="flinks">
+        <a href="rsei-model.html">RSEI Model™ v2.0</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report 2026</a>
+        <a href="intelligence.html">IFN Case Library</a>
+        <a href="score.html">Scoring Tool</a>
+        <a href="solace.html">Solace Guide™</a>
+        <a href="contact.html">Analyst Certification (Coming)</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Field Notes</div>
+      <div class="flinks">
+        <a href="intelligence.html">IFN-005 · Facade Bank Page</a>
+        <a href="intelligence.html">IFN-001 · Bank Exploit</a>
+        <a href="intelligence.html">IFN-002 · E Score 5</a>
+        <a href="intelligence.html">IFN-003 · Live Exit</a>
+        <a href="intelligence.html">IFN-004 · $28K Case</a>
+        <a href="contact.html">Submit a Case</a>
       </div>
     </div>
   </div>
+  <div class="fbot">
+    <div class="fquote" id="fq"></div>
+    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved<a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a><a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a></div>
+  </div>
+</footer>
+<script>
+var QQ = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — OSB', '"The feelings were real. The person was not." — OSB Solace', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™', '"She called the bank herself. She was still being set up." — IFN-001 · OSB', '"Romance fraud has a name. It has a score. Only one organisation built both." — OSB'];
+function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
+function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mob'),h=document.querySelector('.nav-ham');
+  if(m&&h&&!m.contains(e.target)&&!h.contains(e.target))m.style.display='none';
+});
+var ro=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});
+},{threshold:.08});
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  var fq=document.getElementById('fq');
+  if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];
+});
+window.addEventListener('scroll',function(){
+  var n=document.getElementById('nav');
+  if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';
+});
+</script>
+<script>
+function animNum(el){
+  var t=parseInt(el.dataset.target),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',cur=0,step=t/60;
+  var tm=setInterval(function(){cur=Math.min(cur+step,t);var v=t>=1000?Math.round(cur).toLocaleString():Math.round(cur);el.textContent=pre+v+suf;if(cur>=t)clearInterval(tm);},33);
+}
+var cObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){document.querySelectorAll('[data-target]').forEach(animNum);cObs.disconnect();}},{threshold:.2});
+var bObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){setTimeout(function(){var f=document.getElementById('sc-fill');if(f)f.style.width='80%';},400);bObs.disconnect();}},{threshold:.5});
+window.addEventListener('DOMContentLoaded',function(){
+  var sb=document.querySelector('.stat-band');if(sb)cObs.observe(sb);
+  var sf=document.getElementById('sc-fill');if(sf)bObs.observe(sf);
+  var ccObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){document.querySelectorAll('.cs-n[data-target]').forEach(animNum);ccObs.disconnect();}},{threshold:.3});
+  var cg=document.querySelector('.cs-grid');if(cg)ccObs.observe(cg);
+});
+function joinCom(){
+  var u=document.getElementById('cu').value,e=document.getElementById('ce').value;
+  var msg=document.getElementById('jmsg');
+  if(!u||!e){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Please enter a username and email.';return;}
+  fetch('https://formspree.io/f/maqpazko',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'community-signup',username:u,email:e})})
+  .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Registration received — check your email.':'Something went wrong.';});
+}
+function nlSub(){
+  var e=document.getElementById('nle').value;var msg=document.getElementById('nlmsg');if(!e)return;
+  fetch('https://formspree.io/f/maqpazko',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'newsletter',email:e})})
+  .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Subscribed — check your email.':'Something went wrong.';});
+}
+</script>
 
-  <script>
-    // Configuration
-    const API_BASE = 'https://osb-backend-production.up.railway.app';
-    const ADMIN_KEY = 'OSB-ADMIN-2026-SENTINEL';
-    
-    // State
-    let currentSection = 'overview';
-    let stats = {};
-    let submissions = [];
-    let posts = [];
-    let messages = [];
-    let subscribers = [];
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      updateSystemTime();
-      setInterval(updateSystemTime, 1000);
-      
-      // Check for saved session
-      if (sessionStorage.getItem('osbAuthenticated') === 'true') {
-        showDashboard();
-      }
-    });
-
-    // System Time
-    function updateSystemTime() {
-      const now = new Date();
-      const utc = now.toISOString().split('T')[1].split('.')[0];
-      document.getElementById('systemTime').textContent = utc + ' UTC';
-    }
-
-    // Authentication
-    function authenticate() {
-      const key = document.getElementById('adminKey').value.trim();
-      const errorEl = document.getElementById('loginError');
-      
-      if (key === ADMIN_KEY) {
-        sessionStorage.setItem('osbAuthenticated', 'true');
-        showDashboard();
-      } else {
-        errorEl.classList.add('show');
-        setTimeout(() => errorEl.classList.remove('show'), 3000);
-      }
-    }
-
-    // Enter key on login
-    document.getElementById('adminKey')?.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') authenticate();
-    });
-
-    function showDashboard() {
-      document.getElementById('loginScreen').classList.add('hidden');
-      document.getElementById('dashboard').classList.add('active');
-      loadOverviewData();
-    }
-
-    // Navigation
-    function showSection(section) {
-      // Update nav
-      document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-        if (item.dataset.section === section) {
-          item.classList.add('active');
-        }
-      });
-      
-      // Update content
-      document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('active');
-      });
-      document.getElementById(section).classList.add('active');
-      
-      // Update title
-      const titles = {
-        overview: 'Overview',
-        submissions: 'Submissions',
-        community: 'Community Room',
-        newsletter: 'Newsletter',
-        messages: 'Messages',
-        global: 'Global Index'
-      };
-      document.getElementById('pageTitle').textContent = titles[section];
-      
-      // Load section data
-      switch(section) {
-        case 'overview':
-          loadOverviewData();
-          break;
-        case 'submissions':
-          loadSubmissions();
-          break;
-        case 'community':
-          loadCommunity();
-          break;
-        case 'newsletter':
-          loadSubscribers();
-          break;
-        case 'messages':
-          loadMessages();
-          break;
-        case 'global':
-          loadGlobalIndex();
-          break;
-      }
-    }
-
-    // API Helper
-    async function apiCall(endpoint, options = {}) {
-      const url = `${API_BASE}${endpoint}`;
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-key': ADMIN_KEY,
-          ...options.headers
-        },
-        ...options
-      };
-      
-      try {
-        const response = await fetch(url, config);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return await response.json();
-      } catch (error) {
-        console.error('API Error:', error);
-        return null;
-      }
-    }
-
-    // Load Overview Data
-    async function loadOverviewData() {
-      const data = await apiCall('/api/admin/stats');
-      if (!data) {
-        // Use mock data if API fails
-        updateStats({
-          totalSubmissions: 247,
-          activeUsers: 89,
-          pendingReview: 12,
-          globalScore: 73.4
-        });
-        renderContinentChart([
-          { label: 'NA', value: 45 },
-          { label: 'EU', value: 38 },
-          { label: 'AS', value: 52 },
-          { label: 'SA', value: 23 },
-          { label: 'AF', value: 18 },
-          { label: 'OC', value: 15 }
-        ]);
-        renderPlatformChart([
-          { label: 'IG', value: 85 },
-          { label: 'TT', value: 72 },
-          { label: 'X', value: 45 },
-          { label: 'FB', value: 38 },
-          { label: 'YT', value: 52 }
-        ]);
-        return;
-      }
-      
-      updateStats(data);
-      renderContinentChart(data.continents);
-      renderPlatformChart(data.platforms);
-      
-      if (data.alerts && data.alerts.length > 0) {
-        showAlert(data.alerts[0]);
-      }
-    }
-
-    function updateStats(data) {
-      document.getElementById('totalSubmissions').textContent = data.totalSubmissions || 0;
-      document.getElementById('activeUsers').textContent = data.activeUsers || 0;
-      document.getElementById('pendingReview').textContent = data.pendingReview || 0;
-      document.getElementById('globalScore').textContent = data.globalScore || 0;
-    }
-
-    function showAlert(alert) {
-      const strip = document.getElementById('alertStrip');
-      const text = document.getElementById('alertText');
-      text.innerHTML = `<strong>${alert.type}:</strong> ${alert.message}`;
-      strip.style.display = 'flex';
-    }
-
-    function renderContinentChart(data) {
-      const container = document.getElementById('continentChart');
-      const max = Math.max(...data.map(d => d.value));
-      
-      container.innerHTML = data.map(item => `
-        <div class="bar-item">
-          <div class="bar" style="height: ${(item.value / max * 150)}px;"></div>
-          <span class="bar-label">${item.label}</span>
-        </div>
-      `).join('');
-    }
-
-    function renderPlatformChart(data) {
-      const container = document.getElementById('platformChart');
-      const max = Math.max(...data.map(d => d.value));
-      
-      container.innerHTML = data.map(item => `
-        <div class="bar-item">
-          <div class="bar" style="height: ${(item.value / max * 150)}px;"></div>
-          <span class="bar-label">${item.label}</span>
-        </div>
-      `).join('');
-    }
-
-    // Load Submissions
-    async function loadSubmissions() {
-      const data = await apiCall('/api/submissions');
-      const container = document.getElementById('submissionsTable');
-      
-      if (!data || !data.length) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            <p>No submissions found</p>
-          </div>
-        `;
-        return;
-      }
-      
-      submissions = data;
-      renderSubmissionsTable();
-    }
-
-    function renderSubmissionsTable() {
-      const container = document.getElementById('submissionsTable');
-      container.innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Platform</th>
-              <th>Country</th>
-              <th>Tier</th>
-              <th>Score</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${submissions.map(sub => `
-              <tr>
-                <td>#${sub.id}</td>
-                <td>${sub.platform}</td>
-                <td>${sub.country}</td>
-                <td><span class="tier-badge tier-${sub.tier.toLowerCase()}">${sub.tier}</span></td>
-                <td>${sub.score}</td>
-                <td>${new Date(sub.created_at).toLocaleDateString()}</td>
-                <td>
-                  <div class="action-btns">
-                    <button class="action-btn" onclick="viewSubmission(${sub.id})" title="View">
-                      <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-    }
-
-    function refreshSubmissions() {
-      loadSubmissions();
-    }
-
-    function exportSubmissions() {
-      if (!submissions.length) return;
-      
-      const csv = [
-        ['ID', 'Platform', 'Country', 'Tier', 'Score', 'Date'].join(','),
-        ...submissions.map(s => [s.id, s.platform, s.country, s.tier, s.score, s.created_at].join(','))
-      ].join('\n');
-      
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `submissions_${new Date().toISOString().split('T')[0]}.csv`;
-      a.click();
-    }
-
-    function viewSubmission(id) {
-      const sub = submissions.find(s => s.id === id);
-      if (!sub) return;
-      
-      showModal(`
-        <div class="modal-field">
-          <div class="modal-label">Submission ID</div>
-          <div class="modal-value">#${sub.id}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Platform</div>
-          <div class="modal-value">${sub.platform}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Country</div>
-          <div class="modal-value">${sub.country}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Threat Tier</div>
-          <div class="modal-value"><span class="tier-badge tier-${sub.tier.toLowerCase()}">${sub.tier}</span></div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">RSEI Score</div>
-          <div class="modal-value">${sub.score}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Submitted</div>
-          <div class="modal-value">${new Date(sub.created_at).toLocaleString()}</div>
-        </div>
-      `);
-    }
-
-    // Load Community
-    async function loadCommunity() {
-      const data = await apiCall('/api/admin/posts');
-      const container = document.getElementById('communityTable');
-      
-      if (!data || !data.length) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-            <p>No pending posts in moderation queue</p>
-          </div>
-        `;
-        document.getElementById('communityBadge').textContent = '0';
-        return;
-      }
-      
-      posts = data;
-      document.getElementById('communityBadge').textContent = data.filter(p => !p.approved).length;
-      renderCommunityTable();
-    }
-
-    function renderCommunityTable() {
-      const container = document.getElementById('communityTable');
-      container.innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Author</th>
-              <th>Content</th>
-              <th>Pillar</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${posts.map(post => `
-              <tr>
-                <td>${post.author}</td>
-                <td>${post.content.substring(0, 60)}${post.content.length > 60 ? '...' : ''}</td>
-                <td>${post.pillar}</td>
-                <td>${post.approved ? '<span style="color: var(--osb-green)">Approved</span>' : '<span style="color: var(--osb-amber)">Pending</span>'}</td>
-                <td>
-                  <div class="action-btns">
-                    ${!post.approved ? `
-                      <button class="action-btn approve" onclick="approvePost(${post.id})" title="Approve">
-                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                      </button>
-                    ` : ''}
-                    <button class="action-btn" onclick="deletePost(${post.id})" title="Delete">
-                      <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-    }
-
-    async function approvePost(id) {
-      const result = await apiCall(`/api/admin/posts/${id}/approve`, { method: 'POST' });
-      if (result) {
-        loadCommunity();
-      }
-    }
-
-    async function deletePost(id) {
-      if (!confirm('Delete this post permanently?')) return;
-      const result = await apiCall(`/api/admin/posts/${id}`, { method: 'DELETE' });
-      if (result) {
-        loadCommunity();
-      }
-    }
-
-    function refreshCommunity() {
-      loadCommunity();
-    }
-
-    // Load Subscribers
-    async function loadSubscribers() {
-      const data = await apiCall('/api/admin/subscribers');
-      const count = data ? data.length : 0;
-      document.getElementById('subscriberCount').textContent = count;
-    }
-
-    // Send Newsletter
-    async function sendNewsletter() {
-      const subject = document.getElementById('nlSubject').value.trim();
-      const content = document.getElementById('nlContent').value.trim();
-      
-      if (!subject || !content) {
-        alert('Please fill in both subject and content');
-        return;
-      }
-      
-      const result = await apiCall('/api/admin/newsletter/send', {
-        method: 'POST',
-        body: JSON.stringify({ subject, content })
-      });
-      
-      if (result) {
-        alert('Newsletter queued for sending');
-        document.getElementById('nlSubject').value = '';
-        document.getElementById('nlContent').value = '';
-      } else {
-        alert('Failed to send newsletter. Check Brevo API configuration.');
-      }
-    }
-
-    // Load Messages
-    async function loadMessages() {
-      const data = await apiCall('/api/admin/messages');
-      const container = document.getElementById('messageList');
-      
-      if (!data || !data.length) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
-            <p>No messages</p>
-          </div>
-        `;
-        document.getElementById('messagesBadge').textContent = '0';
-        return;
-      }
-      
-      messages = data;
-      const unread = data.filter(m => !m.read).length;
-      document.getElementById('messagesBadge').textContent = unread;
-      
-      container.innerHTML = data.map(msg => `
-        <div class="message-item ${msg.read ? '' : 'unread'}" onclick="viewMessage(${msg.id})">
-          <div class="message-header">
-            <span class="message-sender">${msg.name}</span>
-            <span class="message-time">${new Date(msg.created_at).toLocaleDateString()}</span>
-          </div>
-          <div class="message-subject">${msg.subject}</div>
-          <div class="message-preview">${msg.message.substring(0, 100)}${msg.message.length > 100 ? '...' : ''}</div>
-        </div>
-      `).join('');
-    }
-
-    async function viewMessage(id) {
-      const msg = messages.find(m => m.id === id);
-      if (!msg) return;
-      
-      // Mark as read
-      if (!msg.read) {
-        await apiCall(`/api/admin/messages/${id}/read`, { method: 'POST' });
-        loadMessages();
-      }
-      
-      showModal(`
-        <div class="modal-field">
-          <div class="modal-label">From</div>
-          <div class="modal-value">${msg.name} &lt;${msg.email}&gt;</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Subject</div>
-          <div class="modal-value">${msg.subject}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Received</div>
-          <div class="modal-value">${new Date(msg.created_at).toLocaleString()}</div>
-        </div>
-        <div class="modal-field">
-          <div class="modal-label">Message</div>
-          <div class="modal-value" style="white-space: pre-wrap; background: var(--osb-darker); padding: 15px; margin-top: 10px;">${msg.message}</div>
-        </div>
-      `);
-    }
-
-    // Load Global Index
-    async function loadGlobalIndex() {
-      const data = await apiCall('/api/submissions');
-      const container = document.getElementById('globalTable');
-      
-      if (!data || !data.length) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-            <p>No data available</p>
-          </div>
-        `;
-        return;
-      }
-      
-      // Aggregate by country
-      const byCountry = {};
-      data.forEach(sub => {
-        if (!byCountry[sub.country]) {
-          byCountry[sub.country] = { count: 0, totalScore: 0 };
-        }
-        byCountry[sub.country].count++;
-        byCountry[sub.country].totalScore += sub.score;
-      });
-      
-      const countries = Object.entries(byCountry)
-        .map(([country, data]) => ({
-          country,
-          submissions: data.count,
-          avgScore: (data.totalScore / data.count).toFixed(1)
-        }))
-        .sort((a, b) => b.avgScore - a.avgScore);
-      
-      container.innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Country</th>
-              <th>Submissions</th>
-              <th>Avg RSEI Score</th>
-              <th>Threat Level</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${countries.map((c, i) => {
-              const tier = c.avgScore >= 80 ? 'critical' : c.avgScore >= 60 ? 'high' : 'low';
-              return `
-                <tr>
-                  <td>#${i + 1}</td>
-                  <td>${c.country}</td>
-                  <td>${c.submissions}</td>
-                  <td>${c.avgScore}</td>
-                  <td><span class="tier-badge tier-${tier}">${tier.toUpperCase()}</span></td>
-                </tr>
-              `;
-            }).join('')}
-          </tbody>
-        </table>
-      `;
-    }
-
-    function refreshGlobal() {
-      loadGlobalIndex();
-    }
-
-    // Modal
-    function showModal(content) {
-      document.getElementById('modalBody').innerHTML = content;
-      document.getElementById('messageModal').classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('messageModal').classList.remove('active');
-    }
-
-    // Close modal on overlay click
-    document.getElementById('messageModal')?.addEventListener('click', (e) => {
-      if (e.target.id === 'messageModal') closeModal();
-    });
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-  </script>
+<!-- COOKIE CONSENT BANNER -->
+<div id="osb-cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(6,6,8,.98);border-top:2px solid rgba(193,18,31,.4);backdrop-filter:blur(24px);padding:1.25rem 2rem;box-shadow:0 -4px 32px rgba(0,0,0,.5);">
+  <div style="max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#C1121F;margin-bottom:.5rem;">OSB/LEGAL/CP/001/2026</div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.65;">OSB uses essential cookies to operate this site and functional cookies to improve your experience. We do not use advertising or tracking cookies. <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a> &nbsp;·&nbsp; <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a></p>
+    </div>
+    <div style="display:flex;gap:.75rem;flex-shrink:0;flex-wrap:wrap;">
+      <button onclick="osbAcceptCookies()" style="background:#C1121F;color:#fff;border:none;padding:10px 24px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#d01020'" onmouseout="this.style.background='#C1121F'">Accept All</button>
+      <button onclick="osbEssentialOnly()" style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:9px 20px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='rgba(193,18,31,.5)';this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.5)'">Essential Only</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var consent = localStorage.getItem('osb-cookie-consent');
+  if(!consent){
+    var b = document.getElementById('osb-cookie-banner');
+    if(b) b.style.display = 'block';
+  }
+})();
+function osbAcceptCookies(){
+  localStorage.setItem('osb-cookie-consent','accepted');
+  var b = document.getElementById('osb-cookie-banner');
+  if(b){ b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
+}
+function osbEssentialOnly(){
+  localStorage.setItem('osb-cookie-consent','essential');
+  var b = document.getElementById('osb-cookie-banner');
+  if(b){ b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
+}
+</script>
+<!-- END COOKIE CONSENT BANNER -->
 </body>
 </html>
