@@ -656,198 +656,459 @@ select.email-input { cursor: pointer; }
   border-radius: 4px;
 }
 
-/* ── OSB REPORT CARD (download target) ── */
+/* ══════════════════════════════════════════════════════════
+   OSB FORMAL INTELLIGENCE REPORT — Law Enforcement Grade
+   ══════════════════════════════════════════════════════════ */
 #osb-report-card {
   background: #07070E;
-  border: 1px solid rgba(192,39,45,.35);
-  padding: 2rem 2.25rem 1.75rem;
-  margin: 2rem 0 1rem;
+  width: 820px;
+  margin: 2rem auto 1rem;
   font-family: 'Syne', sans-serif;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 80px rgba(192,39,45,.2), 0 0 0 1px rgba(192,39,45,.25);
 }
+
+/* Vertical red accent bar on left edge */
 #osb-report-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: #C0272D;
-}
-.rc-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #C0272D 0%, rgba(192,39,45,.3) 100%);
 }
 
-.rc-org {
+/* Classification banner */
+.rc-class-banner {
+  background: linear-gradient(90deg, #8b0000 0%, #C0272D 40%, #8b0000 100%);
+  text-align: center;
+  padding: 7px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #fff;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+
+/* Document header — full-width logo panel */
+.rc-doc-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(192,39,45,.3);
+}
+.rc-doc-logo-panel {
+  background: linear-gradient(135deg, rgba(192,39,45,.14) 0%, rgba(192,39,45,.05) 100%);
+  padding: 1rem;
+  border-right: 1px solid rgba(192,39,45,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+  max-width: 260px;
+}
+.rc-doc-logo-img {
+  height: 76px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(192,39,45,.5)) drop-shadow(0 2px 4px rgba(0,0,0,.6));
+}
+.rc-doc-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+}
+.rc-doc-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.rc-doc-title {
   font-family: 'Syne', sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #fff;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  line-height: 1.2;
 }
-.rc-sub {
+.rc-doc-subtitle {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .6rem;
-  color: rgba(255,255,255,.35);
-  letter-spacing: 1.5px;
+  font-size: .68rem;
+  color: rgba(255,255,255,.3);
+  letter-spacing: 2px;
   text-transform: uppercase;
-  margin-top: 3px;
+  margin-top: 5px;
 }
-.rc-ref {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .6rem;
-  color: #C0272D;
-  letter-spacing: 1.5px;
+.rc-doc-meta {
   text-align: right;
 }
-.rc-score-block {
+.rc-doc-ref {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .78rem;
+  color: #C0272D;
+  letter-spacing: 1.5px;
+  margin-bottom: 3px;
+}
+.rc-doc-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: rgba(255,255,255,.25);
+  letter-spacing: 1px;
+}
+.rc-doc-footer-row {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,.04);
+  padding-top: .6rem;
+  margin-top: .5rem;
+}
+.rc-doc-agency {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: rgba(255,255,255,.15);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.rc-doc-model {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: rgba(192,39,45,.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Body padding wrapper */
+.rc-body {
+  padding: 1.5rem 2rem;
+}
+
+/* Section label */
+.rc-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #C0272D;
+  margin-bottom: .6rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.rc-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(192,39,45,.2);
+}
+
+/* Threat level block */
+.rc-threat-block {
+  display: flex;
+  align-items: stretch;
   gap: 1.25rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.rc-score-panel {
+  padding: 1.25rem 1.5rem;
+  border-right: 1px solid rgba(255,255,255,.06);
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .rc-score-big {
   font-family: 'Syne', sans-serif;
-  font-size: 5rem;
+  font-size: 5.5rem;
   font-weight: 800;
   line-height: 1;
   color: #C0272D;
 }
-.rc-score-meta {
-  padding-bottom: .5rem;
-}
-.rc-score-label {
+.rc-score-denom {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .6rem;
-  color: rgba(255,255,255,.3);
+  font-size: .75rem;
+  color: rgba(255,255,255,.2);
   letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: .25rem;
+  margin-top: 2px;
 }
-.rc-tier-pill {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .65rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border: 1px solid;
-  display: inline-block;
-}
-.rc-tier-low  { color: #639922; border-color: #639922; }
-.rc-tier-high { color: #BA7517; border-color: #BA7517; }
-.rc-tier-crit { color: #C0272D; border-color: #C0272D; }
-.rc-pillars {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: .75rem;
-  margin-bottom: 1.25rem;
-}
-.rc-pillar {
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.06);
-  padding: .75rem;
-  text-align: center;
-}
-.rc-pillar-id {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .55rem;
-  color: rgba(255,255,255,.3);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: .25rem;
-}
-.rc-pillar-val {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-}
-.rc-pillar-denom {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .55rem;
-  color: rgba(255,255,255,.25);
-}
-.rc-classification {
-  border-top: 1px solid rgba(255,255,255,.06);
-  padding-top: 1rem;
+.rc-threat-detail {
+  flex: 1;
+  padding: 1.25rem 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: .5rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: .75rem;
 }
-.rc-class-label {
+.rc-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .55rem;
-  color: rgba(255,255,255,.25);
+  font-size: .9rem;
+  font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 2px;
+  padding: 5px 12px;
+  border: 1px solid;
 }
-.rc-class-val {
+.rc-tier-low  { color: #4a9e1a; border-color: #4a9e1a; background: rgba(74,158,26,.06); }
+.rc-tier-high { color: #d4860a; border-color: #d4860a; background: rgba(212,134,10,.06); }
+.rc-tier-crit { color: #C0272D; border-color: #C0272D; background: rgba(192,39,45,.08); }
+
+/* Threat meter bar */
+.rc-threat-meter {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.rc-threat-meter-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,.06);
+  position: relative;
+}
+.rc-threat-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a9e1a, #d4860a, #C0272D);
+  transition: width .3s;
+}
+.rc-threat-meter-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  color: rgba(255,255,255,.3);
+  letter-spacing: 1px;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* Pillar breakdown — horizontal bars */
+.rc-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-bottom: 1.5rem;
+}
+.rc-pillar-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.rc-pillar-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  width: 160px;
+  flex-shrink: 0;
+}
+.rc-pillar-track {
+  flex: 1;
+  height: 9px;
+  background: rgba(255,255,255,.05);
+  position: relative;
+}
+.rc-pillar-fill {
+  height: 100%;
+  background: #C0272D;
+  opacity: .7;
+}
+.rc-pillar-fill.dominant {
+  opacity: 1;
+  background: linear-gradient(90deg, #C0272D, #ff4a52);
+  box-shadow: 0 0 8px rgba(192,39,45,.5);
+}
+.rc-pillar-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
+  font-weight: 700;
+  color: #fff;
+  width: 28px;
+  text-align: right;
+}
+.rc-pillar-max {
   font-family: 'JetBrains Mono', monospace;
   font-size: .7rem;
-  color: rgba(255,255,255,.7);
-  letter-spacing: .5px;
+  color: rgba(255,255,255,.2);
+  width: 20px;
 }
-/* Report card narrative + action */
-.rc-narrative {
+
+/* Behavioral indicators grid */
+.rc-indicators {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .4rem;
+  margin-bottom: 1.5rem;
+}
+.rc-indicator {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  padding: .5rem .65rem;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.04);
+}
+.rc-indicator.triggered {
   background: rgba(192,39,45,.06);
-  border-left: 2px solid #C0272D;
-  padding: .875rem 1rem;
-  margin-bottom: .75rem;
-  border-radius: 0 4px 4px 0;
+  border-color: rgba(192,39,45,.2);
 }
-.rc-narrative-label {
+.rc-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.rc-indicator.triggered .rc-indicator-dot {
+  background: #C0272D;
+  box-shadow: 0 0 4px rgba(192,39,45,.6);
+}
+.rc-indicator-text {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .55rem;
-  color: #C0272D;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: .375rem;
+  font-size: .7rem;
+  color: rgba(255,255,255,.25);
+  letter-spacing: .5px;
+  line-height: 1.5;
+}
+.rc-indicator.triggered .rc-indicator-text {
+  color: rgba(255,255,255,.65);
+}
+
+/* Narrative */
+.rc-narrative {
+  background: rgba(192,39,45,.05);
+  border-left: 2px solid #C0272D;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.5rem;
 }
 .rc-narrative-body {
   font-family: 'Syne', sans-serif;
-  font-size: .72rem;
+  font-size: .92rem;
   color: rgba(255,255,255,.75);
-  line-height: 1.65;
+  line-height: 1.75;
 }
 .rc-e-flag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .6rem;
+  font-size: .75rem;
   color: #C0272D;
-  margin-top: .5rem;
+  margin-top: .6rem;
   letter-spacing: .3px;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
 }
+
+/* Action / referral */
 .rc-action {
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.07);
-  border-left: 2px solid rgba(255,255,255,.2);
-  padding: .875rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0 4px 4px 0;
-}
-.rc-action-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .55rem;
-  color: rgba(255,255,255,.35);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: .375rem;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-left: 2px solid rgba(255,255,255,.15);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.5rem;
 }
 .rc-action-body {
   font-family: 'Syne', sans-serif;
-  font-size: .72rem;
-  color: rgba(255,255,255,.6);
-  line-height: 1.65;
+  font-size: .92rem;
+  color: rgba(255,255,255,.55);
+  line-height: 1.75;
 }
+
+/* Metadata grid */
+.rc-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+}
+.rc-meta-cell {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.05);
+  padding: .6rem .75rem;
+}
+.rc-meta-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: rgba(255,255,255,.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.rc-meta-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .8rem;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .5px;
+}
+
+/* Authority footer */
+.rc-authority {
+  border-top: 1px solid rgba(192,39,45,.2);
+  padding: 1.1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(192,39,45,.03);
+}
+.rc-authority-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.rc-authority-text {}
+.rc-authority-name {
+  font-family: 'Syne', sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.rc-authority-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: rgba(255,255,255,.2);
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+}
+.rc-authority-right {
+  text-align: right;
+}
+.rc-authority-url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  color: rgba(192,39,45,.5);
+  letter-spacing: 1px;
+}
+.rc-authority-legal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem;
+  color: rgba(255,255,255,.12);
+  letter-spacing: .5px;
+  margin-top: 3px;
+}
+
+/* Legacy classes kept for compat */
+.rc-header { display:none; }
+.rc-score-meta { display:none; }
+.rc-score-label { display:none; }
+.rc-tier-pill { display:none; }
+.rc-pillars-old { display:none; }
+.rc-org { display:none; }
+.rc-sub { display:none; }
+.rc-ref { display:none; }
+.rc-classification { display:none; }
+.rc-class-label { display:none; }
+.rc-class-val { display:none; }
 
 /* Download btn */
 .btn-download-jpeg {
@@ -856,7 +1117,7 @@ select.email-input { cursor: pointer; }
   border: 1px solid #C0272D;
   color: #C0272D;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .7rem;
+  font-size: .85rem;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -1220,78 +1481,164 @@ function showResult(){
 
     <!-- OSB DOWNLOADABLE REPORT CARD -->
     <div id="osb-report-card">
-      <div class="rc-header">
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <img src="${OSB_LOGO_B64}" alt="OSB" style="height:48px;width:auto;max-width:200px;object-fit:contain;display:block;filter:drop-shadow(0 0 6px rgba(192,39,45,.3));">
-          <div class="rc-sub" style="margin-top:2px;">RSEI Model™ v2.0 &nbsp;·&nbsp; Behavioural Intelligence Assessment</div>
+
+      <!-- CLASSIFICATION STRIP -->
+      <div class="rc-class-banner">RESTRICTED &nbsp;·&nbsp; OSB BEHAVIOURAL INTELLIGENCE &nbsp;·&nbsp; FOR AUTHORISED RECIPIENT ONLY &nbsp;·&nbsp; RESTRICTED</div>
+
+      <!-- DOCUMENT HEADER — LOGO DOMINANT -->
+      <div class="rc-doc-header">
+        <div class="rc-doc-logo-panel">
+          <img src="${OSB_LOGO_B64}" alt="OSB" style="width:100%;height:auto;display:block;filter:drop-shadow(0 0 16px rgba(192,39,45,.6)) drop-shadow(0 2px 6px rgba(0,0,0,.8));">
         </div>
-        <div class="rc-ref" style="text-align:right;">
-          OSB/RSEI/${new Date().getFullYear()}/${Math.floor(Date.now()/1000).toString(36).toUpperCase()}<br>
-          ${new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}).toUpperCase()}<br>
-          <span style="color:rgba(255,255,255,.2);font-size:.5rem;letter-spacing:1px;">onlinesecuritybureau.com</span>
+        <div class="rc-doc-right">
+          <div class="rc-doc-title-row">
+            <div>
+              <div class="rc-doc-title">Romance Scam<br>Exploitation Index</div>
+              <div class="rc-doc-subtitle">RSEI Model™ v2.0 &nbsp;·&nbsp; Behavioural Intelligence Assessment</div>
+            </div>
+            <div class="rc-doc-meta">
+              <div class="rc-doc-ref">REF: OSB/RSEI/${new Date().getFullYear()}/${Math.floor(Date.now()/1000).toString(36).toUpperCase()}</div>
+              <div class="rc-doc-date">${new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'}).toUpperCase()}</div>
+              <div class="rc-doc-date" style="margin-top:2px;">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})} ${Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_',' ')}</div>
+            </div>
+          </div>
+          <div class="rc-doc-footer-row">
+            <div class="rc-doc-agency">OSB &nbsp;·&nbsp; Est. 2021 &nbsp;·&nbsp; onlinesecuritybureau.com</div>
+            <div class="rc-doc-model">RSEI Model™ &nbsp;·&nbsp; Behavioural Fraud Intelligence</div>
+          </div>
         </div>
       </div>
 
-      <!-- TECHNICAL SCORES -->
-      <div class="rc-score-block">
-        <div class="rc-score-big">${core}</div>
-        <div class="rc-score-meta">
-          <div class="rc-score-label">RSEI Composite Score · Out of 20</div>
-          <div class="rc-tier-pill ${tierClass==='tier-low'?'rc-tier-low':tierClass==='tier-high'?'rc-tier-high':'rc-tier-crit'}">${tier}</div>
+      <!-- SECTION 01 — COMPOSITE THREAT INDEX -->
+      <div class="rc-body" style="padding-bottom:.75rem;">
+        <div class="rc-section-label">01 &nbsp; Composite Threat Index</div>
+        <div class="rc-threat-block">
+          <div class="rc-score-panel">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:.45rem;color:rgba(255,255,255,.2);letter-spacing:2px;margin-bottom:.4rem;">RSEI SCORE</div>
+            <div class="rc-score-big">${core}</div>
+            <div class="rc-score-denom">OUT OF 20</div>
+          </div>
+          <div class="rc-threat-detail">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.45rem;color:rgba(255,255,255,.2);letter-spacing:2px;margin-bottom:.4rem;">THREAT CLASSIFICATION</div>
+              <div class="rc-tier-badge ${tierClass==='tier-low'?'rc-tier-low':tierClass==='tier-high'?'rc-tier-high':'rc-tier-crit'}">
+                <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;"></span>
+                ${tier}
+              </div>
+            </div>
+            <div class="rc-threat-meter">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.45rem;color:rgba(255,255,255,.2);letter-spacing:1px;min-width:32px;">0</div>
+              <div class="rc-threat-meter-track">
+                <div class="rc-threat-meter-fill" style="width:${Math.round((core/20)*100)}%"></div>
+              </div>
+              <div class="rc-threat-meter-pct">${Math.round((core/20)*100)}%</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:.5rem;color:rgba(255,255,255,.15);letter-spacing:.5px;line-height:1.6;">
+              Assessment generated ${new Date().toLocaleDateString([],{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="rc-pillars">
-        <div class="rc-pillar">
-          <div class="rc-pillar-id">R — Relationship</div>
-          <div class="rc-pillar-val">${R}<span class="rc-pillar-denom">/5</span></div>
-        </div>
-        <div class="rc-pillar">
-          <div class="rc-pillar-id">S — Script</div>
-          <div class="rc-pillar-val">${S}<span class="rc-pillar-denom">/5</span></div>
-        </div>
-        <div class="rc-pillar">
-          <div class="rc-pillar-id">E — Emotional</div>
-          <div class="rc-pillar-val">${E}<span class="rc-pillar-denom">/5</span></div>
-        </div>
-        <div class="rc-pillar">
-          <div class="rc-pillar-id">I — Extraction</div>
-          <div class="rc-pillar-val">${I}<span class="rc-pillar-denom">/5</span></div>
-        </div>
-      </div>
 
-      <!-- ASSESSMENT NARRATIVE -->
+        <!-- SECTION 02 — PILLAR BREAKDOWN -->
+        <div class="rc-section-label" style="margin-top:.25rem;">02 &nbsp; Four-Pillar Behavioural Breakdown</div>
+        <div class="rc-pillars">
+          <div class="rc-pillar-row">
+            <div class="rc-pillar-label">R &mdash; RELATIONSHIP</div>
+            <div class="rc-pillar-track"><div class="rc-pillar-fill ${R===Math.max(R,S,E,I)?'dominant':''}" style="width:${(R/5)*100}%"></div></div>
+            <div class="rc-pillar-score">${R}</div>
+            <div class="rc-pillar-max">/5</div>
+          </div>
+          <div class="rc-pillar-row">
+            <div class="rc-pillar-label">S &mdash; SCRIPT</div>
+            <div class="rc-pillar-track"><div class="rc-pillar-fill ${S===Math.max(R,S,E,I)?'dominant':''}" style="width:${(S/5)*100}%"></div></div>
+            <div class="rc-pillar-score">${S}</div>
+            <div class="rc-pillar-max">/5</div>
+          </div>
+          <div class="rc-pillar-row">
+            <div class="rc-pillar-label">E &mdash; EMOTIONAL</div>
+            <div class="rc-pillar-track"><div class="rc-pillar-fill ${E===Math.max(R,S,E,I)?'dominant':''}" style="width:${(E/5)*100}%"></div></div>
+            <div class="rc-pillar-score">${E}</div>
+            <div class="rc-pillar-max">/5</div>
+          </div>
+          <div class="rc-pillar-row">
+            <div class="rc-pillar-label">I &mdash; EXTRACTION</div>
+            <div class="rc-pillar-track"><div class="rc-pillar-fill ${I===Math.max(R,S,E,I)?'dominant':''}" style="width:${(I/5)*100}%"></div></div>
+            <div class="rc-pillar-score">${I}</div>
+            <div class="rc-pillar-max">/5</div>
+          </div>
+        </div>
+
+        <!-- SECTION 03 — ASSESSMENT NARRATIVE -->
+        <div class="rc-section-label" style="margin-top:.25rem;">03 &nbsp; OSB Intelligence Assessment</div>
+      </div>
+      <div class="rc-body" style="padding-top:0;padding-bottom:.75rem;">
       <div class="rc-narrative">
-        <div class="rc-narrative-label">Assessment</div>
+        <div class="rc-narrative-label" style="display:none;">Assessment</div>
         <div class="rc-narrative-body">${message}</div>
         ${E>=4 ? `<div class="rc-e-flag">⚠ Emotional Investment Score Elevated — Victim support recommended regardless of financial loss.</div>` : ''}
       </div>
 
-      <!-- ACTION PLAN -->
+        <!-- SECTION 04 — RECOMMENDED ACTION -->
+        <div class="rc-section-label" style="margin-top:1rem;">04 &nbsp; Recommended Action</div>
       <div class="rc-action">
-        <div class="rc-action-label">What to do now</div>
+        <div class="rc-action-label" style="display:none;">What to do now</div>
         <div class="rc-action-body">${advice}</div>
       </div>
 
-      <!-- CLASSIFICATION FOOTER -->
-      <div class="rc-classification">
-        <div>
-          <div class="rc-class-label">Dominant Vector</div>
-          <div class="rc-class-val">${[{p:'R',v:R},{p:'S',v:S},{p:'E',v:E},{p:'I',v:I}].sort((a,b)=>b.v-a.v)[0].p} Pillar — Score ${Math.max(R,S,E,I)}/5</div>
-        </div>
-        <div>
-          <div class="rc-class-label">E Pillar Trigger</div>
-          <div class="rc-class-val">${E>=4?'ACTIVATED · Victim support recommended':'NOT TRIGGERED'}</div>
-        </div>
-        <div>
-          <div class="rc-class-label">Issued By</div>
-          <div class="rc-class-val">OSB · onlinesecuritybureau.com</div>
+      </div>
+      <!-- SECTION 05 — METADATA GRID (case details) -->
+      <div class="rc-body" style="padding-top:0;padding-bottom:1.25rem;">
+        <div class="rc-section-label">05 &nbsp; Case Metadata</div>
+        <div class="rc-meta-grid">
+          <div class="rc-meta-cell">
+            <div class="rc-meta-label">Document Type</div>
+            <div class="rc-meta-val">Behavioural Assessment</div>
+          </div>
+          <div class="rc-meta-cell">
+            <div class="rc-meta-label">Framework</div>
+            <div class="rc-meta-val">RSEI Model™ v2.0</div>
+          </div>
+          <div class="rc-meta-cell">
+            <div class="rc-meta-label">Issuing Authority</div>
+            <div class="rc-meta-val">OSB / John Dee</div>
+          </div>
+          <div class="rc-meta-cell">
+            <div class="rc-meta-label">Classification</div>
+            <div class="rc-meta-val">Restricted</div>
+          </div>
+          <div class="rc-meta-cell">
+            <div class="rc-meta-label">Methodology</div>
+            <div class="rc-meta-val">4-Pillar Scoring</div>
+          </div>
+          <div class="rc-meta-cell">
+            <div class="rc-meta-label">Web Reference</div>
+            <div class="rc-meta-val">onlinesecuritybureau.com</div>
+          </div>
         </div>
       </div>
-      <!-- FOOTER LOGO STRIP -->
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.05);">
-        <img src="${OSB_LOGO_B64}" alt="OSB" style="height:40px;width:auto;max-width:160px;object-fit:contain;opacity:.85;filter:drop-shadow(0 0 5px rgba(192,39,45,.35));">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:.5rem;color:rgba(255,255,255,.15);letter-spacing:1.5px;text-transform:uppercase;text-align:right;">Confidential · For Recipient Use Only<br>© ${new Date().getFullYear()} OSB · onlinesecuritybureau.com</div>
+
+      <!-- AUTHORITY FOOTER -->
+      <div class="rc-authority">
+        <div class="rc-authority-left">
+          <img src="${OSB_LOGO_B64}" alt="OSB" style="height:38px;width:auto;opacity:.9;filter:drop-shadow(0 0 6px rgba(192,39,45,.4));">
+          <div class="rc-authority-text">
+            <div class="rc-authority-name">OSB</div>
+            <div class="rc-authority-role">Behavioural Fraud Intelligence &nbsp;·&nbsp; RSEI Model™ v2.0 &nbsp;·&nbsp; Est. 2021</div>
+            <div class="rc-authority-role" style="margin-top:2px;color:rgba(192,39,45,.4);">onlinesecuritybureau.com</div>
+          </div>
+        </div>
+        <div class="rc-authority-right">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.2);letter-spacing:1px;margin-bottom:4px;">DOMINANT VECTOR</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#C0272D;letter-spacing:2px;font-weight:700;">${[{p:'R',v:R},{p:'S',v:S},{p:'E',v:E},{p:'I',v:I}].sort((a,b)=>b.v-a.v)[0].p} PILLAR — ${Math.max(R,S,E,I)}/5</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.48rem;color:rgba(255,255,255,.15);letter-spacing:1px;margin-top:6px;">E-TRIGGER: ${E>=4?'ACTIVATED':'NOT TRIGGERED'}</div>
+        </div>
       </div>
+
+      <!-- BOTTOM CLASSIFICATION STRIP -->
+      <div class="rc-class-banner" style="font-size:.5rem;letter-spacing:3px;padding:4px 0;">
+        © ${new Date().getFullYear()} OSB &nbsp;·&nbsp; REF: OSB/RSEI/${new Date().getFullYear()}/${Math.floor(Date.now()/1000).toString(36).toUpperCase()} &nbsp;·&nbsp; RESTRICTED — AUTHORISED RECIPIENT ONLY
+      </div>
+
     </div>
     <!-- END REPORT CARD -->
 
