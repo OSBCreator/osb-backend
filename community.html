@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OSB Intelligence Community — Social Engineering Awareness</title>
-<meta name="description" content="The OSB Intelligence Community — a moderated platform for social engineering awareness, field intelligence, and victim support.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="description" content="Join the OSB Intelligence Community — the world's only behavioural intelligence feed for romance fraud.">
+<title>OSB Community — Intelligence Feed — OSB</title>
 <style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
@@ -389,135 +389,10 @@ footer{background:var(--footer-bg) !important;}
 
 /* Hero intel preview */
 
-
-/* ── ANONYMOUS AVATARS ── */
-.av-wrap{display:flex;align-items:center;gap:.875rem;margin-bottom:1.25rem;padding:.875rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);}
-.av-svg{flex-shrink:0;border-radius:2px;overflow:hidden;}
-.av-info{flex:1;}
-.av-name{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--w);font-weight:500;margin-bottom:.2rem;}
-.av-sub{font-size:.72rem;color:rgba(255,255,255,.28);}
-.post-card .post-meta{flex:1;}
-.post-card .post-author{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--w);font-weight:500;}
-.post-card .post-ts{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.25);margin-top:2px;}
-.post-badge{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(193,18,31,.3);color:var(--r);}
-.post-body{font-size:.875rem;line-height:1.85;color:rgba(255,255,255,.65);font-weight:300;margin-bottom:1rem;white-space:pre-wrap;}
-.post-actions{display:flex;align-items:center;gap:1.25rem;}
-.post-act{background:none;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:1px;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:.35rem;transition:color .2s;padding:0;}
-.post-act:hover{color:var(--w);}
-.post-act.liked{color:var(--r);}
-.post-stats{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.18);}
-.pending-note{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(193,18,31,.5);margin-top:.75rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06);}
-.compose-box{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--r);padding:1.75rem;margin-bottom:2rem;}
-.compose-hd{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
-.compose-row{display:flex;gap:.75rem;margin-bottom:.75rem;}
-.compose-inp{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--w);font-family:'Figtree',sans-serif;font-size:.875rem;padding:10px 13px;outline:none;transition:border-color .2s;}
-.compose-inp:focus{border-color:rgba(193,18,31,.45);}
-.compose-inp::placeholder{color:rgba(255,255,255,.2);}
-.compose-ta{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--w);font-family:'Figtree',sans-serif;font-size:.875rem;padding:12px 13px;outline:none;resize:none;height:110px;line-height:1.7;margin-bottom:.75rem;transition:border-color .2s;}
-.compose-ta:focus{border-color:rgba(193,18,31,.45);}
-.compose-ta::placeholder{color:rgba(255,255,255,.2);}
-.compose-foot{display:flex;align-items:center;justify-content:space-between;}
-.char-ct{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.2);}
-.compose-btn{background:var(--r);color:var(--w);border:none;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;cursor:pointer;transition:opacity .2s;}
-.compose-btn:hover{opacity:.85;}
-.compose-btn:disabled{opacity:.4;cursor:not-allowed;}
-.compose-note{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.18);margin-top:.625rem;line-height:1.6;}
-.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.75rem;}
-.cs-box{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);padding:.875rem;text-align:center;}
-.cs-n{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--w);line-height:1;}
-.cs-l{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:.3rem;}
-
-.compose-path-wrap{display:flex;gap:0;margin-bottom:1rem;border:1px solid rgba(255,255,255,.1);}
-.compose-path{flex:1;background:none;border:none;padding:.75rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;}
-.compose-path.active{background:var(--r);color:var(--w);}
-.compose-path:not(.active):hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.7);}
-
-/* ── PAGE HERO ── */
-.ph{background:var(--n);padding:4rem 3rem 3.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;}
-.ph::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
-.ph-tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1rem;}
-.ph-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:600;line-height:1.05;letter-spacing:-.5px;color:var(--w);margin-bottom:1rem;}
-.ph-h em{color:var(--r);font-style:italic;font-weight:400;}
-.ph-sub{font-size:.95rem;color:rgba(255,255,255,.5);line-height:1.85;max-width:640px;font-weight:300;margin-bottom:1.25rem;}
-.ph-rule{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:.4rem .875rem;}
-
-/* ── COMMUNITY LAYOUT ── */
-.layout{display:grid;grid-template-columns:1fr 320px;gap:3rem;max-width:1160px;margin:0 auto;padding:3rem 3rem 5rem;}
-@media(max-width:1000px){.layout{grid-template-columns:1fr;padding:2rem 1.5rem 4rem;}}
-@media(max-width:600px){.layout{padding:1.5rem 1.25rem 3rem;}}
-
-/* ── MAIN COL ── */
-.main-col{}
-
-/* ── COMPOSE BOX ── */
-.compose{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--r);padding:1.75rem;margin-bottom:2rem;}
-.compose-username{display:flex;gap:.75rem;margin-bottom:.75rem;}
-.compose-username input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--w);font-family:'Figtree',sans-serif;font-size:.875rem;padding:10px 13px;outline:none;transition:border-color .2s;}
-.compose-username input:focus{border-color:rgba(193,18,31,.45);}
-.compose-username input::placeholder{color:rgba(255,255,255,.2);}
-.compose-select{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.6);font-family:'Figtree',sans-serif;font-size:.875rem;padding:10px 13px;outline:none;cursor:pointer;}
-.compose-select option{background:#0B0B0D;color:var(--w);}
-textarea#inp-content{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--w);font-family:'Figtree',sans-serif;font-size:.875rem;padding:12px 13px;outline:none;resize:none;height:110px;line-height:1.7;margin-bottom:.75rem;transition:border-color .2s;}
-textarea#inp-content:focus{border-color:rgba(193,18,31,.45);}
-textarea#inp-content::placeholder{color:rgba(255,255,255,.2);}
-.compose-foot{display:flex;align-items:center;justify-content:space-between;}
-.char-count{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.2);}
-.compose-submit{background:var(--r);color:var(--w);border:none;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;cursor:pointer;transition:opacity .2s;}
-.compose-submit:hover{opacity:.85;}
-.compose-submit:disabled{opacity:.4;cursor:not-allowed;}
-.compose-notice{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.18);margin-top:.625rem;line-height:1.6;}
-.toast{display:none;position:fixed;bottom:2rem;right:2rem;background:var(--r);color:var(--w);padding:.875rem 1.375rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.5px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.4);}
-.toast.show{display:block;}
-
-/* ── FILTER BAR ── */
-.filter-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.75rem;}
-.fb{padding:6px 14px;border:1px solid rgba(255,255,255,.1);font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.35);cursor:pointer;transition:all .15s;background:none;letter-spacing:1.5px;text-transform:uppercase;}
-.fb.on,.fb:hover{border-color:var(--r);color:var(--r);background:rgba(193,18,31,.06);}
-
-/* ── FEED & POSTS ── */
-.feed{display:flex;flex-direction:column;}
-.post{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;margin-bottom:.875rem;transition:border-color .2s;}
-.post:hover{border-color:rgba(193,18,31,.25);}
-.post.ifn{border-left:2px solid var(--r);}
-.post-head{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap;}
-.post-avatar{width:36px;height:36px;background:var(--r);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--w);flex-shrink:0;}
-.post-username{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--w);font-weight:500;}
-.post-time{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.25);margin-top:2px;}
-.post-badge{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(193,18,31,.3);color:var(--r);margin-left:auto;}
-.post-content{font-size:.875rem;line-height:1.9;color:rgba(255,255,255,.65);font-weight:300;margin-bottom:1rem;white-space:pre-wrap;}
-.post-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
-.pa-btn{background:none;border:1px solid rgba(255,255,255,.08);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.5px;color:rgba(255,255,255,.28);padding:5px 10px;transition:all .15s;}
-.pa-btn:hover{border-color:var(--r);color:var(--r);}
-
-/* ── SIDEBAR ── */
-.sidebar{display:flex;flex-direction:column;gap:1.375rem;}
-.sbox{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--r);padding:1.75rem;}
-.sbox-title{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.25rem;padding-bottom:.875rem;border-bottom:1px solid rgba(255,255,255,.07);}
-.sbox-rule{padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.6;}
-.sbox-rule:last-child{border-bottom:none;}
-.sbox-rule strong{display:block;font-size:.78rem;color:var(--w);margin-bottom:.2rem;font-weight:600;}
-.sbox-body{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;}
-.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.82rem;}
-.stat-row:last-child{border-bottom:none;}
-.stat-label{color:rgba(255,255,255,.38);}
-.stat-val{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--w);font-weight:500;}
-.ifn-item{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.06);}
-.ifn-item:last-child{border-bottom:none;}
-.ifn-num{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--r);letter-spacing:1px;flex-shrink:0;padding-top:2px;}
-.ifn-title{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.5;}
-.reach-btn{display:block;background:var(--r);color:var(--w);text-align:center;padding:11px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .2s;}
-.reach-btn:hover{background:#d01020;}
-
-/* ── FOOTER COMPACT ── */
-footer .foot-inner{max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:3rem;padding-bottom:2.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap;}
-footer .flinks{display:flex;flex-direction:column;gap:.5rem;}
-footer .flinks a{font-size:.8rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;}
-footer .flinks a:hover{color:var(--w);}
-footer .fdesc{font-size:.8rem;color:rgba(255,255,255,.25);line-height:1.85;max-width:340px;}
-footer .fcopy{max-width:1160px;margin:0 auto;font-size:.7rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
 </style>
 </head>
 <body>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection & Response System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Est. 2021 · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection & Response System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Est. 2021 · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div></div></div></div>
 <nav id="nav">
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="OSB"></a>
   <div class="nav-links">
@@ -574,445 +449,174 @@ footer .fcopy{max-width:1160px;margin:0 auto;font-size:.7rem;color:rgba(255,255,
     <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
   </div>
 </div>
-
-<div class="ticker"><div class="tt">
-<div class="ti">OSB Intelligence Community — Social Engineering Awareness<span class="ts">◆</span></div>
-<div class="ti">$1T+ Annual Global Social Engineering Losses — 2024<span class="ts">◆</span></div>
-<div class="ti">IFN Series · Field Intelligence Notes · Documented Operator Tactics<span class="ts">◆</span></div>
-<div class="ti">OSBI Model™ v2.0 · Behavioural Threat Detection · Est. 2021<span class="ts">◆</span></div>
-<div class="ti">Moderated · Secured · Intelligence-Led<span class="ts">◆</span></div>
-<div class="ti">OSB Intelligence Community — Social Engineering Awareness<span class="ts">◆</span></div>
-<div class="ti">$1T+ Annual Global Social Engineering Losses — 2024<span class="ts">◆</span></div>
-<div class="ti">IFN Series · Field Intelligence Notes · Documented Operator Tactics<span class="ts">◆</span></div>
-</div></div>
-
-<div class="ph">
-  <div class="ph-tag">OSB Intelligence Community</div>
-  <h1 class="ph-h">Every operator leaves a pattern.<br><em>This is where we document them.</em></h1>
-  <p class="ph-sub">A moderated, secured intelligence platform for social engineering awareness. Share what you know. Document what you have seen. Every post contributes to the OSB field intelligence database.</p>
-  <div class="ph-rule">Username only · No inbox · No personal data · Moderated before live</div>
 </div>
-
-<div class="layout">
-  <div class="main-col">
-
-    <div class="compose">
-      <div class="compose-path-wrap">
-        <button class="compose-path active" id="path-post" onclick="setPath('post')">◆ &nbsp;Post to Community</button>
-        <button class="compose-path" id="path-ask" onclick="setPath('ask')">? &nbsp;Ask OSB</button>
-      </div>
-      <div id="ask-notice" style="display:none;background:rgba(192,39,45,.06);border:1px solid rgba(192,39,45,.2);padding:.75rem 1rem;margin-bottom:.75rem;font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.7;">Your question goes directly to OSB privately. It will not appear publicly. OSB will respond directly.</div>
-      <div class="compose-username">
-        <input type="text" id="inp-username" placeholder="Your username" maxlength="32">
-        <select class="compose-select" id="inp-pillar">
-          <option value="">— Tag (optional) —</option>
-          <option value="R">R · Relationship Acceleration</option>
-          <option value="S">S · Script Consistency</option>
-          <option value="E">E · Emotional Manipulation</option>
-          <option value="I">I · Financial Extraction</option>
-          <option value="IFN">IFN · Field Note</option>
-        </select>
-      </div>
-      <textarea id="inp-content" placeholder="Share intelligence, a documented case, a pattern you have observed, or a question for the community." maxlength="1200"></textarea>
-      <div class="compose-foot">
-        <span class="char-count" id="char-count">0 / 1200</span>
-        <button class="compose-submit" id="submit-btn" onclick="submitPost()">Post Intelligence</button>
-      </div>
-      <div class="compose-notice">All posts go through OSB moderation before appearing publicly. Username only — no personal data stored.</div>
-      <div class="toast" id="toast"></div>
-    </div>
-
-    <div class="filter-bar">
-      <button class="fb on" onclick="filterFeed('all',this)">All</button>
-      <button class="fb" onclick="filterFeed('IFN',this)">IFN Notes</button>
-      <button class="fb" onclick="filterFeed('R',this)">R Pillar</button>
-      <button class="fb" onclick="filterFeed('S',this)">S Pillar</button>
-      <button class="fb" onclick="filterFeed('E',this)">E Pillar</button>
-      <button class="fb" onclick="filterFeed('I',this)">I Pillar</button>
-    </div>
-
-    <div class="feed" id="feed">
-
-      <div class="post ifn" data-p="IFN">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">IFN-006 · Originally on Quora · 1.3K views · 36 upvotes</div></div>
-          <div class="post-badge">IFN-006</div>
-        </div>
-        <div class="post-content">THE PROXY CALLER EXPLOIT — YOU ARE NOT THE TARGET, YOU ARE THE MECHANISM.
-
-You called the bank yourself. Real number. Right questions. They confirmed the balance. You hung up feeling certain. That certainty was the goal.
-
-He could not make that call. Not with his accent. Not without leaving a trace. So he spent time love bombing someone who would make it for him — willingly, carefully, proudly.
-
-When you confirmed that balance, you did not make a mistake. You completed a step in a criminal operation you were oblivious of being a part of. He wanted more than your money. He wanted your legitimacy. Your accent. Your clean record on the other end of a recorded bank line.
-
-This is the layer most people never see: It is not always "send me money." Sometimes it is "help me confirm something." Sometimes it is "help me move something small."
-
-You are being positioned inside a money laundering chain. This is structured fraud — roles, scripts, timing. You did not miss something obvious. You did your due diligence. That is exactly what made this work.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 36</button>
-          <button class="pa-btn">◎ 1.3K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post ifn" data-p="IFN">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">IFN-005 · Originally on Quora · 4.2K views · 92 upvotes</div></div>
-          <div class="post-badge">IFN-005</div>
-        </div>
-        <div class="post-content">THE FACADE BANK PAGE
-
-It did not start with asking. It started with showing. A large balance — right there on the screen.
-
-He walked you through it calmly, the kind of calm that comes from someone who appears to have nothing to hide. Working. Building something. A man with substance, with means, with a future that included you.
-
-You were not being asked to give anything. You were being asked to help someone you trusted move money that was already his — from his bank account. It felt natural. It felt safe.
-
-Then something went wrong. A security flag. An account restriction. Hence the monetary request. But the money existed. You had seen it.
-
-That feeling of safety was not an accident. It was the architecture of the moment. Because the bank page itself was never real. It was a staged interface designed to convince the victim that the money already existed.
-
-Clarity is not defeat. It is the first step to freedom.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 92</button>
-          <button class="pa-btn">◎ 4.2K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">Apr 26 · Originally on Quora · 3.1K views · 77 upvotes</div></div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-content">I KNOW HE IS A SCAMMER. I STILL CANNOT LET GO.
-
-He did not win your heart in a day. It took time. It took process. So there is no reason your feelings should disappear the moment you find out the truth. The truth changes what it was. It does not change what it felt like.
-
-That is the trap inside the trap. The scam continues in your nervous system long after the conversation ends.
-
-You do not block him on day one. You reduce. Gradually. Confronting him will not give you closure — it will give him another opening. Erase the digital presence. Every photo. Every saved message. Fill the space. That void is proof you are capable of deep connection. That capacity belongs to you. It was never his.
-
-You do not have to have lost money for this to count as damage. Emotional injury is injury.
-
-FIELD EVIDENCE: "To die would be a happy ending." — Anonymous comment. Zero financial loss. Critical emotional severity.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 77</button>
-          <button class="pa-btn">◎ 3.1K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">9 months ago · Originally on Quora · 2.9K views · 115 upvotes</div></div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-content">THE HIDDEN DANGERS OF ROMANCE SCAMS
-
-It is more than just losing money — the damage runs deep.
-
-EMOTIONAL DAMAGE: Heartbreak and betrayal. Victims form real emotional bonds. Depression, anxiety, even PTSD are common. Many blame themselves, leading to withdrawal or suicidal thoughts.
-
-FINANCIAL LOSS: Victims have lost thousands to millions. Some drain life savings, retirement funds, or business capital. Others take loans or remortgage homes under pressure.
-
-MIND CONTROL: Scammers use love bombing, fake emergencies, and guilt as weapons. Victims are isolated and taught to distrust family. In extreme cases they unknowingly become money mules.
-
-IDENTITY THEFT: Scammers collect photos, IDs, bank info, passwords. Some victims are blackmailed with private images — sextortion.
-
-LEGAL TROUBLE: Victims may unknowingly help move stolen money. Some face investigations, frozen accounts, or criminal charges.
-
-Shame on anyone who judges victims. Compassion is what is needed — not condemnation.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 115</button>
-          <button class="pa-btn">◎ 2.9K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">9 months ago · Originally on Quora · 2.5K views · 85 upvotes</div></div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-content">OIL RIG SCAMS: THE ROMANCE TRAP YOU DID NOT SEE COMING
-
-You meet someone online — charming, professional, claims to be an engineer on an offshore oil rig. They say they are stationed in a remote location and cannot come home yet.
-
-After love bombing, they tell you there is a crisis: "My equipment broke down, I need to transfer money urgently, but I cannot access my account from here." They give you a fake bank login and ask you to transfer money. Suddenly the account gets frozen. Then they beg you to cover the cost — "I will pay you back when I return."
-
-There is NO oil rig. NO broken equipment. NO real bank account. Just an emotional setup to steal your money.
-
-Scammers use emotions as weapons. But now you know the trick.
-
-Remember: Trust — but VERIFY.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 85</button>
-          <button class="pa-btn">◎ 2.5K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">9 months ago · Originally on Quora · 2.2K views · 86 upvotes</div></div>
-          <div class="post-badge">OSB Field Case</div>
-        </div>
-        <div class="post-content">FROM LOVE TO LOSS: A SINGAPORE NURSE'S STORY
-
-A hardworking nurse in Singapore. After long shifts and isolation during COVID, she began chatting with a kind man online. He said he was an interior designer in Canada. They talked daily — sweet messages, photos, even dreams of marriage.
-
-Then he introduced her to crypto trading. She tried it. The website looked real. Her money grew. Over time she invested all her savings, took a loan, and sent over S$120,000 ($90,000 USD).
-
-Then it collapsed. The site demanded withdrawal fees. When she refused, he vanished. Everything — the romance, the money, the platform — was fake.
-
-She was left with no money, huge debt, shame, heartbreak, and depression. She later filed for bankruptcy and started therapy.
-
-If this could happen to a smart, strong nurse — it can happen to anyone.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 86</button>
-          <button class="pa-btn">◎ 2.2K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">Feb 28 · Originally on Quora · 2.4K views · 60 upvotes</div></div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-content">THE "UN DOCTOR" SCRIPT
-
-In one documented case, a victim wired over $50,000 with each payment tied to a new UN processing fee, emergency, or clearance requirement. The payments were spaced out. Each request sounded reasonable. Each crisis felt urgent. That is how this script works.
-
-The scammer claims to be a surgeon or humanitarian working for the United Nations. Widowed or divorced. Moves fast emotionally. Introduces a child for sympathy. Creates a crisis — blocked bank account, urgent travel approval. Asks you to pay UN processing or clearance fees.
-
-Reality: The United Nations does not charge the public for staff leave, travel, or admin processing. Official emails come only from @un.org domains.
-
-If money enters the relationship, it is not love. It is a scam.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 60</button>
-          <button class="pa-btn">◎ 2.4K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">7 months ago · Originally on Quora · 7.2K views · 67 upvotes</div></div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-content">3 WAYS TO SPOT A ROMANCE SCAMMER
-
-Asking for money, bank info, driver licence, or SSN? SCAMMER.
-
-Sends you a package? It might seem like a sweet gesture, but scammers use this method to earn your trust and create obligation.
-
-Introduced you to cryptocurrency investment? Crypto is used in romance scams due to its anonymity and the impossibility of recovery.
-
-"But I video called him?" These are the days of sophisticated AI. Video calls can now be faked using deepfake software.
-
-Be vigilant.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 67</button>
-          <button class="pa-btn">◎ 7.2K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">Feb 19 · Originally on Quora · 1.3K views · 46 upvotes</div></div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-content">WHY PEOPLE STILL FALL VICTIM IN 2026
-
-Loneliness and lack of awareness are the real roots of this problem. Who rejects love and affection in moments of emotional vulnerability? When attention comes when you are at your lowest, it is difficult to resist.
-
-Romance scammers penetrate during grief, loneliness, or major life changes — exploiting emotional vulnerability.
-
-Seniors remain among the most vulnerable. The most recent FTC data shows adults aged 60 and above lost approximately $277 million to romance scams alone.
-
-When people feel loved and remembered by family, they are less likely to seek affection from strangers online. Human connection remains the strongest defence of all.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 46</button>
-          <button class="pa-btn">◎ 1.3K views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div class="post" data-p="community">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta"><div class="post-username">John Dee · OSB</div><div class="post-time">Feb 12 · Originally on Quora · 874 views · 21 upvotes</div></div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-content">RECOVERY SCAMS: DO NOT PAY TWICE
-
-In 2025, the FTC reported that imposter and advance-fee scams — including recovery scams — accounted for nearly $3 billion in reported losses.
-
-If you have lost money to a scam, your funds are not sitting somewhere waiting to be recovered. In most cases, the money is already gone.
-
-Recovery agents who promise "We can recover your funds" are scammers looking to exploit you again.
-
-Never pay anyone to recover your lost money. Report the incident through the FBI IC3 complaint portal at ic3.gov.</div>
-        <div class="post-actions">
-          <button class="pa-btn">♥ 21</button>
-          <button class="pa-btn">◎ 874 views</button>
-          <button class="pa-btn" onclick="sharePost()">↗ Share</button>
-        </div>
-      </div>
-
-      <div id="community-posts"></div>
-    </div>
+</div>
+<div class="pg-hero">
+  <div class="si">
+    <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Intelligence Community</div></div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.8rem);font-weight:600;line-height:.95;color:var(--w);letter-spacing:-1px;margin-bottom:1.25rem;">The live intelligence feed.<br><em>Join it.</em></h1>
+    <p style="font-size:1rem;color:rgba(255,255,255,.42);max-width:540px;line-height:1.85;font-weight:300;">Every OSB field note and intelligence brief — published here, permanently archived. Read without an account. Sign up to engage and receive briefings directly.</p>
   </div>
-
-  <div class="sidebar">
-    <div class="sbox">
-      <div class="sbox-title">◆ &nbsp;IFN Intelligence Library</div>
-      <div class="ifn-item"><div class="ifn-num">IFN-006</div><div class="ifn-title">The Proxy Caller Exploit — Confirmed by Victim Testimony</div></div>
-      <div class="ifn-item"><div class="ifn-num">IFN-005</div><div class="ifn-title">The Facade Bank Page — Fraudulent Financial Interface Exploit</div></div>
-    </div>
-    <div class="sbox">
-      <div class="sbox-title">◆ &nbsp;OSB Field Intelligence · Quora Origins</div>
-      <div class="stat-row"><span class="stat-label">Published Posts</span><span class="stat-val">13</span></div>
-      <div class="stat-row"><span class="stat-label">Total Upvotes</span><span class="stat-val">697</span></div>
-      <div class="stat-row"><span class="stat-label">Quora Reach</span><span class="stat-val">33.1K</span></div>
-      <div class="stat-row"><span class="stat-label">Views This Month</span><span class="stat-val">6K</span></div>
-    </div>
-    <div class="sbox">
-      <div class="sbox-title">◆ &nbsp;Community Standards</div>
-      <div class="sbox-rule"><strong>Intelligence Only</strong>Posts must contribute field intelligence or documented observations.</div>
-      <div class="sbox-rule"><strong>No Operator Names</strong>Documented evidence only. No unverified identities.</div>
-      <div class="sbox-rule"><strong>Victim Respect</strong>All victim accounts must protect anonymity.</div>
-      <div class="sbox-rule"><strong>OSB Moderation</strong>Every post is reviewed before going live.</div>
-    </div>
-    <div class="sbox">
-      <div class="sbox-title">◆ &nbsp;Reach OSB Directly</div>
-      <p class="sbox-body" style="margin-bottom:1rem;">For urgent cases, victim intervention requests, or platform partnership enquiries.</p>
-      <a href="contact.html" class="reach-btn">Contact OSB Intelligence</a>
+</div>
+<div class="nl-bar">
+  <div class="nl-inner">
+    <div class="nl-text"><strong>Join the OSB Intelligence Network</strong><span>Every new publication delivered directly. No algorithm. Your inbox. Forever.</span></div>
+    <div class="nl-form"><input type="email" class="nl-inp" placeholder="your@email.com" id="nle"><button class="nl-btn" onclick="nlSub()">Subscribe Free</button></div>
+    <div id="nlmsg" style="display:none;font-size:.78rem;color:rgba(255,255,255,.6);width:100%;margin-top:.5rem;"></div>
+  </div>
+</div>
+<div class="sd">
+  <div class="si">
+    <div class="feed-g2">
+      <div class="reveal">
+        <div class="feed-top2">
+          <div class="feed-ttl"><span class="ldot"></span>&nbsp;&nbsp;Live Intelligence Feed</div>
+          <div class="flt2">
+            <button class="ff2 active" onclick="ff(this,&apos;all&apos;)">All</button>
+            <button class="ff2" onclick="ff(this,&apos;S&apos;)">S-Pillar</button>
+            <button class="ff2" onclick="ff(this,&apos;E&apos;)">E-Pillar</button>
+            <button class="ff2" onclick="ff(this,&apos;I&apos;)">I-Pillar</button>
+            <button class="ff2" onclick="ff(this,&apos;live&apos;)">Live</button>
+          </div>
+        </div>
+        <div class="feed-list2">
+          <div class="fi2" data-p="S" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-005</div><div><div class="fi2-tag">S-Pillar · New</div><div class="fi2-t">The Facade Bank Page — Staged Financial Interface</div><div class="fi2-e">First documented globally by OSB. 1,000+ views in 3 days.</div></div><div class="fi2-stats"><span class="fstat2">♥ 6</span><span class="fstat2">◎ 1K+</span></div></div>
+          <div class="fi2" data-p="S" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-001</div><div><div class="fi2-tag">S-Pillar · Active</div><div class="fi2-t">The Proxy Caller Exploit</div><div class="fi2-e">The victim called the bank. The money was real. So was the trap. They were the instrument — not the target.</div></div><div class="fi2-stats"><span class="fstat2">♥ 8</span><span class="fstat2">◎ 1,234</span></div></div>
+          <div class="fi2" data-p="E" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-002</div><div><div class="fi2-tag">E-Pillar · E Score 5</div><div class="fi2-t">The Suicidal Ideation Script — Zero Financial Loss</div><div class="fi2-e">Established the E Pillar Independent Trigger. Emotional harm is real harm.</div></div><div class="fi2-stats"><span class="fstat2">♥ 12</span><span class="fstat2">◎ 890</span></div></div>
+          <div class="fi2" data-p="live" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-003</div><div><div class="fi2-tag">Live Intervention</div><div class="fi2-t">First Live Exit — Active Scam Exited in Real Time</div><div class="fi2-e">OSB intervened on Quora. Subject exited the same day.</div></div><div class="fi2-stats"><span class="fstat2">♥ 19</span><span class="fstat2">◎ 2,100</span></div></div>
+          <div class="fi2" data-p="I" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-004</div><div><div class="fi2-tag">I-Pillar · $28,000</div><div class="fi2-t">$28,000 Over 3 Years — The Slow-Burn Pattern</div><div class="fi2-e">Low velocity. High duration. Maximum damage.</div></div><div class="fi2-stats"><span class="fstat2">♥ 24</span><span class="fstat2">◎ 3,400</span></div></div>
+        </div>
+      </div>
+      <div class="comm-side2 reveal d2">
+        <div class="sc3">
+          <div class="sc3-t">Create Your Account</div>
+          <div class="sc3-s">No real name required or displayed. Comment and engage once your account reaches trust level 1. Private. Secure.</div>
+          <input type="text" class="fi3" placeholder="Choose a username" id="cu">
+          <input type="email" class="fi3" placeholder="your@email.com" id="ce">
+          <button class="fb3" onclick="joinCom()">Create Account — Free</button>
+          <div class="fn3">No personal data sold · Senior-friendly</div>
+          <div id="jmsg" style="display:none;margin-top:.75rem;font-size:.78rem;"></div>
+        </div>
+        <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.875rem;">Community Activity</div>
+          <div class="cs-grid">
+            <div class="cs-box"><span class="cs-n" data-target="5">0</span><div class="cs-l">Field Notes</div></div>
+            <div class="cs-box"><span class="cs-n" data-target="847">0</span><div class="cs-l">Assessments</div></div>
+            <div class="cs-box"><span class="cs-n" data-target="7634">0</span><div class="cs-l">Total Views</div></div>
+            <div class="cs-box"><span class="cs-n" data-target="63">0</span><div class="cs-l">Engagements</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:.875rem;padding:.625rem 0;border-bottom:1px solid rgba(255,255,255,.06);">Recent Detections</div>
+          <div class="rec-l">
+            <div class="rec-i"><div class="rec-tag">S-Pillar · March 2026</div><div class="rec-title">Facade Bank Page · IFN-005</div></div>
+            <div class="rec-i"><div class="rec-tag">S-Pillar · March 2026</div><div class="rec-title">Proxy Caller Exploit · IFN-001</div></div>
+            <div class="rec-i"><div class="rec-tag">E-Pillar · March 2026</div><div class="rec-title">Crisis Language · E Score 5 · IFN-002</div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="foot-inner">
+  <div class="fg">
     <div>
-      <img src="logo.png" alt="OSB" style="height:36px;margin-bottom:1rem;display:block;">
-      <p class="fdesc">Online Security Bureau is the world's first behavioural intelligence organisation built to identify, document and stop social engineering fraud across dating and social platforms.</p>
+      <div class="flogo"><img src="logo.png" alt="OSB"></div>
+      <p class="fdesc">OSB is the world's first behavioural intelligence organisation built to identify, document and stop romance fraud using the RSEI Model™. Pioneering the future of fraud intelligence since 2021.</p>
     </div>
-    <div class="flinks">
-      <a href="index.html">Home</a>
-      <a href="community.html">Community</a>
-      <a href="report.html">Global Fraud Report</a>
-      <a href="platform-index.html">Platform Index</a>
-      <a href="solace.html">Solace</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="contact.html">Contact</a>
+    <div>
+      <div class="fcol-t">Navigate</div>
+      <div class="flinks">
+        <a href="index.html">Home</a><a href="about.html">About OSB</a>
+        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">SCORE</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report</a>
+        <a href="intelligence.html">Intelligence</a><a href="solace.html">Solace</a>
+        <a href="community.html">Community</a><a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Intelligence</div>
+      <div class="flinks">
+        <a href="rsei-model.html">RSEI Model™ v2.0</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report 2026</a>
+        <a href="intelligence.html">IFN Case Library</a>
+        <a href="score.html">Scoring Tool</a>
+        <a href="solace.html">Solace Guide™</a>
+        <a href="contact.html">Analyst Certification (Coming)</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Field Notes</div>
+      <div class="flinks">
+        <a href="intelligence.html">IFN-005 · Facade Bank Page</a>
+        <a href="intelligence.html">IFN-001 · Bank Exploit</a>
+        <a href="intelligence.html">IFN-002 · E Score 5</a>
+        <a href="intelligence.html">IFN-003 · Live Exit</a>
+        <a href="intelligence.html">IFN-004 · $28K Case</a>
+        <a href="contact.html">Submit a Case</a>
+      </div>
     </div>
   </div>
-  <div class="fcopy">© 2021–2026 Online Security Bureau · OSBI Model™ · RSEI Security Tool™ · All rights reserved</div>
+  <div class="fbot">
+    <div class="fquote" id="fq"></div>
+    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved &nbsp;·&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a></div>
+  </div>
 </footer>
-
 <script>
-const API = 'https://osb-backend-production.up.railway.app';
-
-document.getElementById('inp-content').addEventListener('input', function(){
-  document.getElementById('char-count').textContent = this.value.length + ' / 1200';
+var QQ = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — OSB', '"The feelings were real. The person was not." — OSB Solace', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™', '"She called the bank herself. She was still being set up." — IFN-001 · OSB', '"Romance fraud has a name. It has a score. Only one organisation built both." — OSB'];
+function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
+function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mob'),h=document.querySelector('.nav-ham');
+  if(m&&h&&!m.contains(e.target)&&!h.contains(e.target))m.style.display='none';
 });
-
-function setPath(p){
-  document.getElementById('path-post').classList.toggle('active', p==='post');
-  document.getElementById('path-ask').classList.toggle('active', p==='ask');
-  document.getElementById('ask-notice').style.display = p==='ask' ? 'block' : 'none';
-}
-
-function filterFeed(f, btn){
-  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
-  if(btn) btn.classList.add('on');
-  document.querySelectorAll('.feed .post').forEach(p=>{
-    p.style.display = (f==='all' || p.dataset.p===f) ? 'block' : 'none';
+var ro=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});
+},{threshold:.08});
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  var fq=document.getElementById('fq');
+  if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];
+});
+window.addEventListener('scroll',function(){
+  var n=document.getElementById('nav');
+  if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';
+});
+</script>
+<script>
+function animNum(el){var t=parseInt(el.dataset.target),cur=0,step=t/60;var tm=setInterval(function(){cur=Math.min(cur+step,t);var v=t>=1000?Math.round(cur).toLocaleString():Math.round(cur);el.textContent=v;if(cur>=t)clearInterval(tm);},33);}
+var ccObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){document.querySelectorAll('.cs-n[data-target]').forEach(animNum);ccObs.disconnect();}},{threshold:.3});
+window.addEventListener('DOMContentLoaded',function(){var cg=document.querySelector('.cs-grid');if(cg)ccObs.observe(cg);});
+function ff(btn,p){document.querySelectorAll('.ff2').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.querySelectorAll('.fi2').forEach(function(i){i.style.display=(p==='all'||i.dataset.p===p)?'grid':'none';});}
+var BACKEND_URL="https://osb-backend-production.up.railway.app";
+function nlSub(){
+  var e=document.getElementById('nle').value;
+  var msg=document.getElementById('nlmsg');
+  var btn=document.querySelector('.nl-btn');
+  if(!e)return;
+  btn.disabled=true;btn.textContent='Subscribing…';
+  var controller=new AbortController();
+  var timeout=setTimeout(function(){controller.abort();},20000);
+  fetch(BACKEND_URL+'/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e}),signal:controller.signal})
+  .then(function(r){
+    clearTimeout(timeout);
+    msg.style.display='block';
+    msg.style.color=r.ok?'#16a34a':'var(--r)';
+    msg.textContent=r.ok?'Subscribed successfully.':'Something went wrong — please try again.';
+    btn.disabled=false;btn.textContent='Subscribe Free';
+  })
+  .catch(function(err){
+    clearTimeout(timeout);
+    btn.disabled=false;btn.textContent='Subscribe Free';
+    msg.style.display='block';msg.style.color='var(--r)';
+    msg.textContent=err.name==='AbortError'?'Server waking up — wait 20 seconds and try again.':'Connection error. Please try again.';
   });
 }
-
-async function submitPost(){
-  const username = document.getElementById('inp-username').value.trim();
-  const content = document.getElementById('inp-content').value.trim();
-  const pillar = document.getElementById('inp-pillar').value;
-  const isAsk = document.getElementById('path-ask').classList.contains('active');
-  if(!username) return showToast('Please enter a username.');
-  if(!content) return showToast('Please write something before posting.');
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Submitting...';
-  try{
-    const endpoint = isAsk ? '/api/community/ask' : '/api/community';
-    const r = await fetch(API + endpoint, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({username, content, pillar: pillar||null})
-    });
-    const d = await r.json();
-    if(d.ok){
-      showToast(isAsk ? '✓ Your question has been sent to OSB privately.' : '✓ Posted. Visible to you now — public after OSB review.');
-      document.getElementById('inp-content').value = '';
-      document.getElementById('char-count').textContent = '0 / 1200';
-    } else showToast('Could not submit: ' + (d.error||'Unknown error'));
-  } catch(e){ showToast('Network error — please try again.'); }
-  btn.disabled = false; btn.textContent = 'Post Intelligence';
-}
-
-function sharePost(){
-  if(navigator.share) navigator.share({title:'OSB Intelligence Community', url:window.location.href});
-  else navigator.clipboard.writeText(window.location.href).then(()=>showToast('Link copied.'));
-}
-
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 4000);
-}
-
-function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
-function closeMob(){document.getElementById('mob').style.display='none';}
-
-async function loadCommunityPosts(){
-  try{
-    const r = await fetch(API + '/api/community?limit=50');
-    const d = await r.json();
-    if(!d.ok || !d.data || !d.data.length) return;
-    const container = document.getElementById('community-posts');
-    container.innerHTML = d.data.map(p=>{
-      const av = (p.username||'A').charAt(0).toUpperCase();
-      const t = p.created_at ? new Date(p.created_at).toLocaleDateString() : 'recently';
-      return `<div class="post" data-p="${p.pillar||'community'}">
-        <div class="post-head">
-          <div class="post-avatar">${av}</div>
-          <div class="post-meta">
-            <div class="post-username">${p.username||'Anonymous'}</div>
-            <div class="post-time">${t}</div>
-          </div>
-          ${p.pillar ? `<div class="post-badge">${p.pillar}</div>` : ''}
-        </div>
-        <div class="post-content">${p.content||''}</div>
-        <div class="post-actions">
-          <button class="pa-btn">&#9829; ${p.likes||0}</button>
-          <button class="pa-btn" onclick="sharePost()">&#8599; Share</button>
-        </div>
-      </div>`;
-    }).join('');
-  } catch(e){}
-}
-
-loadCommunityPosts();
+function joinCom(){var u=document.getElementById('cu').value,e=document.getElementById('ce').value;var msg=document.getElementById('jmsg');if(!u||!e){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Please enter a username and email.';return;}fetch(BACKEND_URL+'/api/community',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,content:'New member signup',pillar:null})}).then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Registration received — check your email.':'Something went wrong.';});}
 </script>
+
 </body>
 </html>
