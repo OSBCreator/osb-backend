@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="description" content="IFN-003 · First Live Exit · OSB Intelligence Field Note · RSEI Model™ v2.0">
+<title>IFN-003: First Live Exit · OSB Intelligence</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--n:#060608;}
+html{scroll-behavior:smooth;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--b);}::-webkit-scrollbar-thumb{background:var(--r);}
+body{font-family:'Figtree',sans-serif;background:var(--b);color:var(--w);overflow-x:hidden;padding-top:72px;line-height:1.6;}
+.ticker{background:var(--r);height:36px;overflow:hidden;display:flex;align-items:center;}
+.tt{display:flex;animation:tickS 55s linear infinite;white-space:nowrap;}
+.ti{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.85);letter-spacing:2px;text-transform:uppercase;padding:0 2.5rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0;}
+.ts{color:rgba(255,255,255,.3);}
+@keyframes tickS{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(6,6,8,.97);border-bottom:1px solid rgba(193,18,31,.25);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;transition:border-color .3s;}
+.nav-logo img{height:46px;width:auto;display:block;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:4px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--r);transition:width .25s;}
+.nav-links a:hover,.nav-links a.active{color:var(--w);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:.875rem;}
+.nbtn-score{background:var(--r);color:var(--w);padding:9px 22px;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s;}
+.nbtn-score:hover{background:#d01020;}
+.nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
+.nbtn-join:hover{border-color:var(--r);color:var(--w);}
+.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+.nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
+.mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);}
+.mob-menu a:hover{color:var(--r);}
+.mob-ctas{display:flex;gap:.875rem;margin-top:1.5rem;}
+.pg-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
+.pg-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
+.si{max-width:1160px;margin:0 auto;}
+.lbl{display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.375rem;}
+.lbl-line{width:28px;height:1px;background:var(--r);}
+.lbl-text{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);font-weight:500;}
+.hxl{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5.2rem);font-weight:600;line-height:.95;letter-spacing:-1.5px;color:var(--w);}
+.hxl em{color:var(--r);font-style:italic;}
+.sd{background:var(--b);padding:6rem 3rem;}
+.sn{background:var(--n);padding:5rem 3rem;}
+.btn-r{background:var(--r);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-r:hover{background:#d01020;transform:translateY(-2px);}
+.btn-g{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);padding:13px 30px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;transition:all .25s;}
+.btn-g:hover{border-color:var(--r);color:var(--w);}
+.btn-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+.two-col{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start;}
+.sticky-col{position:sticky;top:88px;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+/* ARTICLE */
+.blg{font-size:1.05rem;line-height:1.95;font-weight:300;color:rgba(255,255,255,.65);}
+.blg em{color:rgba(255,255,255,.9);font-style:normal;}
+.blg strong{color:var(--w);font-weight:600;}
+.sec-div{display:flex;align-items:center;gap:1.5rem;margin:2.5rem 0;}
+.sec-div-line{flex:1;height:1px;background:rgba(255,255,255,.06);}
+.sec-div-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);white-space:nowrap;}
+.pullquote{border-left:2px solid var(--r);padding:1.5rem 2rem;margin:2.5rem 0;background:rgba(193,18,31,.04);}
+.pullquote p{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;color:var(--w);line-height:1.3;font-style:italic;}
+/* SCORE CARD */
+.score-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--r);padding:2rem;margin-bottom:1rem;}
+.sc-tag{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.sc-big{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;color:var(--w);margin-bottom:.25rem;}
+.sc-tier{display:inline-block;background:rgba(193,18,31,.1);border-left:2px solid var(--r);padding:3px 12px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--r);margin-bottom:1.5rem;letter-spacing:.5px;text-transform:uppercase;}
+.pillar-row{display:flex;align-items:center;gap:.875rem;margin-bottom:.625rem;}
+.pillar-lbl{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.35);width:90px;flex-shrink:0;}
+.pillar-bar{flex:1;height:3px;background:rgba(255,255,255,.07);position:relative;}
+.pillar-fill{height:3px;background:var(--r);transition:width 1.5s ease;}
+.pillar-val{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--w);font-weight:500;width:28px;text-align:right;flex-shrink:0;}
+/* META */
+.meta-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;margin-bottom:1rem;}
+.meta-tag{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:1rem;padding-bottom:.875rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.meta-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.meta-row:last-child{border-bottom:none;}
+.meta-k{font-size:.78rem;color:rgba(255,255,255,.28);}
+.meta-v{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--w);}
+.meta-v.green{color:#16a34a;}
+/* RELATED */
+.rel-case{display:flex;align-items:center;gap:.875rem;padding:.875rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-bottom:.5rem;text-decoration:none;transition:all .2s;}
+.rel-case:hover{border-color:rgba(193,18,31,.3);background:rgba(193,18,31,.04);}
+.rel-id{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--r);font-weight:500;flex-shrink:0;}
+.rel-title{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.4;transition:color .2s;}
+.rel-case:hover .rel-title{color:var(--w);}
+/* SIGNOFF */
+.signoff{padding-top:2.5rem;margin-top:2.5rem;border-top:1px solid rgba(255,255,255,.06);}
+.signoff-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin-bottom:.25rem;}
+.signoff-title{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.signoff-date{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:.5rem;}
+/* FOOTER */
+footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem 3rem 3rem;}
+.fg{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3.5rem;margin-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.flogo img{width:190px;height:auto;display:block;margin-bottom:1.375rem;}
+.fdesc{font-size:.8rem;color:rgba(255,255,255,.25);line-height:1.85;}
+.fcol-t{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
+.flinks{display:flex;flex-direction:column;gap:.5rem;}
+.flinks a{font-size:.8rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:var(--w);}
+.fbot{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fquote{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(255,255,255,.16);font-style:italic;max-width:500px;}
+.fcopy{font-size:.7rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
+@media(max-width:1000px){nav{padding:0 1.5rem;}.nav-links,.nbtn-join,.nbtn-score{display:none;}.nav-ham{display:flex;}.sd,.sn{padding:4.5rem 1.5rem;}.pg-hero{padding:4rem 1.5rem 3.5rem;}.two-col{grid-template-columns:1fr;gap:3rem;}.sticky-col{position:static;}.fg{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:600px){.pg-hero{padding:3rem 1.25rem 2.5rem;}.sd,.sn{padding:3.5rem 1.25rem;}.fg{grid-template-columns:1fr;}.fbot{flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+<div class="ticker"><div class="tt">
+  <div class="ti">IFN Case Library · 5 Documented Field Cases · OSB Behavioural Intelligence<span class="ts">◆</span></div>
+  <div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection System<span class="ts">◆</span></div>
+  <div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div>
+  <div class="ti">Never Let Affection Override Process · OSB · Est. 2021<span class="ts">◆</span></div>
+  <div class="ti">IFN Case Library · 5 Documented Field Cases · OSB Behavioural Intelligence<span class="ts">◆</span></div>
+  <div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection System<span class="ts">◆</span></div>
+  <div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div>
+  <div class="ti">Never Let Affection Override Process · OSB · Est. 2021<span class="ts">◆</span></div>
+</div></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="/osb-logo.jpg" alt="OSB" width="144" height="96" loading="eager"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="intelligence.html" class="active">Intelligence</a>
+    <a href="certification.html">For Platforms</a>
+    <a href="score.html">SCORE</a>
+    <a href="solace.html">Solace</a>
+    <a href="community.html">Community</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a href="community.html" class="nbtn-join">Community</a>
+    <a href="score.html" class="nbtn-score">SCORE Now</a>
+  </div>
+  <button class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a href="index.html" onclick="closeMob()">Home</a>
+  <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
+  <a href="certification.html" onclick="closeMob()">For Platforms</a>
+  <a href="score.html" onclick="closeMob()">SCORE</a>
+  <a href="solace.html" onclick="closeMob()">Solace</a>
+  <a href="community.html" onclick="closeMob()">Community</a>
+  <div class="mob-ctas"><a href="score.html" class="btn-r">SCORE Now</a></div>
+</div>
+
+<div class="pg-hero">
+  <div style="position:absolute;right:-2rem;bottom:-1rem;font-family:'Bebas Neue',sans-serif;font-size:12rem;color:rgba(255,255,255,.018);line-height:1;pointer-events:none;white-space:nowrap;">EXIT</div>
+  <div class="si">
+    <div class="lbl reveal"><div class="lbl-line"></div><div class="lbl-text">Intelligence Field Note · R-Pillar / E-Pillar</div></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:.75rem;" class="reveal">IFN-003</div>
+    <h1 class="hxl reveal d1">First Live Exit</h1>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:1.5rem;" class="reveal d2">Active Scam Exited in Real Time · Confirmed Outcome</p>
+    <div style="display:flex;align-items:center;gap:2rem;margin-top:1.75rem;flex-wrap:wrap;" class="reveal d3">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);">John Dee · OSB</div>
+      <div style="width:1px;height:12px;background:rgba(255,255,255,.1);"></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);">2025</div>
+      <div style="width:1px;height:12px;background:rgba(255,255,255,.1);"></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);">Quora</div>
+      <div style="width:1px;height:12px;background:rgba(255,255,255,.1);"></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);">First Documented Live OSB Intervention</div>
+    </div>
+  </div>
+</div>
+
+<div class="sd">
+  <div class="si">
+    <div class="two-col">
+      <article>
+        <p class="blg reveal" style="font-size:1.15rem;margin-bottom:2.5rem;color:rgba(255,255,255,.75);">OSB intervened in an active romance scam on Quora. The subject exited the same day. Both R and E pillars at maximum. First documented live OSB exit intervention with confirmed successful outcome.</p>
+        <div class="sec-div reveal"><div class="sec-div-line"></div><div class="sec-div-lbl">The Situation</div><div class="sec-div-line"></div></div>
+        <p class="blg reveal" style="margin-bottom:1.75rem;">A person reached out on Quora describing a relationship that had developed over an extended period. The emotional investment was at maximum — R5. The psychological manipulation indicators were clear and severe — E5. The situation had all the hallmarks of an active romance fraud at a critical stage.</p>
+<div class="sec-div reveal"><div class="sec-div-line"></div><div class="sec-div-lbl">The Intervention</div><div class="sec-div-line"></div></div>
+        <p class="blg reveal" style="margin-bottom:1.75rem;">OSB responded directly. The intervention was not generic advice. It was specific, framework-informed, and designed to give the subject a clear understanding of what was happening to them — using language they could act on immediately. The goal was exit, not just awareness.</p>
+<div class="sec-div reveal"><div class="sec-div-line"></div><div class="sec-div-lbl">The Outcome</div><div class="sec-div-line"></div></div>
+        <p class="blg reveal" style="margin-bottom:1.75rem;"><em>The subject exited the same day. Outcome confirmed.</em> This is not always possible. When someone has built months or years of emotional investment in a relationship — even a fraudulent one — exit is psychologically difficult. The same-day exit in IFN-003 represents both the severity of the intervention and the subject's own courage in accepting what they were told.</p>
+<div class="sec-div reveal"><div class="sec-div-line"></div><div class="sec-div-lbl">The Significance</div><div class="sec-div-line"></div></div>
+        <p class="blg reveal" style="margin-bottom:1.75rem;">IFN-003 established that the RSEI framework is not only a diagnostic tool — it is an intervention architecture. The pillar scores do not just describe what happened. They describe what the subject needs to hear, and in what order, to be able to exit. This case is the operational proof of that principle.</p>
+
+        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-left:2px solid rgba(255,255,255,.15);padding:1.125rem 1.375rem;margin-top:2.5rem;" class="reveal">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.5rem;">Methodology Note</div>
+          <div style="font-size:.85rem;color:rgba(255,255,255,.35);line-height:1.8;">IFN-003 is classified as a successful exit intervention. OSB does not publish exit intervention details publicly — the methodology is part of the confidential assessment process. The outcome (same-day confirmed exit) is documented as part of the IFN record.</div>
+        </div>
+        <div class="signoff reveal" style="margin-top:3rem;">
+          <div class="signoff-name">John Dee</div>
+          <div class="signoff-title">Founder & Director · OSB · Creator, RSEI Model™</div>
+          <div class="signoff-date">2025 · Quora · Published on public record</div>
+        </div>
+      </article>
+
+      <aside class="sticky-col">
+        <div class="score-card reveal">
+          <div class="sc-tag">RSEI Score · IFN-003</div>
+          <div class="sc-big">14<span style="font-size:2rem;color:rgba(255,255,255,.3);">/20</span></div>
+          <div class="sc-tier">CRITICAL</div>
+          <div class="pillar-row">
+          <div class="pillar-lbl">R · Relationship</div>
+          <div class="pillar-bar"><div class="pillar-fill" style="width:100%"></div></div>
+          <div class="pillar-val">5/5</div>
+        </div>
+<div class="pillar-row">
+          <div class="pillar-lbl">S · Sophistication</div>
+          <div class="pillar-bar"><div class="pillar-fill" style="width:40%"></div></div>
+          <div class="pillar-val">2/5</div>
+        </div>
+<div class="pillar-row">
+          <div class="pillar-lbl">E · Emotional</div>
+          <div class="pillar-bar"><div class="pillar-fill" style="width:100%"></div></div>
+          <div class="pillar-val">5/5</div>
+        </div>
+<div class="pillar-row">
+          <div class="pillar-lbl">I · Financial</div>
+          <div class="pillar-bar"><div class="pillar-fill" style="width:40%"></div></div>
+          <div class="pillar-val">2/5</div>
+        </div>
+
+        </div>
+        <div class="meta-card reveal d1">
+          <div class="meta-tag">Case Metadata</div>
+          <div class="meta-row"><span class="meta-k">Case ID</span><span class="meta-v">IFN-003</span></div>
+          <div class="meta-row"><span class="meta-k">Platform</span><span class="meta-v">Quora</span></div>
+          <div class="meta-row"><span class="meta-k">Documented</span><span class="meta-v">2025</span></div>
+          <div class="meta-row"><span class="meta-k">Documented by</span><span class="meta-v">John Dee · OSB</span></div>
+          <div class="meta-row"><span class="meta-k">Views</span><span class="meta-v">Confirmed</span></div>
+          <div class="meta-row"><span class="meta-k">Status</span><span class="meta-v green">Resolved</span></div>
+          <div class="meta-row"><span class="meta-k">Classification</span><span class="meta-v" style="font-size:.68rem;">First Documented Live OSB Intervention</span></div>
+        </div>
+        <div style="margin-bottom:1rem;" class="reveal d1">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:.875rem;padding-bottom:.875rem;border-bottom:1px solid rgba(255,255,255,.06);">Related Cases</div>
+          <a href="ifn-002.html" class="rel-case"><div class="rel-id">IFN-002</div><div class="rel-title">Suicidal Ideation Script — E Pillar Trigger</div></a>
+<a href="ifn-004.html" class="rel-case"><div class="rel-id">IFN-004</div><div class="rel-title">The Slow-Burn Pattern — $28K Over 3 Years</div></a>
+
+        </div>
+        <a href="intelligence.html" style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(193,18,31,.55);text-decoration:none;display:block;margin-bottom:1.5rem;" class="reveal d2">← Back to IFN Case Library</a>
+        <a href="score.html" class="btn-r reveal d2" style="width:100%;text-align:center;display:block;margin-bottom:.75rem;">Score Your Situation</a>
+        <a href="community.html" class="btn-g reveal d3" style="width:100%;text-align:center;display:block;">Join OSB Community</a>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="sn" style="border-top:1px solid rgba(255,255,255,.04);">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.5rem;">OSB · RSEI Model™</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;line-height:1.05;margin-bottom:1.25rem;">Documented. Named. <em style="color:var(--r);font-style:italic;">Scored.</em></h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.35);line-height:1.85;max-width:480px;margin:0 auto 2.5rem;">Every IFN case is a permanent record. If you suspect romance fraud, OSB's scoring tool can help you understand what you are facing — free, confidential, in minutes.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="score.html" class="btn-r" style="padding:13px 36px;">Score Your Situation</a>
+      <a href="intelligence.html" class="btn-g">Full Case Library</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fg">
+    <div>
+      <div class="flogo"><img src="/osb-logo.jpg" alt="OSB" loading="lazy" style="max-height:48px;width:auto;"></div>
+      <p class="fdesc">OSB is the world's first behavioural intelligence organisation built to identify, document and stop social engineering fraud using the RSEI Model™. Est. 2021.</p>
+    </div>
+    <div>
+      <div class="fcol-t">Intelligence</div>
+      <div class="flinks">
+        <a href="intelligence.html">IFN Case Library</a>
+        <a href="ifn-001.html">IFN-001 · Proxy Caller</a>
+        <a href="ifn-002.html">IFN-002 · E Score 5</a>
+        <a href="ifn-003.html">IFN-003 · Live Exit</a>
+        <a href="ifn-004.html">IFN-004 · $28K Case</a>
+        <a href="ifn-005.html">IFN-005 · Facade Bank</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Dispatches</div>
+      <div class="flinks">
+        <a href="open-letter.html">Open Letter to Platforms</a>
+        <a href="gift-cards.html">Gift Cards Intelligence</a>
+        <a href="rsei-model.html">RSEI Model™ v2.0</a>
+        <a href="report.html">Global Fraud Report 2026</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">OSB</div>
+      <div class="flinks">
+        <a href="certification.html">Platform Certification</a>
+        <a href="score.html">Scoring Tool</a>
+        <a href="solace.html">OSB Solace</a>
+        <a href="community.html">Community</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="fquote" id="fq"></div>
+    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved &nbsp;·&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookies</a></div>
+  </div>
+</footer>
+<script>
+var QQ=['"We named what they do. Now we stop it." — OSB','"The feelings were real. The person was not." — OSB Solace','"Emotional harm is real harm." — E Pillar Independent Trigger','"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB','"Never let affection override process." — OSB'];
+function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
+function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
+document.addEventListener('click',function(e){var m=document.getElementById('mob'),h=document.querySelector('.nav-ham');if(m&&h&&!m.contains(e.target)&&!h.contains(e.target))m.style.display='none';});
+var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  var fq=document.getElementById('fq');if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];
+});
+window.addEventListener('scroll',function(){var n=document.getElementById('nav');if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';});
+</script>
+</body>
+</html>
