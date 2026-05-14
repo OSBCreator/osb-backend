@@ -89,7 +89,35 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .fbot{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
 .fquote{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(255,255,255,.16);font-style:italic;max-width:500px;}
 .fcopy{font-size:.7rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
-/* MOBILE */
+/* INTAKE TABS */
+.intake-tabs{display:flex;gap:.5rem;margin-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:0;}
+.itab{background:none;border:none;border-bottom:2px solid transparent;padding:.875rem 1.25rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;margin-bottom:-1px;}
+.itab:hover{color:rgba(255,255,255,.6);}
+.itab.active{color:var(--r);border-bottom-color:var(--r);}
+.intake-panel{display:none;}
+.intake-panel.active{display:block;}
+/* EMERGENCY BLOCK */
+.emergency-block{background:rgba(193,18,31,.07);border:1px solid rgba(193,18,31,.35);border-left:3px solid var(--r);padding:1.5rem 2rem;margin-bottom:2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.eb-text{flex:1;}
+.eb-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:.375rem;}
+.eb-desc{font-size:.9rem;color:rgba(255,255,255,.6);line-height:1.6;}
+/* SLA STRIP */
+.sla-strip{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:.875rem 1.125rem;margin-bottom:1rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;}
+.sla-item{display:flex;align-items:center;gap:.5rem;}
+.sla-dot{width:5px;height:5px;background:var(--r);border-radius:50%;flex-shrink:0;}
+.sla-text{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);}
+.sla-val{color:rgba(255,255,255,.55);font-weight:600;}
+/* REFERENCE NUMBER */
+.ref-block{background:rgba(193,18,31,.05);border:1px solid rgba(193,18,31,.2);border-left:3px solid var(--r);padding:1.25rem 1.5rem;margin-top:1.5rem;}
+.ref-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(193,18,31,.7);margin-bottom:.375rem;}
+.ref-code{font-family:'IBM Plex Mono',monospace;font-size:1.1rem;color:var(--w);letter-spacing:2px;font-weight:500;}
+.ref-note{font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.375rem;line-height:1.6;}
+/* INTEL FORM TAGS */
+.pillar-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
+.ptag{background:none;border:1px solid rgba(255,255,255,.12);padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);cursor:pointer;transition:all .2s;}
+.ptag:hover{border-color:rgba(193,18,31,.4);color:rgba(255,255,255,.6);}
+.ptag.selected{border-color:var(--r);color:var(--r);background:rgba(193,18,31,.07);}
+
 @media(max-width:1000px){
   nav{padding:0 1.5rem;}
   .nav-links,.nbtn-join,.nbtn-score{display:none;}
@@ -451,6 +479,10 @@ footer{background:var(--footer-bg) !important;}
 </div>
 </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE HERO
+═══════════════════════════════════════════════════════════ -->
 <div class="pg-hero">
   <div class="si">
     <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Contact OSB</div></div>
@@ -458,42 +490,237 @@ footer{background:var(--footer-bg) !important;}
     <p style="font-size:1rem;color:rgba(255,255,255,.42);max-width:540px;line-height:1.85;font-weight:300;">Whether you are in an active situation, coming through one, or want to share intelligence — reach out. Every message is reviewed personally by OSB.</p>
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════════════════ -->
 <div class="sd">
   <div class="si">
-    <div class="two-col">
-      <div class="reveal">
-        <div class="cfw">
-          <form id="osb-form">
-            <div style="margin-bottom:1rem;"><label class="cfl">Your email <span>(optional — for a reply)</span></label><input type="email" class="cfi" id="cfe" placeholder="your@email.com"></div>
-            <div style="margin-bottom:1rem;"><label class="cfl">Why are you reaching out?</label><select class="cfs" id="cfr" style="background:rgba(255,255,255,.04);"><option value="" style="background:#111;">— Select —</option><option style="background:#111;">Platform certification enquiry</option><option style="background:#111;">Institutional or regulatory enquiry</option><option style="background:#111;">I am a researcher or journalist</option><option style="background:#111;">I want to share a case with OSB</option><option style="background:#111;">I want to report a fraud technique</option><option style="background:#111;">I think I am in a social engineering fraud right now</option><option style="background:#111;">I recently left a scam situation</option><option style="background:#111;">Other</option></select></div>
-            <div style="margin-bottom:1rem;"><label class="cfl">Your message</label><textarea class="cft" id="cfm" placeholder="Tell us what is happening. There is no right or wrong way to say it. Take your time."></textarea></div>
 
-            <!-- CONSENT BLOCK — OSB/LEGAL/CON/001/2026 -->
-            <div style="border:1px solid rgba(193,18,31,.35);border-radius:6px;padding:1rem 1.125rem;margin-bottom:1rem;background:rgba(193,18,31,.04);">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.5rem;">OSB/LEGAL/CON/001/2026 — Contact Form Data Notice</div>
-              <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:.875rem;">If you click the button below, the following information is sent securely to OSB: your email address (if provided), your reason for reaching out, and your message. Your email — if provided — is used only to reply to you. Your message is seen only by OSB and used solely to assist you or process your enquiry. Nothing is sold. Nothing is shared publicly. You can request deletion at any time by contacting <a href="mailto:contact@onlinesecuritybureau.com" style="color:#C1121F;text-decoration:none;">contact@onlinesecuritybureau.com</a>. See our <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a> and <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a>.</div>
-              <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
-                <input type="checkbox" id="contact-consent" onchange="updateContactSubmit()" style="width:15px;height:15px;min-width:15px;margin-top:2px;accent-color:#C1121F;cursor:pointer;">
-                <span style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.6;">I understand that the information above will be sent securely to OSB and used only to assist me or process my enquiry. I have read the <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a> and <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a>.</span>
-              </label>
-              <div style="font-size:.65rem;color:rgba(255,255,255,.2);letter-spacing:.5px;margin-top:.75rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06);">PRIVACY BY DESIGN &middot; DATA MINIMISATION STANDARD &middot; OSB &middot; RSEI Model™<br>Data encrypted in transit &middot; Used only for the stated purpose &middot; Deletion available on request</div>
-            </div>
-            <!-- END CONSENT -->
-
-            <button type="button" class="cfb" id="contact-submit-btn" onclick="sendContact()" disabled style="opacity:.4;cursor:not-allowed;">Send to OSB — Privately and Securely</button>
-          </form>
-          <div class="form-ok" id="form-ok"><p><strong>Message received.</strong><br>OSB will review your message personally. If you provided an email, you will hear from us.</p></div>
-          <p style="font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.875rem;line-height:1.5;">Nothing is sent until you click the button. Your message is seen only by OSB.</p>
-        </div>
+    <!-- ACTIVE SITUATION BANNER -->
+    <div class="emergency-block reveal">
+      <div class="eb-text">
+        <div class="eb-label">Active Situation — Priority Routing</div>
+        <div class="eb-desc">If you are in an active social engineering fraud situation right now — you don't need to fill a form. Go directly to OSB Solace for immediate, trauma-informed support.</div>
       </div>
-      <div class="ci-stack reveal d2">
-        <div class="ci-blk"><div class="ci-tag">Direct Contact — Institutional</div><div class="ci-val">john.dee@onlinesecuritybureau.com</div><div class="ci-sub">For platform certification enquiries, institutional partnerships, regulatory engagement, law enforcement, and media. Reviewed personally by the OSB founder.</div><a href="mailto:john.dee@onlinesecuritybureau.com" class="btn-r" style="display:inline-block;margin-top:1.125rem;font-size:.72rem;letter-spacing:1.5px;">Send Direct Email</a></div>
-        <div class="ci-blk"><div class="ci-tag">General Enquiries</div><div class="ci-val">contact@onlinesecuritybureau.com</div><div class="ci-sub">For general questions, case submissions, intelligence sharing, and individual support enquiries. All messages are reviewed by OSB.</div><a href="mailto:contact@onlinesecuritybureau.com" class="btn-g" style="display:inline-block;margin-top:1.125rem;font-size:.72rem;letter-spacing:1.5px;">Send Email</a></div>
-        <div class="ci-blk"><div class="ci-tag">RSEI Scoring Tool</div><div class="ci-val">Score your situation now</div><div class="ci-sub">Clear, evidence-based score in 2 minutes. Free. Private. No personal details required. Accessible for all ages — designed with seniors in mind.</div><a href="score.html" class="btn-r" style="display:inline-block;margin-top:1.125rem;font-size:.72rem;letter-spacing:1.5px;">Begin the Assessment</a></div>
-        <div class="ci-blk"><div class="ci-tag">Response</div><div class="ci-val">Personal review</div><div class="ci-sub">Every message is reviewed personally by OSB. If your situation is urgent — say so. Active cases are prioritised immediately.</div></div>
-        <div class="anon-blk"><div class="anon-t">A note on anonymity</div><div class="anon-s">OSB operates anonymously by design. We do not need your real name. Share only what you are comfortable sharing. Every level of disclosure is respected equally.</div></div>
-      </div>
+      <a href="solace.html" class="btn-r" style="white-space:nowrap;flex-shrink:0;">I Need Help Now →</a>
     </div>
+
+    <!-- INTAKE TABS -->
+    <div class="intake-tabs">
+      <button class="itab active" onclick="switchTab('institutional',this)">Institutional Enquiry</button>
+      <button class="itab" onclick="switchTab('intelligence',this)">Intelligence Submission</button>
+    </div>
+
+    <!-- ─── PANEL 1: INSTITUTIONAL ─── -->
+    <div class="intake-panel active" id="panel-institutional">
+      <div class="two-col">
+
+        <!-- FORM -->
+        <div>
+          <div class="cfw">
+            <form id="osb-form" onsubmit="return false;">
+
+              <div style="margin-bottom:1rem;">
+                <label class="cfl">Your email <span>(optional — for a reply)</span></label>
+                <input type="email" class="cfi" id="cfe" placeholder="your@email.com" autocomplete="email">
+              </div>
+
+              <div style="margin-bottom:1rem;">
+                <label class="cfl">Why are you reaching out?</label>
+                <select class="cfs" id="cfr" style="background:rgba(255,255,255,.04);">
+                  <option value="" style="background:#111;">— Select —</option>
+                  <option style="background:#111;">Platform certification enquiry</option>
+                  <option style="background:#111;">Institutional or regulatory enquiry</option>
+                  <option style="background:#111;">I am a researcher or journalist</option>
+                  <option style="background:#111;">I want to share a case with OSB</option>
+                  <option style="background:#111;">I want to report a fraud technique</option>
+                  <option style="background:#111;">I think I am in a social engineering fraud right now</option>
+                  <option style="background:#111;">I recently left a scam situation</option>
+                  <option style="background:#111;">Other</option>
+                </select>
+              </div>
+
+              <div style="margin-bottom:1rem;">
+                <label class="cfl">Your message</label>
+                <textarea class="cft" id="cfm" placeholder="Tell us what is happening. There is no right or wrong way to say it. Take your time." autocomplete="off"></textarea>
+              </div>
+
+              <!-- CONSENT BLOCK -->
+              <div style="border:1px solid rgba(193,18,31,.35);border-radius:6px;padding:1rem 1.125rem;margin-bottom:1rem;background:rgba(193,18,31,.04);">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.5rem;">OSB/LEGAL/CON/001/2026 — Contact Form Data Notice</div>
+                <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:.875rem;">If you click the button below, the following information is sent securely to OSB: your email address (if provided), your reason for reaching out, and your message. Your email — if provided — is used only to reply to you. Your message is seen only by OSB and used solely to assist you or process your enquiry. Nothing is sold. Nothing is shared publicly. You can request deletion at any time by contacting <a href="mailto:contact@onlinesecuritybureau.com" style="color:#C1121F;text-decoration:none;">contact@onlinesecuritybureau.com</a>. See our <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a> and <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a>.</div>
+                <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+                  <input type="checkbox" id="contact-consent" onchange="updateContactSubmit()" style="width:15px;height:15px;min-width:15px;margin-top:2px;accent-color:#C1121F;cursor:pointer;">
+                  <span style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.6;">I understand that the information above will be sent securely to OSB and used only to assist me or process my enquiry. I have read the <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a> and <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a>.</span>
+                </label>
+                <div style="font-size:.65rem;color:rgba(255,255,255,.2);letter-spacing:.5px;margin-top:.75rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06);">PRIVACY BY DESIGN &middot; DATA MINIMISATION STANDARD &middot; OSB &middot; RSEI Model™<br>Data encrypted in transit &middot; Used only for the stated purpose &middot; Deletion available on request</div>
+              </div>
+
+              <!-- SLA STRIP -->
+              <div class="sla-strip">
+                <div class="sla-item"><div class="sla-dot"></div><span class="sla-text">Institutional: <span class="sla-val">48hr response</span></span></div>
+                <div class="sla-item"><div class="sla-dot"></div><span class="sla-text">Active cases: <span class="sla-val">Same day</span></span></div>
+                <div class="sla-item"><div class="sla-dot"></div><span class="sla-text">Intelligence: <span class="sla-val">72hr review</span></span></div>
+              </div>
+
+              <!-- ERROR -->
+              <div id="contact-err" style="display:none;background:rgba(193,18,31,.08);border:1px solid rgba(193,18,31,.3);border-left:3px solid #C1121F;padding:.875rem 1.125rem;margin-bottom:1rem;font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6;"></div>
+
+              <button type="button" class="cfb" id="contact-submit-btn" onclick="sendContact()" disabled style="opacity:.4;cursor:not-allowed;">Send to OSB — Privately and Securely</button>
+            </form>
+
+            <!-- SUCCESS STATE -->
+            <div class="form-ok" id="form-ok" style="display:none;">
+              <p><strong>Message received.</strong><br>OSB will review your message personally. If you provided an email, you will hear from us.</p>
+              <div class="ref-block" id="ref-block">
+                <div class="ref-label">Enquiry Reference</div>
+                <div class="ref-code" id="ref-code">—</div>
+                <div class="ref-note">Keep this reference. OSB uses it to track your enquiry.</div>
+              </div>
+              <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;">What Happens Next</div>
+                <div style="display:flex;flex-direction:column;gap:.75rem;">
+                  <div style="display:flex;gap:.875rem;align-items:flex-start;"><div style="width:6px;height:6px;background:#C1121F;border-radius:50%;flex-shrink:0;margin-top:.4rem;"></div><div style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;"><strong style="color:rgba(255,255,255,.6);">Now</strong> — Your message is logged and queued for personal review by OSB.</div></div>
+                  <div style="display:flex;gap:.875rem;align-items:flex-start;"><div style="width:6px;height:6px;background:rgba(193,18,31,.4);border-radius:50%;flex-shrink:0;margin-top:.4rem;"></div><div style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;"><strong style="color:rgba(255,255,255,.6);">Within 48 hours</strong> — OSB reviews your enquiry. If you provided an email, you will receive a direct response.</div></div>
+                  <div style="display:flex;gap:.875rem;align-items:flex-start;"><div style="width:6px;height:6px;background:rgba(193,18,31,.2);border-radius:50%;flex-shrink:0;margin-top:.4rem;"></div><div style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;"><strong style="color:rgba(255,255,255,.6);">If urgent</strong> — Active fraud situations are escalated immediately. Use your reference number in any follow-up.</div></div>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.875rem;line-height:1.5;">Nothing is sent until you click the button. Your message is seen only by OSB.</p>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="ci-stack">
+          <div class="ci-blk">
+            <div class="ci-tag">Direct Contact — Institutional</div>
+            <div class="ci-val">john.dee@onlinesecuritybureau.com</div>
+            <div class="ci-sub">For platform certification, institutional partnerships, regulatory engagement, law enforcement, and media. Reviewed personally by the OSB founder.</div>
+            <a href="mailto:john.dee@onlinesecuritybureau.com" class="btn-r" style="display:inline-block;margin-top:1.125rem;font-size:.72rem;letter-spacing:1.5px;">Send Direct Email</a>
+          </div>
+          <div class="ci-blk">
+            <div class="ci-tag">General Enquiries</div>
+            <div class="ci-val">contact@onlinesecuritybureau.com</div>
+            <div class="ci-sub">For general questions, case submissions, intelligence sharing, and individual support enquiries. All messages are reviewed by OSB.</div>
+            <a href="mailto:contact@onlinesecuritybureau.com" class="btn-g" style="display:inline-block;margin-top:1.125rem;font-size:.72rem;letter-spacing:1.5px;">Send Email</a>
+          </div>
+          <div class="ci-blk">
+            <div class="ci-tag">RSEI Scoring Tool</div>
+            <div class="ci-val">Score your situation now</div>
+            <div class="ci-sub">Clear, evidence-based score in 2 minutes. Free. Private. No personal details required. Accessible for all ages — designed with seniors in mind.</div>
+            <a href="score.html" class="btn-r" style="display:inline-block;margin-top:1.125rem;font-size:.72rem;letter-spacing:1.5px;">Begin the Assessment</a>
+          </div>
+          <div class="ci-blk">
+            <div class="ci-tag">Response</div>
+            <div class="ci-val">Personal review</div>
+            <div class="ci-sub">Every message is reviewed personally by OSB. If your situation is urgent — say so. Active cases are prioritised immediately.</div>
+          </div>
+          <div class="anon-blk">
+            <div class="anon-t">A note on anonymity</div>
+            <div class="anon-s">OSB operates anonymously by design. We do not need your real name. Share only what you are comfortable sharing. Every level of disclosure is respected equally.</div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- end panel-institutional -->
+
+    <!-- ─── PANEL 2: INTELLIGENCE SUBMISSION ─── -->
+    <div class="intake-panel" id="panel-intelligence">
+      <div class="two-col">
+
+        <!-- FORM -->
+        <div>
+          <p style="font-size:.9rem;color:rgba(255,255,255,.4);line-height:1.85;margin-bottom:2rem;">Use this form to submit a documented scammer technique, operator pattern, or field observation directly to the OSB intelligence corpus. Your submission is reviewed by OSB and — if validated — may be elevated to IFN status.</p>
+          <div class="cfw">
+
+            <div style="margin-bottom:1rem;">
+              <label class="cfl">Your username <span>(anonymous — no real name needed)</span></label>
+              <input type="text" class="cfi" id="intel-user" placeholder="e.g. field_observer_7" autocomplete="off">
+            </div>
+
+            <div style="margin-bottom:1rem;">
+              <label class="cfl">RSEI Pillar — what dimension does this relate to?</label>
+              <div class="pillar-tags" id="pillar-tags">
+                <button class="ptag" onclick="selectPillar('R',this)">R · Relationship</button>
+                <button class="ptag" onclick="selectPillar('S',this)">S · Sophistication</button>
+                <button class="ptag" onclick="selectPillar('E',this)">E · Emotional</button>
+                <button class="ptag" onclick="selectPillar('I',this)">I · Financial</button>
+                <button class="ptag" onclick="selectPillar('IFN',this)">IFN · Field Case</button>
+                <button class="ptag" onclick="selectPillar('OTHER',this)">Other</button>
+              </div>
+              <input type="hidden" id="intel-pillar" value="">
+            </div>
+
+            <div style="margin-bottom:1rem;">
+              <label class="cfl">Platform where this was observed</label>
+              <input type="text" class="cfi" id="intel-platform" placeholder="e.g. Tinder, WhatsApp, Facebook, LinkedIn…" autocomplete="off">
+            </div>
+
+            <div style="margin-bottom:1rem;">
+              <label class="cfl">Describe the technique or pattern</label>
+              <textarea class="cft" id="intel-content" placeholder="Describe what you observed — the technique, how it was deployed, what made it effective. As much detail as you are comfortable sharing." autocomplete="off"></textarea>
+            </div>
+
+            <!-- SLA -->
+            <div class="sla-strip" style="margin-bottom:1rem;">
+              <div class="sla-item"><div class="sla-dot"></div><span class="sla-text">Review: <span class="sla-val">72 hours</span></span></div>
+              <div class="sla-item"><div class="sla-dot"></div><span class="sla-text">IFN elevation: <span class="sla-val">If validated</span></span></div>
+              <div class="sla-item"><div class="sla-dot"></div><span class="sla-text">Attribution: <span class="sla-val">Anonymous by default</span></span></div>
+            </div>
+
+            <!-- ERROR -->
+            <div id="intel-err" style="display:none;background:rgba(193,18,31,.08);border:1px solid rgba(193,18,31,.3);border-left:3px solid #C1121F;padding:.875rem 1.125rem;margin-bottom:1rem;font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6;"></div>
+
+            <button type="button" class="cfb" id="intel-submit-btn" onclick="sendIntel()">Submit to OSB Intelligence</button>
+
+            <!-- SUCCESS STATE -->
+            <div class="form-ok" id="intel-ok" style="display:none;">
+              <p><strong>Intelligence received.</strong><br>OSB will review your submission within 72 hours. If validated, it will be incorporated into the intelligence corpus.</p>
+              <div class="ref-block" id="intel-ref-block">
+                <div class="ref-label">Submission Reference</div>
+                <div class="ref-code" id="intel-ref-code">—</div>
+                <div class="ref-note">Keep this reference. OSB uses it to track your submission through the review process.</div>
+              </div>
+              <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem;">What Happens Next</div>
+                <div style="display:flex;flex-direction:column;gap:.75rem;">
+                  <div style="display:flex;gap:.875rem;align-items:flex-start;"><div style="width:6px;height:6px;background:#C1121F;border-radius:50%;flex-shrink:0;margin-top:.4rem;"></div><div style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;"><strong style="color:rgba(255,255,255,.6);">Now</strong> — Your submission enters the OSB moderation queue.</div></div>
+                  <div style="display:flex;gap:.875rem;align-items:flex-start;"><div style="width:6px;height:6px;background:rgba(193,18,31,.4);border-radius:50%;flex-shrink:0;margin-top:.4rem;"></div><div style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;"><strong style="color:rgba(255,255,255,.6);">Within 72 hours</strong> — OSB reviews and classifies your submission against the RSEI Model™ pillars.</div></div>
+                  <div style="display:flex;gap:.875rem;align-items:flex-start;"><div style="width:6px;height:6px;background:rgba(193,18,31,.2);border-radius:50%;flex-shrink:0;margin-top:.4rem;"></div><div style="font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;"><strong style="color:rgba(255,255,255,.6);">If validated</strong> — Your submission may be elevated to IFN status and permanently logged in the OSB intelligence library.</div></div>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.875rem;line-height:1.5;">All intelligence submissions are seen only by OSB. Nothing is published without review.</p>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="ci-stack" style="position:sticky;top:88px;">
+          <div class="ci-blk">
+            <div class="ci-tag">What qualifies as intelligence?</div>
+            <div class="ci-val">Any observed pattern</div>
+            <div class="ci-sub">A script you recognised. A tactic you experienced. A technique you documented. A platform behaviour you noticed. If it's real and specific — OSB wants it.</div>
+          </div>
+          <div class="ci-blk">
+            <div class="ci-tag">IFN Elevation</div>
+            <div class="ci-val">Intelligence Field Note</div>
+            <div class="ci-sub">Submissions that are validated, specific, and document a named technique may be elevated to IFN status — permanently logged in the OSB case library with a reference code.</div>
+          </div>
+          <div class="ci-blk">
+            <div class="ci-tag">RSEI Pillars</div>
+            <div class="ci-val">R · S · E · I</div>
+            <div class="ci-sub">Tag your submission to the most relevant behavioural pillar. If you are unsure, select "Other" — OSB will classify it during review.</div>
+          </div>
+          <div class="anon-blk">
+            <div class="anon-t">Your identity is safe</div>
+            <div class="anon-s">Intelligence submissions require only a username. OSB does not collect, store, or share identifying information beyond what you voluntarily provide.</div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- end panel-intelligence -->
+
   </div>
 </div>
 
@@ -565,19 +792,66 @@ window.addEventListener('scroll',function(){
 </script>
 <script>
 var BACKEND_URL="https://osb-backend-production.up.railway.app";
+
+/* ── REFERENCE NUMBER ── */
+/* ── IN-PAGE ERROR HANDLER ── */
+function showErr(id, msg){
+  var el=document.getElementById(id);
+  if(!el){
+    el=document.createElement('div');
+    el.id=id;
+    el.style.cssText='background:rgba(193,18,31,.08);border:1px solid rgba(193,18,31,.3);border-left:3px solid var(--r);padding:.875rem 1.125rem;margin-top:.875rem;font-family:\'Figtree\',sans-serif;font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6;display:none;';
+    var btn=document.getElementById(id==='contact-err'?'contact-submit-btn':'intel-submit-btn');
+    if(btn&&btn.parentNode)btn.parentNode.insertBefore(el,btn.nextSibling);
+  }
+  el.textContent=msg;
+  el.style.display='block';
+  setTimeout(function(){el.style.display='none';},6000);
+}
+
+function generateRef(type){
+  var year=new Date().getFullYear();
+  var num=String(Math.floor(Math.random()*9000)+1000);
+  return 'OSB/'+type+'/'+year+'/'+num;
+}
+
+/* ── TAB SWITCHING ── */
+function switchTab(tab, btn){
+  document.querySelectorAll('.itab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.intake-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  var panel=document.getElementById('panel-'+tab);
+  panel.classList.add('active');
+  // Force reveal elements visible — IntersectionObserver won't fire for hidden panels
+  panel.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
+}
+
+/* ── PILLAR SELECTION ── */
+var selectedPillar='';
+function selectPillar(pillar, btn){
+  document.querySelectorAll('.ptag').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  selectedPillar=pillar;
+  document.getElementById('intel-pillar').value=pillar;
+}
+
+/* ── CONSENT CHECK ── */
 function updateContactSubmit(){
   var btn=document.getElementById('contact-submit-btn');
   var checked=document.getElementById('contact-consent').checked;
   if(btn){btn.disabled=!checked;btn.style.opacity=checked?'1':'0.4';btn.style.cursor=checked?'pointer':'not-allowed';}
 }
+
+/* ── SEND INSTITUTIONAL CONTACT ── */
 function sendContact(){
   var consent=document.getElementById('contact-consent');
   if(!consent||!consent.checked)return;
-  var email=document.getElementById('cfe').value,reason=document.getElementById('cfr').value,message=document.getElementById('cfm').value;
+  var email=document.getElementById('cfe').value;
+  var reason=document.getElementById('cfr').value;
+  var message=document.getElementById('cfm').value;
   if(!message)return;
   var btn=document.getElementById('contact-submit-btn');
-  btn.disabled=true;btn.style.opacity='0.6';
-  btn.textContent='Sending…';
+  btn.disabled=true;btn.style.opacity='0.6';btn.textContent='Sending…';
   var controller=new AbortController();
   var timeout=setTimeout(function(){controller.abort();},20000);
   fetch(BACKEND_URL+'/api/contact',{
@@ -589,26 +863,239 @@ function sendContact(){
   .then(function(r){
     clearTimeout(timeout);
     if(r.ok){
+      var ref=generateRef('ENQ');
       document.getElementById('osb-form').style.display='none';
       document.getElementById('form-ok').style.display='block';
+      var rc=document.getElementById('ref-code');
+      if(rc)rc.textContent=ref;
     } else {
-      btn.disabled=false;
+      btn.disabled=false;btn.style.opacity='1';
       btn.textContent='Send to OSB — Privately and Securely';
-      alert('Something went wrong. Please try again.');
+      showErr('contact-err','Something went wrong. Please try again.');
+    }
+  })
+  .catch(function(err){\n    clearTimeout(timeout);
+    btn.disabled=false;btn.style.opacity='1';
+    btn.textContent='Send to OSB — Privately and Securely';
+    if(err.name==='AbortError'){
+      showErr('contact-err','Connection timed out. Please wait a moment and try again.');
+    } else {
+      showErr('contact-err','Network error. Please check your connection and try again.');
+    }
+  });
+}
+
+/* ── SEND INTELLIGENCE SUBMISSION ── */
+function sendIntel(){
+  var username=document.getElementById('intel-user').value.trim();
+  var content=document.getElementById('intel-content').value.trim();
+  var pillar=document.getElementById('intel-pillar').value||'OTHER';
+  var platform=document.getElementById('intel-platform').value.trim();
+  if(!username||!content){showErr('intel-err','Please provide a username and describe the intelligence.');return;}
+  var btn=document.getElementById('intel-submit-btn');
+  btn.disabled=true;btn.style.opacity='0.6';btn.textContent='Submitting…';
+  var controller=new AbortController();
+  var timeout=setTimeout(function(){controller.abort();},20000);
+  fetch(BACKEND_URL+'/api/community',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({username:username,content:(platform?'[Platform: '+platform+'] ':'')+content,pillar:pillar,ifn_ref:'INTEL-SUBMISSION'}),
+    signal:controller.signal
+  })
+  .then(function(r){
+    clearTimeout(timeout);
+    if(r.ok){
+      var ref=generateRef('INT');
+      document.getElementById('intel-ok').style.display='block';
+      var rc=document.getElementById('intel-ref-code');
+      if(rc)rc.textContent=ref;
+      btn.style.display='none';
+    } else {
+      btn.disabled=false;btn.style.opacity='1';
+      btn.textContent='Submit to OSB Intelligence';
+      showErr('intel-err','Something went wrong. Please try again.');
     }
   })
   .catch(function(err){
     clearTimeout(timeout);
-    btn.disabled=false;
-    btn.textContent='Send to OSB — Privately and Securely';
+    btn.disabled=false;btn.style.opacity='1';
+    btn.textContent='Submit to OSB Intelligence';
     if(err.name==='AbortError'){
-      alert('The server is waking up — please wait 20 seconds and try again.');
+      showErr('intel-err','Connection timed out. Please try again.');
     } else {
-      alert('Connection error. Please check your internet and try again.');
+      showErr('intel-err','Network error. Please check your connection.');
     }
   });
 }
 </script>
 
+
+
+<script>
+var BACKEND_URL = 'https://osb-backend-production.up.railway.app';
+
+/* ── NAV DROPDOWN HOVER FIX ── */
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.nav-intel-wrap').forEach(function(wrap){
+    var drop = wrap.querySelector('.mega-drop');
+    if(!drop) return;
+    wrap.addEventListener('mouseenter', function(){ drop.style.display = 'block'; });
+    wrap.addEventListener('mouseleave', function(){ drop.style.display = 'none'; });
+  });
+});
+
+/* ── TAB SWITCHING ── */
+function switchTab(tab, btn){
+  document.querySelectorAll('.itab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.intake-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  var panel = document.getElementById('panel-' + tab);
+  panel.classList.add('active');
+  // Force reveal elements visible — IntersectionObserver won't fire for hidden panels
+  panel.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+}
+
+/* ── IN-PAGE ERROR ── */
+function showErr(id, msg){
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display = 'none'; }, 6000);
+}
+
+/* ── REFERENCE NUMBER ── */
+function generateRef(type){
+  var year = new Date().getFullYear();
+  var num  = String(Math.floor(Math.random() * 9000) + 1000);
+  return 'OSB/' + type + '/' + year + '/' + num;
+}
+
+/* ── CONSENT ── */
+function updateContactSubmit(){
+  var checked = document.getElementById('contact-consent').checked;
+  var btn     = document.getElementById('contact-submit-btn');
+  if(btn){
+    btn.disabled     = !checked;
+    btn.style.opacity = checked ? '1' : '0.4';
+    btn.style.cursor  = checked ? 'pointer' : 'not-allowed';
+  }
+}
+
+/* ── SEND CONTACT ── */
+function sendContact(){
+  var consent = document.getElementById('contact-consent');
+  if(!consent || !consent.checked) return;
+  var email   = document.getElementById('cfe').value;
+  var reason  = document.getElementById('cfr').value;
+  var message = document.getElementById('cfm').value;
+  if(!message){ showErr('contact-err', 'Please write a message before sending.'); return; }
+  var btn = document.getElementById('contact-submit-btn');
+  btn.disabled = true; btn.style.opacity = '0.6'; btn.textContent = 'Sending…';
+  var controller = new AbortController();
+  var timer = setTimeout(function(){ controller.abort(); }, 20000);
+  fetch(BACKEND_URL + '/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ email: email || 'anonymous', reason: reason, message: message }),
+    signal: controller.signal
+  })
+  .then(function(r){
+    clearTimeout(timer);
+    if(r.ok){
+      var ref = generateRef('ENQ');
+      document.getElementById('osb-form').style.display = 'none';
+      document.getElementById('form-ok').style.display  = 'block';
+      var rc = document.getElementById('ref-code');
+      if(rc) rc.textContent = ref;
+    } else {
+      btn.disabled = false; btn.style.opacity = '1';
+      btn.textContent = 'Send to OSB — Privately and Securely';
+      showErr('contact-err', 'Something went wrong. Please try again.');
+    }
+  })
+  .catch(function(err){
+    clearTimeout(timer);
+    btn.disabled = false; btn.style.opacity = '1';
+    btn.textContent = 'Send to OSB — Privately and Securely';
+    showErr('contact-err', err.name === 'AbortError'
+      ? 'Connection timed out. Please wait a moment and try again.'
+      : 'Network error. Please check your connection.');
+  });
+}
+
+/* ── PILLAR SELECTION ── */
+function selectPillar(pillar, btn){
+  document.querySelectorAll('.ptag').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  document.getElementById('intel-pillar').value = pillar;
+}
+
+/* ── SEND INTELLIGENCE ── */
+function sendIntel(){
+  var username = document.getElementById('intel-user').value.trim();
+  var content  = document.getElementById('intel-content').value.trim();
+  var pillar   = document.getElementById('intel-pillar').value || 'OTHER';
+  var platform = document.getElementById('intel-platform').value.trim();
+  if(!username){ showErr('intel-err', 'Please provide a username.'); return; }
+  if(!content){  showErr('intel-err', 'Please describe the intelligence before submitting.'); return; }
+  var btn = document.getElementById('intel-submit-btn');
+  btn.disabled = true; btn.style.opacity = '0.6'; btn.textContent = 'Submitting…';
+  var controller = new AbortController();
+  var timer = setTimeout(function(){ controller.abort(); }, 20000);
+  fetch(BACKEND_URL + '/api/community', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      username: username,
+      content:  (platform ? '[Platform: ' + platform + '] ' : '') + content,
+      pillar:   pillar,
+      ifn_ref:  'INTEL-SUBMISSION'
+    }),
+    signal: controller.signal
+  })
+  .then(function(r){
+    clearTimeout(timer);
+    if(r.ok){
+      var ref = generateRef('INT');
+      document.getElementById('intel-ok').style.display = 'block';
+      var rc = document.getElementById('intel-ref-code');
+      if(rc) rc.textContent = ref;
+      btn.style.display = 'none';
+    } else {
+      btn.disabled = false; btn.style.opacity = '1';
+      btn.textContent = 'Submit to OSB Intelligence';
+      showErr('intel-err', 'Something went wrong. Please try again.');
+    }
+  })
+  .catch(function(err){
+    clearTimeout(timer);
+    btn.disabled = false; btn.style.opacity = '1';
+    btn.textContent = 'Submit to OSB Intelligence';
+    showErr('intel-err', err.name === 'AbortError'
+      ? 'Connection timed out. Please try again.'
+      : 'Network error. Please check your connection.');
+  });
+}
+
+/* ── NAV & REVEAL ── */
+function toggleMob(){ var m=document.getElementById('mob'); m.style.display=m.style.display==='block'?'none':'block'; }
+function closeMob(){ var m=document.getElementById('mob'); if(m) m.style.display='none'; }
+document.addEventListener('click', function(e){
+  var m=document.getElementById('mob'), h=document.querySelector('.nav-ham');
+  if(m&&h&&!m.contains(e.target)&&!h.contains(e.target)) m.style.display='none';
+});
+var ro = new IntersectionObserver(function(entries){
+  entries.forEach(function(x){ if(x.isIntersecting) x.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ ro.observe(el); });
+  window.scrollTo(0,0);
+});
+window.addEventListener('scroll', function(){
+  var n = document.getElementById('nav');
+  if(n) n.style.borderBottomColor = window.scrollY > 60 ? 'rgba(193,18,31,.5)' : 'rgba(193,18,31,.25)';
+});
+</script>
 </body>
 </html>
