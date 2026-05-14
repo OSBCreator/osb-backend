@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OSB Intelligence Community — Social Engineering Awareness</title>
-<meta name="description" content="The OSB Intelligence Community — a moderated platform for social engineering awareness, field intelligence, and victim support.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="description" content="Join the OSB Intelligence Community — the world's only behavioural intelligence feed for romance fraud.">
+<title>OSB Community — Intelligence Feed — OSB</title>
 <style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
@@ -389,479 +389,10 @@ footer{background:var(--footer-bg) !important;}
 
 /* Hero intel preview */
 
-
-/* ── ANONYMOUS AVATARS ── */
-.av-wrap{display:flex;align-items:center;gap:.875rem;margin-bottom:1.25rem;padding:.875rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);}
-.av-svg{flex-shrink:0;border-radius:2px;overflow:hidden;}
-.av-info{flex:1;}
-.av-name{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--w);font-weight:500;margin-bottom:.2rem;}
-.av-sub{font-size:.72rem;color:rgba(255,255,255,.28);}
-.post-card .post-meta{flex:1;}
-.post-card .post-author{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--w);font-weight:500;}
-.post-card .post-ts{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.25);margin-top:2px;}
-.post-badge{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(193,18,31,.3);color:var(--r);}
-.post-body{font-size:.875rem;line-height:1.85;color:rgba(255,255,255,.65);font-weight:300;margin-bottom:1rem;white-space:pre-wrap;}
-.post-actions{display:flex;align-items:center;gap:1.25rem;}
-.post-act{background:none;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:1px;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:.35rem;transition:color .2s;padding:0;}
-.post-act:hover{color:var(--w);}
-.post-act.liked{color:var(--r);}
-.post-stats{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.18);}
-.pending-note{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(193,18,31,.5);margin-top:.75rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06);}
-.compose-box{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--r);padding:1.75rem;margin-bottom:2rem;}
-.compose-hd{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
-.compose-row{display:flex;gap:.75rem;margin-bottom:.75rem;}
-.compose-inp{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--w);font-family:'Figtree',sans-serif;font-size:.875rem;padding:10px 13px;outline:none;transition:border-color .2s;}
-.compose-inp:focus{border-color:rgba(193,18,31,.45);}
-.compose-inp::placeholder{color:rgba(255,255,255,.2);}
-.compose-ta{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--w);font-family:'Figtree',sans-serif;font-size:.875rem;padding:12px 13px;outline:none;resize:none;height:110px;line-height:1.7;margin-bottom:.75rem;transition:border-color .2s;}
-.compose-ta:focus{border-color:rgba(193,18,31,.45);}
-.compose-ta::placeholder{color:rgba(255,255,255,.2);}
-.compose-foot{display:flex;align-items:center;justify-content:space-between;}
-.char-ct{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.2);}
-.compose-btn{background:var(--r);color:var(--w);border:none;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;cursor:pointer;transition:opacity .2s;}
-.compose-btn:hover{opacity:.85;}
-.compose-btn:disabled{opacity:.4;cursor:not-allowed;}
-.compose-note{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.18);margin-top:.625rem;line-height:1.6;}
-.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.75rem;}
-.cs-box{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);padding:.875rem;text-align:center;}
-.cs-n{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--w);line-height:1;}
-.cs-l{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:.3rem;}
-
-.compose-path-wrap{display:flex;gap:0;margin-bottom:1rem;border:1px solid rgba(255,255,255,.1);}
-.compose-path{flex:1;background:none;border:none;padding:.75rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;}
-.compose-path.active{background:var(--r);color:var(--w);}
-.compose-path:not(.active):hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.7);}
-
-/* ══════════════════════════════════════════
-   PAGE HERO
-═══════════════════════════════════════════ */
-.ph{background:var(--n);padding:5rem 3rem 4rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
-.ph::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--r),#ff3344,var(--r));}
-.ph::after{content:'FIELD INTELLIGENCE DATABASE';position:absolute;right:-3rem;top:50%;transform:translateY(-50%) rotate(90deg);font-family:'Bebas Neue',sans-serif;font-size:9rem;color:rgba(255,255,255,.018);letter-spacing:10px;pointer-events:none;white-space:nowrap;}
-.ph-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:4rem;align-items:center;}
-.ph-tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--r);margin-bottom:1.25rem;display:flex;align-items:center;gap:.875rem;}
-.ph-tag::before{content:'';width:24px;height:1px;background:var(--r);}
-.ph-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:700;line-height:.95;letter-spacing:-1px;color:var(--w);margin-bottom:1.25rem;}
-.ph-h em{color:var(--r);font-style:italic;font-weight:400;}
-.ph-sub{font-size:.9rem;color:rgba(255,255,255,.42);line-height:1.95;max-width:520px;font-weight:300;margin-bottom:1.75rem;}
-.ph-rule{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
-.ph-rule span{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.18);display:flex;align-items:center;gap:.5rem;}
-.ph-rule span::before{content:'◆';color:rgba(193,18,31,.45);font-size:.45rem;}
-.ph-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.04);}
-.ph-stat{background:var(--n);padding:1.5rem;text-align:center;position:relative;}
-.ph-stat::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(193,18,31,.3),transparent);}
-.ph-stat-n{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--w);line-height:1;display:block;letter-spacing:-1px;}
-.ph-stat-l{font-family:'IBM Plex Mono',monospace;font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.18);margin-top:.25rem;display:block;}
-@media(max-width:900px){.ph-inner{grid-template-columns:1fr;}.ph-stats{display:none;}.ph{padding:4rem 1.5rem 3rem;}}
-@media(max-width:600px){.ph{padding:3rem 1.25rem 2.5rem;}}
-
-/* ══════════════════════════════════════════
-   LAYOUT
-═══════════════════════════════════════════ */
-.layout{display:grid;grid-template-columns:1fr 290px;gap:2.5rem;max-width:1160px;margin:0 auto;padding:2.5rem 3rem 6rem;}
-@media(max-width:1020px){.layout{grid-template-columns:1fr;padding:2rem 1.5rem 4rem;}}
-@media(max-width:600px){.layout{padding:1.5rem 1.25rem 3rem;}}
-
-/* ══════════════════════════════════════════
-   COMPOSE — SECURE TERMINAL
-═══════════════════════════════════════════ */
-.compose{position:relative;margin-bottom:2.25rem;border:1px solid rgba(255,255,255,.08);overflow:hidden;}
-.compose::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
-
-/* scanline overlay on header only */
-.compose-hdr{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.875rem 1.375rem;
-  background:rgba(193,18,31,.06);
-  border-bottom:1px solid rgba(193,18,31,.12);
-  position:relative;overflow:hidden;
-}
-.compose-hdr::after{
-  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);
-  pointer-events:none;
-}
-.compose-hdr-label{
-  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
-  letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,.5);
-  display:flex;align-items:center;gap:.625rem;
-}
-.compose-hdr-dot{
-  width:7px;height:7px;background:var(--r);border-radius:50%;
-  box-shadow:0 0 0 0 rgba(193,18,31,.5);
-  animation:dot-pulse 2.2s ease infinite;
-}
-@keyframes dot-pulse{0%,100%{box-shadow:0 0 0 0 rgba(193,18,31,.5)}60%{box-shadow:0 0 0 6px rgba(193,18,31,0)}}
-.compose-hdr-status{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:2px;color:rgba(255,255,255,.15);text-transform:uppercase;}
-
-.compose-body{padding:1.375rem;}
-.compose-path-wrap{display:flex;gap:0;margin-bottom:1.125rem;border:1px solid rgba(255,255,255,.08);}
-.compose-path{flex:1;background:none;border:none;padding:.8rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;}
-.compose-path.active{background:var(--r);color:var(--w);}
-.compose-path:not(.active):hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.65);}
-
-#ask-notice{display:none;background:rgba(193,18,31,.06);border-left:3px solid var(--r);padding:.75rem 1rem;margin-bottom:.875rem;font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.75;}
-.compose-username{display:flex;gap:.5rem;margin-bottom:.625rem;}
-.compose-username input,textarea#inp-content,.compose-select{
-  background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.07);
-  color:var(--w);font-family:'IBM Plex Mono',monospace;font-size:.8rem;
-  padding:10px 12px;outline:none;transition:border-color .2s,background .2s;
-}
-.compose-username input{flex:1;}
-.compose-username input:focus,textarea#inp-content:focus,.compose-select:focus{border-color:rgba(193,18,31,.5);background:rgba(193,18,31,.04);}
-.compose-username input::placeholder,textarea#inp-content::placeholder{color:rgba(255,255,255,.15);font-family:'IBM Plex Mono',monospace;font-size:.75rem;}
-.compose-select{cursor:pointer;}
-.compose-select option{background:#0B0B0D;color:var(--w);}
-textarea#inp-content{width:100%;resize:none;height:115px;line-height:1.8;margin-bottom:.75rem;font-family:'Figtree',sans-serif;}
-.compose-foot{display:flex;align-items:center;justify-content:space-between;}
-.char-count{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.15);}
-.compose-submit{
-  background:var(--r);color:var(--w);border:none;
-  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
-  letter-spacing:2.5px;text-transform:uppercase;
-  padding:11px 22px;cursor:pointer;
-  transition:background .2s,letter-spacing .2s;
-  display:flex;align-items:center;gap:.5rem;
-}
-.compose-submit::after{content:'→';}
-.compose-submit:hover{background:#d01020;letter-spacing:3px;}
-.compose-submit:disabled{opacity:.35;cursor:not-allowed;}
-.compose-notice{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.12);margin-top:.875rem;padding-top:.875rem;border-top:1px solid rgba(255,255,255,.05);line-height:1.7;}
-.toast{
-  display:none;position:fixed;bottom:2rem;right:2rem;z-index:9999;
-  background:var(--n);border:1px solid rgba(193,18,31,.35);border-left:3px solid var(--r);
-  color:var(--w);padding:1rem 1.5rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.5px;
-  box-shadow:0 12px 48px rgba(0,0,0,.6);
-}
-.toast.show{display:block;animation:slide-up .3s ease;}
-@keyframes slide-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-/* ══════════════════════════════════════════
-   FILTER BAR
-═══════════════════════════════════════════ */
-.filter-bar{
-  display:flex;gap:0;margin-bottom:2rem;
-  border:1px solid rgba(255,255,255,.07);
-  overflow-x:auto;-webkit-overflow-scrolling:touch;
-}
-.filter-bar::-webkit-scrollbar{height:2px;}
-.filter-bar::-webkit-scrollbar-thumb{background:var(--r);}
-.fb{
-  flex:1;min-width:80px;
-  padding:10px 14px;border:none;
-  border-right:1px solid rgba(255,255,255,.06);
-  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
-  color:rgba(255,255,255,.28);cursor:pointer;
-  transition:all .18s;background:none;
-  letter-spacing:1.5px;text-transform:uppercase;
-  white-space:nowrap;text-align:center;
-}
-.fb:last-child{border-right:none;}
-.fb .fb-count{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:rgba(255,255,255,.12);line-height:1;margin-bottom:2px;transition:color .18s;}
-.fb.on{background:rgba(193,18,31,.08);color:var(--r);}
-.fb.on .fb-count{color:var(--r);}
-.fb:not(.on):hover{background:rgba(255,255,255,.03);color:rgba(255,255,255,.6);}
-
-/* ══════════════════════════════════════════
-   FEED
-═══════════════════════════════════════════ */
-.feed{display:flex;flex-direction:column;gap:.875rem;}
-
-/* ── BASE POST CARD ── */
-.post{
-  position:relative;
-  background:rgba(255,255,255,.02);
-  border:1px solid rgba(255,255,255,.07);
-  overflow:hidden;
-  transition:border-color .2s ease,box-shadow .22s ease,transform .22s ease;
-  opacity:0;transform:translateY(16px);
-}
-.post.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease,border-color .2s,box-shadow .22s;}
-.post:hover{border-color:rgba(193,18,31,.28);box-shadow:-2px 0 0 0 var(--r),0 10px 40px rgba(0,0,0,.35);}
-
-/* ── POST HEADER ── */
-.post-head{
-  display:flex;align-items:center;gap:.875rem;
-  padding:.875rem 1.25rem;
-  border-bottom:1px solid rgba(255,255,255,.05);
-  background:rgba(255,255,255,.015);
-}
-.post-avatar{
-  width:34px;height:34px;flex-shrink:0;
-  background:rgba(193,18,31,.12);
-  border:1px solid rgba(193,18,31,.25);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--r);
-}
-.post-meta{flex:1;min-width:0;}
-.post-username{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--w);font-weight:500;}
-.post-time{font-family:'IBM Plex Mono',monospace;font-size:.57rem;color:rgba(255,255,255,.2);margin-top:2px;}
-.post-badge{
-  font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:1.5px;
-  text-transform:uppercase;padding:4px 9px;flex-shrink:0;
-  border:1px solid rgba(193,18,31,.3);color:var(--r);
-  background:rgba(193,18,31,.06);
-}
-
-/* ── POST BODY (collapsed by default) ── */
-.post-body-wrap{padding:1.25rem 1.25rem .25rem;cursor:pointer;}
-
-.post-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.15rem,2.5vw,1.5rem);
-  font-weight:700;color:var(--w);line-height:1.15;
-  margin-bottom:.875rem;letter-spacing:-.2px;
-  transition:color .2s;
-}
-.post:hover .post-title{color:rgba(255,255,255,.9);}
-
-/* Collapsed preview — clamps to 3 lines */
-.post-preview{
-  font-size:.855rem;line-height:1.9;
-  color:rgba(255,255,255,.48);font-weight:300;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
-  margin-bottom:.5rem;
-}
-
-/* Full content — hidden until expanded */
-.post-full{
-  font-size:.855rem;line-height:1.95;
-  color:rgba(255,255,255,.58);font-weight:300;
-  white-space:pre-wrap;word-break:break-word;
-  display:none;margin-bottom:.5rem;
-  animation:fade-in .3s ease;
-}
-@keyframes fade-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
-.post.expanded .post-preview{display:none;}
-.post.expanded .post-full{display:block;}
-
-/* Read more toggle */
-.post-read-more{
-  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--r);cursor:pointer;
-  display:inline-flex;align-items:center;gap:.375rem;
-  padding:.5rem 0 1rem;transition:gap .2s;
-  background:none;border:none;
-}
-.post-read-more::after{content:'↓';transition:transform .3s;}
-.post.expanded .post-read-more::after{content:'↑';}
-.post-read-more:hover{gap:.6rem;}
-
-/* ── POST STAT PILL ── */
-.post-stat-pill{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(193,18,31,.07);border:1px solid rgba(193,18,31,.18);
-  padding:5px 11px;margin-bottom:1rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.62rem;
-  color:rgba(193,18,31,.85);
-}
-.post-stat-pill::before{content:'▸';font-size:.65rem;}
-
-/* ── POST ACTIONS ── */
-.post-actions{
-  display:flex;align-items:center;
-  padding:.625rem 1.25rem;
-  border-top:1px solid rgba(255,255,255,.05);
-}
-.pa-btn{
-  background:none;border:none;border-right:1px solid rgba(255,255,255,.05);
-  cursor:pointer;font-family:'IBM Plex Mono',monospace;
-  font-size:.58rem;letter-spacing:1px;
-  color:rgba(255,255,255,.2);padding:0 .875rem;height:30px;
-  transition:all .15s;text-transform:uppercase;
-}
-.pa-btn:first-child{padding-left:0;}
-.pa-btn:last-child{border-right:none;margin-left:auto;padding-right:0;}
-.pa-btn:hover{color:var(--r);}
-.pa-btn.liked{color:var(--r);}
-.pa-btn.liked .like-icon{animation:heart-pop .3s ease;}
-@keyframes heart-pop{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
-
-/* ══════════════════════════════════════════
-   POST TYPES
-═══════════════════════════════════════════ */
-
-/* IFN — CLASSIFIED BRIEFING */
-.post.ifn{border-color:rgba(193,18,31,.18);background:rgba(193,18,31,.025);}
-.post.ifn::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--r);}
-.post.ifn .post-head{background:rgba(193,18,31,.05);border-bottom-color:rgba(193,18,31,.12);padding-left:1.5rem;}
-.post.ifn .post-title{font-size:clamp(1.25rem,2.8vw,1.7rem);}
-.ifn-case-num{
-  font-family:'Bebas Neue',sans-serif;font-size:6rem;line-height:1;
-  color:rgba(193,18,31,.06);
-  position:absolute;right:.5rem;top:0;
-  letter-spacing:-2px;pointer-events:none;user-select:none;
-}
-/* IFN type icon */
-.post-type-icon{
-  width:22px;height:22px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.75rem;opacity:.6;
-}
-
-/* FEATURED */
-.post.featured{border-color:rgba(193,18,31,.22);background:linear-gradient(160deg,rgba(193,18,31,.04) 0%,rgba(255,255,255,.01) 100%);}
-.post.featured .post-title{font-size:clamp(1.4rem,3vw,1.9rem);}
-.post.featured::after{
-  content:'FEATURED';position:absolute;top:.9rem;right:1.25rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.48rem;letter-spacing:3px;
-  color:rgba(193,18,31,.35);text-transform:uppercase;
-}
-.post.featured .post-head{background:rgba(193,18,31,.04);}
-
-/* FIELD CASE */
-.post.field-case .post-title{
-  font-size:clamp(1.3rem,2.8vw,1.75rem);
-  border-bottom:1px solid rgba(255,255,255,.07);
-  padding-bottom:1rem;margin-bottom:1rem;
-}
-
-/* AWARENESS */
-.post.awareness .post-preview,.post.awareness .post-full{color:rgba(255,255,255,.52);}
-
-/* ══════════════════════════════════════════
-   FULL-READ MODAL (click to read)
-═══════════════════════════════════════════ */
-.post-modal-overlay{
-  display:none;position:fixed;inset:0;z-index:8000;
-  background:rgba(0,0,0,.82);backdrop-filter:blur(8px);
-  align-items:center;justify-content:center;padding:2rem;
-}
-.post-modal-overlay.open{display:flex;}
-.post-modal{
-  background:var(--n);border:1px solid rgba(255,255,255,.1);
-  border-top:3px solid var(--r);
-  max-width:720px;width:100%;max-height:88vh;overflow-y:auto;
-  position:relative;
-  animation:modal-in .3s cubic-bezier(.16,1,.3,1);
-}
-@keyframes modal-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-.post-modal::-webkit-scrollbar{width:3px;}
-.post-modal::-webkit-scrollbar-thumb{background:var(--r);}
-.modal-close{
-  position:sticky;top:0;z-index:2;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.875rem 1.375rem;
-  background:rgba(193,18,31,.07);
-  border-bottom:1px solid rgba(193,18,31,.15);
-}
-.modal-close-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:3px;color:rgba(255,255,255,.3);text-transform:uppercase;}
-.modal-close-btn{
-  background:none;border:1px solid rgba(255,255,255,.12);
-  color:rgba(255,255,255,.4);font-family:'IBM Plex Mono',monospace;
-  font-size:.65rem;letter-spacing:1px;padding:5px 12px;cursor:pointer;
-  transition:all .15s;
-}
-.modal-close-btn:hover{border-color:var(--r);color:var(--r);}
-.modal-body{padding:2rem 2.25rem 2.5rem;}
-.modal-badge{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:.875rem;}
-.modal-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.6rem,4vw,2.4rem);
-  font-weight:700;color:var(--w);line-height:1.1;
-  margin-bottom:1.25rem;letter-spacing:-.5px;
-}
-.modal-meta{
-  display:flex;align-items:center;gap:1.25rem;
-  padding:.875rem 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
-  margin-bottom:1.75rem;flex-wrap:wrap;
-}
-.modal-meta span{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;color:rgba(255,255,255,.22);}
-.modal-content{
-  font-size:.95rem;line-height:2;color:rgba(255,255,255,.65);
-  font-weight:300;
-}
-.modal-content p{margin-bottom:1.125rem;}
-.modal-content p:last-child{margin-bottom:0;}
-.modal-content p{margin-bottom:1.25rem;}
-.modal-pill{
-  display:inline-flex;align-items:center;gap:.5rem;margin-top:1.75rem;
-  background:rgba(193,18,31,.08);border:1px solid rgba(193,18,31,.2);
-  padding:7px 14px;font-family:'IBM Plex Mono',monospace;
-  font-size:.65rem;color:rgba(193,18,31,.9);
-}
-.modal-pill::before{content:'▸';}
-.modal-foot{
-  display:flex;gap:0;
-  border-top:1px solid rgba(255,255,255,.06);
-  padding:.875rem 2.25rem;
-}
-.modal-act{
-  background:none;border:none;border-right:1px solid rgba(255,255,255,.05);
-  cursor:pointer;font-family:'IBM Plex Mono',monospace;
-  font-size:.6rem;letter-spacing:1px;
-  color:rgba(255,255,255,.22);padding:0 1.125rem;height:36px;
-  transition:all .15s;text-transform:uppercase;
-}
-.modal-act:first-child{padding-left:0;}
-.modal-act:last-child{border-right:none;margin-left:auto;padding-right:0;}
-.modal-act:hover{color:var(--r);}
-.modal-act.liked{color:var(--r);}
-@media(max-width:600px){.post-modal-overlay{padding:0;}.post-modal{max-height:100vh;border-top-left-radius:0;}.modal-body{padding:1.5rem;}.modal-title{font-size:1.5rem;}}
-
-/* ══════════════════════════════════════════
-   SIDEBAR
-═══════════════════════════════════════════ */
-.sidebar{display:flex;flex-direction:column;gap:1rem;position:sticky;top:88px;}
-@media(max-width:1020px){.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}}
-@media(max-width:600px){.sidebar{grid-template-columns:1fr;}}
-
-.sbox{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);overflow:hidden;position:relative;}
-.sbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
-.sbox-title{
-  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
-  letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.28);
-  padding:.875rem 1.125rem;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  background:rgba(255,255,255,.02);
-  display:flex;align-items:center;gap:.5rem;
-}
-.sbox-title::before{content:'◆';color:var(--r);font-size:.45rem;}
-.sbox-body-inner{padding:1.125rem;}
-
-.sbox-rule{padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.78rem;color:rgba(255,255,255,.38);line-height:1.65;}
-.sbox-rule:last-child{border-bottom:none;}
-.sbox-rule strong{display:block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.5px;color:rgba(255,255,255,.65);margin-bottom:.2rem;font-weight:500;}
-
-.sbox-body{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.75;}
-
-.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
-.stat-row:last-child{border-bottom:none;}
-.stat-label{font-size:.76rem;color:rgba(255,255,255,.3);}
-.stat-val{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--w);font-weight:500;}
-
-.ifn-item{display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;transition:opacity .15s;}
-.ifn-item:last-child{border-bottom:none;}
-.ifn-item:hover{opacity:.75;}
-.ifn-num{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--r);background:rgba(193,18,31,.08);padding:3px 7px;flex-shrink:0;}
-.ifn-title{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.5;}
-
-.reach-btn{
-  display:flex;align-items:center;justify-content:center;gap:.5rem;
-  background:var(--r);color:var(--w);text-decoration:none;
-  padding:11px;margin:1.125rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
-  letter-spacing:2.5px;text-transform:uppercase;
-  transition:background .2s,letter-spacing .2s;
-}
-.reach-btn::after{content:'→';}
-.reach-btn:hover{background:#d01020;letter-spacing:3px;}
-
-/* ══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
-footer .foot-inner{max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:3rem;padding-bottom:2.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap;}
-footer .flinks a{font-size:.78rem;color:rgba(255,255,255,.22);text-decoration:none;transition:color .2s;}
-footer .flinks a:hover{color:var(--w);}
-footer .fdesc{font-size:.78rem;color:rgba(255,255,255,.22);line-height:1.85;max-width:340px;}
-footer .fcopy{max-width:1160px;margin:0 auto;font-size:.68rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
 </style>
 </head>
 <body>
+<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection & Response System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Est. 2021 · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">$42B+ Annual Global Scam Losses — GASA Global State of Scams 2025<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection & Response System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates the Platforms Where Scams Begin<span class="ts">◆</span></div><div class="ti">State of Romance Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Est. 2021 · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div></div></div></div>
 <nav id="nav">
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="OSB"></a>
   <div class="nav-links">
@@ -918,765 +449,174 @@ footer .fcopy{max-width:1160px;margin:0 auto;font-size:.68rem;color:rgba(255,255
     <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
   </div>
 </div>
-
-<div class="ticker"><div class="tt">
-<div class="ti">OSB Intelligence Community — Social Engineering Awareness<span class="ts">◆</span></div>
-<div class="ti">$1T+ Annual Global Social Engineering Losses — 2024<span class="ts">◆</span></div>
-<div class="ti">IFN Series · Field Intelligence Notes · Documented Operator Tactics<span class="ts">◆</span></div>
-<div class="ti">OSBI Model™ v2.0 · Behavioural Threat Detection · Est. 2021<span class="ts">◆</span></div>
-<div class="ti">Moderated · Secured · Intelligence-Led<span class="ts">◆</span></div>
-<div class="ti">OSB Intelligence Community — Social Engineering Awareness<span class="ts">◆</span></div>
-<div class="ti">$1T+ Annual Global Social Engineering Losses — 2024<span class="ts">◆</span></div>
-<div class="ti">IFN Series · Field Intelligence Notes · Documented Operator Tactics<span class="ts">◆</span></div>
-</div></div>
-
-<div class="ph">
-  <div class="ph-inner">
-    <div>
-      <div class="ph-tag">OSB Intelligence Community</div>
-      <h1 class="ph-h">Every operator leaves a pattern.<br><em>This is where we document them.</em></h1>
-      <p class="ph-sub">A moderated, secured intelligence platform for social engineering awareness. Share what you know. Document what you have seen. Every post contributes to the OSB field intelligence database.</p>
-      <div class="ph-rule">
-        <span>Username only</span>
-        <span>No inbox</span>
-        <span>No personal data stored</span>
-        <span>Moderated before live</span>
-      </div>
-    </div>
-    <div class="ph-stats">
-      <div class="ph-stat"><span class="ph-stat-n">13</span><span class="ph-stat-l">Published<br>Posts</span></div>
-      <div class="ph-stat"><span class="ph-stat-n">697</span><span class="ph-stat-l">Total<br>Upvotes</span></div>
-      <div class="ph-stat"><span class="ph-stat-n">33.1K</span><span class="ph-stat-l">Quora<br>Reach</span></div>
-      <div class="ph-stat"><span class="ph-stat-n">6K</span><span class="ph-stat-l">Views This<br>Month</span></div>
-    </div>
+</div>
+</div>
+<div class="pg-hero">
+  <div class="si">
+    <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Intelligence Community</div></div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.8rem);font-weight:600;line-height:.95;color:var(--w);letter-spacing:-1px;margin-bottom:1.25rem;">The live intelligence feed.<br><em>Join it.</em></h1>
+    <p style="font-size:1rem;color:rgba(255,255,255,.42);max-width:540px;line-height:1.85;font-weight:300;">Every OSB field note and intelligence brief — published here, permanently archived. Read without an account. Sign up to engage and receive briefings directly.</p>
   </div>
 </div>
-
-<div class="layout">
-  <div class="main-col">
-
-    <div class="compose">
-      <div class="compose-hdr">
-        <span class="compose-hdr-label">Field Submission Terminal</span>
-        <span class="compose-hdr-status">SECURE · MODERATED · ENCRYPTED</span>
-      </div>
-      <div class="compose-body">
-        <div class="compose-path-wrap">
-          <button class="compose-path active" id="path-post" onclick="setPath('post')">◆ &nbsp;Post to Community</button>
-          <button class="compose-path" id="path-ask" onclick="setPath('ask')">? &nbsp;Ask OSB Privately</button>
-        </div>
-        <div id="ask-notice">Your question goes directly to OSB privately. It will not appear publicly. OSB will respond directly.</div>
-        <div class="compose-username">
-          <input type="text" id="inp-username" placeholder="Username (handle only)" maxlength="32">
-          <select class="compose-select" id="inp-pillar">
-            <option value="">— Pillar Tag —</option>
-            <option value="R">R · Relationship Acceleration</option>
-            <option value="S">S · Script Consistency</option>
-            <option value="E">E · Emotional Manipulation</option>
-            <option value="I">I · Financial Extraction</option>
-            <option value="IFN">IFN · Field Intelligence Note</option>
-          </select>
-        </div>
-        <textarea id="inp-content" placeholder="Share a documented case, observed pattern, operator tactic, or intelligence for the community…" maxlength="1200"></textarea>
-        <div class="compose-foot">
-          <span class="char-count" id="char-count">0 / 1200</span>
-          <button class="compose-submit" id="submit-btn" onclick="submitPost()">Post Intelligence</button>
-        </div>
-        <div class="compose-notice">All posts go through OSB moderation before appearing publicly. Username only — no personal data stored or retained.</div>
-        <div class="toast" id="toast"></div>
-      </div>
-    </div>
-
-    <div class="filter-bar">
-      <button class="fb on" onclick="filterFeed('all',this)"><span class="fb-count">10</span>All Posts</button>
-      <button class="fb" onclick="filterFeed('IFN',this)"><span class="fb-count">2</span>IFN Notes</button>
-      <button class="fb" onclick="filterFeed('featured',this)"><span class="fb-count">1</span>Featured</button>
-      <button class="fb" onclick="filterFeed('field-case',this)"><span class="fb-count">2</span>Field Cases</button>
-      <button class="fb" onclick="filterFeed('awareness',this)"><span class="fb-count">2</span>Awareness</button>
-    </div>
-
-    <div class="feed" id="feed">
-
-      <!-- ═══ IFN-006 ═══ -->
-      <div class="post ifn" data-type="IFN" data-p="IFN"
-           data-badge="IFN-006"
-           data-username="John Dee · OSB Intelligence"
-           data-time="IFN-006 · 1.3K views · 36 upvotes · Quora Origin"
-           data-likes="36" data-views="1.3K"
-           data-pill="">
-        <div class="ifn-case-num">006</div>
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">IFN-006 &nbsp;·&nbsp; 1.3K views &nbsp;·&nbsp; 36 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">IFN-006</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">The Proxy Caller Exploit — You Are Not the Target. You Are the Mechanism.</div>
-          <div class="post-preview">You called the bank yourself. Real number. Right questions. They confirmed the balance. You hung up feeling certain. That certainty was the goal. He could not make that call — not with his accent, not without leaving a trace. So he spent time love bombing someone who would make it for him.</div>
-          <div class="post-full">You called the bank yourself. Real number. Right questions. They confirmed the balance. You hung up feeling certain. That certainty was the goal.
-
-He could not make that call. Not with his accent. Not without leaving a trace. So he spent time love bombing someone who would make it for him — willingly, carefully, proudly.
-
-When you confirmed that balance, you did not make a mistake. You completed a step in a criminal operation you were oblivious of being a part of. He wanted more than your money. He wanted your legitimacy. Your accent. Your clean record on the other end of a recorded bank line.
-
-This is the layer most people never see: It is not always "send me money." Sometimes it is "help me confirm something." Sometimes it is "help me move something small."
-
-You are being positioned inside a money laundering chain. This is structured fraud — roles, scripts, timing. You did not miss something obvious. You did your due diligence. That is exactly what made this work.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read Full Brief</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">36</span></button>
-          <button class="pa-btn">◎ 1.3K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ IFN-005 ═══ -->
-      <div class="post ifn" data-type="IFN" data-p="IFN"
-           data-badge="IFN-005"
-           data-username="John Dee · OSB Intelligence"
-           data-time="IFN-005 · 4.2K views · 92 upvotes · Quora Origin"
-           data-likes="92" data-views="4.2K"
-           data-pill="">
-        <div class="ifn-case-num">005</div>
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">IFN-005 &nbsp;·&nbsp; 4.2K views &nbsp;·&nbsp; 92 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">IFN-005</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">The Facade Bank Page — A Staged Interface Designed to Manufacture Certainty</div>
-          <div class="post-preview">It did not start with asking. It started with showing. A large balance — right there on the screen. He walked you through it calmly, the kind of calm that comes from someone who appears to have nothing to hide.</div>
-          <div class="post-full">It did not start with asking. It started with showing. A large balance — right there on the screen.
-
-He walked you through it calmly, the kind of calm that comes from someone who appears to have nothing to hide. Working. Building something. A man with substance, with means, with a future that included you.
-
-You were not being asked to give anything. You were being asked to help someone you trusted move money that was already his — from his bank account. It felt natural. It felt safe.
-
-Then something went wrong. A security flag. An account restriction. Hence the monetary request. But the money existed. You had seen it.
-
-That feeling of safety was not an accident. It was the architecture of the moment. Because the bank page itself was never real — a staged interface designed to convince the victim that the money already existed.
-
-Clarity is not defeat. It is the first step to freedom.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read Full Brief</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">92</span></button>
-          <button class="pa-btn">◎ 4.2K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ FEATURED ═══ -->
-      <div class="post featured" data-type="featured" data-p="featured"
-           data-badge="OSB Intelligence"
-           data-username="John Dee · OSB Intelligence"
-           data-time="Apr 26 · 3.1K views · 77 upvotes · Quora Origin"
-           data-likes="77" data-views="3.1K"
-           data-pill='Field Evidence: "To die would be a happy ending." — Anonymous · Zero financial loss · Critical emotional severity'>
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">Apr 26 &nbsp;·&nbsp; 3.1K views &nbsp;·&nbsp; 77 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">I Know He Is a Scammer. I Still Cannot Let Go.</div>
-          <div class="post-preview">He did not win your heart in a day. It took time. It took process. So there is no reason your feelings should disappear the moment you find out the truth. The truth changes what it was. It does not change what it felt like.</div>
-          <div class="post-full">He did not win your heart in a day. It took time. It took process. So there is no reason your feelings should disappear the moment you find out the truth. The truth changes what it was. It does not change what it felt like.
-
-That is the trap inside the trap. The scam continues in your nervous system long after the conversation ends.
-
-You do not block him on day one. You reduce. Gradually. Confronting him will not give you closure — it will give him another opening. Erase the digital presence. Every photo. Every saved message. Fill the space. That void is proof you are capable of deep connection. That capacity belongs to you. It was never his.
-
-You do not have to have lost money for this to count as damage. Emotional injury is injury.</div>
-          <div class="post-stat-pill">Field Evidence: "To die would be a happy ending." — Anonymous · Zero financial loss · Critical emotional severity</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read More</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">77</span></button>
-          <button class="pa-btn">◎ 3.1K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ AWARENESS ═══ -->
-      <div class="post awareness" data-type="awareness" data-p="awareness"
-           data-badge="Awareness"
-           data-username="John Dee · OSB Intelligence"
-           data-time="7 months ago · 7.2K views · 67 upvotes · Quora Origin"
-           data-likes="67" data-views="7.2K"
-           data-pill="">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">7 months ago &nbsp;·&nbsp; 7.2K views &nbsp;·&nbsp; 67 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">Awareness</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">3 Ways to Spot a Romance Scammer — Before It Is Too Late</div>
-          <div class="post-preview">Asking for money, bank info, driver licence, or SSN? SCAMMER. Sends you a package? It might seem like a sweet gesture, but scammers use this to earn trust. Introduced you to cryptocurrency?</div>
-          <div class="post-full">Asking for money, bank info, driver licence, or SSN? SCAMMER.
-
-Sends you a package? It might seem like a sweet gesture, but scammers use this method to earn your trust and create obligation.
-
-Introduced you to cryptocurrency investment? Crypto is used in romance scams due to its anonymity and the impossibility of recovery.
-
-"But I video called him?" These are the days of sophisticated AI. Video calls can now be faked using deepfake software.
-
-Be vigilant.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read More</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">67</span></button>
-          <button class="pa-btn">◎ 7.2K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ HIDDEN DANGERS ═══ -->
-      <div class="post" data-type="community" data-p="community"
-           data-badge="OSB Intelligence"
-           data-username="John Dee · OSB Intelligence"
-           data-time="9 months ago · 2.9K views · 115 upvotes · Quora Origin"
-           data-likes="115" data-views="2.9K"
-           data-pill="">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">9 months ago &nbsp;·&nbsp; 2.9K views &nbsp;·&nbsp; 115 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">The Hidden Dangers of Romance Scams — It Goes Deeper Than Money</div>
-          <div class="post-preview">EMOTIONAL DAMAGE: Heartbreak and betrayal. Victims form real bonds. Depression, anxiety, even PTSD are common. FINANCIAL LOSS: Victims have lost thousands to millions — some drain life savings, retirement funds, or business capital.</div>
-          <div class="post-full">EMOTIONAL DAMAGE: Heartbreak and betrayal. Victims form real emotional bonds. Depression, anxiety, even PTSD are common. Many blame themselves, leading to withdrawal or suicidal thoughts.
-
-FINANCIAL LOSS: Victims have lost thousands to millions. Some drain life savings, retirement funds, or business capital. Others take loans or remortgage homes under pressure.
-
-MIND CONTROL: Scammers use love bombing, fake emergencies, and guilt as weapons. Victims are isolated and taught to distrust family. In extreme cases they unknowingly become money mules.
-
-IDENTITY THEFT: Scammers collect photos, IDs, bank info, passwords. Some victims are blackmailed with private images — sextortion.
-
-LEGAL TROUBLE: Victims may unknowingly help move stolen money. Some face investigations, frozen accounts, or criminal charges.
-
-Shame on anyone who judges victims. Compassion is what is needed — not condemnation.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read More</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">115</span></button>
-          <button class="pa-btn">◎ 2.9K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ OIL RIG ═══ -->
-      <div class="post" data-type="community" data-p="community"
-           data-badge="OSB Intelligence"
-           data-username="John Dee · OSB Intelligence"
-           data-time="9 months ago · 2.5K views · 85 upvotes · Quora Origin"
-           data-likes="85" data-views="2.5K"
-           data-pill="Scammers use emotions as weapons. Trust — but VERIFY.">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">9 months ago &nbsp;·&nbsp; 2.5K views &nbsp;·&nbsp; 85 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">Oil Rig Scams: The Romance Trap You Did Not See Coming</div>
-          <div class="post-preview">You meet someone online — charming, professional, claims to be an engineer on an offshore oil rig. They say they are stationed in a remote location and cannot come home yet. After love bombing, they tell you there is a crisis.</div>
-          <div class="post-full">You meet someone online — charming, professional, claims to be an engineer on an offshore oil rig. They say they are stationed in a remote location and cannot come home yet.
-
-After love bombing, they tell you there is a crisis: "My equipment broke down, I need to transfer money urgently, but I cannot access my account from here." They give you a fake bank login and ask you to transfer money. Suddenly the account gets frozen. Then they beg you to cover the cost — "I will pay you back when I return."
-
-There is NO oil rig. NO broken equipment. NO real bank account. Just an emotional setup to steal your money.</div>
-          <div class="post-stat-pill">Scammers use emotions as weapons. Trust — but VERIFY.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read More</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">85</span></button>
-          <button class="pa-btn">◎ 2.5K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ SINGAPORE NURSE ═══ -->
-      <div class="post field-case" data-type="field-case" data-p="field-case"
-           data-badge="Field Case"
-           data-username="John Dee · OSB Intelligence"
-           data-time="9 months ago · 2.2K views · 86 upvotes · Quora Origin"
-           data-likes="86" data-views="2.2K"
-           data-pill="If this could happen to a smart, strong nurse — it can happen to anyone.">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">9 months ago &nbsp;·&nbsp; 2.2K views &nbsp;·&nbsp; 86 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">Field Case</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">From Love to Loss: A Singapore Nurse's Story</div>
-          <div class="post-preview">A hardworking nurse in Singapore. After long shifts and isolation during COVID, she began chatting with a kind man online. He said he was an interior designer in Canada. They talked daily — sweet messages, photos, even dreams of marriage.</div>
-          <div class="post-full">A hardworking nurse in Singapore. After long shifts and isolation during COVID, she began chatting with a kind man online. He said he was an interior designer in Canada. They talked daily — sweet messages, photos, even dreams of marriage.
-
-Then he introduced her to crypto trading. She tried it. The website looked real. Her money grew. Over time she invested all her savings, took a loan, and sent over S$120,000 ($90,000 USD).
-
-Then it collapsed. The site demanded withdrawal fees. When she refused, he vanished. Everything — the romance, the money, the platform — was fake.
-
-She was left with no money, huge debt, shame, heartbreak, and depression. She later filed for bankruptcy and started therapy.</div>
-          <div class="post-stat-pill">If this could happen to a smart, strong nurse — it can happen to anyone.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read Full Case</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">86</span></button>
-          <button class="pa-btn">◎ 2.2K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ UN DOCTOR ═══ -->
-      <div class="post field-case" data-type="field-case" data-p="field-case"
-           data-badge="Field Case"
-           data-username="John Dee · OSB Intelligence"
-           data-time="Feb 28 · 2.4K views · 60 upvotes · Quora Origin"
-           data-likes="60" data-views="2.4K"
-           data-pill="If money enters the relationship, it is not love. It is a scam.">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">Feb 28 &nbsp;·&nbsp; 2.4K views &nbsp;·&nbsp; 60 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">Field Case</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">The "UN Doctor" Script — $50,000 Paid in Clearance Fees That Never Existed</div>
-          <div class="post-preview">The scammer claims to be a surgeon or humanitarian working for the United Nations. Widowed or divorced. Moves fast emotionally. Introduces a child for sympathy. Then creates a crisis — blocked bank account, urgent travel approval.</div>
-          <div class="post-full">In one documented case, a victim wired over $50,000 with each payment tied to a new UN processing fee, emergency, or clearance requirement. The payments were spaced out. Each request sounded reasonable. Each crisis felt urgent. That is how this script works.
-
-The scammer claims to be a surgeon or humanitarian working for the United Nations. Widowed or divorced. Moves fast emotionally. Introduces a child for sympathy. Creates a crisis — blocked bank account, urgent travel approval. Asks you to pay UN processing or clearance fees.
-
-Reality: The United Nations does not charge the public for staff leave, travel, or admin processing. Official emails come only from @un.org domains.</div>
-          <div class="post-stat-pill">If money enters the relationship, it is not love. It is a scam.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read Full Case</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">60</span></button>
-          <button class="pa-btn">◎ 2.4K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ WHY PEOPLE FALL ═══ -->
-      <div class="post" data-type="community" data-p="community"
-           data-badge="OSB Intelligence"
-           data-username="John Dee · OSB Intelligence"
-           data-time="Feb 19 · 1.3K views · 46 upvotes · Quora Origin"
-           data-likes="46" data-views="1.3K"
-           data-pill="FTC Data: Adults 60+ lost ~$277M to romance scams alone.">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">Feb 19 &nbsp;·&nbsp; 1.3K views &nbsp;·&nbsp; 46 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">OSB Intelligence</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">Why People Still Fall Victim in 2026 — Loneliness Is the Real Exploit</div>
-          <div class="post-preview">Loneliness and lack of awareness are the real roots of this problem. Who rejects love and affection in moments of emotional vulnerability? When attention comes when you are at your lowest, it is difficult to resist.</div>
-          <div class="post-full">Loneliness and lack of awareness are the real roots of this problem. Who rejects love and affection in moments of emotional vulnerability? When attention comes when you are at your lowest, it is difficult to resist.
-
-Romance scammers penetrate during grief, loneliness, or major life changes — exploiting emotional vulnerability.
-
-Seniors remain among the most vulnerable. The most recent FTC data shows adults aged 60 and above lost approximately $277 million to romance scams alone.
-
-When people feel loved and remembered by family, they are less likely to seek affection from strangers online. Human connection remains the strongest defence of all.</div>
-          <div class="post-stat-pill">FTC Data: Adults 60+ lost ~$277M to romance scams alone.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read More</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">46</span></button>
-          <button class="pa-btn">◎ 1.3K</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <!-- ═══ RECOVERY SCAMS ═══ -->
-      <div class="post awareness" data-type="awareness" data-p="awareness"
-           data-badge="Warning"
-           data-username="John Dee · OSB Intelligence"
-           data-time="Feb 12 · 874 views · 21 upvotes · Quora Origin"
-           data-likes="21" data-views="874"
-           data-pill="FTC 2025: ~$3B lost to imposter and advance-fee scams.">
-        <div class="post-head">
-          <div class="post-avatar">J</div>
-          <div class="post-meta">
-            <div class="post-username">John Dee · OSB Intelligence</div>
-            <div class="post-time">Feb 12 &nbsp;·&nbsp; 874 views &nbsp;·&nbsp; 21 upvotes &nbsp;·&nbsp; Quora Origin</div>
-          </div>
-          <div class="post-badge">Warning</div>
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">Recovery Scams: Do Not Pay Twice</div>
-          <div class="post-preview">In 2025, the FTC reported that imposter and advance-fee scams — including recovery scams — accounted for nearly $3 billion in reported losses. If you have lost money, your funds are not sitting somewhere waiting to be recovered.</div>
-          <div class="post-full">In 2025, the FTC reported that imposter and advance-fee scams — including recovery scams — accounted for nearly $3 billion in reported losses.
-
-If you have lost money to a scam, your funds are not sitting somewhere waiting to be recovered. In most cases, the money is already gone.
-
-Recovery agents who promise "We can recover your funds" are scammers looking to exploit you again.
-
-Never pay anyone to recover your lost money. Report the incident through the FBI IC3 complaint portal at ic3.gov.</div>
-          <div class="post-stat-pill">FTC 2025: ~$3B lost to imposter and advance-fee scams.</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read More</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">21</span></button>
-          <button class="pa-btn">◎ 874</button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>
-
-      <div id="community-posts"></div>
-    </div>
-  </div>
-
-  <div class="sidebar">
-    <div class="sbox">
-      <div class="sbox-title">IFN Intelligence Library</div>
-      <div class="sbox-body-inner">
-        <div class="ifn-item"><div class="ifn-num">IFN-006</div><div class="ifn-title">The Proxy Caller Exploit — Confirmed by Victim Testimony</div></div>
-        <div class="ifn-item"><div class="ifn-num">IFN-005</div><div class="ifn-title">The Facade Bank Page — Fraudulent Financial Interface Exploit</div></div>
-      </div>
-    </div>
-    <div class="sbox">
-      <div class="sbox-title">OSB Field Intelligence</div>
-      <div class="sbox-body-inner">
-        <div class="stat-row"><span class="stat-label">Published Posts</span><span class="stat-val">13</span></div>
-        <div class="stat-row"><span class="stat-label">Total Upvotes</span><span class="stat-val">697</span></div>
-        <div class="stat-row"><span class="stat-label">Quora Reach</span><span class="stat-val">33.1K</span></div>
-        <div class="stat-row"><span class="stat-label">Views This Month</span><span class="stat-val">6K</span></div>
-      </div>
-    </div>
-    <div class="sbox">
-      <div class="sbox-title">Community Standards</div>
-      <div class="sbox-body-inner">
-        <div class="sbox-rule"><strong>Intelligence Only</strong>Posts must contribute field intelligence or documented observations.</div>
-        <div class="sbox-rule"><strong>No Operator Names</strong>Documented evidence only. No unverified identities.</div>
-        <div class="sbox-rule"><strong>Victim Respect</strong>All victim accounts must protect anonymity.</div>
-        <div class="sbox-rule"><strong>OSB Moderation</strong>Every post is reviewed before going live.</div>
-      </div>
-    </div>
-    <div class="sbox">
-      <div class="sbox-title">Reach OSB Directly</div>
-      <div class="sbox-body-inner">
-        <p class="sbox-body" style="margin-bottom:0;">For urgent cases, victim intervention requests, or platform partnership enquiries.</p>
-      </div>
-      <a href="contact.html" class="reach-btn">Contact OSB Intelligence</a>
-    </div>
+<div class="nl-bar">
+  <div class="nl-inner">
+    <div class="nl-text"><strong>Join the OSB Intelligence Network</strong><span>Every new publication delivered directly. No algorithm. Your inbox. Forever.</span></div>
+    <div class="nl-form"><input type="email" class="nl-inp" placeholder="your@email.com" id="nle"><button class="nl-btn" onclick="nlSub()">Subscribe Free</button></div>
+    <div id="nlmsg" style="display:none;font-size:.78rem;color:rgba(255,255,255,.6);width:100%;margin-top:.5rem;"></div>
   </div>
 </div>
-
-<!-- ═══ FULL READ MODAL ═══ -->
-<div class="post-modal-overlay" id="post-modal-overlay" onclick="closeModalOnOverlay(event)">
-  <div class="post-modal" id="post-modal">
-    <div class="modal-close">
-      <span class="modal-close-label">OSB Intelligence · Field Post</span>
-      <button class="modal-close-btn" onclick="closeModal()">✕ Close</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-badge" id="modal-badge"></div>
-      <h2 class="modal-title" id="modal-title"></h2>
-      <div class="modal-meta">
-        <span id="modal-username"></span>
-        <span id="modal-time"></span>
+<div class="sd">
+  <div class="si">
+    <div class="feed-g2">
+      <div class="reveal">
+        <div class="feed-top2">
+          <div class="feed-ttl"><span class="ldot"></span>&nbsp;&nbsp;Live Intelligence Feed</div>
+          <div class="flt2">
+            <button class="ff2 active" onclick="ff(this,&apos;all&apos;)">All</button>
+            <button class="ff2" onclick="ff(this,&apos;S&apos;)">S-Pillar</button>
+            <button class="ff2" onclick="ff(this,&apos;E&apos;)">E-Pillar</button>
+            <button class="ff2" onclick="ff(this,&apos;I&apos;)">I-Pillar</button>
+            <button class="ff2" onclick="ff(this,&apos;live&apos;)">Live</button>
+          </div>
+        </div>
+        <div class="feed-list2">
+          <div class="fi2" data-p="S" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-005</div><div><div class="fi2-tag">S-Pillar · New</div><div class="fi2-t">The Facade Bank Page — Staged Financial Interface</div><div class="fi2-e">First documented globally by OSB. 1,000+ views in 3 days.</div></div><div class="fi2-stats"><span class="fstat2">♥ 6</span><span class="fstat2">◎ 1K+</span></div></div>
+          <div class="fi2" data-p="S" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-001</div><div><div class="fi2-tag">S-Pillar · Active</div><div class="fi2-t">The Proxy Caller Exploit</div><div class="fi2-e">The victim called the bank. The money was real. So was the trap. They were the instrument — not the target.</div></div><div class="fi2-stats"><span class="fstat2">♥ 8</span><span class="fstat2">◎ 1,234</span></div></div>
+          <div class="fi2" data-p="E" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-002</div><div><div class="fi2-tag">E-Pillar · E Score 5</div><div class="fi2-t">The Suicidal Ideation Script — Zero Financial Loss</div><div class="fi2-e">Established the E Pillar Independent Trigger. Emotional harm is real harm.</div></div><div class="fi2-stats"><span class="fstat2">♥ 12</span><span class="fstat2">◎ 890</span></div></div>
+          <div class="fi2" data-p="live" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-003</div><div><div class="fi2-tag">Live Intervention</div><div class="fi2-t">First Live Exit — Active Scam Exited in Real Time</div><div class="fi2-e">OSB intervened on Quora. Subject exited the same day.</div></div><div class="fi2-stats"><span class="fstat2">♥ 19</span><span class="fstat2">◎ 2,100</span></div></div>
+          <div class="fi2" data-p="I" onclick="location.href='intelligence.html'"><div class="fi2-num">IFN-004</div><div><div class="fi2-tag">I-Pillar · $28,000</div><div class="fi2-t">$28,000 Over 3 Years — The Slow-Burn Pattern</div><div class="fi2-e">Low velocity. High duration. Maximum damage.</div></div><div class="fi2-stats"><span class="fstat2">♥ 24</span><span class="fstat2">◎ 3,400</span></div></div>
+        </div>
       </div>
-      <div class="modal-content" id="modal-content"></div>
-      <div class="modal-pill" id="modal-pill" style="display:none"></div>
-    </div>
-    <div class="modal-foot">
-      <button class="modal-act" id="modal-like-btn" onclick="likeModal()"><span id="modal-like-icon">♥</span> <span id="modal-like-count"></span></button>
-      <button class="modal-act" id="modal-views-btn"></button>
-      <button class="modal-act" onclick="sharePost()">↗ Share</button>
-      <button class="modal-act" onclick="closeModal()">✕ Close</button>
+      <div class="comm-side2 reveal d2">
+        <div class="sc3">
+          <div class="sc3-t">Create Your Account</div>
+          <div class="sc3-s">No real name required or displayed. Comment and engage once your account reaches trust level 1. Private. Secure.</div>
+          <input type="text" class="fi3" placeholder="Choose a username" id="cu">
+          <input type="email" class="fi3" placeholder="your@email.com" id="ce">
+          <button class="fb3" onclick="joinCom()">Create Account — Free</button>
+          <div class="fn3">No personal data sold · Senior-friendly</div>
+          <div id="jmsg" style="display:none;margin-top:.75rem;font-size:.78rem;"></div>
+        </div>
+        <div style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.875rem;">Community Activity</div>
+          <div class="cs-grid">
+            <div class="cs-box"><span class="cs-n" data-target="5">0</span><div class="cs-l">Field Notes</div></div>
+            <div class="cs-box"><span class="cs-n" data-target="847">0</span><div class="cs-l">Assessments</div></div>
+            <div class="cs-box"><span class="cs-n" data-target="7634">0</span><div class="cs-l">Total Views</div></div>
+            <div class="cs-box"><span class="cs-n" data-target="63">0</span><div class="cs-l">Engagements</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:.875rem;padding:.625rem 0;border-bottom:1px solid rgba(255,255,255,.06);">Recent Detections</div>
+          <div class="rec-l">
+            <div class="rec-i"><div class="rec-tag">S-Pillar · March 2026</div><div class="rec-title">Facade Bank Page · IFN-005</div></div>
+            <div class="rec-i"><div class="rec-tag">S-Pillar · March 2026</div><div class="rec-title">Proxy Caller Exploit · IFN-001</div></div>
+            <div class="rec-i"><div class="rec-tag">E-Pillar · March 2026</div><div class="rec-title">Crisis Language · E Score 5 · IFN-002</div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="foot-inner">
+  <div class="fg">
     <div>
-      <img src="logo.png" alt="OSB" style="height:36px;margin-bottom:1rem;display:block;">
-      <p class="fdesc">Online Security Bureau is the world's first behavioural intelligence organisation built to identify, document and stop social engineering fraud across dating and social platforms.</p>
+      <div class="flogo"><img src="logo.png" alt="OSB"></div>
+      <p class="fdesc">OSB is the world's first behavioural intelligence organisation built to identify, document and stop romance fraud using the RSEI Model™. Pioneering the future of fraud intelligence since 2021.</p>
     </div>
-    <div class="flinks">
-      <a href="index.html">Home</a>
-      <a href="community.html">Community</a>
-      <a href="report.html">Global Fraud Report</a>
-      <a href="platform-index.html">Platform Index</a>
-      <a href="solace.html">Solace</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="contact.html">Contact</a>
+    <div>
+      <div class="fcol-t">Navigate</div>
+      <div class="flinks">
+        <a href="index.html">Home</a><a href="about.html">About OSB</a>
+        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">SCORE</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report</a>
+        <a href="intelligence.html">Intelligence</a><a href="solace.html">Solace</a>
+        <a href="community.html">Community</a><a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Intelligence</div>
+      <div class="flinks">
+        <a href="rsei-model.html">RSEI Model™ v2.0</a>
+        <a href="platform-index.html">Platform Safety Index</a>
+        <a href="report.html">Global Fraud Report 2026</a>
+        <a href="intelligence.html">IFN Case Library</a>
+        <a href="score.html">Scoring Tool</a>
+        <a href="solace.html">Solace Guide™</a>
+        <a href="contact.html">Analyst Certification (Coming)</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-t">Field Notes</div>
+      <div class="flinks">
+        <a href="intelligence.html">IFN-005 · Facade Bank Page</a>
+        <a href="intelligence.html">IFN-001 · Bank Exploit</a>
+        <a href="intelligence.html">IFN-002 · E Score 5</a>
+        <a href="intelligence.html">IFN-003 · Live Exit</a>
+        <a href="intelligence.html">IFN-004 · $28K Case</a>
+        <a href="contact.html">Submit a Case</a>
+      </div>
     </div>
   </div>
-  <div class="fcopy">© 2021–2026 Online Security Bureau · OSBI Model™ · RSEI Security Tool™ · All rights reserved</div>
+  <div class="fbot">
+    <div class="fquote" id="fq"></div>
+    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved &nbsp;·&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a></div>
+  </div>
 </footer>
-
 <script>
-const API = 'https://osb-backend-production.up.railway.app';
-
-/* ── CHAR COUNT ── */
-document.getElementById('inp-content').addEventListener('input', function(){
-  document.getElementById('char-count').textContent = this.value.length + ' / 1200';
+var QQ = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — OSB', '"The feelings were real. The person was not." — OSB Solace', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™', '"She called the bank herself. She was still being set up." — IFN-001 · OSB', '"Romance fraud has a name. It has a score. Only one organisation built both." — OSB'];
+function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
+function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mob'),h=document.querySelector('.nav-ham');
+  if(m&&h&&!m.contains(e.target)&&!h.contains(e.target))m.style.display='none';
 });
-
-/* ── COMPOSE PATH ── */
-function setPath(p){
-  document.getElementById('path-post').classList.toggle('active', p==='post');
-  document.getElementById('path-ask').classList.toggle('active', p==='ask');
-  document.getElementById('ask-notice').style.display = p==='ask' ? 'block' : 'none';
-}
-
-/* ── FILTER FEED ── */
-function filterFeed(f, btn){
-  document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
-  if(btn) btn.classList.add('on');
-  document.querySelectorAll('.feed .post').forEach(p => {
-    const show = f === 'all' || p.dataset.type === f;
-    p.style.display = show ? '' : 'none';
-  });
-}
-
-/* ── SCROLL REVEAL ── */
-function revealPosts(){
-  document.querySelectorAll('.post:not(.in)').forEach((p, i) => {
-    if(p.getBoundingClientRect().top < window.innerHeight - 30){
-      setTimeout(() => p.classList.add('in'), i * 70);
-    }
-  });
-}
-window.addEventListener('scroll', revealPosts, {passive:true});
-setTimeout(revealPosts, 120);
-
-/* ── READ MORE TOGGLE (inline expand) ── */
-function toggleExpand(btn){
-  event.stopPropagation();
-  const post = btn.closest('.post');
-  post.classList.toggle('expanded');
-  const expanded = post.classList.contains('expanded');
-  btn.textContent = expanded ? '↑ Collapse' : (btn.dataset.orig || 'Read More ↓');
-  if(!btn.dataset.orig) btn.dataset.orig = btn.textContent;
-}
-
-/* ── LIKE POST ── */
-function likePost(btn, e){
-  if(e) e.stopPropagation();
-  const liked = btn.classList.toggle('liked');
-  const countEl = btn.querySelector('.like-count');
-  const icon = btn.querySelector('.like-icon');
-  let count = parseInt(countEl.textContent);
-  countEl.textContent = liked ? count + 1 : count - 1;
-  if(liked){ icon.style.animation='none'; requestAnimationFrame(()=>{ icon.style.animation=''; }); }
-}
-
-/* ── HTML ESCAPE HELPER ── */
-function escHtml(str){
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-/* ══════════════════════════════════════════
-   MODAL
-═══════════════════════════════════════════ */
-let _modalPost = null;
-
-function openModal(post){
-  _modalPost = post;
-  const title   = post.querySelector('.post-title')?.textContent || '';
-  const full    = post.querySelector('.post-full')?.textContent || post.querySelector('.post-preview')?.textContent || '';
-  const badge   = post.dataset.badge || '';
-  const user    = post.dataset.username || '';
-  const time    = post.dataset.time || '';
-  const likes   = post.dataset.likes || '0';
-  const views   = post.dataset.views || '';
-  const pill    = post.dataset.pill || '';
-
-  document.getElementById('modal-badge').textContent    = badge;
-  document.getElementById('modal-title').textContent    = title;
-  document.getElementById('modal-username').textContent = user;
-  document.getElementById('modal-time').textContent     = time;
-
-  // Render full content — split on blank lines into paragraphs, preserve single newlines as <br>
-  const contentEl = document.getElementById('modal-content');
-  contentEl.innerHTML = full
-    .split(/\n{2,}/)
-    .filter(p => p.trim())
-    .map(p => '<p>' + escHtml(p).replace(/\n/g, '<br>') + '</p>')
-    .join('');
-  document.getElementById('modal-like-count').textContent = likes;
-  document.getElementById('modal-views-btn').textContent  = views ? '◎ ' + views : '';
-
-  const pillEl = document.getElementById('modal-pill');
-  if(pill){ pillEl.textContent = pill; pillEl.style.display = ''; }
-  else { pillEl.style.display = 'none'; }
-
-  // sync liked state
-  const likeBtn = post.querySelector('.pa-btn.liked');
-  document.getElementById('modal-like-btn').classList.toggle('liked', !!likeBtn);
-
-  document.getElementById('post-modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(){
-  document.getElementById('post-modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-  _modalPost = null;
-}
-
-function closeModalOnOverlay(e){
-  if(e.target === document.getElementById('post-modal-overlay')) closeModal();
-}
-
-function likeModal(){
-  const btn = document.getElementById('modal-like-btn');
-  const liked = btn.classList.toggle('liked');
-  const countEl = document.getElementById('modal-like-count');
-  let count = parseInt(countEl.textContent) || 0;
-  countEl.textContent = liked ? count + 1 : count - 1;
-  // sync back to post card
-  if(_modalPost){
-    const cardLikeBtn = _modalPost.querySelector('.pa-btn');
-    if(cardLikeBtn){
-      cardLikeBtn.classList.toggle('liked', liked);
-      const cardCount = cardLikeBtn.querySelector('.like-count');
-      if(cardCount) cardCount.textContent = countEl.textContent;
-    }
-  }
-}
-
-// Close modal on Escape
-document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
-
-/* ── SUBMIT POST ── */
-async function submitPost(){
-  const username = document.getElementById('inp-username').value.trim();
-  const content  = document.getElementById('inp-content').value.trim();
-  const pillar   = document.getElementById('inp-pillar').value;
-  const isAsk    = document.getElementById('path-ask').classList.contains('active');
-  if(!username) return showToast('Please enter a username.');
-  if(!content)  return showToast('Please write something before posting.');
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Submitting…';
-  try{
-    const endpoint = isAsk ? '/api/community/ask' : '/api/community';
-    const r = await fetch(API + endpoint, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({username, content, pillar: pillar||null})
-    });
-    const d = await r.json();
-    if(d.ok){
-      showToast(isAsk ? '✓ Your question has been sent to OSB privately.' : '✓ Submitted. Your post will appear after OSB review.');
-      document.getElementById('inp-content').value = '';
-      document.getElementById('char-count').textContent = '0 / 1200';
-    } else showToast('Could not submit: ' + (d.error||'Unknown error'));
-  } catch(e){ showToast('Network error — please try again.'); }
-  btn.disabled = false; btn.textContent = 'Post Intelligence';
-}
-
-/* ── SHARE ── */
-function sharePost(){
-  if(navigator.share) navigator.share({title:'OSB Intelligence Community', url:window.location.href});
-  else navigator.clipboard?.writeText(window.location.href).then(()=>showToast('Link copied to clipboard.'));
-}
-
-/* ── TOAST ── */
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 4200);
-}
-
-/* ── NAV ── */
-function toggleMob(){ const m=document.getElementById('mob'); m.style.display=m.style.display==='block'?'none':'block'; }
-function closeMob(){ document.getElementById('mob').style.display='none'; }
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').style.boxShadow = window.scrollY>10 ? '0 2px 32px rgba(0,0,0,.55)' : '';
-},{passive:true});
-
-/* ── LOAD API POSTS ── */
-async function loadCommunityPosts(){
-  try{
-    const r = await fetch(API + '/api/community?limit=50');
-    const d = await r.json();
-    if(!d.ok || !d.data?.length) return;
-    const container = document.getElementById('community-posts');
-    container.innerHTML = d.data.map(p => {
-      const av = (p.username||'A').charAt(0).toUpperCase();
-      const t  = p.created_at ? new Date(p.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : 'recently';
-      const lines = (p.content||'').split('\n').filter(Boolean);
-      const title = lines[0]?.length > 10 ? lines[0] : 'Community Post';
-      const body  = lines.slice(1).join('\n').trim() || p.content || '';
-      const preview = body.slice(0, 180) + (body.length > 180 ? '…' : '');
-      const isIFN = p.pillar === 'IFN';
-      return `<div class="post${isIFN?' ifn':''} in"
-        data-type="${isIFN?'IFN':'community'}" data-p="${p.pillar||'community'}"
-        data-badge="${p.pillar||'Community'}"
-        data-username="${p.username||'Anonymous'}"
-        data-time="${t}"
-        data-likes="${p.likes||0}" data-views=""
-        data-pill="">
-        <div class="post-head">
-          <div class="post-avatar">${av}</div>
-          <div class="post-meta">
-            <div class="post-username">${p.username||'Anonymous'}</div>
-            <div class="post-time">${t}</div>
-          </div>
-          ${p.pillar ? `<div class="post-badge">${p.pillar}</div>` : ''}
-        </div>
-        <div class="post-body-wrap" onclick="openModal(this.closest('.post'))">
-          <div class="post-title">${title}</div>
-          <div class="post-preview">${preview}</div>
-          <div class="post-full">${body}</div>
-        </div>
-        <button class="post-read-more" onclick="toggleExpand(this)">Read More</button>
-        <div class="post-actions">
-          <button class="pa-btn" onclick="likePost(this,event)"><span class="like-icon">♥</span> <span class="like-count">${p.likes||0}</span></button>
-          <button class="pa-btn" onclick="openModal(this.closest('.post'));event.stopPropagation()">↗ Read Full</button>
-          <button class="pa-btn" onclick="sharePost();event.stopPropagation()">Share</button>
-        </div>
-      </div>`;
-    }).join('');
-    setTimeout(revealPosts, 100);
-  } catch(e){}
-}
-
-loadCommunityPosts();
+var ro=new IntersectionObserver(function(e){
+  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});
+},{threshold:.08});
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  var fq=document.getElementById('fq');
+  if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];
+});
+window.addEventListener('scroll',function(){
+  var n=document.getElementById('nav');
+  if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';
+});
 </script>
+<script>
+function animNum(el){var t=parseInt(el.dataset.target),cur=0,step=t/60;var tm=setInterval(function(){cur=Math.min(cur+step,t);var v=t>=1000?Math.round(cur).toLocaleString():Math.round(cur);el.textContent=v;if(cur>=t)clearInterval(tm);},33);}
+var ccObs=new IntersectionObserver(function(e){if(e[0].isIntersecting){document.querySelectorAll('.cs-n[data-target]').forEach(animNum);ccObs.disconnect();}},{threshold:.3});
+window.addEventListener('DOMContentLoaded',function(){var cg=document.querySelector('.cs-grid');if(cg)ccObs.observe(cg);});
+function ff(btn,p){document.querySelectorAll('.ff2').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.querySelectorAll('.fi2').forEach(function(i){i.style.display=(p==='all'||i.dataset.p===p)?'grid':'none';});}
+var BACKEND_URL="https://osb-backend-production.up.railway.app";
+function nlSub(){
+  var e=document.getElementById('nle').value;
+  var msg=document.getElementById('nlmsg');
+  var btn=document.querySelector('.nl-btn');
+  if(!e)return;
+  btn.disabled=true;btn.textContent='Subscribing…';
+  var controller=new AbortController();
+  var timeout=setTimeout(function(){controller.abort();},20000);
+  fetch(BACKEND_URL+'/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e}),signal:controller.signal})
+  .then(function(r){
+    clearTimeout(timeout);
+    msg.style.display='block';
+    msg.style.color=r.ok?'#16a34a':'var(--r)';
+    msg.textContent=r.ok?'Subscribed successfully.':'Something went wrong — please try again.';
+    btn.disabled=false;btn.textContent='Subscribe Free';
+  })
+  .catch(function(err){
+    clearTimeout(timeout);
+    btn.disabled=false;btn.textContent='Subscribe Free';
+    msg.style.display='block';msg.style.color='var(--r)';
+    msg.textContent=err.name==='AbortError'?'Server waking up — wait 20 seconds and try again.':'Connection error. Please try again.';
+  });
+}
+function joinCom(){var u=document.getElementById('cu').value,e=document.getElementById('ce').value;var msg=document.getElementById('jmsg');if(!u||!e){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Please enter a username and email.';return;}fetch(BACKEND_URL+'/api/community',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,content:'New member signup',pillar:null})}).then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Registration received — check your email.':'Something went wrong.';});}
+</script>
+
 </body>
 </html>
