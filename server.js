@@ -10,7 +10,6 @@ const app = express();
 // ── MIDDLEWARE ────────────────────────────────────────────────────────────────
 app.use(cors());
 app.use(express.json({ limit: "50kb" }));
-app.use(express.static(__dirname));
 
 // ── SUPABASE CLIENT ───────────────────────────────────────────────────────────
 const supabase = createClient(
@@ -301,6 +300,9 @@ pages.forEach(page => {
     res.sendFile(path.join(__dirname, `${page}.html`));
   });
 });
+
+// ── STATIC FILES (after routes so .html redirect fires first) ────────────────
+app.use(express.static(__dirname, { extensions: [] }));
 
 // ── 404 & GLOBAL ERROR ────────────────────────────────────────────────────────
 app.use((req, res) => res.status(404).json({ ok: false, error: "Endpoint not found" }));
