@@ -10,9 +10,6 @@ const app = express();
 // ── MIDDLEWARE ────────────────────────────────────────────────────────────────
 app.use(cors());
 app.use(express.json({ limit: "50kb" }));
-// Serve static assets (CSS, JS, images) but never auto-append .html
-app.use(express.static(__dirname, { extensions: [] }));
-
 // ── SUPABASE CLIENT ───────────────────────────────────────────────────────────
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -283,28 +280,25 @@ app.get("/api/admin/stats", adminAuth, timeout(20000), wrap(async (req, res) => 
 }));
 
 // ── CLEAN URL ROUTING ─────────────────────────────────────────────────────────
-// Redirect index.html and /index to root
+// /index and /index.html → root
 app.get(["/index", "/index.html"], (req, res) => res.redirect(301, "/"));
 
-// Redirect all other .html URLs to clean URLs
-app.get("/*.html", (req, res) => {
-  const clean = req.path.replace(".html", "");
-  return res.redirect(301, clean);
-});
+// All other /*.html → strip extension
+app.get("/*.html", (req, res) => res.redirect(301, req.path.replace(".html", "")));
 
-// Serve each page at its clean URL
+// Named clean URL routes
 const pages = [
   "about", "rsei-model", "score", "platform-index",
   "news", "solace", "community", "report", "contact",
   "certification", "registry", "intelligence", "privacy",
   "cookies", "press", "open-letter", "admin"
 ];
-
 pages.forEach(page => {
-  app.get(`/${page}`, (req, res) => {
-    res.sendFile(path.join(__dirname, `${page}.html`));
-  });
+  app.get(`/${page}`, (req, res) => res.sendFile(path.join(__dirname, `${page}.html`)));
 });
+
+// Static assets LAST — serves CSS/JS/images; extensions:[] means never auto-serve .html
+app.use(express.static(__dirname, { extensions: [] }));
 
 // ── 404 & GLOBAL ERROR ────────────────────────────────────────────────────────
 app.use((req, res) => res.status(404).json({ ok: false, error: "Endpoint not found" }));
