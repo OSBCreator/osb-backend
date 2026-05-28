@@ -281,6 +281,27 @@ app.get("/api/admin/stats", adminAuth, timeout(20000), wrap(async (req, res) => 
   }});
 }));
 
+// ── CLEAN URL ROUTING ─────────────────────────────────────────────────────────
+// Redirect .html URLs to clean URLs (301 = permanent, updates Google index)
+app.get("/*.html", (req, res) => {
+  const clean = req.path.replace(".html", "");
+  return res.redirect(301, clean);
+});
+
+// Serve each page at its clean URL
+const pages = [
+  "about", "rsei-model", "score", "platform-index",
+  "news", "solace", "community", "report", "contact",
+  "certification", "registry", "intelligence", "privacy",
+  "cookies", "press", "open-letter", "admin"
+];
+
+pages.forEach(page => {
+  app.get(`/${page}`, (req, res) => {
+    res.sendFile(path.join(__dirname, `${page}.html`));
+  });
+});
+
 // ── 404 & GLOBAL ERROR ────────────────────────────────────────────────────────
 app.use((req, res) => res.status(404).json({ ok: false, error: "Endpoint not found" }));
 app.use((err, req, res, next) => {
