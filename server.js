@@ -6,6 +6,7 @@ const path    = require("path");
 const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
+app.set("trust proxy", 1); // Railway runs behind a proxy — required for correct req.ip (per-client rate limiting)
 
 // ── MIDDLEWARE ────────────────────────────────────────────────────────────────
 app.use(cors());
@@ -13,7 +14,7 @@ app.use(express.json({ limit: "50kb" }));
 // ── SUPABASE CLIENT ───────────────────────────────────────────────────────────
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY
 );
 
 // ── CIRCUIT BREAKER ───────────────────────────────────────────────────────────
