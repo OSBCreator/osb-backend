@@ -26,7 +26,7 @@
   --white: #11111B;          /* raised card / input surface */
   --off-white: #07070E;      /* page background + recessed insets */
   --gray: rgba(255,255,255,.62);     /* secondary text */
-  --mid: rgba(255,255,255,.42);      /* muted text */
+  --mid: rgba(255,255,255,.56);      /* muted text */
   --light: #1C1C26;          /* track fills */
   --border: rgba(255,255,255,.10);
   --green: #8FCB4E;
@@ -37,6 +37,8 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.opt:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; border-color: var(--red); }
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -243,7 +245,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(
 }
 .q-num {
   font-size: 11px;
-  color: var(--red);
+  color: #E85862;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: .25rem;
@@ -1200,7 +1202,7 @@ select.email-input { cursor: pointer; }
     <div class="hero-badge">Free · Private · 2 Minutes</div>
     <h1>Does something<br><em>feel off?</em></h1>
     <p><strong style="color:#fff;font-weight:600">You're not imagining it.</strong> A short, confidential assessment built on the RSEI Model™ — no account, no judgement. Answer honestly and get a clear, evidence-based picture of what you're in, and what to do next.</p>
-    <div style="margin-top:1.25rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4)">RSEI Model™ v2.0 · Thresholds drawn from documented field cases</div>
+    <div style="margin-top:1.25rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.52)">RSEI Model™ v2.0 · Thresholds drawn from documented field cases</div>
   </div>
 </div>
 
@@ -1406,9 +1408,9 @@ function render(){
     <div class="q-num">${q.qNum}</div>
     <div class="q-text">${q.text}</div>
     <div class="q-sub">${q.sub}</div>
-    <div class="options">
+    <div class="options" role="radiogroup" aria-label="Select the answer that fits best">
       ${q.options.map((o,i)=>`
-        <div class="opt ${sel===i?'selected':''}" onclick="select(${i})">
+        <div class="opt ${sel===i?'selected':''}" onclick="select(${i})" role="radio" tabindex="0" aria-checked="${sel===i?'true':'false'}" onkeydown="optKey(event,${i})">
           <div class="opt-radio"></div>
           <div class="opt-text">${o.t}</div>
         </div>`).join('')}
@@ -1422,9 +1424,14 @@ function render(){
   </div>`;
 }
 
+function optKey(e,i){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(i); } }
 function select(i){
   answers[step] = i;
-  document.querySelectorAll('.opt').forEach((el,idx)=>el.classList.toggle('selected',idx===i));
+  document.querySelectorAll('.opt').forEach((el,idx)=>{
+    var on = idx===i;
+    el.classList.toggle('selected', on);
+    el.setAttribute('aria-checked', on ? 'true' : 'false');
+  });
   document.getElementById('next-btn').disabled = false;
 }
 
@@ -1677,17 +1684,17 @@ function showResult(){
       <div class="intake-grid">
 
         <div class="intake-field">
-          <label class="intake-label">Your email <span class="opt-tag">optional — for a reply</span></label>
+          <label class="intake-label" for="user-email">Your email <span class="opt-tag">optional — for a reply</span></label>
           <input class="email-input" type="email" id="user-email" placeholder="your@email.com">
         </div>
 
         <div class="intake-field">
-          <label class="intake-label">Country you are in <span class="opt-tag">optional</span></label>
+          <label class="intake-label" for="user-country">Country you are in <span class="opt-tag">optional</span></label>
           <input class="email-input" type="text" id="user-country" placeholder="e.g. United States, Nigeria, UK...">
         </div>
 
         <div class="intake-field">
-          <label class="intake-label">Where did you meet this person? <span class="opt-tag">optional</span></label>
+          <label class="intake-label" for="user-platform">Where did you meet this person? <span class="opt-tag">optional</span></label>
           <select class="email-input" id="user-platform">
             <option value="">— Select platform —</option>
             <option>Facebook</option>
@@ -1706,7 +1713,7 @@ function showResult(){
         </div>
 
         <div class="intake-field">
-          <label class="intake-label">Have you already sent money or handled money for them? <span class="opt-tag">optional</span></label>
+          <label class="intake-label" for="user-money">Have you already sent money or handled money for them? <span class="opt-tag">optional</span></label>
           <select class="email-input" id="user-money">
             <option value="">— Select —</option>
             <option>No — nothing sent</option>
@@ -1720,7 +1727,7 @@ function showResult(){
 
         <div class="intake-field full-width">
           <label class="intake-label">Briefly tell OSB what happened <span class="opt-tag">optional — 3 to 4 lines is enough</span></label>
-          <textarea class="email-input" id="user-story" rows="4" placeholder="How did you meet? What made you suspicious? What has happened so far? Your words help us understand your situation and protect others in the same position." style="resize:vertical;font-family:inherit;line-height:1.6"></textarea>
+          <textarea aria-label="Briefly describe your situation, optional" class="email-input" id="user-story" rows="4" placeholder="How did you meet? What made you suspicious? What has happened so far? Your words help us understand your situation and protect others in the same position." style="resize:vertical;font-family:inherit;line-height:1.6"></textarea>
         </div>
 
       </div>
