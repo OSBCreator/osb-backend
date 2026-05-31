@@ -661,9 +661,12 @@ select.email-input { cursor: pointer; }
 /* ══════════════════════════════════════════════════════════
    OSB FORMAL INTELLIGENCE REPORT — Law Enforcement Grade
    ══════════════════════════════════════════════════════════ */
+.rc-frame { display: contents; }
+@media(max-width:860px){ .rc-frame { display:block; width:100%; overflow:hidden; } }
 #osb-report-card {
   background: #07070E;
   width: 820px;
+  transform-origin: top left;
   margin: 2rem auto 1rem;
   font-family: 'Syne', sans-serif;
   position: relative;
@@ -1501,6 +1504,7 @@ function showResult(){
     </div>
 
     <!-- OSB DOWNLOADABLE REPORT CARD -->
+    <div class="rc-frame">
     <div id="osb-report-card">
 
       <!-- CLASSIFICATION STRIP -->
@@ -1661,6 +1665,7 @@ function showResult(){
       </div>
 
     </div>
+    </div><!-- /.rc-frame (mobile scale-to-fit) -->
     <!-- END REPORT CARD -->
 
     <button class="btn-download-jpeg" onclick="downloadReportCard()">↓ Download Your Assessment Report (JPEG)</button>
@@ -1757,6 +1762,7 @@ function showResult(){
   </div>`;
 
   setTimeout(()=>{
+    fitReportCard();
     document.getElementById('rbar').style.width = barPct+'%';
     let n=0, target=core;
     const el=document.getElementById('score-num');
@@ -1767,6 +1773,22 @@ function showResult(){
   }, 150);
 }
 
+function fitReportCard(){
+  var card = document.getElementById('osb-report-card');
+  if(!card) return;
+  var frame = card.parentElement;
+  if(document.documentElement.clientWidth <= 860){
+    card.style.transform = 'none';
+    var scale = Math.min(1, frame.clientWidth / card.offsetWidth);
+    card.style.transform = 'scale(' + scale + ')';
+    frame.style.height = (card.offsetHeight * scale) + 'px';
+  } else {
+    card.style.transform = 'none';
+    frame.style.height = '';
+  }
+}
+window.addEventListener('resize', fitReportCard);
+
 function downloadReportCard(){
   var card = document.getElementById('osb-report-card');
   if(!card){ alert('Complete your assessment first.'); return; }
@@ -1774,6 +1796,8 @@ function downloadReportCard(){
   var orig = btn.textContent;
   btn.textContent = 'Generating report…';
   btn.disabled = true;
+  var prevT = card.style.transform, frame = card.parentElement, prevH = frame.style.height;
+  card.style.transform = 'none'; frame.style.height = '';   // capture full 820px certificate regardless of device
   html2canvas(card, {
     backgroundColor: '#07070E',
     scale: 2,
@@ -1784,9 +1808,11 @@ function downloadReportCard(){
     link.download = 'OSB-RSEI-Assessment-' + new Date().toISOString().slice(0,10) + '.jpg';
     link.href = canvas.toDataURL('image/jpeg', 0.92);
     link.click();
+    card.style.transform = prevT; frame.style.height = prevH; fitReportCard();
     btn.textContent = '✓ Report Downloaded';
     setTimeout(function(){ btn.textContent = orig; btn.disabled = false; }, 3000);
   }).catch(function(){
+    card.style.transform = prevT; frame.style.height = prevH; fitReportCard();
     btn.textContent = 'Download failed — try again';
     btn.disabled = false;
   });
