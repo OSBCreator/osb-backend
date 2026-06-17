@@ -6,7 +6,7 @@
 
 const OSB = {
 
-  API: 'https://osb-backend-production.up.railway.app',
+  API: 'https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api',
 
   /**
    * Fetch with timeout + auto-retry
