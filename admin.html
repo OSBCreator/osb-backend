@@ -370,7 +370,7 @@ html,body{background:var(--bg);color:var(--white);font-family:var(--syne);font-s
           Refresh
         </button>
         <div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--white-muted);letter-spacing:1px;">
-          <div class="status-dot"></div>RAILWAY
+          <div class="status-dot"></div>EDGE
         </div>
         <button class="sound-btn active" id="sound-btn" onclick="toggleSound()">🔊</button>
       </div>
@@ -716,7 +716,7 @@ function updateAlertFeed(s){
   if(s.critical_tier>0)items.push({dot:'alert-dot-red',title:s.critical_tier+' Critical submission'+(s.critical_tier>1?'s':''),meta:'Active exploitation detected — review immediately'});
   if(s.unread_messages>0)items.push({dot:'alert-dot-amber',title:s.unread_messages+' unread message'+(s.unread_messages>1?'s':''),meta:'Contact form inbox — action required'});
   if(s.pending_moderation>0)items.push({dot:'alert-dot-amber',title:s.pending_moderation+' post'+(s.pending_moderation>1?'s':'')+' pending moderation',meta:'Community feed awaiting review'});
-  items.push({dot:'alert-dot-green',title:'Railway + Supabase connected',meta:'All systems operational'});
+  items.push({dot:'alert-dot-green',title:'Edge + Supabase connected',meta:'All systems operational'});
   if(!items.length){el.innerHTML='<div class="loading-state" style="padding:16px;">All clear</div>';return;}
   el.innerHTML=items.map(function(it){return '<div class="alert-item"><div class="alert-dot '+it.dot+'"></div><div class="alert-info"><div class="alert-title">'+it.title+'</div><div class="alert-meta">'+it.meta+'</div></div></div>';}).join('');
 }
