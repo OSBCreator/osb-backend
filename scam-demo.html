@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch a Scam Get Scored — OSB | RSEI Model™</title>
+<meta name="description" content="A composite romance-fraud conversation, scored live against the OSB RSEI Model™. See how each message maps to a behavioural pillar.">
+<style>
+:root{
+  --bg:#07070E; --panel:#11111B; --inset:#0B0B12; --ink:#ECECF2;
+  --gray:rgba(255,255,255,.62); --mid:rgba(255,255,255,.42);
+  --border:rgba(255,255,255,.10); --red:#C1121F; --redlt:#E85862;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+body{background:var(--bg);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:clamp(1.25rem,4vw,3rem)}
+.eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mid)}
+h1{font-family:'Cormorant Garamond','Times New Roman',serif;font-weight:700;font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;margin:.5rem 0 .35rem}
+h1 em{font-style:italic;color:var(--redlt)}
+.lede{color:var(--gray);max-width:60ch;margin-bottom:.9rem}
+.disclaim{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);border:1px solid var(--border);border-radius:999px;padding:5px 12px;margin-bottom:2rem}
+.grid{display:grid;grid-template-columns:1.3fr .9fr;gap:1.75rem;align-items:start}
+@media(max-width:840px){.grid{grid-template-columns:1fr}}
+
+/* chat */
+.chat{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:1.25rem;min-height:340px}
+.chat-head{display:flex;align-items:center;gap:.6rem;padding-bottom:.85rem;margin-bottom:1rem;border-bottom:1px solid var(--border)}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#2a2a38,#15151f);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--gray);border:1px solid var(--border)}
+.chat-name{font-weight:600;font-size:.9rem}
+.chat-sub{font-size:.66rem;color:var(--mid);font-family:'IBM Plex Mono',monospace}
+.msgs{display:flex;flex-direction:column;gap:.85rem}
+.msg{opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.msg.show{opacity:1;transform:none}
+.bubble{background:var(--inset);border:1px solid var(--border);border-radius:14px 14px 14px 4px;padding:.7rem .9rem;font-size:.92rem;max-width:88%}
+.tag{margin-top:.4rem;font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.5px;color:var(--redlt);display:flex;gap:.45rem;align-items:flex-start}
+.tag b{color:var(--ink);font-weight:600}
+.pill-badge{flex:0 0 auto;font-size:.58rem;font-weight:700;background:rgba(193,18,31,.16);color:var(--redlt);border:1px solid rgba(193,18,31,.4);border-radius:5px;padding:2px 6px;letter-spacing:1px}
+
+/* panel */
+.scorebox{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:1.4rem;position:sticky;top:1.25rem}
+.sb-label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-align:center}
+.sb-core{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3.6rem;line-height:1;text-align:center;margin:.1rem 0}
+.sb-core small{font-size:1rem;color:var(--mid)}
+.tier{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:1px;padding:.4rem .7rem;border-radius:8px;margin:.4rem 0 1.1rem;transition:all .4s}
+.pillars{display:flex;flex-direction:column;gap:.7rem}
+.p-row{}
+.p-top{display:flex;justify-content:space-between;font-size:.72rem;color:var(--gray);margin-bottom:.25rem}
+.p-top b{color:var(--ink);font-weight:600}
+.track{height:7px;background:var(--inset);border-radius:4px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:4px;background:var(--red);transition:width .6s cubic-bezier(.4,0,.2,1)}
+.controls{margin-top:1.4rem;display:flex;gap:.6rem}
+.btn{flex:1;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.82rem;padding:.7rem;border-radius:9px;transition:background .2s}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:#d8202e}
+.btn-primary:disabled{opacity:.4;cursor:default}
+.btn-ghost{background:transparent;color:var(--gray);border:1px solid var(--border)}
+.endcard{margin-top:1.75rem;background:var(--inset);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:12px;padding:1.2rem;display:none}
+.endcard.show{display:block}
+.endcard p{color:var(--gray);font-size:.9rem;margin-bottom:.8rem}
+.endcard a{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:600;font-size:.85rem;padding:.65rem 1.2rem;border-radius:9px}
+.foot{margin-top:2.5rem;font-size:.7rem;color:var(--mid);font-family:'IBM Plex Mono',monospace;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">OSB · RSEI Model™ v2.0 · Live Demonstration</div>
+  <h1>Watch a scam <em>get scored.</em></h1>
+  <p class="lede">A composite romance-fraud conversation, reconstructed from documented field patterns. Reveal it message by message — each one maps to a behavioural pillar, and the RSEI score climbs in real time.</p>
+  <span class="disclaim">Composite illustration · not a real person · for education</span>
+
+  <div class="grid">
+    <!-- chat -->
+    <div class="chat">
+      <div class="chat-head">
+        <div class="avatar">?</div>
+        <div>
+          <div class="chat-name">"David" · matched 4 days ago</div>
+          <div class="chat-sub">identity unverified</div>
+        </div>
+      </div>
+      <div class="msgs" id="msgs"></div>
+    </div>
+
+    <!-- score panel -->
+    <div class="scorebox">
+      <div class="sb-label">RSEI Core Score</div>
+      <div class="sb-core"><span id="core">4</span><small> / 20</small></div>
+      <div class="tier" id="tier" style="background:rgba(99,153,34,.14);color:#8FCB4E">Awaiting signal…</div>
+      <div class="pillars" id="pillars"></div>
+      <div class="controls">
+        <button class="btn btn-primary" id="next" onclick="reveal()">Reveal next message ▸</button>
+        <button class="btn btn-ghost" onclick="restart()">Reset</button>
+      </div>
+      <div class="endcard" id="end">
+        <p id="endmsg"></p>
+        <a href="score.html">Check your own situation →</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot">Scored by the same RSEI engine (<code>rsei.js</code>) used across OSB — one model, one source of truth.</div>
+</div>
+
+<!-- canonical scoring engine -->
+<script src="/rsei.js"></script>
+<script>
+/* Fallback if rsei.js fails to load, so the demo still runs. */
+var ENGINE = (typeof RSEI !== "undefined") ? RSEI : {
+  CONFIG:{pillarNames:{R:"Relationship Acceleration",S:"Script Consistency",E:"Emotional Manipulation",I:"Incremental Financial Extraction"},pillars:["R","S","E","I"],scoreMax:20,eTriggerThreshold:4},
+  score:function(a){var R=Math.round((a[0]+a[1])/2),S=Math.round((a[2]+a[3])/2),E=Math.round((a[4]+a[5])/2),I=Math.round((a[6]+a[7])/2);var c=R+S+E+I;var t=c<=11?["Low Behavioural Risk","#639922"]:c<=16?["High Probability Romance Scam","#BA7517"]:["Critical — Exploitation in Progress","#C1121F"];return{pillars:{R:R,S:S,E:E,I:I},core:c,scoreMax:20,tier:t[0],color:t[1],eTrigger:E>=4};}
+};
+
+/* The composite conversation. Each beat fills one question (R,R,S,S,E,E,I,I order). */
+var BEATS = [
+  {pillar:"R", text:"I know we only matched a few days ago, but I feel like I've known you my whole life 💕", technique:"Love-bombing", why:"Manufactured instant intimacy — moving far faster than a real connection would.", q:4},
+  {pillar:"R", text:"I think you're my soulmate. I've honestly never felt this sure about anyone.", technique:"Premature commitment", why:"Declaring destiny within days to lock in emotional investment.", q:5},
+  {pillar:"S", text:"I'd love to video call but I'm an engineer on an offshore rig — the signal out here is terrible.", technique:"Unverifiable occupation", why:"A classic script: a job that explains why he can never be seen or met.", q:4},
+  {pillar:"S", text:"My contract pays $480,000 but the funds are locked until I'm back onshore.", technique:"Wealth + locked funds", why:"Builds a fake fortune now to justify an 'urgent' money request later.", q:5},
+  {pillar:"E", text:"You're the only person I trust. Let's keep us private for now — people wouldn't understand.", technique:"Isolation & secrecy", why:"Cutting you off from the friends and family who might raise the alarm.", q:4},
+  {pillar:"E", text:"If you really loved me, you wouldn't doubt me like this. It hurts.", technique:"Guilt & weaponised affection", why:"Turning your caution into a test of love so you override your instincts.", q:5},
+  {pillar:"I", text:"Tiny favour — could you grab a $300 gift card so I can fix my satellite phone? I'll repay you.", technique:"The small first ask", why:"A small, deniable request to establish the pattern of you sending money.", q:4},
+  {pillar:"I", text:"Customs needs a $9,000 release fee for my funds. Send it and I'll pay you back triple, I promise.", technique:"Advance-fee escalation", why:"The real goal: a large 'fee' to unlock money that does not exist.", q:5}
+];
+
+var revealed = 0;
+var answers = [1,1,1,1,1,1,1,1]; // unrevealed pillars sit at baseline
+
+function buildPillars(){
+  var box = document.getElementById("pillars"); box.innerHTML = "";
+  ENGINE.CONFIG.pillars.forEach(function(p){
+    box.innerHTML +=
+      '<div class="p-row"><div class="p-top"><span><b>'+p+'</b> — '+ENGINE.CONFIG.pillarNames[p]+'</span><span id="pv-'+p+'">0/5</span></div>'+
+      '<div class="track"><div class="fill" id="pf-'+p+'"></div></div></div>';
+  });
+}
+
+function update(){
+  var r = ENGINE.score(answers);
+  document.getElementById("core").textContent = r.core;
+  var t = document.getElementById("tier");
+  t.textContent = revealed === 0 ? "Awaiting signal…" : r.tier;
+  t.style.background = "rgba(0,0,0,.0)";
+  t.style.color = r.color; t.style.background = hexA(r.color, .15);
+  ENGINE.CONFIG.pillars.forEach(function(p){
+    var v = r.pillars[p];
+    document.getElementById("pf-"+p).style.width = (v/5*100)+"%";
+    document.getElementById("pv-"+p).textContent = (revealed?v:0)+"/5";
+  });
+}
+
+function hexA(hex,a){var n=parseInt(hex.slice(1),16);return "rgba("+(n>>16&255)+","+(n>>8&255)+","+(n&255)+","+a+")";}
+
+function reveal(){
+  if(revealed >= BEATS.length) return;
+  var b = BEATS[revealed];
+  answers[revealed] = b.q;
+  var el = document.createElement("div");
+  el.className = "msg";
+  el.innerHTML = '<div class="bubble">'+escapeHTML(b.text)+'</div>'+
+                 '<div class="tag"><span class="pill-badge">'+b.pillar+'</span><span><b>'+b.technique+'.</b> '+b.why+'</span></div>';
+  document.getElementById("msgs").appendChild(el);
+  requestAnimationFrame(function(){ el.classList.add("show"); });
+  revealed++;
+  update();
+  if(revealed >= BEATS.length){
+    var r = ENGINE.score(answers);
+    document.getElementById("next").disabled = true;
+    document.getElementById("next").textContent = "Conversation scored";
+    var end = document.getElementById("end");
+    document.getElementById("endmsg").textContent =
+      "Final RSEI score: "+r.core+"/20 — "+r.tier+". Eight messages. Every pillar maxed. This is what a scored exploitation pattern looks like" + (r.eTrigger ? ", and the emotional-manipulation trigger alone flags it for victim support." : ".");
+    end.classList.add("show");
+  }
+}
+
+function restart(){
+  revealed = 0; answers = [1,1,1,1,1,1,1,1];
+  document.getElementById("msgs").innerHTML = "";
+  document.getElementById("next").disabled = false;
+  document.getElementById("next").textContent = "Reveal next message ▸";
+  document.getElementById("end").classList.remove("show");
+  update();
+}
+
+function escapeHTML(s){return s.replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+buildPillars();
+update();
+</script>
+</body>
+</html>

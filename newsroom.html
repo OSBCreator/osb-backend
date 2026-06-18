@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSB Intelligence Wire — Social Engineering & Romance Fraud News</title>
+<meta name="description" content="The OSB Intelligence Wire: the latest social engineering and romance fraud news, each story read through the RSEI Model™ behavioural lens.">
+<style>
+:root{--bg:#07070E;--card:#11111B;--inset:#0C0C14;--ink:#ECECF2;--soft:rgba(255,255,255,.64);--mut:rgba(255,255,255,.42);--border:rgba(255,255,255,.10);--red:#C1121F;--redsoft:#E85862;}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+body{background:var(--bg);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+html,body{overflow-x:clip}
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(1.5rem,4vw,3.5rem) clamp(1.25rem,4vw,2rem) 5rem}
+.eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.64rem;letter-spacing:3px;text-transform:uppercase;color:var(--mut)}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.08;margin:.5rem 0 .5rem}
+h1 em{font-style:italic;color:var(--redsoft)}
+.lede{color:var(--soft);max-width:64ch;margin-bottom:.4rem}
+.note{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-bottom:2.25rem}
+.live{display:inline-flex;align-items:center;gap:.5rem}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+@media(max-width:560px){.feed{grid-template-columns:1fr}}
+.item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;display:flex;flex-direction:column;gap:.65rem;transition:border-color .2s}
+.item:hover{border-color:rgba(193,18,31,.45)}
+.item-top{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+.chip{flex-shrink:0;font-weight:700;font-size:.56rem;background:rgba(193,18,31,.16);color:var(--redsoft);border:1px solid rgba(193,18,31,.4);border-radius:5px;padding:2px 7px;letter-spacing:1px}
+.headline{font-size:1.02rem;line-height:1.4;font-weight:500}
+.headline a{color:var(--ink);text-decoration:none}
+.headline a:hover{color:var(--redsoft)}
+.lens{font-size:.82rem;color:var(--soft);border-top:1px solid var(--border);padding-top:.6rem;margin-top:auto}
+.lens b{color:var(--redsoft);font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:.2rem}
+.state{text-align:center;padding:4rem 1rem;color:var(--mut)}
+.state .big{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--soft);margin-bottom:.5rem}
+.skel{background:var(--card);border:1px solid var(--border);border-radius:14px;height:150px;animation:sk 1.4s ease-in-out infinite}
+@keyframes sk{0%,100%{opacity:.5}50%{opacity:.85}}
+.foot{margin-top:2.5rem;font-size:.72rem;color:var(--mut);font-family:'IBM Plex Mono',monospace;border-top:1px solid var(--border);padding-top:1.5rem}
+.foot a{color:var(--redsoft);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">OSB · Intelligence Wire</div>
+  <h1>The social engineering <em>newsroom.</em></h1>
+  <p class="lede">The latest romance-fraud and social-engineering reporting from across the web — each story read through the RSEI Model™ behavioural lens. We don't just collect the news. We tell you which manipulation pillar it shows.</p>
+  <p class="note"><span class="live"><span class="dot"></span>Live feed</span> · headlines &amp; sources only · updated on each visit</p>
+
+  <div class="feed" id="feed">
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+  </div>
+
+  <div class="foot">
+    Aggregated from public news sources via Google News. OSB adds the behavioural reading; we link to original reporting and never republish full articles.
+    For deeper analysis, see the <a href="intelligence.html">IFN field intelligence library</a>.
+  </div>
+</div>
+
+<script>
+// OSB search topics. Each headline is fetched from Google News RSS through a public
+// CORS proxy and read client-side — no backend required.
+const QUERIES = ["romance scam","pig butchering scam","social engineering fraud","sextortion scam","online dating fraud","investment romance scam"];
+const PROXY = "https://api.allorigins.win/raw?url=";
+const RSS = q => "https://news.google.com/rss/search?q=" + encodeURIComponent(q) + "&hl=en-US&gl=US&ceid=US:en";
+
+// RSEI lens — simple keyword reading of each headline into a pillar.
+const LENS = [
+  {p:"R", name:"Relationship Acceleration", kw:["romance","dating","lover","boyfriend","girlfriend","fiance","soulmate","whirlwind"], note:"Manufactured intimacy — a relationship pushed unnaturally fast."},
+  {p:"S", name:"Script Consistency", kw:["fake profile","impersonat","catfish","stolen photo","fake identity","posing as","deepfake"], note:"A fabricated, repeatable persona built to withstand scrutiny."},
+  {p:"E", name:"Emotional Manipulation", kw:["sextortion","blackmail","threat","coerc","emotional","isolat","suicide","despair","trauma"], note:"Pressure, fear or guilt used to override the victim's judgement."},
+  {p:"I", name:"Incremental Extraction", kw:["crypto","investment","pig butcher","wire","gift card","bitcoin","lost $","stole $","millions","funds","payment","money"], note:"Money drawn out in escalating, deniable steps."}
+];
+function lensFor(title){
+  const t = title.toLowerCase();
+  for(const l of LENS){ if(l.kw.some(k=>t.includes(k))) return l; }
+  return {p:"SE", name:"Social Engineering", note:"A documented social-engineering pattern in the wild."};
+}
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function timeAgo(d){const s=(Date.now()-d)/1000;if(s<3600)return Math.max(1,Math.floor(s/60))+"m ago";if(s<86400)return Math.floor(s/3600)+"h ago";return Math.floor(s/86400)+"d ago";}
+
+async function pull(q){
+  try{
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 8000);
+    const r = await fetch(PROXY + encodeURIComponent(RSS(q)), {cache:"no-store", signal:ctrl.signal});
+    clearTimeout(t);
+    if(!r.ok) return [];
+    const xml = new DOMParser().parseFromString(await r.text(), "text/xml");
+    return [...xml.querySelectorAll("item")].slice(0,8).map(it=>{
+      let title = (it.querySelector("title")||{}).textContent || "";
+      const link = (it.querySelector("link")||{}).textContent || "#";
+      const pub = Date.parse((it.querySelector("pubDate")||{}).textContent || "") || Date.now();
+      const src = (it.querySelector("source")||{}).textContent || title.split(" - ").pop();
+      title = title.replace(/ - [^-]+$/,"").trim();
+      return {title, link, pub, src};
+    });
+  }catch(e){ return []; }
+}
+
+(async function(){
+  const feed = document.getElementById("feed");
+  let items = [];
+  try{
+    const batches = await Promise.all(QUERIES.map(pull));
+    const seen = new Set();
+    batches.flat().forEach(i=>{ const k=i.title.toLowerCase().slice(0,60); if(i.title && !seen.has(k)){ seen.add(k); items.push(i);} });
+    items.sort((a,b)=>b.pub-a.pub);
+    items = items.slice(0,24);
+  }catch(e){ items = []; }
+
+  if(!items.length){
+    feed.classList.remove("feed");
+    feed.innerHTML = '<div class="state"><div class="big">The wire is updating.</div>Live headlines could not load just now — please check back in a moment. In the meantime, explore the <a href="intelligence.html" style="color:var(--redsoft)">IFN field intelligence library</a>.</div>';
+    return;
+  }
+  feed.innerHTML = items.map(i=>{
+    const L = lensFor(i.title);
+    return `<article class="item">
+      <div class="item-top"><span>${esc(i.src)}</span><span class="chip">${L.p}</span></div>
+      <div class="headline"><a href="${esc(i.link)}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a></div>
+      <div class="lens"><b>RSEI lens · ${esc(L.name)}</b>${esc(L.note)}</div>
+    </article>`;
+  }).join("");
+})();
+</script>
+</body>
+</html>

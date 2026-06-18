@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSB Intelligence Community — Social Engineering Awareness</title>
 <meta name="description" content="The OSB Intelligence Community — a moderated platform for social engineering awareness, field intelligence, and victim support.">
-<style>@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
+<style>
+:focus-visible{outline:2px solid #C1121F;outline-offset:2px}
+@media(max-width:640px){html,body{overflow-x:clip}[style*="grid-template-columns"]{grid-template-columns:1fr!important}.filter-bar{flex-wrap:wrap!important;overflow-x:auto}.signal-steps,.stat-row,.post-actions,.post-head,.compose-foot,.compose-hdr,.ifn-item{flex-wrap:wrap!important}}@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
 html{scroll-behavior:smooth;}
@@ -863,7 +865,7 @@ footer .fcopy{max-width:1160px;margin:0 auto;font-size:.68rem;color:rgba(255,255
 </head>
 <body>
 <nav id="nav">
-  <a href="index.html" class="nav-logo"><img src="/osb-logo.jpg" alt="OSB"></a>
+  <a href="index.html" class="nav-logo"><img src="/osb-emblem.png" alt="OSB — Online Security Bureau" style="height:46px;width:auto"></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -893,7 +895,7 @@ footer .fcopy{max-width:1160px;margin:0 auto;font-size:.68rem;color:rgba(255,255
   </div>
   <div class="nav-right">
     <a href="community.html" class="nbtn-join">Community</a>
-    <a href="score.html" class="nbtn-score">SCORE Now</a>
+    <a href="score.html" class="nbtn-score">Check your situation</a>
   </div>
   <button class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </nav>
@@ -914,7 +916,7 @@ footer .fcopy{max-width:1160px;margin:0 auto;font-size:.68rem;color:rgba(255,255
   <a href="community.html" onclick="closeMob()">Community</a>
   <a href="contact.html" onclick="closeMob()">Contact</a>
   <div class="mob-ctas">
-    <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">SCORE Now</a>
+    <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">Check your situation</a>
     <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
   </div>
 </div>
@@ -1451,7 +1453,7 @@ Never pay anyone to recover your lost money. Report the incident through the FBI
 <footer>
   <div class="foot-inner">
     <div>
-      <img src="/osb-logo.jpg" alt="OSB" style="height:36px;margin-bottom:1rem;display:block;">
+      <img src="/osb-logo.png" alt="OSB — Online Security Bureau" style="height:36px;margin-bottom:1rem;display:block;">
       <p class="fdesc">Online Security Bureau is the world's first behavioural intelligence organisation built to identify, document and stop social engineering fraud across dating and social platforms.</p>
     </div>
     <div class="flinks">
@@ -1468,7 +1470,7 @@ Never pay anyone to recover your lost money. Report the incident through the FBI
 </footer>
 
 <script>
-const API = 'https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api';
+const API = 'https://osb-backend-production.up.railway.app';
 
 /* ── CHAR COUNT ── */
 document.getElementById('inp-content').addEventListener('input', function(){
