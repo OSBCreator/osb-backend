@@ -58,69 +58,36 @@ h1 em{font-style:italic;color:var(--redsoft)}
 </div>
 
 <script>
-// OSB search topics. Each headline is fetched from Google News RSS through a public
-// CORS proxy and read client-side — no backend required.
-const QUERIES = ["romance scam","pig butchering scam","social engineering fraud","sextortion scam","online dating fraud","investment romance scam"];
-const PROXY = "https://api.allorigins.win/raw?url=";
-const RSS = q => "https://news.google.com/rss/search?q=" + encodeURIComponent(q) + "&hl=en-US&gl=US&ceid=US:en";
+// OSB Intelligence Wire — served by the "osb-news" Supabase Edge Function (server-side, reliable).
+// After deploying the function, paste its URL below
+// (Supabase shows it as https://<project-ref>.supabase.co/functions/v1/osb-news):
+const NEWS_API = "https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-news";
 
-// RSEI lens — simple keyword reading of each headline into a pillar.
-const LENS = [
-  {p:"R", name:"Relationship Acceleration", kw:["romance","dating","lover","boyfriend","girlfriend","fiance","soulmate","whirlwind"], note:"Manufactured intimacy — a relationship pushed unnaturally fast."},
-  {p:"S", name:"Script Consistency", kw:["fake profile","impersonat","catfish","stolen photo","fake identity","posing as","deepfake"], note:"A fabricated, repeatable persona built to withstand scrutiny."},
-  {p:"E", name:"Emotional Manipulation", kw:["sextortion","blackmail","threat","coerc","emotional","isolat","suicide","despair","trauma"], note:"Pressure, fear or guilt used to override the victim's judgement."},
-  {p:"I", name:"Incremental Extraction", kw:["crypto","investment","pig butcher","wire","gift card","bitcoin","lost $","stole $","millions","funds","payment","money"], note:"Money drawn out in escalating, deniable steps."}
-];
-function lensFor(title){
-  const t = title.toLowerCase();
-  for(const l of LENS){ if(l.kw.some(k=>t.includes(k))) return l; }
-  return {p:"SE", name:"Social Engineering", note:"A documented social-engineering pattern in the wild."};
-}
 function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
-function timeAgo(d){const s=(Date.now()-d)/1000;if(s<3600)return Math.max(1,Math.floor(s/60))+"m ago";if(s<86400)return Math.floor(s/3600)+"h ago";return Math.floor(s/86400)+"d ago";}
-
-async function pull(q){
-  try{
-    const ctrl = new AbortController();
-    const t = setTimeout(()=>ctrl.abort(), 8000);
-    const r = await fetch(PROXY + encodeURIComponent(RSS(q)), {cache:"no-store", signal:ctrl.signal});
-    clearTimeout(t);
-    if(!r.ok) return [];
-    const xml = new DOMParser().parseFromString(await r.text(), "text/xml");
-    return [...xml.querySelectorAll("item")].slice(0,8).map(it=>{
-      let title = (it.querySelector("title")||{}).textContent || "";
-      const link = (it.querySelector("link")||{}).textContent || "#";
-      const pub = Date.parse((it.querySelector("pubDate")||{}).textContent || "") || Date.now();
-      const src = (it.querySelector("source")||{}).textContent || title.split(" - ").pop();
-      title = title.replace(/ - [^-]+$/,"").trim();
-      return {title, link, pub, src};
-    });
-  }catch(e){ return []; }
-}
 
 (async function(){
   const feed = document.getElementById("feed");
   let items = [];
   try{
-    const batches = await Promise.all(QUERIES.map(pull));
-    const seen = new Set();
-    batches.flat().forEach(i=>{ const k=i.title.toLowerCase().slice(0,60); if(i.title && !seen.has(k)){ seen.add(k); items.push(i);} });
-    items.sort((a,b)=>b.pub-a.pub);
-    items = items.slice(0,24);
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 9000);
+    const r = await fetch(NEWS_API, {cache:"no-store", signal:ctrl.signal});
+    clearTimeout(t);
+    if(r.ok){ const d = await r.json(); items = (d && Array.isArray(d.items)) ? d.items : []; }
   }catch(e){ items = []; }
 
   if(!items.length){
     feed.classList.remove("feed");
-    feed.innerHTML = '<div class="state"><div class="big">The wire is updating.</div>Live headlines could not load just now — please check back in a moment. In the meantime, explore the <a href="intelligence.html" style="color:var(--redsoft)">IFN field intelligence library</a>.</div>';
+    feed.innerHTML = '<div class="state"><div class="big">The wire is updating.</div>Live headlines could not load just now \u2014 please check back in a moment. In the meantime, explore the <a href="intelligence.html" style="color:var(--redsoft)">IFN field intelligence library</a>.</div>';
     return;
   }
-  feed.innerHTML = items.map(i=>{
-    const L = lensFor(i.title);
-    return `<article class="item">
-      <div class="item-top"><span>${esc(i.src)}</span><span class="chip">${L.p}</span></div>
-      <div class="headline"><a href="${esc(i.link)}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a></div>
-      <div class="lens"><b>RSEI lens · ${esc(L.name)}</b>${esc(L.note)}</div>
-    </article>`;
+  feed.innerHTML = items.map(function(i){
+    const L = i.lens || {p:"SE",name:"Social Engineering",note:""};
+    return '<article class="item">'
+      + '<div class="item-top"><span>'+esc(i.src)+'</span><span class="chip">'+esc(L.p)+'</span></div>'
+      + '<div class="headline"><a href="'+esc(i.link)+'" target="_blank" rel="noopener noreferrer">'+esc(i.title)+'</a></div>'
+      + '<div class="lens"><b>RSEI lens \u00b7 '+esc(L.name)+'</b>'+esc(L.note)+'</div>'
+      + '</article>';
   }).join("");
 })();
 </script>
