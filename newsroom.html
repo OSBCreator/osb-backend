@@ -5,25 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSB Intelligence Wire — Social Engineering & Romance Fraud News</title>
 <meta name="description" content="The OSB Intelligence Wire: the latest social engineering and romance fraud news, each story read through the RSEI Model™ behavioural lens.">
+<link rel="icon" href="/osb-emblem.png">
 <style>
 :root{--bg:#07070E;--card:#11111B;--inset:#0C0C14;--ink:#ECECF2;--soft:rgba(255,255,255,.64);--mut:rgba(255,255,255,.42);--border:rgba(255,255,255,.10);--red:#C1121F;--redsoft:#E85862;}
 *{box-sizing:border-box;margin:0;padding:0}
 :focus-visible{outline:2px solid var(--red);outline-offset:2px}
-body{background:var(--bg);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 html,body{overflow-x:clip}
-.wrap{max-width:1080px;margin:0 auto;padding:clamp(1.5rem,4vw,3.5rem) clamp(1.25rem,4vw,2rem) 5rem}
+body{background:var(--bg);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1rem clamp(1.25rem,4vw,2.5rem);background:rgba(7,7,14,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .nav-logo img{height:42px;width:auto;display:block}
+nav .nav-links{display:flex;gap:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase}
+nav .nav-links a{color:var(--soft);text-decoration:none}
+nav .nav-links a:hover{color:var(--ink)}
+@media(max-width:620px){nav .nav-links{gap:1rem}nav .nav-links a:nth-child(n+3){display:none}}
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(1.5rem,4vw,3rem) clamp(1.25rem,4vw,2rem) 5rem}
 .eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.64rem;letter-spacing:3px;text-transform:uppercase;color:var(--mut)}
 h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.08;margin:.5rem 0 .5rem}
 h1 em{font-style:italic;color:var(--redsoft)}
 .lede{color:var(--soft);max-width:64ch;margin-bottom:.4rem}
-.note{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-bottom:2.25rem}
+.note{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-bottom:1.75rem}
 .live{display:inline-flex;align-items:center;gap:.5rem}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.filters{display:none;flex-wrap:wrap;gap:.5rem;margin:0 0 1.6rem}
+.fbtn{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;background:transparent;color:var(--mut);border:1px solid var(--border);border-radius:999px;padding:.45rem .9rem;cursor:pointer;transition:all .15s}
+.fbtn:hover{color:var(--ink);border-color:rgba(193,18,31,.5)}
+.fbtn.on{background:rgba(193,18,31,.14);color:var(--redsoft);border-color:rgba(193,18,31,.55)}
 .feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
 @media(max-width:560px){.feed{grid-template-columns:1fr}}
-.item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;display:flex;flex-direction:column;gap:.65rem;transition:border-color .2s}
-.item:hover{border-color:rgba(193,18,31,.45)}
+.item{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s;animation:up .55s ease both}
+.item:hover{border-color:rgba(193,18,31,.45);transform:translateY(-3px)}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--inset);flex-shrink:0}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(130% 130% at var(--gx,20%) 0%, rgba(193,18,31,.30), transparent 62%),
+  repeating-linear-gradient(var(--ang,24deg), rgba(255,255,255,.028) 0 1px, transparent 1px 9px),
+  linear-gradient(160deg,#101019,#0A0A12)}
+.art span{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:4.2rem;color:rgba(232,88,98,.82);text-shadow:0 0 36px rgba(193,18,31,.4)}
+.art i{position:absolute;bottom:.6rem;right:.85rem;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:.52rem;letter-spacing:2px;color:rgba(255,255,255,.32);text-transform:uppercase}
+.cbody{padding:1.1rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
 .item-top{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
 .chip{flex-shrink:0;font-weight:700;font-size:.56rem;background:rgba(193,18,31,.16);color:var(--redsoft);border:1px solid rgba(193,18,31,.4);border-radius:5px;padding:2px 7px;letter-spacing:1px}
 .headline{font-size:1.02rem;line-height:1.4;font-weight:500}
@@ -31,20 +52,45 @@ h1 em{font-style:italic;color:var(--redsoft)}
 .headline a:hover{color:var(--redsoft)}
 .lens{font-size:.82rem;color:var(--soft);border-top:1px solid var(--border);padding-top:.6rem;margin-top:auto}
 .lens b{color:var(--redsoft);font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:.2rem}
+.feat{grid-column:1/-1}
+@media(min-width:760px){
+  .feat{display:grid;grid-template-columns:1.15fr 1fr}
+  .feat .thumb{aspect-ratio:auto;height:100%;min-height:280px}
+  .feat .cbody{padding:1.6rem 1.75rem;justify-content:center}
+  .feat .headline{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.75rem;line-height:1.2;font-weight:600}
+}
 .state{text-align:center;padding:4rem 1rem;color:var(--mut)}
 .state .big{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--soft);margin-bottom:.5rem}
-.skel{background:var(--card);border:1px solid var(--border);border-radius:14px;height:150px;animation:sk 1.4s ease-in-out infinite}
+.skel{background:var(--card);border:1px solid var(--border);border-radius:14px;height:220px;animation:sk 1.4s ease-in-out infinite}
 @keyframes sk{0%,100%{opacity:.5}50%{opacity:.85}}
 .foot{margin-top:2.5rem;font-size:.72rem;color:var(--mut);font-family:'IBM Plex Mono',monospace;border-top:1px solid var(--border);padding-top:1.5rem}
 .foot a{color:var(--redsoft);text-decoration:none}
 </style>
 </head>
 <body>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="/osb-emblem.png" alt="OSB — Online Security Bureau"></a>
+  <div class="nav-links">
+    <a href="intelligence.html">Intelligence</a>
+    <a href="score.html">Score</a>
+    <a href="rsei-model.html">RSEI Model</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
 <div class="wrap">
   <div class="eyebrow">OSB · Intelligence Wire</div>
   <h1>The social engineering <em>newsroom.</em></h1>
   <p class="lede">The latest romance-fraud and social-engineering reporting from across the web — each story read through the RSEI Model™ behavioural lens. We don't just collect the news. We tell you which manipulation pillar it shows.</p>
   <p class="note"><span class="live"><span class="dot"></span>Live feed</span> · headlines &amp; sources only · updated on each visit</p>
+
+  <div class="filters" id="filters">
+    <button class="fbtn on" data-f="all">All</button>
+    <button class="fbtn" data-f="R">R · Relationship</button>
+    <button class="fbtn" data-f="S">S · Script</button>
+    <button class="fbtn" data-f="E">E · Emotional</button>
+    <button class="fbtn" data-f="I">I · Extraction</button>
+    <button class="fbtn" data-f="SE">SE · General</button>
+  </div>
 
   <div class="feed" id="feed">
     <div class="skel"></div><div class="skel"></div><div class="skel"></div>
@@ -59,11 +105,22 @@ h1 em{font-style:italic;color:var(--redsoft)}
 
 <script>
 // OSB Intelligence Wire — served by the "osb-news" Supabase Edge Function (server-side, reliable).
-// After deploying the function, paste its URL below
-// (Supabase shows it as https://<project-ref>.supabase.co/functions/v1/osb-news):
 const NEWS_API = "https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-news";
 
 function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function timeAgo(d){const s=(Date.now()-d)/1000;if(s<3600)return Math.max(1,Math.floor(s/60))+"m ago";if(s<86400)return Math.floor(s/3600)+"h ago";return Math.floor(s/86400)+"d ago";}
+function art(p,idx){return '<div class="art" style="--gx:'+((idx*37)%100)+'%;--ang:'+((idx*29)%180)+'deg"><span>'+esc(p)+'</span><i>RSEI · '+esc(p)+'</i></div>';}
+function card(i,idx,feat){
+  const L=i.lens||{p:"SE",name:"Social Engineering",note:""};
+  const img=i.img?'<img src="'+esc(i.img)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">':'';
+  return '<article class="item'+(feat?' feat':'')+'" data-p="'+esc(L.p)+'" style="animation-delay:'+(idx*55)+'ms">'
+    +'<div class="thumb">'+art(L.p,idx)+img+'</div>'
+    +'<div class="cbody">'
+    +'<div class="item-top"><span>'+esc(i.src)+' · '+timeAgo(i.pub)+'</span><span class="chip">'+esc(L.p)+'</span></div>'
+    +'<div class="headline"><a href="'+esc(i.link)+'" target="_blank" rel="noopener noreferrer">'+esc(i.title)+'</a></div>'
+    +'<div class="lens"><b>RSEI lens · '+esc(L.name)+'</b>'+esc(L.note)+'</div>'
+    +'</div></article>';
+}
 
 (async function(){
   const feed = document.getElementById("feed");
@@ -81,14 +138,19 @@ function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">"
     feed.innerHTML = '<div class="state"><div class="big">The wire is updating.</div>Live headlines could not load just now \u2014 please check back in a moment. In the meantime, explore the <a href="intelligence.html" style="color:var(--redsoft)">IFN field intelligence library</a>.</div>';
     return;
   }
-  feed.innerHTML = items.map(function(i){
-    const L = i.lens || {p:"SE",name:"Social Engineering",note:""};
-    return '<article class="item">'
-      + '<div class="item-top"><span>'+esc(i.src)+'</span><span class="chip">'+esc(L.p)+'</span></div>'
-      + '<div class="headline"><a href="'+esc(i.link)+'" target="_blank" rel="noopener noreferrer">'+esc(i.title)+'</a></div>'
-      + '<div class="lens"><b>RSEI lens \u00b7 '+esc(L.name)+'</b>'+esc(L.note)+'</div>'
-      + '</article>';
-  }).join("");
+  feed.innerHTML = items.map(function(i,idx){ return card(i,idx,idx===0); }).join("");
+  const fl = document.getElementById("filters");
+  fl.style.display = "flex";
+  fl.querySelectorAll(".fbtn").forEach(function(b){
+    b.addEventListener("click", function(){
+      fl.querySelectorAll(".fbtn").forEach(function(x){x.classList.remove("on");});
+      b.classList.add("on");
+      var f = b.dataset.f;
+      document.querySelectorAll("#feed .item").forEach(function(el){
+        el.style.display = (f==="all" || el.dataset.p===f) ? "" : "none";
+      });
+    });
+  });
 })();
 </script>
 </body>

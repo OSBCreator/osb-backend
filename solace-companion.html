@@ -10,6 +10,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :focus-visible{outline:2px solid var(--red);outline-offset:3px}
 body{background:var(--bg);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:.8rem clamp(1.25rem,4vw,2rem);background:rgba(8,8,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.topbar .tb-logo img{height:34px;width:auto;display:block;opacity:.9}
+.topbar .tb-back{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);text-decoration:none}
+.topbar .tb-back:hover{color:var(--ink)}
 .wrap{max-width:640px;margin:0 auto;padding:clamp(1.5rem,5vw,3.5rem) clamp(1.25rem,5vw,2rem) 5rem}
 .eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--mut);text-align:center}
 h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(2.1rem,6vw,3rem);line-height:1.12;text-align:center;margin:.6rem 0 .4rem}
@@ -46,6 +50,10 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clam
 </style>
 </head>
 <body>
+<div class="topbar">
+  <a href="index.html" class="tb-logo"><img src="/osb-emblem.png" alt="OSB — Online Security Bureau"></a>
+  <a href="solace.html" class="tb-back">← Back to Solace</a>
+</div>
 <div class="wrap">
   <div class="eyebrow">OSB Solace · Recovery Companion</div>
   <h1>The 30-Day Companion</h1>
