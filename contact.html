@@ -794,7 +794,7 @@ window.addEventListener('scroll',function(){
 });
 </script>
 <script>
-var BACKEND_URL="https://osb-backend-production.up.railway.app";
+var BACKEND_URL="https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api";
 
 /* ── REFERENCE NUMBER ── */
 /* ── IN-PAGE ERROR HANDLER ── */
@@ -877,7 +877,8 @@ function sendContact(){
       showErr('contact-err','Something went wrong. Please try again.');
     }
   })
-  .catch(function(err){\n    clearTimeout(timeout);
+  .catch(function(err){
+    clearTimeout(timeout);
     btn.disabled=false;btn.style.opacity='1';
     btn.textContent='Send to OSB — Privately and Securely';
     if(err.name==='AbortError'){
@@ -935,7 +936,7 @@ function sendIntel(){
 
 
 <script>
-var BACKEND_URL = 'https://osb-backend-production.up.railway.app';
+var BACKEND_URL = 'https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api';
 
 /* ── NAV DROPDOWN HOVER FIX ── */
 document.addEventListener('DOMContentLoaded', function(){
