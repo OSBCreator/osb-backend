@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>OSB Chat Console</title>
+<link rel="icon" href="/osb-emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070E;--panel:#0E0E18;--panel2:#12121F;--raise:#16161F;--ink:#EDEDF3;
+  --soft:rgba(255,255,255,.62);--mut:rgba(255,255,255,.40);--border:rgba(255,255,255,.08);
+  --red:#C1121F;--redsoft:#E85862;--green:#3DBB82;--amber:#E8A33D;
+  --serif:'Cormorant Garamond',Georgia,serif;--mono:'IBM Plex Mono',ui-monospace,monospace;--sans:'Figtree',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* LOGIN */
+#L{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1.5rem;
+  background:radial-gradient(900px 500px at 50% 0%,rgba(193,18,31,.13),transparent 60%),var(--bg)}
+.L-card{width:100%;max-width:380px;text-align:center}
+.L-card img{height:56px;margin-bottom:1.4rem;opacity:.95}
+.L-eye{font-family:var(--mono);font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--redsoft);margin-bottom:.5rem}
+.L-title{font-family:var(--serif);font-size:2.1rem;font-weight:600;margin-bottom:.3rem}
+.L-sub{color:var(--mut);font-size:.84rem;margin-bottom:1.8rem}
+.inp{width:100%;background:var(--panel2);border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:.85rem 1rem;
+  color:var(--ink);font-family:var(--mono);font-size:.86rem;text-align:center;outline:none;margin-bottom:.6rem}
+.inp:focus{border-color:rgba(193,18,31,.55)}
+.inp::placeholder{color:rgba(255,255,255,.2)}
+.btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:11px;padding:.85rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600}
+.btn:hover{background:#d81b28}
+.btn:disabled{opacity:.6;cursor:wait}
+#L-err{display:none;color:var(--redsoft);font-family:var(--mono);font-size:.68rem;margin-top:.9rem}
+
+/* SHELL */
+#A{display:none;height:100vh;grid-template-columns:320px 1fr}
+.QUEUE{border-right:1px solid var(--border);background:var(--panel);display:flex;flex-direction:column;min-height:0}
+.Q-hd{padding:1rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.Q-hd img{height:30px}
+.Q-hd .t{font-family:var(--serif);font-size:1.15rem;font-weight:600;line-height:1}
+.Q-hd .s{font-family:var(--mono);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--mut)}
+.Q-me{margin-left:auto;text-align:right}
+.Q-me .n{font-family:var(--mono);font-size:.62rem;color:var(--soft)}
+.Q-me button{background:none;border:none;color:var(--mut);font-family:var(--mono);font-size:.55rem;cursor:pointer;text-transform:uppercase;letter-spacing:1px}
+.Q-me button:hover{color:var(--redsoft)}
+.Q-bar{padding:.6rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.pill{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.56rem;letter-spacing:1px;
+  text-transform:uppercase;color:var(--soft);background:var(--panel2);border:1px solid var(--border);border-radius:20px;padding:.32rem .65rem}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:p 1.8s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+.sound{margin-left:auto;background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--soft);
+  font-family:var(--mono);font-size:.55rem;letter-spacing:1px;text-transform:uppercase;padding:.32rem .6rem;cursor:pointer}
+.Q-list{flex:1;overflow-y:auto;min-height:0}
+.Qi{padding:.85rem 1.1rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;position:relative}
+.Qi:hover{background:var(--panel2)}
+.Qi.on{background:linear-gradient(90deg,rgba(193,18,31,.15),transparent)}
+.Qi.on::before{content:"";position:absolute;left:0;top:18%;bottom:18%;width:2px;background:var(--red)}
+.Qi-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.25rem}
+.Qi-name{font-weight:600;font-size:.85rem}
+.Qi-badge{font-family:var(--mono);font-size:.5rem;letter-spacing:1px;text-transform:uppercase;padding:1px 6px;border-radius:4px}
+.Qi-badge.waiting{background:rgba(232,163,61,.16);color:var(--amber);border:1px solid rgba(232,163,61,.35)}
+.Qi-badge.active{background:rgba(61,187,130,.14);color:var(--green);border:1px solid rgba(61,187,130,.32)}
+.Qi-time{margin-left:auto;font-family:var(--mono);font-size:.55rem;color:var(--mut)}
+.Qi-prev{font-size:.76rem;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.Qi-unread{position:absolute;right:1.1rem;bottom:.85rem;background:var(--red);color:#fff;font-family:var(--mono);
+  font-size:.55rem;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--mut);font-family:var(--mono);font-size:.66rem;letter-spacing:1px;text-transform:uppercase}
+
+/* CONVERSATION */
+.CONV{display:flex;flex-direction:column;min-width:0;min-height:0}
+.C-hd{padding:.9rem 1.3rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.8rem;flex-shrink:0;background:var(--panel)}
+.C-hd .t{font-family:var(--serif);font-size:1.25rem;font-weight:600;line-height:1}
+.C-hd .s{font-family:var(--mono);font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);margin-top:2px}
+.C-acts{margin-left:auto;display:flex;gap:.5rem}
+.act{font-family:var(--mono);font-size:.58rem;letter-spacing:1px;text-transform:uppercase;border-radius:8px;
+  padding:.42rem .8rem;cursor:pointer;border:1px solid;transition:.15s;background:none}
+.act-claim{background:rgba(61,187,130,.12);color:var(--green);border-color:rgba(61,187,130,.35)}
+.act-claim:hover{background:rgba(61,187,130,.22)}
+.act-close{background:rgba(229,72,77,.1);color:var(--redsoft);border-color:rgba(229,72,77,.3)}
+.act-close:hover{background:rgba(229,72,77,.2)}
+.C-body{flex:1;overflow-y:auto;padding:1.4rem;display:flex;flex-direction:column;gap:.75rem;min-height:0}
+.m{max-width:66%;padding:.7rem .95rem;border-radius:13px;font-size:.87rem;line-height:1.6;word-wrap:break-word}
+.m.them{align-self:flex-start;background:var(--raise);border:1px solid var(--border)}
+.m.me{align-self:flex-end;background:var(--red);color:#fff}
+.m.sys{align-self:center;background:none;border:1px dashed rgba(255,255,255,.14);color:var(--mut);font-size:.72rem;text-align:center;max-width:80%}
+.m-who{font-family:var(--mono);font-size:.5rem;letter-spacing:1px;text-transform:uppercase;opacity:.7;margin-bottom:.25rem}
+.C-foot{border-top:1px solid var(--border);padding:.9rem 1.3rem 1.1rem;flex-shrink:0;background:var(--panel)}
+.C-row{display:flex;gap:.6rem}
+.C-in{flex:1;background:var(--raise);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:.7rem .9rem;
+  color:var(--ink);font-family:inherit;font-size:.87rem;outline:none;resize:none;max-height:120px;line-height:1.55}
+.C-in:focus{border-color:rgba(193,18,31,.5)}
+.C-in::placeholder{color:rgba(255,255,255,.22)}
+.C-send{background:var(--red);border:none;border-radius:11px;color:#fff;padding:0 1.2rem;cursor:pointer;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase}
+.C-send:disabled{opacity:.45;cursor:not-allowed}
+.canned{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
+.cn{font-family:var(--mono);font-size:.55rem;letter-spacing:.5px;background:var(--panel2);border:1px solid var(--border);
+  color:var(--mut);border-radius:20px;padding:.3rem .7rem;cursor:pointer}
+.cn:hover{color:var(--ink);border-color:rgba(193,18,31,.4)}
+.blank{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;color:var(--mut)}
+.blank .big{font-family:var(--serif);font-size:1.5rem;color:var(--soft)}
+.blank .sm{font-family:var(--mono);font-size:.62rem;letter-spacing:1px;text-transform:uppercase}
+@media(max-width:860px){
+  #A{grid-template-columns:1fr}
+  .QUEUE{position:fixed;left:0;top:0;bottom:0;width:280px;z-index:60;transform:translateX(-100%);transition:transform .25s}
+  .QUEUE.open{transform:none}
+  .burger{display:inline-flex!important}
+}
+.burger{display:none;background:var(--panel2);border:1px solid var(--border);border-radius:8px;width:32px;height:32px;
+  align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<div id="L">
+  <div class="L-card">
+    <img src="/osb-emblem.png" alt="OSB">
+    <div class="L-eye">Restricted · Support Team</div>
+    <div class="L-title">Chat Console</div>
+    <div class="L-sub">Online Security Bureau — live victim support</div>
+    <input class="inp" id="op-name" placeholder="Your name (shown to visitors)" maxlength="40" autocomplete="off">
+    <input class="inp" id="op-key" type="password" placeholder="Admin key" autocomplete="off">
+    <button class="btn" id="login-btn">Go on shift</button>
+    <div id="L-err"></div>
+  </div>
+</div>
+
+<div id="A">
+  <aside class="QUEUE" id="QUEUE">
+    <div class="Q-hd">
+      <img src="/osb-emblem.png" alt="">
+      <div><div class="t">Console</div><div class="s">Live Support</div></div>
+      <div class="Q-me"><div class="n" id="me-name">—</div><button onclick="signOut()">Sign out</button></div>
+    </div>
+    <div class="Q-bar">
+      <span class="pill"><span class="dot"></span><span id="q-count">0 waiting</span></span>
+      <button class="sound" id="snd" onclick="toggleSound()">Sound off</button>
+    </div>
+    <div class="Q-list" id="q-list"></div>
+  </aside>
+
+  <main class="CONV">
+    <div class="C-hd">
+      <button class="burger" onclick="toggleQ()"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div><div class="t" id="c-name">No conversation selected</div><div class="s" id="c-meta">Pick someone from the queue</div></div>
+      <div class="C-acts" id="c-acts" style="display:none">
+        <button class="act act-claim" id="btn-claim" onclick="claim()">Take this chat</button>
+        <button class="act act-close" onclick="closeChat()">End chat</button>
+      </div>
+    </div>
+    <div class="C-body" id="c-body">
+      <div class="blank"><div class="big">Nobody selected</div><div class="sm">Conversations appear on the left</div></div>
+    </div>
+    <div class="C-foot" id="c-foot" style="display:none">
+      <div class="canned">
+        <button class="cn" onclick="quick('You are in the right place. Take your time — tell me what happened when you are ready.')">Reassure</button>
+        <button class="cn" onclick="quick('First thing: please stop sending any money, and do not confront them. Keep everything — screenshots, messages, payment records.')">First steps</button>
+        <button class="cn" onclick="quick('None of this makes you foolish. These are trained criminals who study how to exploit trust and kindness.')">Not your fault</button>
+        <button class="cn" onclick="quick('If you are having thoughts of harming yourself, please contact a crisis service in your country right now. You do not have to carry this alone.')">Crisis</button>
+      </div>
+      <div class="C-row">
+        <textarea class="C-in" id="c-in" rows="1" placeholder="Write a reply…" maxlength="2000"></textarea>
+        <button class="C-send" id="c-send" onclick="send()">Send</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+var API='https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api';
+var KEY='',ME='',cur=null,lastMsgId=0,qPoll=null,cPoll=null,soundOn=false,ac=null,prevWaiting=0;
+
+function esc(s){return (s==null?'':''+s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function api(p,o){o=o||{};o.headers=Object.assign({'x-admin-key':KEY,'Content-Type':'application/json'},o.headers||{});return fetch(API+p,o);}
+function timeAgo(d){if(!d)return'';var s=(Date.now()-new Date(d).getTime())/1000;if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m';if(s<86400)return Math.floor(s/3600)+'h';return Math.floor(s/86400)+'d';}
+
+/* LOGIN */
+document.getElementById('login-btn').addEventListener('click',doLogin);
+document.getElementById('op-key').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+function doLogin(){
+  var name=(document.getElementById('op-name').value||'').trim();
+  var key=document.getElementById('op-key').value;
+  var e=document.getElementById('L-err'),b=document.getElementById('login-btn');
+  e.style.display='none';
+  if(!name){e.textContent='Please enter your name.';e.style.display='block';return;}
+  if(!key){e.textContent='Enter the admin key.';e.style.display='block';return;}
+  b.disabled=true;b.textContent='Checking…';
+  KEY=key;ME=name;
+  api('/api/chat/op/sessions').then(function(r){
+    if(r.ok){
+      document.getElementById('L').style.display='none';
+      document.getElementById('A').style.display='grid';
+      document.getElementById('me-name').textContent=ME;
+      loadQueue();qPoll=setInterval(loadQueue,4000);
+    }else{KEY='';e.textContent=(r.status===401)?'Wrong key.':'Server error ('+r.status+').';e.style.display='block';}
+  }).catch(function(){KEY='';e.textContent='Could not reach the server.';e.style.display='block';})
+   .finally(function(){b.disabled=false;b.textContent='Go on shift';});
+}
+function signOut(){KEY='';if(qPoll)clearInterval(qPoll);if(cPoll)clearInterval(cPoll);
+  document.getElementById('A').style.display='none';document.getElementById('L').style.display='flex';document.getElementById('op-key').value='';}
+
+/* QUEUE */
+function loadQueue(){
+  api('/api/chat/op/sessions').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||!d.ok)return;
+    var s=d.sessions||[];
+    var waiting=s.filter(function(x){return x.status==='waiting';}).length;
+    document.getElementById('q-count').textContent=waiting+' waiting · '+s.length+' open';
+    if(waiting>prevWaiting)beep();
+    prevWaiting=waiting;
+    var el=document.getElementById('q-list');
+    if(!s.length){el.innerHTML='<div class="empty">No one waiting</div>';return;}
+    el.innerHTML=s.map(function(x){
+      return '<div class="Qi'+(cur&&cur.id===x.id?' on':'')+'" onclick="openChat('+x.id+')">'
+        +'<div class="Qi-top"><span class="Qi-name">'+esc(x.display_name||'Anonymous')+'</span>'
+        +'<span class="Qi-badge '+x.status+'">'+x.status+'</span>'
+        +'<span class="Qi-time">'+timeAgo(x.created_at)+'</span></div>'
+        +'<div class="Qi-prev">'+esc(x.preview||'…')+'</div>'
+        +(x.unread?'<span class="Qi-unread">'+x.unread+'</span>':'')+'</div>';
+    }).join('');
+  }).catch(function(){});
+}
+
+/* CONVERSATION */
+function openChat(id){
+  cur={id:id};lastMsgId=0;
+  document.getElementById('c-acts').style.display='flex';
+  document.getElementById('c-foot').style.display='block';
+  loadConv(true);
+  if(cPoll)clearInterval(cPoll);
+  cPoll=setInterval(function(){loadConv(false);},3000);
+  loadQueue();
+  if(window.innerWidth<=860)toggleQ(true);
+}
+function loadConv(full){
+  if(!cur)return;
+  api('/api/chat/op/session/'+cur.id).then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||!d.ok)return;
+    cur=Object.assign(cur,d.session||{});
+    document.getElementById('c-name').textContent=cur.display_name||'Anonymous';
+    document.getElementById('c-meta').textContent=(cur.status||'').toUpperCase()+(cur.operator?' · with '+cur.operator:'')+(cur.page?' · from '+cur.page:'');
+    document.getElementById('btn-claim').style.display=(cur.status==='active')?'none':'inline-block';
+    var body=document.getElementById('c-body');
+    var msgs=d.messages||[];
+    if(full)body.innerHTML='';
+    msgs.forEach(function(m){
+      if(m.id<=lastMsgId)return;
+      lastMsgId=m.id;
+      var div=document.createElement('div');
+      if(m.sender==='system'){div.className='m sys';div.innerHTML=esc(m.body);}
+      else if(m.sender==='operator'){div.className='m me';div.innerHTML='<div class="m-who">'+esc(m.operator||'OSB')+'</div>'+esc(m.body);}
+      else{div.className='m them';div.innerHTML=esc(m.body);}
+      body.appendChild(div);
+    });
+    body.scrollTop=body.scrollHeight;
+  }).catch(function(){});
+}
+function claim(){if(!cur)return;api('/api/chat/op/session/'+cur.id+'/claim',{method:'POST',body:JSON.stringify({operator:ME})}).then(function(){loadConv(true);loadQueue();});}
+function closeChat(){if(!cur)return;if(!confirm('End this conversation?'))return;
+  api('/api/chat/op/session/'+cur.id+'/close',{method:'POST',body:'{}'}).then(function(){
+    if(cPoll)clearInterval(cPoll);cur=null;
+    document.getElementById('c-body').innerHTML='<div class="blank"><div class="big">Conversation ended</div><div class="sm">Pick another from the queue</div></div>';
+    document.getElementById('c-acts').style.display='none';
+    document.getElementById('c-foot').style.display='none';
+    document.getElementById('c-name').textContent='No conversation selected';
+    document.getElementById('c-meta').textContent='Pick someone from the queue';
+    loadQueue();
+  });}
+function send(){
+  var i=document.getElementById('c-in'),v=(i.value||'').trim();
+  if(!v||!cur)return;
+  i.value='';i.style.height='auto';
+  api('/api/chat/op/session/'+cur.id+'/send',{method:'POST',body:JSON.stringify({body:v,operator:ME})}).then(function(){loadConv(false);loadQueue();});
+}
+function quick(t){var i=document.getElementById('c-in');i.value=t;i.focus();}
+document.getElementById('c-in').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
+document.getElementById('c-in').addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px';});
+
+/* SOUND + NAV */
+function toggleSound(){soundOn=!soundOn;document.getElementById('snd').textContent=soundOn?'Sound on':'Sound off';
+  if(soundOn&&!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}}
+function beep(){if(!soundOn||!ac)return;try{var o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);
+  o.type='sine';o.frequency.value=740;g.gain.setValueAtTime(.0001,ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(.18,ac.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+.45);
+  o.start();o.stop(ac.currentTime+.47);}catch(e){}}
+function toggleQ(close){var q=document.getElementById('QUEUE');if(close){q.classList.remove('open');return;}q.classList.toggle('open');}
+</script>
+</body>
+</html>
