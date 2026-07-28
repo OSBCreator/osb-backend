@@ -139,7 +139,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1
     </div>
     <div class="Q-bar">
       <span class="pill"><span class="dot"></span><span id="q-count">0 waiting</span></span>
-      <button class="sound" id="snd" onclick="toggleSound()">Sound off</button>
+      <button class="sound" id="snd" onclick="toggleSound()">ALARM OFF</button>
     </div>
     <div class="Q-list" id="q-list"></div>
   </aside>
@@ -173,7 +173,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1
 
 <script>
 var API='https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api';
-var KEY='',ME='',cur=null,lastMsgId=0,qPoll=null,cPoll=null,soundOn=false,ac=null,prevWaiting=0;
+var KEY='',ME='',cur=null,lastMsgId=0,qPoll=null,cPoll=null,soundOn=false,ac=null;
+var seenSessions={}, prevUnread={}, titleTimer=null, baseTitle='OSB Chat Console', pendingAlerts=0;
 
 function esc(s){return (s==null?'':''+s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function api(p,o){o=o||{};o.headers=Object.assign({'x-admin-key':KEY,'Content-Type':'application/json'},o.headers||{});return fetch(API+p,o);}
@@ -196,12 +197,14 @@ function doLogin(){
       document.getElementById('L').style.display='none';
       document.getElementById('A').style.display='grid';
       document.getElementById('me-name').textContent=ME;
-      loadQueue();qPoll=setInterval(loadQueue,4000);
+      try{ if(localStorage.getItem('osb_console_sound')==='1' && !soundOn) toggleSound(); }catch(e){}
+      loadQueue();
+      startQueuePolling();
     }else{KEY='';e.textContent=(r.status===401)?'Wrong key.':'Server error ('+r.status+').';e.style.display='block';}
   }).catch(function(){KEY='';e.textContent='Could not reach the server.';e.style.display='block';})
    .finally(function(){b.disabled=false;b.textContent='Go on shift';});
 }
-function signOut(){KEY='';if(qPoll)clearInterval(qPoll);if(cPoll)clearInterval(cPoll);
+function signOut(){KEY='';stopQueuePolling();if(cPoll)clearInterval(cPoll);clearFlash();
   document.getElementById('A').style.display='none';document.getElementById('L').style.display='flex';document.getElementById('op-key').value='';}
 
 /* QUEUE */
@@ -211,8 +214,20 @@ function loadQueue(){
     var s=d.sessions||[];
     var waiting=s.filter(function(x){return x.status==='waiting';}).length;
     document.getElementById('q-count').textContent=waiting+' waiting · '+s.length+' open';
-    if(waiting>prevWaiting)beep();
-    prevWaiting=waiting;
+
+    var arrivals=0, newMsgs=0, liveIds={};
+    s.forEach(function(x){
+      liveIds[x.id]=1;
+      var u=x.unread||0;
+      if(!seenSessions[x.id]){ seenSessions[x.id]=1; arrivals++; }
+      else if(u>(prevUnread[x.id]||0)){ newMsgs+=(u-(prevUnread[x.id]||0)); }
+      prevUnread[x.id]=u;
+    });
+    Object.keys(seenSessions).forEach(function(id){ if(!liveIds[id]){ delete seenSessions[id]; delete prevUnread[id]; } });
+
+    if(arrivals>0){ alarm('arrival'); flashTitle(arrivals+' NEW CHAT'); startNag('arrival'); }
+    else if(newMsgs>0){ alarm('message'); flashTitle(newMsgs+' NEW MESSAGE'); startNag('message'); }
+
     var el=document.getElementById('q-list');
     if(!s.length){el.innerHTML='<div class="empty">No one waiting</div>';return;}
     el.innerHTML=s.map(function(x){
@@ -281,13 +296,101 @@ function quick(t){var i=document.getElementById('c-in');i.value=t;i.focus();}
 document.getElementById('c-in').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
 document.getElementById('c-in').addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px';});
 
-/* SOUND + NAV */
-function toggleSound(){soundOn=!soundOn;document.getElementById('snd').textContent=soundOn?'Sound on':'Sound off';
-  if(soundOn&&!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}}
-function beep(){if(!soundOn||!ac)return;try{var o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);
-  o.type='sine';o.frequency.value=740;g.gain.setValueAtTime(.0001,ac.currentTime);
-  g.gain.exponentialRampToValueAtTime(.18,ac.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+.45);
-  o.start();o.stop(ac.currentTime+.47);}catch(e){}}
+/* Background-safe polling.
+   Browsers throttle setInterval in hidden tabs (as slow as once a minute),
+   which would delay alerts on an unattended console. A Web Worker timer is
+   not throttled, so the queue keeps polling at full speed regardless. */
+function startQueuePolling(){
+  if(qPoll){ try{qPoll.terminate?qPoll.terminate():clearInterval(qPoll);}catch(e){} }
+  try{
+    var src='var t=null;onmessage=function(e){if(e.data==="start"){if(t)clearInterval(t);t=setInterval(function(){postMessage("tick");},4000);}else if(e.data==="stop"){clearInterval(t);t=null;}};';
+    var w=new Worker(URL.createObjectURL(new Blob([src],{type:'application/javascript'})));
+    w.onmessage=function(){ loadQueue(); if(cur) loadConv(false); };
+    w.postMessage('start');
+    qPoll=w;
+  }catch(e){
+    qPoll=setInterval(function(){ loadQueue(); if(cur) loadConv(false); },4000);
+  }
+}
+function stopQueuePolling(){
+  if(!qPoll)return;
+  try{ qPoll.terminate ? qPoll.terminate() : clearInterval(qPoll); }catch(e){}
+  qPoll=null;
+}
+
+/* ALARM — loud, repeating, built to carry across a room */
+function toggleSound(){
+  soundOn=!soundOn;
+  var b=document.getElementById('snd');
+  b.textContent=soundOn?'ALARM ON':'ALARM OFF';
+  b.style.background=soundOn?'rgba(61,187,130,.16)':'';
+  b.style.color=soundOn?'#3DBB82':'';
+  b.style.borderColor=soundOn?'rgba(61,187,130,.4)':'';
+  try{localStorage.setItem('osb_console_sound',soundOn?'1':'0');}catch(e){}
+  if(soundOn){
+    if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+    if(ac&&ac.state==='suspended')ac.resume();
+    alarm('test');
+    if(window.Notification&&Notification.permission==='default')Notification.requestPermission();
+  }
+}
+
+function buzz(freq,start,dur,vol){
+  if(!ac)return;
+  var o=ac.createOscillator(), g=ac.createGain();
+  o.type='square';
+  o.frequency.setValueAtTime(freq,ac.currentTime+start);
+  o.connect(g); g.connect(ac.destination);
+  g.gain.setValueAtTime(0.0001,ac.currentTime+start);
+  g.gain.exponentialRampToValueAtTime(vol,ac.currentTime+start+0.008);
+  g.gain.setValueAtTime(vol,ac.currentTime+start+Math.max(0.02,dur-0.03));
+  g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+start+dur);
+  o.start(ac.currentTime+start);
+  o.stop(ac.currentTime+start+dur+0.02);
+}
+
+function alarm(kind){
+  if(!soundOn)return;
+  if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return;}}
+  if(ac.state==='suspended')ac.resume();
+  try{
+    if(kind==='arrival'){
+      for(var i=0;i<5;i++){ buzz(920,i*0.26,0.16,0.85); buzz(690,i*0.26+0.08,0.10,0.6); }
+    }else if(kind==='message'){
+      buzz(860,0,0.15,0.75); buzz(860,0.22,0.15,0.75); buzz(640,0.44,0.18,0.6);
+    }else{
+      buzz(860,0,0.18,0.75);
+    }
+  }catch(e){}
+  if(window.Notification&&Notification.permission==='granted'&&document.hidden){
+    try{
+      var n=new Notification(kind==='arrival'?'New chat waiting - OSB':'New message - OSB',
+        {body:kind==='arrival'?'Someone has just opened a chat.':'A visitor has replied.',requireInteraction:true});
+      n.onclick=function(){window.focus();n.close();};
+    }catch(e){}
+  }
+}
+
+function flashTitle(txt){
+  if(titleTimer)clearInterval(titleTimer);
+  var on=true;
+  titleTimer=setInterval(function(){ document.title = on ? ('*** '+txt+' ***') : baseTitle; on=!on; },700);
+}
+function clearFlash(){ if(titleTimer){clearInterval(titleTimer);titleTimer=null;} document.title=baseTitle; }
+
+/* Nag: if nobody has picked the chat up, keep buzzing every 20s until
+   someone clicks the console. Stops on its own once acknowledged. */
+var nagTimer=null;
+function startNag(kind){
+  stopNag();
+  nagTimer=setInterval(function(){ alarm(kind); },20000);
+}
+function stopNag(){ if(nagTimer){clearInterval(nagTimer);nagTimer=null;} }
+function acknowledge(){ clearFlash(); stopNag(); }
+window.addEventListener('focus',acknowledge);
+document.addEventListener('click',acknowledge);
+document.addEventListener('keydown',acknowledge);
+
 function toggleQ(close){var q=document.getElementById('QUEUE');if(close){q.classList.remove('open');return;}q.classList.toggle('open');}
 </script>
 </body>
