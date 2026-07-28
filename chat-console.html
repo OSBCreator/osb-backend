@@ -335,18 +335,74 @@ function toggleSound(){
   }
 }
 
-function buzz(freq,start,dur,vol){
+var busOut=null;
+function getBus(){
+  if(busOut&&busOut.ctx===ac)return busOut.node;
+  var comp=ac.createDynamicsCompressor();
+  comp.threshold.setValueAtTime(-8,ac.currentTime);
+  comp.knee.setValueAtTime(4,ac.currentTime);
+  comp.ratio.setValueAtTime(14,ac.currentTime);
+  comp.attack.setValueAtTime(0.002,ac.currentTime);
+  comp.release.setValueAtTime(0.12,ac.currentTime);
+  var master=ac.createGain();
+  master.gain.setValueAtTime(0.92,ac.currentTime);
+  comp.connect(master); master.connect(ac.destination);
+  busOut={ctx:ac,node:comp};
+  return comp;
+}
+
+function buzz(start,dur,vol,pitch){
   if(!ac)return;
-  var o=ac.createOscillator(), g=ac.createGain();
-  o.type='square';
-  o.frequency.setValueAtTime(freq,ac.currentTime+start);
-  o.connect(g); g.connect(ac.destination);
-  g.gain.setValueAtTime(0.0001,ac.currentTime+start);
-  g.gain.exponentialRampToValueAtTime(vol,ac.currentTime+start+0.008);
-  g.gain.setValueAtTime(vol,ac.currentTime+start+Math.max(0.02,dur-0.03));
-  g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+start+dur);
-  o.start(ac.currentTime+start);
-  o.stop(ac.currentTime+start+dur+0.02);
+  var t=ac.currentTime+start;
+  var base=pitch||96;
+
+  var osc=ac.createOscillator();
+  osc.type='sawtooth';
+  osc.frequency.setValueAtTime(base,t);
+  osc.frequency.exponentialRampToValueAtTime(base*0.72,t+dur);
+
+  var sub=ac.createOscillator();
+  sub.type='square';
+  sub.frequency.setValueAtTime(base*0.5,t);
+  sub.frequency.exponentialRampToValueAtTime(base*0.36,t+dur);
+
+  var lfo=ac.createOscillator();
+  lfo.type='square';
+  lfo.frequency.setValueAtTime(34,t);
+  var lfoAmt=ac.createGain();
+  lfoAmt.gain.setValueAtTime(0.55,t);
+
+  var rattle=ac.createGain();
+  rattle.gain.setValueAtTime(0.45,t);
+  lfo.connect(lfoAmt); lfoAmt.connect(rattle.gain);
+
+  var filt=ac.createBiquadFilter();
+  filt.type='lowpass';
+  filt.frequency.setValueAtTime(2200,t);
+  filt.frequency.exponentialRampToValueAtTime(900,t+dur);
+  filt.Q.setValueAtTime(7,t);
+
+  var env=ac.createGain();
+  env.gain.setValueAtTime(0.0001,t);
+  env.gain.exponentialRampToValueAtTime(vol,t+0.012);
+  env.gain.setValueAtTime(vol,t+Math.max(0.05,dur-0.06));
+  env.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+
+  osc.connect(filt); sub.connect(filt);
+  filt.connect(rattle); rattle.connect(env); env.connect(getBus());
+
+  osc.start(t); sub.start(t); lfo.start(t);
+  osc.stop(t+dur+0.02); sub.stop(t+dur+0.02); lfo.stop(t+dur+0.02);
+}
+
+function shake(){
+  var el=document.getElementById('A');
+  if(!el)return;
+  var n=0, id=setInterval(function(){
+    var x=(n%2?-1:1)*(7-n*0.5);
+    el.style.transform='translate('+x+'px,'+(x/2)+'px)';
+    if(++n>12){ clearInterval(id); el.style.transform=''; }
+  },28);
 }
 
 function alarm(kind){
@@ -355,13 +411,17 @@ function alarm(kind){
   if(ac.state==='suspended')ac.resume();
   try{
     if(kind==='arrival'){
-      for(var i=0;i<5;i++){ buzz(920,i*0.26,0.16,0.85); buzz(690,i*0.26+0.08,0.10,0.6); }
+      buzz(0,0.52,0.55,96);
+      buzz(0.60,0.52,0.55,96);
+      buzz(1.20,0.62,0.6,86);
     }else if(kind==='message'){
-      buzz(860,0,0.15,0.75); buzz(860,0.22,0.15,0.75); buzz(640,0.44,0.18,0.6);
+      buzz(0,0.48,0.52,104);
+      buzz(0.56,0.48,0.52,104);
     }else{
-      buzz(860,0,0.18,0.75);
+      buzz(0,0.5,0.55,96);
     }
   }catch(e){}
+  try{ shake(); }catch(e){}
   if(window.Notification&&Notification.permission==='granted'&&document.hidden){
     try{
       var n=new Notification(kind==='arrival'?'New chat waiting - OSB':'New message - OSB',
