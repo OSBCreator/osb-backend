@@ -1,0 +1,19 @@
+# ── Server-side code — must never be publicly served ──
+server.js
+schema.sql
+
+# ── Build & config manifests ──
+package.json
+package-lock.json
+wrangler.toml
+node_modules/
+
+# ── Repo/OS files ──
+.gitignore
+.assetsignore
+.DS_Store
+**/.DS_Store
+
+# ── Orphaned duplicates (nothing links to these) ──
+scoring-tool-inner .html
+scoring-tool-inner_.html
