@@ -8,6 +8,10 @@ package-lock.json
 wrangler.toml
 node_modules/
 
+# ── CI/CD tooling and archived code ──
+.github/
+legacy/
+
 # ── Repo/OS files ──
 .gitignore
 .assetsignore
