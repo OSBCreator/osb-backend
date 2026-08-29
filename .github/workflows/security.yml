@@ -1,0 +1,31 @@
+name: Security
+
+# The Cloudflare Worker serves `directory = "./"`, which means every tracked
+# file is public by default. This workflow inverts that default: any commit
+# that would expose server-side code, config, or credentials fails the build.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  asset-exposure:
+    name: Asset exposure guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify no server-side files or credentials are publicly served
+        run: python3 .github/scripts/check_asset_exposure.py
