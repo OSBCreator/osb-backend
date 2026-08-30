@@ -293,6 +293,23 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 /* IFN CARDS */
 .ifn-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3.5rem;flex-wrap:wrap;}
 .ifn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.125rem;}
+/* Homepage Intelligence Wire teaser */
+.wire-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.125rem;}
+@media(max-width:900px){.wire-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.wire-grid{grid-template-columns:1fr;}}
+.wcard{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);display:block;text-decoration:none;overflow:hidden;transition:.2s;}
+.wcard:hover{background:rgba(193,18,31,.055);border-color:rgba(193,18,31,.3);transform:translateY(-4px);}
+.wc-art{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(130% 130% at var(--gx,20%) 0%, rgba(193,18,31,.28), transparent 62%),
+  repeating-linear-gradient(var(--ang,24deg), rgba(255,255,255,.026) 0 1px, transparent 1px 9px),
+  linear-gradient(160deg,#101019,#0A0A12);}
+.wc-art span{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:2.6rem;color:rgba(232,88,98,.8);}
+.wc-bd{padding:1.1rem 1.25rem;}
+.wc-meta{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.32);display:flex;justify-content:space-between;margin-bottom:.6rem;}
+.wc-meta .wc-pillar{color:var(--r);}
+.wc-title{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:600;line-height:1.35;color:rgba(255,255,255,.92);}
+.wire-empty{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:1px;color:rgba(255,255,255,.3);text-transform:uppercase;}
+
 .icard{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);
   transition:all .3s;text-decoration:none;display:block;overflow:hidden;}
 .icard:hover{background:rgba(193,18,31,.055);border-color:rgba(193,18,31,.3);transform:translateY(-4px);}
@@ -628,7 +645,7 @@ footer{background:var(--footer-bg) !important;}
         <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Industry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's open call to dating platforms globally</div></a>
       </div>
     </div>
-    <a href="score.html">SCORE</a>
+    <a href="score.html">CHECK</a>
     <a href="solace.html">Solace</a>
     <a href="community.html">Community</a>
     <a href="contact.html">Contact</a>
@@ -648,7 +665,7 @@ footer{background:var(--footer-bg) !important;}
   <a href="certification.html" onclick="closeMob()">RSEI Certified™ — For Platforms</a>
   <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
   <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
-  <a href="score.html" onclick="closeMob()">SCORE</a>
+  <a href="score.html" onclick="closeMob()">CHECK</a>
   <a href="solace.html" onclick="closeMob()">Solace</a>
   <a href="community.html" onclick="closeMob()">Community</a>
   <a href="contact.html" onclick="closeMob()">Contact</a>
@@ -673,7 +690,7 @@ footer{background:var(--footer-bg) !important;}
   <h1 class="h-h1">Social and dating platforms have<br>a social engineering problem.<br><em>We scored it.</em></h1>
   <p class="h-sub">The RSEI Model™ is the world's only behavioural threat detection framework for social engineering fraud — built from five documented field cases, not academic modelling. <span style="white-space:nowrap">Institutional certification available. Scoring tool free.</span></p>
   <div class="h-btns">
-    <a href="score.html" class="btn-r h-btn-pulse">Score Your Situation Now</a>
+    <a href="score.html" class="btn-r h-btn-pulse">Check Your Situation Now</a>
     <a href="rsei-model.html" class="btn-g">Read the Framework</a>
     <a href="scam-demo.html" class="btn-g">Watch a Scam Get Scored</a>
   </div>
@@ -699,7 +716,7 @@ footer{background:var(--footer-bg) !important;}
   <div style="max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;text-align:center;">
     <div style="display:flex;align-items:center;gap:.875rem;">
       <div style="width:28px;height:1px;background:rgba(193,18,31,.45);flex-shrink:0;"></div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.38);letter-spacing:1.5px;text-transform:uppercase;">Suspect romance fraud — <a href="score.html" style="color:rgba(193,18,31,.7);text-decoration:none;border-bottom:1px solid rgba(193,18,31,.25);padding-bottom:1px;">Score your situation</a> · Confidential · or enter <a href="solace.html" style="color:rgba(193,18,31,.65);text-decoration:none;">OSB Solace</a> <span style="opacity:.5;font-size:.58rem;">(trauma-informed support)</span></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.38);letter-spacing:1.5px;text-transform:uppercase;">Suspect romance fraud — <a href="score.html" style="color:rgba(193,18,31,.7);text-decoration:none;border-bottom:1px solid rgba(193,18,31,.25);padding-bottom:1px;">Check your situation</a> · Confidential · or enter <a href="solace.html" style="color:rgba(193,18,31,.65);text-decoration:none;">OSB Solace</a> <span style="opacity:.5;font-size:.58rem;">(trauma-informed support)</span></div>
     </div>
     <div style="width:1px;height:20px;background:rgba(255,255,255,.1);flex-shrink:0;"></div>
     <div style="display:flex;align-items:center;gap:.875rem;">
@@ -719,147 +736,6 @@ footer{background:var(--footer-bg) !important;}
   <div class="sblk reveal d2"><span class="snum" data-target="5" data-prefix="" data-suffix="">0</span><div class="slbl">Intelligence field notes documented</div></div>
   <div class="sblk reveal d3"><span class="snum" data-target="1" data-prefix="" data-suffix="">0</span><div class="slbl">Framework of its kind in the world</div></div>
   <div class="sblk reveal" id="live-stat" style="display:none"><span class="snum" id="live-assess">0</span><div class="slbl">Situations assessed · live data</div></div>
-</div>
-
-<div class="sd" style="padding-top:7rem;padding-bottom:0;">
-  <div class="si">
-    <div class="fw-hdr">
-      <div class="reveal">
-        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">The Framework</div></div>
-        <h2 class="hlg hw">Four pillars.<br><em>One score. Zero ambiguity.</em></h2>
-      </div>
-      <div class="reveal d1">
-        <p class="blg tw" style="margin-bottom:2rem;">The RSEI Model™ is the world's only behavioural threat detection system built for social engineering fraud. Four detection modules. One Core RSEI Rating. Every exploitation follows the same behavioural sequence — RSEI detects it.</p>
-        <a href="rsei-model.html" class="btn-g" style="font-size:10px;">Read the full framework →</a>
-      </div>
-    </div>
-    <div class="fw-pillars">
-      <div class="pbox reveal d1"><div class="pbox-bg">R</div><div class="ptag">Pillar 01</div><div class="pscore">1—5</div><div class="pname">Relationship Acceleration</div><div class="pdesc">How fast the scammer engineers false intimacy, emotional dependency and premature declarations of love and commitment.</div></div>
-      <div class="pbox reveal d2"><div class="pbox-bg">S</div><div class="ptag">Pillar 02</div><div class="pscore">1—5</div><div class="pname">Script Consistency</div><div class="pdesc">The rehearsed persona — occupation, location, backstory and financial credibility props designed to feel verifiable.</div></div>
-      <div class="pbox reveal d3"><div class="pbox-bg">E</div><div class="ptag">Pillar 03</div><div class="pscore">1—5</div><div class="pname">Emotional Manipulation</div><div class="pdesc">Exploitation of trust, guilt, love and fear. E ≥ 4 triggers mandatory support — regardless of financial loss.</div></div>
-      <div class="pbox reveal d4"><div class="pbox-bg">I</div><div class="ptag">Pillar 04</div><div class="pscore">1—5</div><div class="pname">Incremental Extraction</div><div class="pdesc">Escalating financial asks — mule recruitment, gift cards, wire transfers, cryptocurrency. Small begins. Large follows.</div></div>
-    </div>
-  </div>
-</div>
-<div class="trig-strip">
-  <div class="trig-inner">
-    <div class="trig-icon">E≥4</div>
-    <div class="trig-body"><strong>E Pillar Independent Trigger — Active at E ≥ 4:</strong> OSB mandates victim support referral regardless of total Core Score and regardless of whether any financial loss has occurred. <strong>Emotional harm is real harm.</strong> This trigger is unique to the RSEI Model™ and was established through field case IFN-002.</div>
-  </div>
-</div>
-
-<div style="background:rgba(255,255,255,.015);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:3.5rem 3rem;">
-  <div style="max-width:1160px;margin:0 auto;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;" class="meth-grid">
-      <div class="reveal">
-        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Methodology</div></div>
-        <h3 class="hmd hw" style="margin-bottom:1.25rem;">Built from field evidence,<br><em>not theory.</em></h3>
-        <p class="bmd tw" style="margin-bottom:1.75rem;">Each RSEI pillar was formalised through documented case intervention — not academic modelling. Every threshold, trigger and scoring boundary has a field case behind it.</p>
-        <div style="display:flex;flex-direction:column;gap:.75rem;">
-          <div style="display:flex;gap:1rem;align-items:flex-start;padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-left:2px solid var(--r);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--r);letter-spacing:1px;flex-shrink:0;margin-top:.1rem;">R</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.7;">Relationship Acceleration — documented through IFN-004 ($28K · 3-year case) establishing velocity-vs-duration benchmarks.</div>
-          </div>
-          <div style="display:flex;gap:1rem;align-items:flex-start;padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-left:2px solid var(--r);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--r);letter-spacing:1px;flex-shrink:0;margin-top:.1rem;">S</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.7;">Script Consistency — formalised through IFN-001 and IFN-005, documenting fabricated financial interfaces and automated credential exploits.</div>
-          </div>
-          <div style="display:flex;gap:1rem;align-items:flex-start;padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-left:2px solid var(--r);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--r);letter-spacing:1px;flex-shrink:0;margin-top:.1rem;">E</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.7;">Emotional Manipulation — IFN-002 established the E ≥ 4 Independent Trigger, the first formal standard for emotional harm without financial loss.</div>
-          </div>
-          <div style="display:flex;gap:1rem;align-items:flex-start;padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-left:2px solid var(--r);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--r);letter-spacing:1px;flex-shrink:0;margin-top:.1rem;">I</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.7;">Incremental Extraction — cross-case patterns defining escalation sequences across mule recruitment, gift cards, wire transfer and crypto.</div>
-          </div>
-        </div>
-      </div>
-      <div class="reveal d2">
-        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Data &amp; Privacy</div></div>
-        <h3 class="hmd hw" style="margin-bottom:1.25rem;">How OSB handles<br><em>your information.</em></h3>
-        <p class="bmd tw" style="margin-bottom:1.5rem;">For Trust &amp; Safety professionals, platform engineers and security reviewers — a plain statement of how this organisation handles data.</p>
-        <div style="display:flex;flex-direction:column;gap:.625rem;">
-          <div style="padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--r);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;">Collection</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7;">OSB collects email addresses for community registration and newsletter delivery only. No profiling. No advertising data.</div>
-          </div>
-          <div style="padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--r);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;">Case Intelligence</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7;">All IFN case records are anonymised before documentation. No victim names, usernames or platform identifiers are published. Custody of raw case data is retained by OSB under formal access control.</div>
-          </div>
-          <div style="padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--r);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;">Scoring Tool</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7;">The RSEI scoring tool does not transmit, log or store responses. Assessment data remains local to the user's session.</div>
-          </div>
-          <div style="padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--r);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;">No Sale of Data</div>
-            <div style="font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.7;">OSB does not sell, license or share personal data with third parties. Deletion is available on request.</div>
-          </div>
-        </div>
-        <div style="margin-top:1.25rem;">
-          <a href="privacy.html" style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.3);text-decoration:none;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:2px;">Full Privacy Policy — OSB/LEGAL/PP/001/2026 →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<style>@media(max-width:1000px){.meth-grid{grid-template-columns:1fr !important;gap:3rem !important;}}</style>
-
-<div class="sn" style="padding-top:7rem;padding-bottom:7rem;">
-  <div class="si">
-    <div class="reveal">
-      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Risk Classification</div></div>
-      <h2 class="hlg hw" style="margin-bottom:4rem;">Three tiers.<br><em>No ambiguity. No softening.</em></h2>
-    </div>
-    <div class="tiers-grid">
-      <div class="tier low reveal d1"><div class="tier-acc"></div><div class="tier-bnum">4</div><div class="tier-range">4—11</div><div class="tier-name">Low Behavioural Risk</div><div class="tier-desc">Patterns present but below confirmed fraud threshold. Monitoring required. Stay alert — particularly around financial requests and inability to verify identity in person.</div><div class="tier-act">Protocol: Monitor · Document · Stay alert to escalation</div></div>
-      <div class="tier high reveal d2"><div class="tier-acc"></div><div class="tier-bnum">12</div><div class="tier-range">12—16</div><div class="tier-name">High Probability Romance Scam</div><div class="tier-desc">Multiple confirmed fraud indicators present. Hallmarks of a professional, organised operation. Do not send money. Screenshot all evidence. Contact OSB now.</div><div class="tier-act">Protocol: Do not send money · Screenshot · Contact OSB</div></div>
-      <div class="tier crit reveal d3"><div class="tier-acc"></div><div class="tier-bnum">17</div><div class="tier-range">17—20</div><div class="tier-name">Critical Exploitation</div><div class="tier-desc">Advanced exploitation in active progress. Immediate action required. Stop all financial transactions. Secure your evidence. Contact your bank and OSB without delay.</div><div class="tier-act">Protocol: Stop all transactions · Contact bank · Contact OSB immediately</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="sp-sec sd" style="padding:7rem 3rem;">
-  <div class="sp-bg-word">SCORE</div>
-  <div class="sp-grid">
-    <div class="reveal">
-      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Free · Private · 2 Minutes</div></div>
-      <h2 class="hlg hw" style="margin-bottom:1.5rem;">Score your situation<br><em>right now.</em></h2>
-      <p class="blg tw" style="margin-bottom:1rem;">8 questions. Evidence-based results built on the RSEI Model™. No personal details required. The only scoring tool of its kind on the planet.</p>
-      <p class="bmd tmt" style="margin-bottom:2.5rem;">Designed for everyone — seniors, families, anyone who suspects something is wrong. Clear. Simple. Free forever.</p>
-      <div class="btn-row" style="margin-bottom:2rem;">
-        <a href="score.html" class="btn-r">Begin the Assessment</a>
-        <a href="community.html" class="btn-g">Share with someone</a>
-      </div>
-      <div class="sp-feats">
-        <div class="sp-feat">Completely private — no data stored without consent</div>
-        <div class="sp-feat">Results in under 2 minutes</div>
-        <div class="sp-feat">Clear action guidance for every tier</div>
-        <div class="sp-feat">Accessible for all ages including seniors</div>
-      </div>
-    </div>
-    <div class="reveal d2">
-      <div class="sc-card">
-        <div class="sc-tag">Sample RSEI Assessment · IFN-001</div>
-        <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.5rem;">
-          <span class="sc-big">16</span><span class="sc-den">/ 20</span>
-        </div>
-        <div class="sc-bar"><div class="sc-fill" id="sc-fill"></div></div>
-        <div class="sc-tier">High Probability Romance Scam</div>
-        <div class="sc-rows">
-          <div class="sc-row"><div class="sc-rl">R — Relationship Acceleration</div><div class="sc-rv">4 / 5</div></div>
-          <div class="sc-row"><div class="sc-rl">S — Script Consistency</div><div class="sc-rv">5 / 5</div></div>
-          <div class="sc-row"><div class="sc-rl">E — Emotional Manipulation</div><div class="sc-rv">4 / 5</div></div>
-          <div class="sc-row"><div class="sc-rl">I — Incremental Extraction</div><div class="sc-rv">3 / 5</div></div>
-          <div class="sc-row" style="border-top:1px solid rgba(255,255,255,.08);margin-top:.25rem;">
-            <div class="sc-rl" style="color:rgba(255,255,255,.65);font-weight:500;">ESI — Velocity Indicator</div>
-            <div class="sc-rv red">4 / 5</div>
-          </div>
-        </div>
-        <a href="score.html" class="btn-r" style="display:block;text-align:center;margin-top:1.75rem;font-size:10px;letter-spacing:2px;">Score your own situation →</a>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="sn" style="padding:7rem 3rem;">
@@ -957,6 +833,24 @@ footer{background:var(--footer-bg) !important;}
       <div class="cstat"><div class="cstat-n">Asia</div><div class="cstat-v">Active</div></div>
       <div class="cstat"><div class="cstat-n">Oceania</div><div class="cstat-v">Active</div></div>
       <div class="cstat"><div class="cstat-n">Global</div><div class="cstat-v">$442B–1T</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sn" style="padding:6rem 3rem;">
+  <div class="si">
+    <div class="ifn-hdr">
+      <div class="reveal">
+        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">OSB Intelligence Wire</div></div>
+        <h2 class="hlg hw">The news, read<br><em>through the RSEI lens.</em></h2>
+      </div>
+      <div class="reveal d1">
+        <p class="bmd tw" style="margin-bottom:1.5rem;max-width:360px;">Live social-engineering reporting from across the web — each story tagged by which pillar it shows.</p>
+        <a href="newsroom.html" class="btn-g" style="font-size:10px;">Open the full Wire →</a>
+      </div>
+    </div>
+    <div class="wire-grid" id="home-wire-grid">
+      <div class="wire-empty">Loading the wire…</div>
     </div>
   </div>
 </div>
@@ -1110,7 +1004,7 @@ footer{background:var(--footer-bg) !important;}
       <div class="fcol-t">Navigate</div>
       <div class="flinks">
         <a href="index.html">Home</a><a href="about.html">About OSB</a>
-        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">SCORE</a>
+        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">CHECK</a>
         <a href="platform-index.html">Platform Safety Index</a>
         <a href="report.html">Global Fraud Report</a>
         <a href="intelligence.html">Intelligence</a><a href="solace.html">Solace</a>
@@ -1124,7 +1018,7 @@ footer{background:var(--footer-bg) !important;}
         <a href="platform-index.html">Platform Safety Index</a>
         <a href="report.html">Global Fraud Report 2026</a>
         <a href="intelligence.html">IFN Case Library</a>
-        <a href="score.html">Scoring Tool</a>
+        <a href="score.html">Check Tool</a>
         <a href="solace.html">Solace Guide™</a>
         <a href="contact.html">Analyst Certification (Coming)</a>
       </div>
@@ -1241,6 +1135,38 @@ function osbEssentialOnly(){
 })();
 </script>
 <!-- OSB Live Chat -->
+<script>
+/* Homepage Intelligence Wire teaser — pulls real headlines from the same
+   osb-news function that powers newsroom.html. No fabricated content. */
+(function(){
+  var NEWS_API = "https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-news";
+  var grid = document.getElementById("home-wire-grid");
+  if(!grid) return;
+  function esc(s){return (s||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function timeAgo(d){var s=(Date.now()-d)/1000;if(s<3600)return Math.max(1,Math.floor(s/60))+"m ago";if(s<86400)return Math.floor(s/3600)+"h ago";return Math.floor(s/86400)+"d ago";}
+  var ctrl = new AbortController();
+  var t = setTimeout(function(){ctrl.abort();}, 7000);
+  fetch(NEWS_API, {cache:"no-store", signal: ctrl.signal})
+    .then(function(r){clearTimeout(t); return r.ok ? r.json() : null;})
+    .then(function(d){
+      var items = (d && Array.isArray(d.items)) ? d.items.slice(0,3) : [];
+      if(!items.length){
+        grid.innerHTML = '<div class="wire-empty">The wire is updating — <a href="newsroom.html" style="color:var(--r)">view the full Intelligence Wire →</a></div>';
+        return;
+      }
+      grid.innerHTML = items.map(function(i, idx){
+        var L = i.lens || {p:"SE", name:"Social Engineering"};
+        return '<a href="newsroom.html" class="wcard">'
+          + '<div class="wc-art" style="--gx:'+((idx*37)%100)+'%;--ang:'+((idx*29)%180)+'deg"><span>'+esc(L.p)+'</span></div>'
+          + '<div class="wc-bd"><div class="wc-meta"><span>'+esc(i.src||"News")+' · '+timeAgo(i.pub)+'</span><span class="wc-pillar">'+esc(L.p)+'</span></div>'
+          + '<div class="wc-title">'+esc(i.title)+'</div></div></a>';
+      }).join("");
+    })
+    .catch(function(){
+      grid.innerHTML = '<div class="wire-empty">The wire is updating — <a href="newsroom.html" style="color:var(--r)">view the full Intelligence Wire →</a></div>';
+    });
+})();
+</script>
 <script src="/osb-chat.js" defer></script>
 </body>
 </html>
