@@ -1,0 +1,51 @@
+{
+  "name": "OSB — Online Security Bureau",
+  "short_name": "OSB",
+  "description": "Behavioural fraud intelligence. Check your situation, get support, and access the RSEI Model™ — free and private.",
+  "id": "/",
+  "start_url": "/index.html?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "orientation": "portrait-primary",
+  "background_color": "#07070E",
+  "theme_color": "#07070E",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["security", "utilities", "lifestyle"],
+  "icons": [
+    { "src": "/icons/icon-72.png", "sizes": "72x72", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-96.png", "sizes": "96x96", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Check Your Situation",
+      "short_name": "Check",
+      "description": "Run the free RSEI assessment",
+      "url": "/score.html?source=pwa_shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Solace — Recovery Support",
+      "short_name": "Solace",
+      "description": "The 30-day recovery path",
+      "url": "/solace.html?source=pwa_shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Talk to Someone",
+      "short_name": "Chat",
+      "description": "Live chat with the OSB support team",
+      "url": "/community.html?source=pwa_shortcut&open_chat=1",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
