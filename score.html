@@ -1340,6 +1340,19 @@ function showResult(){
 
   const resultText = `RSEI Score: ${core}/20 | Tier: ${tier} | R:${R} S:${S} E:${E} I:${I}`;
 
+  // Keep the structured values available for submission. The result string
+  // above is human-readable, but the cohort study and all reference-range
+  // analysis need the actual numbers as data, not parsed out of a sentence.
+  window.OSB_RESULT = {
+    score: core,
+    risk: tierClass === 'tier-low' ? 'low' : (tierClass === 'tier-high' ? 'high' : 'critical'),
+    tier: tier,
+    pillar_r: R,
+    pillar_s: S,
+    pillar_e: E,
+    pillar_i: I
+  };
+
   setProgress('Assessment complete', 100);
 
   document.getElementById('main').innerHTML = `
@@ -1683,8 +1696,15 @@ async function sendResult(resultText){
 
   btn.textContent = 'Sending…';
 
+  const RES = window.OSB_RESULT || {};
   const body = {
     result:        resultText,
+    score:         RES.score,
+    risk:          RES.risk,
+    pillar_r:      RES.pillar_r,
+    pillar_s:      RES.pillar_s,
+    pillar_e:      RES.pillar_e,
+    pillar_i:      RES.pillar_i,
     email:         email    || 'Not provided',
     country:       country  || 'Not provided',
     platform:      platform || 'Not provided',
