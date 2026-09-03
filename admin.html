@@ -6,6 +6,12 @@
 <meta name="robots" content="noindex, nofollow">
 <title>OSB Sentinel · Command</title>
 <link rel="icon" href="/osb-emblem.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#07070E">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OSB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -203,6 +209,28 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .sub-row .em{font-family:var(--mono);font-size:.75rem;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sub-row .dt{font-family:var(--mono);font-size:.56rem;color:var(--mut)}
 
+
+/* ── COHORT STUDY ── */
+.cohort-panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1rem}
+.cohort-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.7rem;margin-bottom:1rem}
+.co-stat{background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:.8rem .9rem}
+.co-stat .n{font-family:var(--serif);font-size:1.9rem;line-height:1;font-weight:600}
+.co-stat .l{font-family:var(--mono);font-size:.52rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);margin-top:.3rem}
+.co-stat.fraud .n{color:var(--crit)} .co-stat.genuine .n{color:var(--low)} .co-stat.pending .n{color:var(--high)}
+.co-bar{height:9px;background:var(--inset);border-radius:5px;overflow:hidden;margin:.5rem 0 .35rem}
+.co-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--redsoft));border-radius:5px;transition:width .5s}
+.co-goal{font-size:.82rem;color:var(--soft);line-height:1.6}
+.co-goal b{color:var(--ink)}
+.co-warn{background:rgba(232,163,61,.09);border:1px solid rgba(232,163,61,.3);border-left:3px solid var(--high);
+  padding:.85rem 1rem;border-radius:8px;font-size:.85rem;line-height:1.65;color:#E8C88D;margin-top:.9rem}
+.outcome-sel{background:var(--panel2);border:1px solid var(--border);border-radius:7px;color:var(--ink);
+  font-family:var(--mono);font-size:.62rem;padding:.35rem .5rem;cursor:pointer;max-width:150px}
+.outcome-sel:focus{border-color:var(--redglow);outline:none}
+.bdg.confirmed_fraud{background:rgba(229,72,77,.16);color:var(--crit);border:1px solid rgba(229,72,77,.35)}
+.bdg.confirmed_genuine{background:rgba(61,187,130,.14);color:var(--low);border:1px solid rgba(61,187,130,.32)}
+.bdg.probable_fraud,.bdg.probable_genuine{background:rgba(232,163,61,.14);color:var(--high);border:1px solid rgba(232,163,61,.3)}
+.bdg.unresolved{background:rgba(255,255,255,.06);color:var(--mut);border:1px solid var(--border)}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1080px){.kpis{grid-template-columns:repeat(3,1fr)}.bento,.bento3{grid-template-columns:1fr}}
 @media(max-width:820px){
@@ -318,8 +346,9 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
           <button class="chip" data-f="high" onclick="filterSubs('high',this)">High</button>
           <button class="chip" data-f="low" onclick="filterSubs('low',this)">Low</button>
         </div>
+        <div class="cohort-panel" id="cohort-panel"></div>
         <div class="panel"><div class="tbl-wrap"><table id="subs-table"><thead><tr>
-          <th>Reporter</th><th>Origin</th><th>Platform</th><th>Score</th><th>Tier</th><th>When</th><th></th>
+          <th>Reporter</th><th>Origin</th><th>Platform</th><th>Score</th><th>Tier</th><th>Known outcome</th><th>When</th><th></th>
         </tr></thead><tbody id="subs-body"></tbody></table></div><div id="subs-empty"></div></div>
       </section>
 
@@ -498,20 +527,97 @@ function renderOverview(){
   }).join('') : '<div class="empty">No activity yet</div>';
 }
 
+var OUTCOMES=[
+  ['','— unclassified —'],
+  ['confirmed_fraud','Confirmed fraud'],
+  ['confirmed_genuine','Confirmed genuine'],
+  ['probable_fraud','Probable fraud'],
+  ['probable_genuine','Probable genuine'],
+  ['unresolved','Unresolved']
+];
+
 function renderSubs(){
   var rows=D.subs.filter(function(s){return subFilter==='all'||tierOf(s)===subFilter;});
   var body=document.getElementById('subs-body'), emp=document.getElementById('subs-empty');
+  renderCohort();
   if(!rows.length){body.innerHTML='';emp.innerHTML='<div class="empty">No submissions'+(subFilter!=='all'?' in this tier':' yet')+'</div>';return;}
   emp.innerHTML='';
   body.innerHTML=rows.map(function(s,i){var t=tierOf(s);var sid='st'+i;
     var story=s.story?'<button class="story-btn" onclick="var e=document.getElementById(\''+sid+'\');e.classList.toggle(\'open\')">View story</button>':'';
+    var sel='<select class="outcome-sel" onchange="setOutcome('+s.id+',this.value,this)">'
+      +OUTCOMES.map(function(o){
+          return '<option value="'+o[0]+'"'+((s.outcome||'')===o[0]?' selected':'')+'>'+o[1]+'</option>';
+        }).join('')
+      +'</select>';
     return '<tr><td><div class="t-strong">'+esc(s.user||'Anonymous')+'</div><div class="t-mut">'+esc(s.email||'—')+'</div></td>'
       +'<td>'+esc(s.country||'—')+'</td><td>'+esc(s.platform||'—')+'</td>'
       +'<td><span class="t-score">'+(s.score!=null?esc(s.score):'—')+'</span></td>'
-      +'<td><span class="bdg '+t+'">'+t+'</span></td><td class="t-mut">'+timeAgo(whenOf(s))+'</td>'
+      +'<td><span class="bdg '+t+'">'+t+'</span></td>'
+      +'<td>'+sel+'</td>'
+      +'<td class="t-mut">'+timeAgo(whenOf(s))+'</td>'
       +'<td>'+story+'</td></tr>'
-      +(s.story?'<tr><td colspan="7" style="padding-top:0;border:none"><div class="story" id="'+sid+'">'+esc(s.story)+'</div></td></tr>':'');
+      +(s.story?'<tr><td colspan="8" style="padding-top:0;border:none"><div class="story" id="'+sid+'">'+esc(s.story)+'</div></td></tr>':'');
   }).join('');
+}
+
+/* Record a known outcome. This is what eventually produces the reference
+   ranges — every classification here is a data point in the cohort. */
+function setOutcome(id, value, el){
+  var basis = '';
+  if(value){
+    basis = prompt(
+      'How was this established?\n\n'
+      +'victim_confirmed | financial_evidence | law_enforcement |\n'
+      +'platform_action | identity_verified | met_in_person |\n'
+      +'osb_analysis | other\n\n'
+      +'(osb_analysis is the weakest basis \u2014 use only when nothing stronger exists)',
+      'victim_confirmed'
+    );
+    if(basis===null){ renderSubs(); return; }   // cancelled — revert the dropdown
+  }
+  el.disabled = true;
+  api('/api/admin/submissions/'+id+'/outcome',{
+    method:'POST',
+    body: JSON.stringify({ outcome:value, basis:basis, by: 'admin' })
+  }).then(function(r){ return r.json().catch(function(){return {};}); })
+    .then(function(d){
+      if(!d.ok){ alert('Could not save: '+(d.error||'unknown error')); }
+      refresh(true);
+    })
+    .catch(function(){ alert('Could not reach the server.'); })
+    .finally(function(){ el.disabled = false; });
+}
+
+/* Readiness panel — the honest answer to "can I publish yet?" */
+function renderCohort(){
+  var el=document.getElementById('cohort-panel');
+  if(!el) return;
+  var c={confirmed_fraud:0,confirmed_genuine:0,probable_fraud:0,probable_genuine:0,unresolved:0,unclassified:0};
+  D.subs.forEach(function(s){
+    var o=s.outcome||'';
+    if(o && c.hasOwnProperty(o)) c[o]++; else c.unclassified++;
+  });
+  var PROV=20, FULL=120;
+  var minConfirmed=Math.min(c.confirmed_fraud,c.confirmed_genuine);
+  var pct=Math.min(100, Math.round((minConfirmed/PROV)*100));
+  var ready = minConfirmed>=PROV;
+
+  el.innerHTML=
+    '<div class="p-head"><div class="p-title">Cohort Study<span class="mono">RSEI reference-range validation</span></div></div>'
+    +'<div class="cohort-grid">'
+    +'<div class="co-stat fraud"><div class="n">'+c.confirmed_fraud+'</div><div class="l">Confirmed fraud</div></div>'
+    +'<div class="co-stat genuine"><div class="n">'+c.confirmed_genuine+'</div><div class="l">Confirmed genuine</div></div>'
+    +'<div class="co-stat"><div class="n">'+(c.probable_fraud+c.probable_genuine)+'</div><div class="l">Probable (either)</div></div>'
+    +'<div class="co-stat"><div class="n">'+c.unresolved+'</div><div class="l">Unresolved</div></div>'
+    +'<div class="co-stat pending"><div class="n">'+c.unclassified+'</div><div class="l">Unclassified</div></div>'
+    +'</div>'
+    +'<div class="co-bar"><div class="co-fill" style="width:'+pct+'%"></div></div>'
+    +'<div class="co-goal">Progress to a <b>provisional</b> range: <b>'+minConfirmed+' / '+PROV+'</b> in the smaller confirmed group. '
+      +'A full reference interval conventionally needs <b>'+FULL+'</b> per group.</div>'
+    +(ready
+        ? '<div class="co-warn" style="background:rgba(61,187,130,.09);border-color:rgba(61,187,130,.3);border-left-color:var(--low);color:#9FE3C0">'
+          +'Provisional threshold reached. Ranges may be published <b>clearly labelled provisional</b>, with the sample size stated.</div>'
+        : '<div class="co-warn">Not yet publishable. Reference ranges on the report card must stay marked <b>[VERIFY]</b> until the confirmed groups are large enough. Publishing early would be the one thing that damages OSB\u2019s credibility rather than building it.</div>');
 }
 function filterSubs(f,el){subFilter=f;document.querySelectorAll('#sub-chips .chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');renderSubs();}
 
