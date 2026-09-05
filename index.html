@@ -178,8 +178,9 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .h-proof-sep{color:rgba(193,18,31,.4);font-size:.65rem;}
 /* SOCIAL SIGNAL */
 
-.h-doors{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:900px;margin:2.25rem auto 0;position:relative;z-index:2;animation:fU .9s ease 2.1s both;}
-@media(max-width:820px){.h-doors{grid-template-columns:1fr;max-width:420px;}}
+.h-doors{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;max-width:1120px;margin:2.25rem auto 0;position:relative;z-index:2;animation:fU .9s ease 2.1s both;}
+@media(max-width:1000px){.h-doors{grid-template-columns:1fr 1fr;max-width:760px;}}
+@media(max-width:600px){.h-doors{grid-template-columns:1fr;max-width:420px;}}
 .h-door{display:block;text-decoration:none;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.11);
   border-radius:12px;padding:1.25rem 1.35rem;text-align:left;transition:transform .2s,border-color .2s,background .2s;}
 .h-door:hover{transform:translateY(-4px);border-color:rgba(193,18,31,.45);background:rgba(193,18,31,.06);}
@@ -190,6 +191,8 @@ footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem
 .h-door-a{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.63rem;letter-spacing:1.4px;
   text-transform:uppercase;color:rgba(255,255,255,.7);}
 .h-door.primary .h-door-a{color:#E85862;}
+.h-door.solace{border-color:rgba(193,18,31,.28);}
+.h-door.solace:hover{border-color:rgba(193,18,31,.5);}
 .h-door:hover .h-door-a{color:#E85862;}
 .h-signal{position:relative;z-index:1;margin-top:.75rem;
   animation:fU .9s ease 2.5s both;text-align:center;
@@ -716,6 +719,11 @@ footer{background:var(--footer-bg) !important;}
       <div class="h-door-s">Free, private assessment against the four RSEI pillars. No account, no cost.</div>
       <div class="h-door-a">Check your situation &rarr;</div>
     </a>
+    <a href="solace.html" class="h-door solace">
+      <div class="h-door-t">It already happened to me</div>
+      <div class="h-door-s">Trauma-informed recovery. A 30-day companion, and people who understand.</div>
+      <div class="h-door-a">Enter OSB Solace &rarr;</div>
+    </a>
     <a href="platform-index.html" class="h-door">
       <div class="h-door-t">We run a platform</div>
       <div class="h-door-s">See how your safety guidance holds up against documented operator methods.</div>
@@ -736,7 +744,7 @@ footer{background:var(--footer-bg) !important;}
     <span class="h-proof-sep">·</span>
     <span class="h-proof-item">Certified Data Protection Officer</span>
   </div>
-  <div class="h-signal">Published field intelligence · <a href="newsroom.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(193,18,31,.3)">Intelligence Wire</a> · <a href="open-letter.html" style="color:inherit;text-decoration:none;">Open Letter to Platforms</a> · IFN Library · 34,000+ content views · Cross-jurisdiction</div>
+  <div class="h-signal">Published field intelligence · <a href="newsroom.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(193,18,31,.3)">Intelligence Wire</a> · <a href="open-letter.html" style="color:inherit;text-decoration:none;">Open Letter to Platforms</a> · IFN Library · 100+ cases assessed since 2021 · Cross-jurisdiction</div>
   <div class="h-inst">
     <a href="certification.html">Platform certification enquiries →</a>
     <span class="h-inst-sep">|</span>
@@ -765,7 +773,7 @@ footer{background:var(--footer-bg) !important;}
 
 <div class="stat-band">
   <div class="sblk reveal"><span class="snum" data-target="1" data-prefix="$" data-suffix="Trillion+">$0</span><div class="slbl">Global scam losses · GASA, 2024</div></div>
-  <div class="sblk reveal d1"><span class="snum" data-target="34000" data-prefix="" data-suffix="+">0</span><div class="slbl">Content views · 5.9K this month</div></div>
+  <div class="sblk reveal d1"><span class="snum" data-target="100" data-prefix="" data-suffix="+">0</span><div class="slbl">Cases assessed since 2021 · OSB casework</div></div>
   <div class="sblk reveal d2"><span class="snum" data-target="5" data-prefix="" data-suffix="">0</span><div class="slbl">Intelligence field notes documented</div></div>
   <div class="sblk reveal d3"><span class="snum" data-target="1" data-prefix="" data-suffix="">0</span><div class="slbl">Framework of its kind in the world</div></div>
   <div class="sblk reveal" id="live-stat" style="display:none"><span class="snum" id="live-assess">0</span><div class="slbl">Situations assessed · live data</div></div>
@@ -963,9 +971,9 @@ footer{background:var(--footer-bg) !important;}
         </div>
         <div class="cs-grid">
           <div class="cs-box"><span class="cs-n" data-target="5">0</span><div class="cs-l">Field Notes</div></div>
-          <div class="cs-box"><span class="cs-n" data-target="847">0</span><div class="cs-l">Assessments</div></div>
-          <div class="cs-box"><span class="cs-n" data-target="34000">0</span><div class="cs-l">Total Views</div></div>
-          <div class="cs-box"><span class="cs-n" data-target="63">0</span><div class="cs-l">Engagements</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="100">0</span><div class="cs-l">Cases Assessed</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="2021">0</span><div class="cs-l">Operating Since</div></div>
+          <div class="cs-box"><span class="cs-n" data-target="24">0</span><div class="cs-l">Hour Response</div></div>
         </div>
       </div>
     </div>
@@ -1069,7 +1077,7 @@ footer{background:var(--footer-bg) !important;}
   </div>
   <div class="fbot">
     <div class="fquote" id="fq"></div>
-    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved &nbsp;·&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a></div>
+    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved &nbsp;·&nbsp; <a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a> &nbsp;·&nbsp; <a href="security.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Trust &amp; Security</a></div>
   </div>
 </footer>
 <script>
@@ -1110,13 +1118,18 @@ function joinCom(){
   var u=document.getElementById('cu').value,e=document.getElementById('ce').value;
   var msg=document.getElementById('jmsg');
   if(!u||!e){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Please enter a username and email.';return;}
-  fetch(['https://','formspree','.io/f/','maqpazko'].join(''),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'community-signup',username:u,email:e})})
-  .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Registration received — check your email.':'Something went wrong.';});
+  fetch(OSB_API+'/api/community/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,email:e,source:'index'})})
+  .then(function(r){return r.json().catch(function(){return{};});})
+  .then(function(d){msg.style.display='block';msg.style.color=d.ok?'#16a34a':'var(--r)';msg.textContent=d.ok?'Welcome — you are in.':(d.error||'Something went wrong.');})
+  .catch(function(){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Could not reach the server. Please try again.';});
 }
+var OSB_API='https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api';
 function nlSub(){
   var e=document.getElementById('nle').value;var msg=document.getElementById('nlmsg');if(!e)return;
-  fetch(['https://','formspree','.io/f/','maqpazko'].join(''),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({type:'newsletter',email:e})})
-  .then(function(r){msg.style.display='block';msg.style.color=r.ok?'#16a34a':'var(--r)';msg.textContent=r.ok?'Subscribed — check your email.':'Something went wrong.';});
+  fetch(OSB_API+'/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e})})
+  .then(function(r){return r.json().catch(function(){return{};});})
+  .then(function(d){msg.style.display='block';msg.style.color=d.ok?'#16a34a':'var(--r)';msg.textContent=d.ok?'Subscribed.':(d.error||'Something went wrong.');})
+  .catch(function(){msg.style.display='block';msg.style.color='var(--r)';msg.textContent='Could not reach the server. Please try again.';});
 }
 </script>
 

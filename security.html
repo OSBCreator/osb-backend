@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust &amp; Security — Online Security Bureau · OSB/SEC/TSC/001/2026</title>
+<meta name="description" content="How OSB secures its platform and the data entrusted to it: architecture, controls, data handling, responsible disclosure, governance and independence.">
+<link rel="icon" href="/osb-emblem.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#07070E">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OSB">
+<style>
+:root{--bg:#07070E;--card:#11111B;--inset:#0C0C14;--ink:#ECECF2;--soft:rgba(255,255,255,.66);--mut:rgba(255,255,255,.42);--faint:rgba(255,255,255,.22);--border:rgba(255,255,255,.10);--red:#C1121F;--redsoft:#E85862;}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--redsoft)}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1rem clamp(1.25rem,4vw,2.5rem);background:rgba(7,7,14,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .nav-logo img{height:42px;width:auto;display:block}
+nav .nav-links{display:flex;gap:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase}
+nav .nav-links a{color:var(--soft);text-decoration:none}
+nav .nav-links a:hover{color:var(--ink)}
+@media(max-width:620px){nav .nav-links{gap:1rem}nav .nav-links a:nth-child(n+3){display:none}}
+.wrap{max-width:780px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.25rem,5vw,2rem) 5rem}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--mut)}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(2.4rem,7vw,3.6rem);line-height:1.08;margin:.5rem 0 1rem}
+.meta{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:2.5rem}
+.meta b{color:var(--soft);font-weight:400}
+.lede{font-size:1.08rem;color:var(--soft);margin-bottom:2.5rem}
+h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(1.5rem,4vw,2rem);margin:2.75rem 0 .85rem;line-height:1.2}
+h2 .n{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--redsoft);vertical-align:super;margin-right:.5rem}
+h3{font-size:1.02rem;font-weight:600;margin:1.5rem 0 .4rem;color:var(--ink)}
+p{color:var(--soft);margin-bottom:1rem}
+ul{color:var(--soft);margin:0 0 1rem 1.2rem}
+li{margin-bottom:.5rem}
+strong{color:var(--ink);font-weight:600}
+.dpo{background:var(--card);border:1px solid rgba(193,18,31,.3);border-radius:16px;padding:1.75rem;margin:1rem 0 1.5rem}
+.dpo .tag{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--redsoft);margin-bottom:.75rem}
+.dpo .name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--ink);margin-bottom:.2rem}
+.dpo .cred{color:var(--soft);margin-bottom:1rem}
+.dpo .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;border-top:1px solid var(--border);padding-top:1rem}
+.dpo .grid div span{display:block;font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-bottom:.2rem}
+.dpo .grid div b{color:var(--ink);font-weight:500;font-size:.92rem;word-break:break-word}
+.callout{background:var(--inset);border-left:3px solid var(--red);border-radius:0 10px 10px 0;padding:1rem 1.15rem;margin:1.25rem 0;color:var(--soft);font-size:.95rem}
+footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.25rem,5vw,2rem);text-align:center}
+footer .flinks{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-bottom:.75rem}
+footer .flinks a{color:var(--mut);text-decoration:none;margin:0 .5rem}
+footer .flinks a:hover{color:var(--soft)}
+footer .fcopy{font-size:.7rem;color:var(--faint)}
+
+.tsc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.25rem 0 1.5rem}
+.tsc-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.15rem 1.25rem}
+.tsc-card .k{font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);margin-bottom:.4rem}
+.tsc-card .v{color:var(--ink);font-weight:600;font-size:.95rem;line-height:1.4}
+.tsc-card .d{color:var(--soft);font-size:.86rem;margin-top:.35rem;line-height:1.6}
+table.tsc{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.9rem}
+table.tsc th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--mut);font-weight:500;padding:.6rem .7rem;border-bottom:1px solid var(--border)}
+table.tsc td{padding:.7rem;border-bottom:1px solid var(--border);color:var(--soft);vertical-align:top}
+table.tsc td b{color:var(--ink);font-weight:600}
+.pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:1px;
+  text-transform:uppercase;padding:2px 8px;border-radius:5px;border:1px solid}
+.pill.on{color:#3DBB82;border-color:rgba(61,187,130,.4);background:rgba(61,187,130,.1)}
+.pill.na{color:var(--mut);border-color:var(--border);background:rgba(255,255,255,.04)}
+.pill.plan{color:#E8A33D;border-color:rgba(232,163,61,.4);background:rgba(232,163,61,.1)}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="/osb-emblem.png" alt="OSB — Online Security Bureau"></a>
+  <div class="nav-links">
+    <a href="rsei-model.html">RSEI Model</a>
+    <a href="score.html">Check</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow">OSB · Trust &amp; Security</div>
+  <h1>Trust &amp; Security</h1>
+  <div class="meta">
+    <span>Ref · <b>OSB/SEC/TSC/001/2026</b></span>
+    <span>Effective · <b>September 2026</b></span>
+    <span>Review cycle · <b>Quarterly</b></span>
+  </div>
+
+  <p class="lede">OSB asks people in distress to tell us what happened to them. That imposes an obligation to be explicit about how the platform is built, what we hold, who can reach it, and what we do not do. This page states that plainly, including where our controls are limited.</p>
+
+  <h2><span class="n">01</span>Who is accountable</h2>
+  <p>Security and data protection at OSB sit with the same office, deliberately. Separating them tends to produce systems that are compliant on paper and weak in practice.</p>
+
+  <div class="dpo">
+    <div class="tag">Accountable Office</div>
+    <div class="name">Office of the Data Protection Officer</div>
+    <div class="cred">OSB's appointed Data Protection Officer holds the IIM — Certified Data Protection Officer credential, issued under the authority of the Nigeria Data Protection Commission (NDPC), and is verifiable with the issuing body using the certificate number below. The same office is responsible for platform security architecture and incident response.</div>
+    <div class="grid">
+      <div><span>Certificate number</span><b>29320da76866f8e3</b></div>
+      <div><span>Issued</span><b>25 May 2026</b></div>
+      <div><span>Contact</span><b>contact@onlinesecuritybureau.com</b></div>
+    </div>
+  </div>
+
+  <h2><span class="n">02</span>Architecture</h2>
+  <p>OSB's public surface is served as static files. All server-side logic runs in managed, isolated functions rather than on servers OSB operates or patches. The attack surface is deliberately narrow: a small number of defined endpoints, no general-purpose application server, and no long-lived credentials in anything delivered to a browser.</p>
+  <p>Where state is held, it is held deliberately and disclosed. Live chat maintains a conversation record so an operator can continue supporting the same person; those records are covered by the retention policy in section 03. Installed and cached versions of the site store content on the user's own device to work offline. Neither is incidental — both are documented here rather than left implicit.</p>
+
+  <table class="tsc">
+    <tr><th>Layer</th><th>Provider</th><th>Notes</th></tr>
+    <tr><td><b>Delivery</b></td><td>Cloudflare Pages</td><td>Static hosting, TLS terminated at edge, DDoS protection inherited from the network</td></tr>
+    <tr><td><b>Application logic</b></td><td>Supabase Edge Functions</td><td>Defined endpoints only, isolated per function. No public database access.</td></tr>
+    <tr><td><b>Client applications</b></td><td>Progressive Web App</td><td>Installable on mobile and desktop. Caches content on the user's device for offline use; holds no credentials.</td></tr>
+    <tr><td><b>Data</b></td><td>Supabase (PostgreSQL)</td><td>Row Level Security enabled on operational tables; reachable only via the service role held by the Edge Function</td></tr>
+    <tr><td><b>Forms</b></td><td>OSB (Supabase)</td><td>All form submissions are handled by OSB's own backend. No third-party form service is used.</td></tr>
+    <tr><td><b>Payments</b></td><td>Flutterwave</td><td>OSB does not store card data at any point</td></tr>
+  </table>
+
+  <h2><span class="n">03</span>Controls in place</h2>
+  <p>Stated as implemented, not as aspiration.</p>
+
+  <div class="tsc-grid">
+    <div class="tsc-card"><div class="k">Transport</div><div class="v">TLS enforced <span class="pill on">Active</span></div><div class="d">All traffic served over HTTPS. No mixed content.</div></div>
+    <div class="tsc-card"><div class="k">Database access</div><div class="v">Deny by default <span class="pill on">Active</span></div><div class="d">Row Level Security enabled with no permissive policy. Only the server-side service role can read or write.</div></div>
+    <div class="tsc-card"><div class="k">Origin control</div><div class="v">CORS restricted <span class="pill on">Active</span></div><div class="d">API accepts requests only from the OSB domain.</div></div>
+    <div class="tsc-card"><div class="k">Abuse control</div><div class="v">Server-side rate limiting <span class="pill on">Active</span></div><div class="d">Per-endpoint limits enforced in the database, not the browser.</div></div>
+    <div class="tsc-card"><div class="k">Input handling</div><div class="v">Sanitised &amp; bounded <span class="pill on">Active</span></div><div class="d">All submitted fields are trimmed and length-limited server-side before storage.</div></div>
+    <div class="tsc-card"><div class="k">Secrets</div><div class="v">Never in source <span class="pill on">Active</span></div><div class="d">Credentials held in the platform secret store. No keys in the repository or in client code.</div></div>
+    <div class="tsc-card"><div class="k">Administrative access</div><div class="v">Server-validated <span class="pill on">Active</span></div><div class="d">Admin authentication is verified server-side against a stored secret. No credential exists in client-side code.</div></div>
+    <div class="tsc-card"><div class="k">Retention</div><div class="v">Automated deletion <span class="pill on">Active</span></div><div class="d">Live chat transcripts are deleted automatically twelve months after a conversation closes.</div></div>
+    <div class="tsc-card"><div class="k">Monitoring</div><div class="v">24/7 case response <span class="pill on">Active</span></div><div class="d">Inbound cases and live chat are monitored continuously by the OSB response team.</div></div>
+    <div class="tsc-card"><div class="k">Continuous review</div><div class="v">Quarterly posture review <span class="pill on">Active</span></div><div class="d">Controls and configuration reviewed each quarter against current threat activity.</div></div>
+  </div>
+
+  <h2><span class="n">04</span>What OSB does not do</h2>
+  <p>Absence of a capability is itself a control.</p>
+  <ul>
+    <li><strong>No accounts required to use OSB.</strong> The assessment, the community and live chat can all be used without registering. No password is collected, so none can be leaked, and there is no account-takeover surface. This is a deliberate design decision: people affected by this kind of fraud frequently will not create an account to ask for help, and requiring one would exclude those who most need it.</li>
+    <li><strong>No advertising or tracking.</strong> No advertising networks, no behavioural trackers, no data sold or shared for marketing.</li>
+    <li><strong>No identity verification of third parties.</strong> OSB does not confirm whether a named individual is or is not a fraud operator, and does not publish accusations against individuals.</li>
+    <li><strong>No card data.</strong> Payment details are handled entirely by the payment provider.</li>
+    <li><strong>No unnecessary identifiers.</strong> The assessment can be completed without a name. Live chat requires no email address.</li>
+  </ul>
+
+  <h2><span class="n">05</span>Responsible disclosure</h2>
+  <p>If you find a vulnerability in OSB's platform, report it and it will be treated seriously and without hostility.</p>
+  <div class="callout">
+    <strong>Report to:</strong> contact@onlinesecuritybureau.com with the subject line <strong>SECURITY</strong>.<br><br>
+    <strong>Our commitment:</strong> acknowledgement within 72 hours, an assessment within 14 days, and credit in this page's change log if you wish to be named.<br><br>
+    <strong>What we ask:</strong> give us reasonable time before public disclosure, do not access, alter or exfiltrate data belonging to other people, and do not run automated testing that would degrade service for victims relying on it.
+  </div>
+  <p>OSB will not pursue legal action against researchers acting in good faith under these terms. There is currently no paid bounty programme.</p>
+
+  <h2><span class="n">06</span>Independence and funding</h2>
+  <p>OSB publishes assessments and intelligence about platforms and operators. That work is only credible if the funding behind it is visible.</p>
+  <ul>
+    <li>OSB is a registered entity, self-funded and independently operated.</li>
+    <li>No platform, dating service or social network has paid OSB to be assessed, rated or omitted from an assessment.</li>
+    <li>Published findings are not shared with an assessed party for approval before publication.</li>
+    <li>Where a commercial relationship exists with any organisation referenced in OSB output, it will be disclosed within that output.</li>
+  </ul>
+
+  <h2><span class="n">07</span>Analytical integrity</h2>
+  <p>OSB's core methodological rule: <strong>figures that cannot be sourced are not published.</strong></p>
+  <ul>
+    <li>Quantified claims OSB cannot independently support are marked <strong>[VERIFY]</strong> and are not presented as established fact.</li>
+    <li>Reference ranges for RSEI scoring remain marked as unvalidated until a cohort of confirmed-outcome cases is large enough to support them.</li>
+    <li>Third-party statistics are attributed to their source. OSB does not generate loss estimates or victim counts.</li>
+    <li>Corrections are published against the original reference number rather than edited silently.</li>
+  </ul>
+
+  <h2><span class="n">08</span>Incident response</h2>
+  <p>OSB's response team operates continuously. In the event of a personal data breach, OSB will notify the Nigeria Data Protection Commission within the period required under the NDPA, and will notify affected individuals directly where the breach is likely to result in a high risk to their rights and freedoms. A public summary will be published on this page once the immediate response is complete.</p>
+
+  <h2><span class="n">09</span>Scope</h2>
+  <p>Stated so that expectations are precise.</p>
+  <ul>
+    <li><strong>Infrastructure dependencies.</strong> Core infrastructure is operated by established third-party providers. Their certifications are theirs; OSB's controls are stated in section 03.</li>
+    <li><strong>Emergency services.</strong> OSB's response team monitors live chat and inbound cases continuously and treats them as time-critical. OSB is not, and does not replace, a statutory emergency service. Where there is immediate risk to life or safety, contact local emergency services or a crisis line in your country — and OSB will continue supporting you alongside them.</li>
+    <li><strong>Jurisdiction.</strong> OSB is not a law enforcement agency and has no power of arrest, seizure or prosecution. Findings are analytical and are designed to support the authorities who do.</li>
+  </ul>
+
+  <h2><span class="n">10</span>Change log</h2>
+  <table class="tsc">
+    <tr><th>Date</th><th>Version</th><th>Change</th></tr>
+    <tr><td>September 2026</td><td>1.0</td><td>First publication.</td></tr>
+  </table>
+
+  <p style="margin-top:2rem"><a href="api-docs.html">API Documentation</a> · <a href="privacy.html">Privacy Policy</a> · <a href="cookies.html">Cookie Policy</a> · <a href="contact.html">Contact OSB</a></p>
+</div>
+
+<footer>
+  <div class="flinks">
+    <a href="index.html">Home</a> ·
+    <a href="rsei-model.html">RSEI Model</a> ·
+    <a href="privacy.html">Privacy</a> ·
+    <a href="cookies.html">Cookies</a> ·
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="fcopy">© 2026 Online Security Bureau · Behavioural fraud intelligence · OSB/SEC/TSC/001/2026</div>
+</footer>
+<script src="/osb-install.js" defer></script>
+</body>
+</html>
