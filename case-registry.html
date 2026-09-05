@@ -290,6 +290,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 .reg-row .sc{font-family:var(--serif);font-size:1.1rem;font-weight:600}
 @media(max-width:700px){.reg-row{grid-template-columns:80px 1fr 60px;font-size:.78rem}.reg-row .oc,.reg-row .dt{display:none}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -318,6 +319,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     <div style="display:flex;gap:.5rem">
       <a href="admin.html" class="rbtn rbtn-clear" style="text-decoration:none;display:inline-block">&larr; Sentinel</a>
       <button class="rbtn rbtn-clear" onclick="loadCases()">Refresh</button>
+      <button class="rbtn rbtn-save" onclick="exportRegistry()">Export to Excel</button>
     </div>
   </div>
 
@@ -563,6 +565,130 @@ function loadCase(id){
   calcTotal();
   window.scrollTo({top:0,behavior:'smooth'});
   msg('Loaded '+c.case_id+' — editing. Saving will update this case.',true);
+}
+
+
+/* Export every logged case as .xlsx, laid out exactly like the original
+   RSEI Case Registry spreadsheet: same 58 columns, same order, same headers.
+   The database remains the working record; this is a portable copy. */
+var EXPORT_COLUMNS = [
+  ["Case ID","case_id"],
+  ["Date Logged","date_logged"],
+  ["Victim Age Range","victim_age_range"],
+  ["Victim Gender","victim_gender"],
+  ["Victim Country","victim_country"],
+  ["Platform Used","platform_used"],
+  ["Relationship Status","relationship_status"],
+  ["Date First Contact","date_first_contact"],
+  ["Date First Emotional Commitment","date_first_emotional"],
+  ["Date First Financial Request","date_first_financial"],
+  ["Total Duration Days","total_duration_days"],
+  ["Days To Platform Exit","days_to_platform_exit"],
+  ["Exit Platform","exit_platform"],
+  ["Exit Communication Type","exit_communication_type"],
+  ["Communication Intensity","communication_intensity"],
+  ["First Request Amount","first_request_amount"],
+  ["First Payment Range","first_payment_range"],
+  ["Payment Method","payment_method"],
+  ["Number of Requests","number_of_requests"],
+  ["Total Estimated Loss","total_estimated_loss"],
+  ["R Score","r_score"],
+  ["S Score","s_score"],
+  ["E Score","e_score"],
+  ["I Score","i_score"],
+  ["RSEI Core Total","rsei_core_total"],
+  ["ESI Score","esi_score"],
+  ["Risk Assessment","risk_assessment"],
+  ["Adjusted Risk Indicator","adjusted_risk_indicator"],
+  ["E Pillar Flag","e_pillar_flag"],
+  ["Script Type","script_type"],
+  ["Persona Profession","persona_profession"],
+  ["Authority Impersonation","authority_impersonation"],
+  ["Crisis Type","crisis_type"],
+  ["Trust Anchor Event","trust_anchor_event"],
+  ["Identity Reinforce Method","identity_reinforce_method"],
+  ["Child Involved YN","child_involved"],
+  ["Isolation Encouraged YN","isolation_encouraged"],
+  ["Isolation Behavior YN","isolation_behavior"],
+  ["Defensive Alignment YN","defensive_alignment"],
+  ["Family Disclosure","family_disclosure"],
+  ["Asset Liquidation YN","asset_liquidation"],
+  ["Collapse Trigger","collapse_trigger"],
+  ["Third Party Authority","third_party_authority"],
+  ["Victim Role","victim_role"],
+  ["Investment Scam YN","investment_scam"],
+  ["Mule Activity YN","mule_activity"],
+  ["Escalation Pattern","escalation_pattern"],
+  ["Intervention Date","intervention_date"],
+  ["Intervention Type","intervention_type"],
+  ["Intervention Outcome","intervention_outcome"],
+  ["E Pillar Recovery Status","e_pillar_recovery_status"],
+  ["Law Enforcement Reported YN","law_enforcement_reported"],
+  ["Financial Recovery Amount","financial_recovery_amount"],
+  ["Case Status","case_status"],
+  ["Case Notes Ref","case_notes"],
+  ["IEF Dual Exploitation YN","ief_dual_exploitation"],
+  ["IEF Case ID Ref","ief_case_id_ref"],
+  ["IEF Score Ref","ief_score_ref"]
+];
+
+
+/* CSV fallback — same columns, same order, opens in Excel. */
+function exportRegistryCSV(){
+  var headers = EXPORT_COLUMNS.map(function(c){ return c[0]; });
+  var esc = function(v){
+    if(v === true) v = 'Yes';
+    else if(v === false) v = 'No';
+    else if(v === null || v === undefined) v = '';
+    return '"' + String(v).replace(/"/g,'""') + '"';
+  };
+  var lines = [headers.map(esc).join(',')];
+  CASES.forEach(function(c){
+    lines.push(EXPORT_COLUMNS.map(function(col){ return esc(c[col[1]]); }).join(','));
+  });
+  var blob = new Blob([lines.join('\n')], {type:'text/csv;charset=utf-8;'});
+  var url = URL.createObjectURL(blob), a = document.createElement('a');
+  var d = new Date();
+  var stamp = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  a.href = url; a.download = 'OSB_RSEI_Case_Registry_'+stamp+'.csv'; a.click();
+  URL.revokeObjectURL(url);
+  msg('Exported '+CASES.length+' case'+(CASES.length===1?'':'s')+' as CSV (opens in Excel).', true);
+}
+
+function exportRegistry(){
+  if(!CASES.length){ msg('No cases to export yet.', false); return; }
+  // If the spreadsheet library could not load (offline, CDN blocked), fall back
+  // to CSV rather than failing — the data is what matters, not the file format.
+  if(typeof XLSX === 'undefined'){ exportRegistryCSV(); return; }
+
+  var rows = CASES.map(function(c){
+    var r = {};
+    EXPORT_COLUMNS.forEach(function(col){
+      var v = c[col[1]];
+      // booleans render as Yes/No to match the original sheet's YN columns
+      if(v === true) v = 'Yes';
+      else if(v === false) v = 'No';
+      else if(v === null || v === undefined) v = '';
+      r[col[0]] = v;
+    });
+    return r;
+  });
+
+  var headers = EXPORT_COLUMNS.map(function(c){ return c[0]; });
+  var ws = XLSX.utils.json_to_sheet(rows, { header: headers });
+
+  // Sensible column widths so it opens readable rather than cramped
+  ws['!cols'] = headers.map(function(h){
+    return { wch: Math.max(12, Math.min(30, h.length + 4)) };
+  });
+
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Case_Registry');
+
+  var d = new Date();
+  var stamp = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  XLSX.writeFile(wb, 'OSB_RSEI_Case_Registry_' + stamp + '.xlsx');
+  msg('Exported ' + CASES.length + ' case' + (CASES.length===1?'':'s') + ' to Excel.', true);
 }
 
 function loadCases(){
