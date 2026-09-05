@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>OSB Case Registry</title>
+<link rel="icon" href="/osb-emblem.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#07070E">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OSB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070E; --panel:#0E0E18; --panel2:#12121F; --inset:#0A0A12; --raise:#16161F;
+  --ink:#EDEDF3; --soft:rgba(255,255,255,.62); --mut:rgba(255,255,255,.40); --faint:rgba(255,255,255,.20);
+  --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.14);
+  --red:#C1121F; --redsoft:#E85862; --redglow:rgba(193,18,31,.5);
+  --crit:#E5484D; --high:#E8A33D; --low:#3DBB82; --info:#6E8BEF;
+  --serif:'Cormorant Garamond',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,monospace; --sans:'Figtree',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+html,body{height:100%;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(900px 500px at 80% -10%,rgba(193,18,31,.10),transparent 60%),radial-gradient(700px 500px at -10% 110%,rgba(110,139,239,.06),transparent 55%);}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--mut)}
+
+/* ── LOGIN ── */
+#L{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1.5rem;
+  background:radial-gradient(1000px 600px at 50% 0%,rgba(193,18,31,.14),transparent 60%),var(--bg)}
+.L-card{width:100%;max-width:400px;text-align:center}
+.L-emblem{height:60px;margin-bottom:1.5rem;opacity:.95}
+.L-eye{font-family:var(--mono);font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--redsoft);margin-bottom:.6rem}
+.L-title{font-family:var(--serif);font-size:2.4rem;font-weight:600;margin-bottom:.4rem}
+.L-sub{color:var(--mut);font-size:.85rem;margin-bottom:2rem}
+#key-inp{width:100%;background:var(--panel2);border:1px solid var(--border2);border-radius:12px;padding:.95rem 1.1rem;
+  color:var(--ink);font-family:var(--mono);font-size:.9rem;letter-spacing:1px;text-align:center;transition:.2s}
+#key-inp:focus{border-color:var(--redglow);background:rgba(193,18,31,.05)}
+#key-inp::placeholder{color:rgba(255,255,255,.18);letter-spacing:2px}
+#login-btn{width:100%;margin-top:.8rem;background:var(--red);color:#fff;border:none;border-radius:12px;padding:.95rem;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.2s;font-weight:600}
+#login-btn:hover{background:#d81b28;box-shadow:0 8px 30px var(--redglow)}
+#login-btn:disabled{opacity:.6;cursor:wait}
+#L-err{display:none;color:var(--redsoft);font-family:var(--mono);font-size:.7rem;letter-spacing:.5px;margin-top:1rem}
+.L-foot{margin-top:2.5rem;font-family:var(--mono);font-size:.56rem;letter-spacing:1.5px;color:var(--faint);text-transform:uppercase}
+
+/* ── APP SHELL ── */
+#A{display:none;min-height:100vh;grid-template-columns:236px 1fr}
+.SB{position:sticky;top:0;height:100vh;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:1.25rem .9rem}
+.SB-top{display:flex;align-items:center;gap:.6rem;padding:.3rem .5rem 1.4rem}
+.SB-top img{height:34px}
+.SB-top .nm{font-family:var(--serif);font-size:1.15rem;font-weight:600;line-height:1}
+.SB-top .tg{font-family:var(--mono);font-size:.5rem;letter-spacing:2px;color:var(--mut);text-transform:uppercase}
+.SB-nav{display:flex;flex-direction:column;gap:.15rem;flex:1}
+.SB-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .75rem;border-radius:10px;cursor:pointer;color:var(--soft);
+  font-size:.85rem;font-weight:500;border:1px solid transparent;transition:.15s;position:relative}
+.SB-item:hover{background:var(--panel2);color:var(--ink)}
+.SB-item.on{background:linear-gradient(90deg,rgba(193,18,31,.16),rgba(193,18,31,.04));color:var(--ink);border-color:rgba(193,18,31,.3)}
+.SB-item.on::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:2px;background:var(--red);border-radius:2px}
+.SB-item svg{width:17px;height:17px;flex-shrink:0;opacity:.9}
+.SB-item .cnt{margin-left:auto;font-family:var(--mono);font-size:.6rem;background:rgba(255,255,255,.08);color:var(--soft);padding:1px 7px;border-radius:20px}
+.SB-item.on .cnt{background:var(--red);color:#fff}
+.SB-foot{border-top:1px solid var(--border);padding-top:.9rem;margin-top:.5rem}
+.SB-logout{display:flex;align-items:center;gap:.6rem;width:100%;background:none;border:none;color:var(--mut);cursor:pointer;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:1px;text-transform:uppercase;padding:.5rem .75rem;border-radius:8px;transition:.15s}
+.SB-logout:hover{color:var(--redsoft);background:rgba(193,18,31,.06)}
+
+.MAIN{min-width:0;display:flex;flex-direction:column}
+.TB{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1rem 1.6rem;background:rgba(7,7,14,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.TB-title{font-family:var(--serif);font-size:1.5rem;font-weight:600;line-height:1}
+.TB-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:2px;color:var(--mut);text-transform:uppercase;margin-top:.25rem}
+.TB-right{display:flex;align-items:center;gap:.65rem}
+.pill{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.6rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--soft);background:var(--panel2);border:1px solid var(--border);border-radius:20px;padding:.4rem .7rem}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--low);box-shadow:0 0 10px var(--low);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tbtn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.6rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--soft);background:var(--panel2);border:1px solid var(--border);border-radius:9px;padding:.45rem .7rem;cursor:pointer;transition:.15s}
+.tbtn:hover{color:var(--ink);border-color:var(--border2)}
+.tbtn svg{width:13px;height:13px}
+.tbtn.spin svg{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.WRAP{padding:1.6rem;max-width:1360px;width:100%}
+.pg{display:none}
+.pg.on{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── PANELS ── */
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:1.25rem}
+.p-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.p-title{font-size:.82rem;font-weight:600;letter-spacing:.3px}
+.p-title .mono{display:block;font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--mut);font-weight:500;margin-top:.2rem}
+.link{font-family:var(--mono);font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--redsoft);cursor:pointer;background:none;border:none}
+.link:hover{color:var(--red)}
+
+/* ── KPI STRIP ── */
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:.85rem;margin-bottom:1rem}
+.kpi{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1rem 1.05rem;position:relative;overflow:hidden}
+.kpi .kl{font-family:var(--mono);font-size:.54rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut)}
+.kpi .kv{font-family:var(--serif);font-size:2.5rem;font-weight:600;line-height:1;margin-top:.35rem}
+.kpi .kd{font-family:var(--mono);font-size:.56rem;letter-spacing:.5px;color:var(--faint);margin-top:.35rem}
+.kpi.accent-crit{border-color:rgba(229,72,77,.28)} .kpi.accent-crit .kv{color:var(--crit)}
+.kpi.accent-crit::after{content:"";position:absolute;inset:0;background:radial-gradient(120px 80px at 90% 0,rgba(229,72,77,.14),transparent 60%);pointer-events:none}
+.kpi.accent-high .kv{color:var(--high)} .kpi.accent-low .kv{color:var(--low)} .kpi.accent-info .kv{color:var(--info)}
+.kpi .mini{position:absolute;right:.6rem;bottom:.5rem;width:78px;height:30px;opacity:.85}
+
+/* ── BENTO GRID ── */
+.bento{display:grid;grid-template-columns:1.55fr 1fr;gap:1rem;margin-bottom:1rem}
+.bento3{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.spark{width:100%;height:170px;display:block}
+.mini-spark{width:100%;height:100%;display:block}
+
+/* donut */
+.donut-wrap{display:flex;align-items:center;gap:1.4rem}
+.donut{position:relative;width:150px;height:150px;border-radius:50%;flex-shrink:0}
+.donut::after{content:"";position:absolute;inset:20px;border-radius:50%;background:var(--panel)}
+.donut-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2}
+.donut-c .n{font-family:var(--serif);font-size:2.1rem;font-weight:600;line-height:1}
+.donut-c .l{font-family:var(--mono);font-size:.5rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut)}
+.legend{display:flex;flex-direction:column;gap:.7rem;flex:1}
+.leg{display:flex;align-items:center;gap:.6rem;font-size:.82rem}
+.leg .sw{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.leg .lt{color:var(--soft)} .leg .lv{margin-left:auto;font-family:var(--mono);font-weight:600}
+.leg .lp{font-family:var(--mono);font-size:.62rem;color:var(--mut);width:38px;text-align:right}
+
+/* bars */
+.bar{display:grid;grid-template-columns:92px 1fr 34px;align-items:center;gap:.7rem;margin-bottom:.7rem}
+.bar-l{font-size:.76rem;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{height:9px;background:var(--inset);border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red),var(--redsoft));animation:grow .8s ease both}
+.bar-v{font-family:var(--mono);font-size:.72rem;font-weight:600;text-align:right;color:var(--ink)}
+@keyframes grow{from{width:0!important}}
+
+/* activity feed */
+.feed{display:flex;flex-direction:column;gap:.15rem;max-height:360px;overflow:auto}
+.fev{display:flex;gap:.75rem;padding:.65rem .4rem;border-bottom:1px solid var(--border)}
+.fev:last-child{border-bottom:none}
+.fic{width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  background:var(--panel2);border:1px solid var(--border)}
+.fic svg{width:14px;height:14px;color:var(--soft)}
+.fic.crit{background:rgba(229,72,77,.14);border-color:rgba(229,72,77,.3)} .fic.crit svg{color:var(--crit)}
+.fbody{min-width:0;flex:1}
+.ftxt{font-size:.8rem;color:var(--ink);line-height:1.35}
+.ftxt b{font-weight:600}
+.fmeta{font-family:var(--mono);font-size:.56rem;letter-spacing:.5px;color:var(--mut);margin-top:.15rem;text-transform:uppercase}
+
+/* badges */
+.bdg{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.54rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+.bdg.critical{background:rgba(229,72,77,.16);color:var(--crit);border:1px solid rgba(229,72,77,.35)}
+.bdg.high{background:rgba(232,163,61,.16);color:var(--high);border:1px solid rgba(232,163,61,.35)}
+.bdg.low{background:rgba(61,187,130,.14);color:var(--low);border:1px solid rgba(61,187,130,.32)}
+.bdg.unknown{background:rgba(255,255,255,.06);color:var(--mut);border:1px solid var(--border)}
+
+/* tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead th{font-family:var(--mono);font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);text-align:left;
+  padding:.6rem .7rem;border-bottom:1px solid var(--border2);font-weight:500;white-space:nowrap}
+tbody td{padding:.7rem .7rem;border-bottom:1px solid var(--border);vertical-align:top}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+.t-strong{font-weight:600} .t-mut{color:var(--mut);font-family:var(--mono);font-size:.72rem}
+.t-score{font-family:var(--serif);font-size:1.15rem;font-weight:600}
+.story-btn{font-family:var(--mono);font-size:.56rem;letter-spacing:1px;text-transform:uppercase;color:var(--redsoft);cursor:pointer;background:none;border:none}
+.story{display:none;margin-top:.5rem;padding:.7rem .85rem;background:var(--inset);border-radius:8px;font-size:.78rem;color:var(--soft);border-left:2px solid var(--red)}
+.story.open{display:block}
+
+/* filter chips */
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
+.chip{font-family:var(--mono);font-size:.58rem;letter-spacing:1px;text-transform:uppercase;background:var(--panel2);color:var(--mut);
+  border:1px solid var(--border);border-radius:20px;padding:.4rem .8rem;cursor:pointer;transition:.15s}
+.chip:hover{color:var(--ink)}
+.chip.on{background:rgba(193,18,31,.15);color:var(--redsoft);border-color:rgba(193,18,31,.5)}
+
+/* community cards */
+.pcard{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.pcard.pending{border-color:rgba(232,163,61,.3)}
+.pc-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.pc-user{font-weight:600;font-size:.85rem}
+.pc-meta{font-family:var(--mono);font-size:.56rem;letter-spacing:.5px;color:var(--mut);text-transform:uppercase;margin-left:auto}
+.pc-body{font-size:.83rem;color:var(--soft);margin-bottom:.7rem;white-space:pre-wrap}
+.pc-act{display:flex;gap:.5rem}
+.btn-a{font-family:var(--mono);font-size:.58rem;letter-spacing:1px;text-transform:uppercase;border-radius:8px;padding:.4rem .8rem;cursor:pointer;border:1px solid;transition:.15s}
+.btn-ok{background:rgba(61,187,130,.12);color:var(--low);border-color:rgba(61,187,130,.35)} .btn-ok:hover{background:rgba(61,187,130,.22)}
+.btn-no{background:rgba(229,72,77,.1);color:var(--crit);border-color:rgba(229,72,77,.32)} .btn-no:hover{background:rgba(229,72,77,.2)}
+
+/* message rows */
+.msg{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.7rem;position:relative}
+.msg.unread{border-color:rgba(193,18,31,.35)}
+.msg.unread::before{content:"";position:absolute;left:0;top:1rem;bottom:1rem;width:2px;background:var(--red);border-radius:2px}
+.msg.read{opacity:.62}
+.m-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem}
+.m-from{font-family:var(--mono);font-size:.72rem;color:var(--ink)}
+.m-reason{font-family:var(--mono);font-size:.54rem;letter-spacing:1px;text-transform:uppercase;color:var(--redsoft);background:rgba(193,18,31,.1);padding:2px 7px;border-radius:5px}
+.m-time{font-family:var(--mono);font-size:.56rem;color:var(--mut);margin-left:auto}
+.m-body{font-size:.83rem;color:var(--soft);white-space:pre-wrap}
+
+.empty{text-align:center;padding:2rem;color:var(--mut);font-family:var(--mono);font-size:.7rem;letter-spacing:1px;text-transform:uppercase}
+.sub-list{display:flex;flex-direction:column;gap:.4rem;max-height:520px;overflow:auto}
+.sub-row{display:flex;align-items:center;gap:.75rem;padding:.6rem .7rem;background:var(--panel2);border:1px solid var(--border);border-radius:9px;font-size:.8rem}
+.sub-row .em{font-family:var(--mono);font-size:.75rem;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub-row .dt{font-family:var(--mono);font-size:.56rem;color:var(--mut)}
+
+
+/* ── COHORT STUDY ── */
+.cohort-panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1rem}
+.cohort-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.7rem;margin-bottom:1rem}
+.co-stat{background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:.8rem .9rem}
+.co-stat .n{font-family:var(--serif);font-size:1.9rem;line-height:1;font-weight:600}
+.co-stat .l{font-family:var(--mono);font-size:.52rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);margin-top:.3rem}
+.co-stat.fraud .n{color:var(--crit)} .co-stat.genuine .n{color:var(--low)} .co-stat.pending .n{color:var(--high)}
+.co-bar{height:9px;background:var(--inset);border-radius:5px;overflow:hidden;margin:.5rem 0 .35rem}
+.co-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--redsoft));border-radius:5px;transition:width .5s}
+.co-goal{font-size:.82rem;color:var(--soft);line-height:1.6}
+.co-goal b{color:var(--ink)}
+.co-warn{background:rgba(232,163,61,.09);border:1px solid rgba(232,163,61,.3);border-left:3px solid var(--high);
+  padding:.85rem 1rem;border-radius:8px;font-size:.85rem;line-height:1.65;color:#E8C88D;margin-top:.9rem}
+.outcome-sel{background:var(--panel2);border:1px solid var(--border);border-radius:7px;color:var(--ink);
+  font-family:var(--mono);font-size:.62rem;padding:.35rem .5rem;cursor:pointer;max-width:150px}
+.outcome-sel:focus{border-color:var(--redglow);outline:none}
+.bdg.confirmed_fraud{background:rgba(229,72,77,.16);color:var(--crit);border:1px solid rgba(229,72,77,.35)}
+.bdg.confirmed_genuine{background:rgba(61,187,130,.14);color:var(--low);border:1px solid rgba(61,187,130,.32)}
+.bdg.probable_fraud,.bdg.probable_genuine{background:rgba(232,163,61,.14);color:var(--high);border:1px solid rgba(232,163,61,.3)}
+.bdg.unresolved{background:rgba(255,255,255,.06);color:var(--mut);border:1px solid var(--border)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1080px){.kpis{grid-template-columns:repeat(3,1fr)}.bento,.bento3{grid-template-columns:1fr}}
+@media(max-width:820px){
+  #A{grid-template-columns:1fr}
+  .SB{position:fixed;left:0;top:0;bottom:0;width:220px;z-index:60;transform:translateX(-100%);transition:transform .25s}
+  .SB.open{transform:none}
+  .SB-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:55}
+  .SB-scrim.on{display:block}
+  .burger{display:inline-flex!important}
+}
+@media(max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}.WRAP{padding:1rem}.TB{padding:.85rem 1rem}}
+.SB-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:55}
+.SB-scrim.on{display:block}
+.burger{display:none;background:var(--panel2);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+
+.reg-wrap{max-width:1100px;margin:0 auto;padding:1.5rem}
+.reg-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.reg-title{font-family:var(--serif);font-size:2rem;font-weight:600;line-height:1}
+.reg-sub{font-family:var(--mono);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--mut);margin-top:.3rem}
+.reg-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:.7rem;margin-bottom:1.25rem}
+.rs{background:var(--panel);border:1px solid var(--border);border-radius:11px;padding:.75rem .9rem}
+.rs .n{font-family:var(--serif);font-size:1.7rem;font-weight:600;line-height:1}
+.rs .l{font-family:var(--mono);font-size:.5rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);margin-top:.25rem}
+.rs.f .n{color:var(--crit)} .rs.g .n{color:var(--low)} .rs.p .n{color:var(--high)}
+.fset{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:1rem}
+.fset > h3{font-family:var(--mono);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--redsoft);
+  margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.frow{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.75rem;margin-bottom:.75rem}
+.fld label{display:block;font-family:var(--mono);font-size:.54rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--mut);margin-bottom:.25rem}
+.fld input,.fld select,.fld textarea{width:100%;background:var(--panel2);border:1px solid var(--border);border-radius:8px;
+  padding:.5rem .65rem;color:var(--ink);font-family:var(--sans);font-size:.85rem;outline:none}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--redglow)}
+.fld textarea{min-height:80px;resize:vertical;line-height:1.6}
+.fld.chk{display:flex;align-items:center;gap:.5rem}
+.fld.chk input{width:auto}
+.fld.chk label{margin:0;text-transform:none;font-size:.78rem;letter-spacing:0;color:var(--soft);font-family:var(--sans)}
+.pill-score{display:flex;align-items:center;gap:.6rem;background:var(--panel2);border:1px solid var(--border);
+  border-radius:10px;padding:.6rem .85rem}
+.pill-score .tot{font-family:var(--serif);font-size:1.9rem;font-weight:600;line-height:1}
+.pill-score .lbl{font-family:var(--mono);font-size:.52rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+.reg-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.25rem 0 2rem}
+.rbtn{font-family:var(--mono);font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;border-radius:10px;
+  padding:.75rem 1.4rem;cursor:pointer;border:1px solid;font-weight:600}
+.rbtn-save{background:var(--red);color:#fff;border-color:var(--red)}
+.rbtn-save:hover{background:#d81b28}
+.rbtn-clear{background:none;color:var(--mut);border-color:var(--border)}
+.rbtn-clear:hover{color:var(--ink)}
+.reg-msg{display:none;padding:.8rem 1rem;border-radius:10px;font-size:.85rem;margin-bottom:1rem}
+.reg-msg.ok{display:block;background:rgba(61,187,130,.1);border:1px solid rgba(61,187,130,.35);color:#9FE3C0}
+.reg-msg.err{display:block;background:rgba(229,72,77,.1);border:1px solid rgba(229,72,77,.35);color:#F2A0A3}
+.reg-list{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.reg-row{display:grid;grid-template-columns:90px 1fr 70px 110px 90px;gap:.75rem;align-items:center;
+  padding:.7rem 1rem;border-bottom:1px solid var(--border);font-size:.82rem;cursor:pointer}
+.reg-row:hover{background:var(--panel2)}
+.reg-row .cid{font-family:var(--mono);font-size:.72rem;color:var(--redsoft)}
+.reg-row .sc{font-family:var(--serif);font-size:1.1rem;font-weight:600}
+@media(max-width:700px){.reg-row{grid-template-columns:80px 1fr 60px;font-size:.78rem}.reg-row .oc,.reg-row .dt{display:none}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="L">
+  <div class="L-card">
+    <img src="/osb-emblem.png" alt="OSB" class="L-emblem">
+    <div class="L-eye">Restricted · Case Registry</div>
+    <div class="L-title">Case Registry</div>
+    <div class="L-sub">RSEI Model&trade; &mdash; assessor-completed casework</div>
+    <input type="password" id="key-inp" placeholder="Enter admin key" autocomplete="off">
+    <button id="login-btn">Authenticate</button>
+    <div id="L-err"></div>
+    <div class="L-foot">OSB &middot; Behavioural Threat Intelligence</div>
+  </div>
+</div>
+
+<div id="A" style="display:none">
+<div class="reg-wrap">
+
+  <div class="reg-head">
+    <div>
+      <div class="reg-title">Case Registry</div>
+      <div class="reg-sub">RSEI Model&trade; v2.0 &middot; Assessor-completed</div>
+    </div>
+    <div style="display:flex;gap:.5rem">
+      <a href="admin.html" class="rbtn rbtn-clear" style="text-decoration:none;display:inline-block">&larr; Sentinel</a>
+      <button class="rbtn rbtn-clear" onclick="loadCases()">Refresh</button>
+    </div>
+  </div>
+
+  <div class="reg-stats" id="reg-stats"></div>
+  <div class="reg-msg" id="reg-msg"></div>
+
+  <!-- METADATA -->
+  <div class="fset">
+    <h3>01 &mdash; Metadata</h3>
+    <div class="frow">
+      <div class="fld"><label>Case ID *</label><input id="f-case_id" placeholder="001-SR"></div>
+      <div class="fld"><label>Date logged</label><input type="date" id="f-date_logged"></div>
+      <div class="fld"><label>Victim age range</label><input id="f-victim_age_range" placeholder="50-60"></div>
+      <div class="fld"><label>Victim gender</label>
+        <select id="f-victim_gender"><option value="">—</option><option>Female</option><option>Male</option><option>Other</option><option>Not disclosed</option></select></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Victim country</label><input id="f-victim_country" placeholder="USA"></div>
+      <div class="fld"><label>Platform used</label><input id="f-platform_used" placeholder="Instagram"></div>
+      <div class="fld"><label>Relationship status</label><input id="f-relationship_status" placeholder="Widowed"></div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="fset">
+    <h3>02 &mdash; Timeline</h3>
+    <div class="frow">
+      <div class="fld"><label>First contact</label><input type="date" id="f-date_first_contact"></div>
+      <div class="fld"><label>First emotional commitment</label><input type="date" id="f-date_first_emotional"></div>
+      <div class="fld"><label>First financial request</label><input type="date" id="f-date_first_financial"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Total duration (days)</label><input type="number" id="f-total_duration_days"></div>
+      <div class="fld"><label>Days to platform exit</label><input type="number" id="f-days_to_platform_exit"></div>
+      <div class="fld"><label>Exit platform</label><input id="f-exit_platform" placeholder="WhatsApp"></div>
+      <div class="fld"><label>Exit comms type</label><input id="f-exit_communication_type" placeholder="Text"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Communication intensity</label>
+        <select id="f-communication_intensity"><option value="">—</option><option>Low</option><option>Moderate</option><option>High</option><option>Very High</option></select></div>
+    </div>
+  </div>
+
+  <!-- FINANCIAL -->
+  <div class="fset">
+    <h3>03 &mdash; Financial</h3>
+    <div class="frow">
+      <div class="fld"><label>First request amount</label><input id="f-first_request_amount" placeholder="USD 300"></div>
+      <div class="fld"><label>First payment range</label><input id="f-first_payment_range" placeholder="USD 100 – USD 500"></div>
+      <div class="fld"><label>Payment method</label><input id="f-payment_method" placeholder="Gift Card"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Number of requests</label><input id="f-number_of_requests" placeholder="20+"></div>
+      <div class="fld"><label>Total estimated loss</label><input id="f-total_estimated_loss" placeholder="USD 50,000"></div>
+      <div class="fld"><label>Financial recovery</label><input id="f-financial_recovery_amount" placeholder="USD 0"></div>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="fset">
+    <h3>04 &mdash; RSEI Scoring</h3>
+    <div class="frow">
+      <div class="fld"><label>R &mdash; Relationship (0-5)</label><input type="number" min="0" max="5" id="f-r_score" oninput="calcTotal()"></div>
+      <div class="fld"><label>S &mdash; Script (0-5)</label><input type="number" min="0" max="5" id="f-s_score" oninput="calcTotal()"></div>
+      <div class="fld"><label>E &mdash; Emotional (0-5)</label><input type="number" min="0" max="5" id="f-e_score" oninput="calcTotal()"></div>
+      <div class="fld"><label>I &mdash; Extraction (0-5)</label><input type="number" min="0" max="5" id="f-i_score" oninput="calcTotal()"></div>
+      <div class="pill-score"><div><div class="tot" id="f-total-display">0</div><div class="lbl">Core total</div></div></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>ESI score</label><input type="number" step="0.1" id="f-esi_score"></div>
+      <div class="fld"><label>Risk assessment</label><input id="f-risk_assessment" placeholder="Critical Exploitation"></div>
+      <div class="fld"><label>Adjusted risk indicator</label><input id="f-adjusted_risk_indicator" placeholder="Critical Velocity-Enhanced"></div>
+      <div class="fld chk"><input type="checkbox" id="f-e_pillar_flag"><label>E Pillar flag</label></div>
+    </div>
+  </div>
+
+  <!-- INTELLIGENCE -->
+  <div class="fset">
+    <h3>05 &mdash; Intelligence</h3>
+    <div class="frow">
+      <div class="fld"><label>Script type</label><input id="f-script_type" placeholder="Oil Rig Engineer"></div>
+      <div class="fld"><label>Persona profession</label><input id="f-persona_profession"></div>
+      <div class="fld"><label>Authority impersonation</label><input id="f-authority_impersonation"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Crisis type</label><input id="f-crisis_type" placeholder="Medical emergency"></div>
+      <div class="fld"><label>Trust anchor event</label><input id="f-trust_anchor_event"></div>
+      <div class="fld"><label>Identity reinforce method</label><input id="f-identity_reinforce_method"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Escalation pattern</label><input id="f-escalation_pattern"></div>
+      <div class="fld"><label>Collapse trigger</label><input id="f-collapse_trigger"></div>
+      <div class="fld"><label>Third party authority</label><input id="f-third_party_authority"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Victim role</label><input id="f-victim_role"></div>
+      <div class="fld"><label>Family disclosure</label><input id="f-family_disclosure"></div>
+    </div>
+    <div class="frow">
+      <div class="fld chk"><input type="checkbox" id="f-child_involved"><label>Child involved</label></div>
+      <div class="fld chk"><input type="checkbox" id="f-isolation_encouraged"><label>Isolation encouraged</label></div>
+      <div class="fld chk"><input type="checkbox" id="f-isolation_behavior"><label>Isolation behaviour</label></div>
+      <div class="fld chk"><input type="checkbox" id="f-defensive_alignment"><label>Defensive alignment</label></div>
+    </div>
+    <div class="frow">
+      <div class="fld chk"><input type="checkbox" id="f-asset_liquidation"><label>Asset liquidation</label></div>
+      <div class="fld chk"><input type="checkbox" id="f-investment_scam"><label>Investment scam</label></div>
+      <div class="fld chk"><input type="checkbox" id="f-mule_activity"><label>Mule activity</label></div>
+    </div>
+  </div>
+
+  <!-- IEF -->
+  <div class="fset">
+    <h3>06 &mdash; IEF Cross-Reference</h3>
+    <div class="frow">
+      <div class="fld chk"><input type="checkbox" id="f-ief_dual_exploitation"><label>IEF dual exploitation</label></div>
+      <div class="fld"><label>IEF case ID ref</label><input id="f-ief_case_id_ref"></div>
+      <div class="fld"><label>IEF score ref</label><input id="f-ief_score_ref"></div>
+    </div>
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="fset">
+    <h3>07 &mdash; Intervention &amp; Outcome</h3>
+    <div class="frow">
+      <div class="fld"><label>Intervention date</label><input type="date" id="f-intervention_date"></div>
+      <div class="fld"><label>Intervention type</label><input id="f-intervention_type"></div>
+      <div class="fld"><label>Intervention outcome</label><input id="f-intervention_outcome" placeholder="Partial"></div>
+      <div class="fld"><label>E Pillar recovery status</label><input id="f-e_pillar_recovery_status"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Case status</label>
+        <select id="f-case_status"><option value="">—</option><option>Open</option><option>Monitoring</option><option>Closed</option></select></div>
+      <div class="fld chk"><input type="checkbox" id="f-law_enforcement_reported"><label>Reported to law enforcement</label></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label>Known outcome (cohort)</label>
+        <select id="f-outcome">
+          <option value="">— unclassified —</option>
+          <option value="confirmed_fraud">Confirmed fraud</option>
+          <option value="confirmed_genuine">Confirmed genuine</option>
+          <option value="probable_fraud">Probable fraud</option>
+          <option value="probable_genuine">Probable genuine</option>
+          <option value="unresolved">Unresolved</option>
+        </select></div>
+      <div class="fld"><label>How established</label>
+        <select id="f-outcome_basis">
+          <option value="">—</option>
+          <option value="victim_confirmed">Victim confirmed</option>
+          <option value="financial_evidence">Financial evidence</option>
+          <option value="law_enforcement">Law enforcement</option>
+          <option value="platform_action">Platform action</option>
+          <option value="identity_verified">Identity verified</option>
+          <option value="met_in_person">Met in person</option>
+          <option value="osb_analysis">OSB analysis (weakest)</option>
+          <option value="other">Other</option>
+        </select></div>
+    </div>
+    <div class="fld"><label>Case notes</label><textarea id="f-case_notes" placeholder="Narrative, observations, anything worth preserving"></textarea></div>
+  </div>
+
+  <div class="reg-actions">
+    <button class="rbtn rbtn-save" onclick="saveCase()">Save case</button>
+    <button class="rbtn rbtn-clear" onclick="clearForm()">Clear form</button>
+  </div>
+
+  <div class="reg-head"><div><div class="reg-title" style="font-size:1.3rem">Logged cases</div></div></div>
+  <div class="reg-list" id="reg-list"></div>
+
+</div>
+</div>
+
+<script>
+var API='https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api';
+var KEY='', CASES=[];
+
+var FIELDS=['case_id','date_logged','victim_age_range','victim_gender','victim_country','platform_used',
+'relationship_status','date_first_contact','date_first_emotional','date_first_financial','total_duration_days',
+'days_to_platform_exit','exit_platform','exit_communication_type','communication_intensity','first_request_amount',
+'first_payment_range','payment_method','number_of_requests','total_estimated_loss','financial_recovery_amount',
+'r_score','s_score','e_score','i_score','esi_score','risk_assessment','script_type','persona_profession',
+'authority_impersonation','crisis_type','trust_anchor_event','escalation_pattern','intervention_date',
+'intervention_type','intervention_outcome','e_pillar_recovery_status','case_status','outcome','outcome_basis','case_notes',
+'identity_reinforce_method','family_disclosure','collapse_trigger','third_party_authority','victim_role',
+'adjusted_risk_indicator','ief_case_id_ref','ief_score_ref'];
+var CHECKS=['e_pillar_flag','child_involved','isolation_encouraged','asset_liquidation','investment_scam',
+'mule_activity','law_enforcement_reported','isolation_behavior','defensive_alignment','ief_dual_exploitation'];
+
+function esc(s){return (s==null?'':''+s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function api(p,o){o=o||{};o.headers=Object.assign({'x-admin-key':KEY,'Content-Type':'application/json'},o.headers||{});return fetch(API+p,o);}
+function msg(t,ok){var m=document.getElementById('reg-msg');m.className='reg-msg '+(ok?'ok':'err');m.textContent=t;
+  setTimeout(function(){m.className='reg-msg';},5000);}
+
+document.getElementById('login-btn').addEventListener('click',doLogin);
+document.getElementById('key-inp').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+function doLogin(){
+  var v=document.getElementById('key-inp').value,e=document.getElementById('L-err'),b=document.getElementById('login-btn');
+  e.style.display='none';
+  if(!v){e.textContent='Enter your admin key.';e.style.display='block';return;}
+  b.disabled=true;b.textContent='Verifying…';KEY=v;
+  api('/api/admin/registry').then(function(r){
+    if(r.ok){document.getElementById('L').style.display='none';document.getElementById('A').style.display='block';loadCases();}
+    else{KEY='';e.textContent=(r.status===401)?'Wrong key.':'Server error ('+r.status+').';e.style.display='block';}
+  }).catch(function(){KEY='';e.textContent='Could not reach the server.';e.style.display='block';})
+   .finally(function(){b.disabled=false;b.textContent='Authenticate';});
+}
+
+function calcTotal(){
+  var t=0;['r','s','e','i'].forEach(function(k){
+    var v=parseInt(document.getElementById('f-'+k+'_score').value);
+    if(!isNaN(v))t+=v;});
+  document.getElementById('f-total-display').textContent=t;
+}
+
+function saveCase(){
+  var body={};
+  FIELDS.forEach(function(f){var el=document.getElementById('f-'+f);if(el)body[f]=el.value;});
+  CHECKS.forEach(function(f){var el=document.getElementById('f-'+f);if(el)body[f]=el.checked;});
+  if(!body.case_id){msg('Case ID is required.',false);return;}
+  var t=0;['r','s','e','i'].forEach(function(k){var v=parseInt(body[k+'_score']);if(!isNaN(v))t+=v;});
+  body.rsei_core_total=t;
+  api('/api/admin/registry',{method:'POST',body:JSON.stringify(body)})
+    .then(function(r){return r.json().catch(function(){return{};});})
+    .then(function(d){
+      if(d.ok){msg('Case '+d.case_id+' saved.',true);clearForm();loadCases();}
+      else{msg('Could not save: '+(d.error||'unknown error'),false);}
+    }).catch(function(){msg('Could not reach the server.',false);});
+}
+
+function clearForm(){
+  FIELDS.forEach(function(f){var el=document.getElementById('f-'+f);if(el)el.value='';});
+  CHECKS.forEach(function(f){var el=document.getElementById('f-'+f);if(el)el.checked=false;});
+  document.getElementById('f-total-display').textContent='0';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function loadCase(id){
+  var c=CASES.filter(function(x){return x.id===id;})[0];
+  if(!c)return;
+  FIELDS.forEach(function(f){var el=document.getElementById('f-'+f);
+    if(el)el.value=(c[f]==null?'':c[f]);});
+  CHECKS.forEach(function(f){var el=document.getElementById('f-'+f);if(el)el.checked=!!c[f];});
+  calcTotal();
+  window.scrollTo({top:0,behavior:'smooth'});
+  msg('Loaded '+c.case_id+' — editing. Saving will update this case.',true);
+}
+
+function loadCases(){
+  api('/api/admin/registry').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||!d.ok)return;
+    CASES=d.data||[];
+    var cf=CASES.filter(function(c){return c.outcome==='confirmed_fraud';}).length;
+    var cg=CASES.filter(function(c){return c.outcome==='confirmed_genuine';}).length;
+    var un=CASES.filter(function(c){return !c.outcome;}).length;
+    document.getElementById('reg-stats').innerHTML=
+      '<div class="rs"><div class="n">'+CASES.length+'</div><div class="l">Cases logged</div></div>'
+      +'<div class="rs f"><div class="n">'+cf+'</div><div class="l">Confirmed fraud</div></div>'
+      +'<div class="rs g"><div class="n">'+cg+'</div><div class="l">Confirmed genuine</div></div>'
+      +'<div class="rs p"><div class="n">'+un+'</div><div class="l">Unclassified</div></div>'
+      +'<div class="rs"><div class="n">'+Math.min(cf,cg)+'/20</div><div class="l">To provisional range</div></div>';
+    var el=document.getElementById('reg-list');
+    if(!CASES.length){el.innerHTML='<div class="empty" style="padding:2rem;text-align:center;color:var(--mut);font-family:var(--mono);font-size:.7rem;letter-spacing:1px;text-transform:uppercase">No cases logged yet</div>';return;}
+    el.innerHTML=CASES.map(function(c){
+      return '<div class="reg-row" onclick="loadCase('+c.id+')">'
+        +'<span class="cid">'+esc(c.case_id)+'</span>'
+        +'<span>'+esc(c.platform_used||'—')+' · '+esc(c.victim_country||'—')+'</span>'
+        +'<span class="sc">'+(c.rsei_core_total!=null?c.rsei_core_total:'—')+'</span>'
+        +'<span class="oc" style="font-family:var(--mono);font-size:.62rem;color:var(--mut)">'+esc((c.outcome||'unclassified').replace(/_/g,' '))+'</span>'
+        +'<span class="dt" style="font-family:var(--mono);font-size:.6rem;color:var(--mut)">'+esc(c.date_logged||'')+'</span>'
+        +'</div>';
+    }).join('');
+  }).catch(function(){});
+}
+</script>
+</body>
+</html>
