@@ -6,6 +6,12 @@
 <meta name="robots" content="noindex, nofollow">
 <title>OSB Chat Console</title>
 <link rel="icon" href="/osb-emblem.png">
+<link rel="manifest" href="/console-manifest.webmanifest">
+<meta name="theme-color" content="#2C080C">
+<link rel="apple-touch-icon" href="/icons/console/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OSB Console">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -113,6 +119,39 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1
 }
 .burger{display:none;background:var(--panel2);border:1px solid var(--border);border-radius:8px;width:32px;height:32px;
   align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+
+/* ── SOUND SETTINGS + INSTALL ── */
+.sset-btn{background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--soft);
+  font-family:var(--mono);font-size:.55rem;letter-spacing:1px;text-transform:uppercase;padding:.32rem .6rem;
+  cursor:pointer;white-space:nowrap}
+.sset-btn:hover{color:var(--ink);border-color:var(--border2)}
+#snd-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);display:none;
+  align-items:center;justify-content:center;padding:1.5rem}
+.sset-card{background:var(--panel);border:1px solid var(--border2);border-radius:16px;width:100%;
+  max-width:520px;max-height:86vh;overflow-y:auto;padding:1.5rem;font-family:var(--sans)}
+.sset-title{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin-bottom:.3rem;color:var(--ink)}
+.sset-sub{font-family:var(--mono);font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--mut);margin-bottom:1.25rem}
+.sset-group{margin-bottom:1.4rem}
+.sset-h{font-family:var(--mono);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--redsoft);margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:1px solid var(--border)}
+.sset-opt{display:grid;grid-template-columns:auto 1fr auto;
+  grid-template-areas:"radio name play" "radio desc play";
+  gap:.15rem .6rem;align-items:center;padding:.6rem .75rem;border:1px solid var(--border);
+  border-radius:10px;margin-bottom:.45rem;cursor:pointer;transition:.15s}
+.sset-opt:hover{border-color:rgba(193,18,31,.4)}
+.sset-opt.on{background:rgba(193,18,31,.09);border-color:rgba(193,18,31,.5)}
+.sset-opt input{grid-area:radio;accent-color:var(--red);width:auto;margin:0}
+.sset-n{grid-area:name;font-size:.88rem;font-weight:600;color:var(--ink)}
+.sset-d{grid-area:desc;font-size:.72rem;color:var(--mut);line-height:1.4}
+.sset-play{grid-area:play;background:var(--panel2);border:1px solid var(--border);border-radius:7px;
+  color:var(--soft);font-family:var(--mono);font-size:.55rem;letter-spacing:1px;text-transform:uppercase;
+  padding:.35rem .65rem;cursor:pointer}
+.sset-play:hover{color:var(--redsoft);border-color:rgba(193,18,31,.45)}
+.sset-close{width:100%;background:var(--red);color:#fff;border:none;border-radius:11px;padding:.8rem;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-weight:600}
+.sset-close:hover{background:#d81b28}
+#install-btn{display:none}
 </style>
 </head>
 <body>
@@ -140,6 +179,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1
     <div class="Q-bar">
       <span class="pill"><span class="dot"></span><span id="q-count">0 waiting</span></span>
       <button class="sound" id="snd" onclick="toggleSound()">ALARM OFF</button>
+      <button class="sset-btn" onclick="openSettings()" title="Alert sounds">&#9835; Sounds</button>
+      <button class="sset-btn" id="install-btn" onclick="installConsole()">Install</button>
     </div>
     <div class="Q-list" id="q-list"></div>
   </aside>
@@ -174,6 +215,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1
 <script>
 var API='https://ufnityyhmfzahxkjmlgo.supabase.co/functions/v1/osb-api';
 var KEY='',ME='',cur=null,lastMsgId=0,qPoll=null,cPoll=null,soundOn=false,ac=null;
+var soundArrival='buzz', soundMessage='pulse', volumeLevel=0.92;
+try{ soundArrival=localStorage.getItem('osb_snd_arrival')||'buzz';
+     soundMessage=localStorage.getItem('osb_snd_message')||'pulse';
+     volumeLevel=parseFloat(localStorage.getItem('osb_console_volume'))||0.92; }catch(e){}
 var seenSessions={}, prevUnread={}, titleTimer=null, baseTitle='OSB Chat Console', pendingAlerts=0;
 
 function esc(s){return (s==null?'':''+s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -351,48 +396,151 @@ function getBus(){
   return comp;
 }
 
-function buzz(start,dur,vol,pitch){
-  if(!ac)return;
-  var t=ac.currentTime+start;
-  var base=pitch||96;
+/* ═══════════════════════════════════════════════════════════════════
+   ALERT SOUND LIBRARY
+   Six distinct alerts, all synthesised in the browser — no audio files
+   to load, so an alert never fails because a file did not download.
+   Everything routes through a limiter so nothing clips at volume.
+   ═══════════════════════════════════════════════════════════════════ */
 
-  var osc=ac.createOscillator();
-  osc.type='sawtooth';
-  osc.frequency.setValueAtTime(base,t);
-  osc.frequency.exponentialRampToValueAtTime(base*0.72,t+dur);
+var SOUNDS = [
+  { id:'buzz',    name:'Yahoo Buzz',      desc:'Low gritty rattle. Cuts through room noise.' },
+  { id:'klaxon',  name:'Klaxon',          desc:'Two-tone alarm. Most urgent.' },
+  { id:'chime',   name:'Chime',           desc:'Clean bell. Calm, still audible.' },
+  { id:'pulse',   name:'Pulse',           desc:'Rising triple beep. Neutral.' },
+  { id:'radio',   name:'Radio Call',      desc:'Dispatch-style double tone.' },
+  { id:'knock',   name:'Knock',           desc:'Soft wooden double tap. Least intrusive.' }
+];
 
-  var sub=ac.createOscillator();
-  sub.type='square';
-  sub.frequency.setValueAtTime(base*0.5,t);
-  sub.frequency.exponentialRampToValueAtTime(base*0.36,t+dur);
+var busOut=null;
+function getBus(){
+  if(busOut && busOut.ctx===ac) return busOut.node;
+  var comp=ac.createDynamicsCompressor();
+  comp.threshold.setValueAtTime(-8,ac.currentTime);
+  comp.knee.setValueAtTime(4,ac.currentTime);
+  comp.ratio.setValueAtTime(14,ac.currentTime);
+  comp.attack.setValueAtTime(0.002,ac.currentTime);
+  comp.release.setValueAtTime(0.12,ac.currentTime);
+  var master=ac.createGain();
+  master.gain.setValueAtTime(volumeLevel,ac.currentTime);
+  comp.connect(master); master.connect(ac.destination);
+  busOut={ctx:ac,node:comp,master:master};
+  return comp;
+}
+function setBusVolume(v){
+  volumeLevel=v;
+  try{ localStorage.setItem('osb_console_volume', String(v)); }catch(e){}
+  if(busOut && busOut.master) busOut.master.gain.setValueAtTime(v, ac.currentTime);
+}
 
-  var lfo=ac.createOscillator();
-  lfo.type='square';
-  lfo.frequency.setValueAtTime(34,t);
-  var lfoAmt=ac.createGain();
-  lfoAmt.gain.setValueAtTime(0.55,t);
+/* ── primitive: one tone ── */
+function tone(opts){
+  if(!ac) return;
+  var t=ac.currentTime+(opts.start||0);
+  var o=ac.createOscillator(), g=ac.createGain();
+  o.type=opts.type||'sine';
+  o.frequency.setValueAtTime(opts.freq,t);
+  if(opts.freqTo) o.frequency.exponentialRampToValueAtTime(opts.freqTo,t+opts.dur);
+  var chain=o;
+  if(opts.filter){
+    var f=ac.createBiquadFilter();
+    f.type='lowpass';
+    f.frequency.setValueAtTime(opts.filter,t);
+    if(opts.filterTo) f.frequency.exponentialRampToValueAtTime(opts.filterTo,t+opts.dur);
+    f.Q.setValueAtTime(opts.q||1,t);
+    o.connect(f); chain=f;
+  }
+  if(opts.rattle){
+    var lfo=ac.createOscillator(), amt=ac.createGain(), rg=ac.createGain();
+    lfo.type='square'; lfo.frequency.setValueAtTime(opts.rattle,t);
+    amt.gain.setValueAtTime(0.55,t); rg.gain.setValueAtTime(0.45,t);
+    lfo.connect(amt); amt.connect(rg.gain);
+    chain.connect(rg); chain=rg;
+    lfo.start(t); lfo.stop(t+opts.dur+0.05);
+  }
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(opts.vol||0.5,t+(opts.attack||0.01));
+  g.gain.setValueAtTime(opts.vol||0.5,t+Math.max(0.02,opts.dur-(opts.decay||0.05)));
+  g.gain.exponentialRampToValueAtTime(0.0001,t+opts.dur);
+  chain.connect(g); g.connect(getBus());
+  o.start(t); o.stop(t+opts.dur+0.05);
+}
 
-  var rattle=ac.createGain();
-  rattle.gain.setValueAtTime(0.45,t);
-  lfo.connect(lfoAmt); lfoAmt.connect(rattle.gain);
+/* ── the six alerts ── */
+function playSound(id, urgent){
+  if(!ac) return;
+  var reps = urgent ? 3 : 2;
+  switch(id){
+    case 'klaxon':
+      for(var i=0;i<reps;i++){
+        tone({start:i*0.5, freq:740, dur:0.22, vol:0.5, type:'sawtooth', filter:2200, filterTo:1200});
+        tone({start:i*0.5+0.24, freq:560, dur:0.24, vol:0.5, type:'sawtooth', filter:2000, filterTo:1000});
+      }
+      break;
+    case 'chime':
+      [0,0.18,0.36].slice(0,reps+1).forEach(function(st,i){
+        tone({start:st, freq:[880,1174,1568][i]||880, dur:0.9, vol:0.42, type:'sine', decay:0.7});
+      });
+      break;
+    case 'pulse':
+      for(var i=0;i<reps+1;i++)
+        tone({start:i*0.16, freq:660+i*180, dur:0.11, vol:0.45, type:'triangle'});
+      break;
+    case 'radio':
+      for(var i=0;i<reps;i++){
+        tone({start:i*0.42, freq:1200, dur:0.09, vol:0.42, type:'square', filter:2600});
+        tone({start:i*0.42+0.12, freq:900, dur:0.13, vol:0.42, type:'square', filter:2200});
+      }
+      break;
+    case 'knock':
+      for(var i=0;i<reps;i++){
+        tone({start:i*0.17, freq:220, freqTo:90, dur:0.13, vol:0.5, type:'sine', filter:900, attack:0.004, decay:0.09});
+      }
+      break;
+    case 'buzz':
+    default:
+      for(var i=0;i<reps;i++){
+        tone({start:i*0.60, freq:96, freqTo:70, dur:0.52, vol:0.55,
+              type:'sawtooth', filter:2200, filterTo:900, q:7, rattle:34});
+        tone({start:i*0.60, freq:48, freqTo:35, dur:0.52, vol:0.35, type:'square', filter:1400});
+      }
+      break;
+  }
+}
 
-  var filt=ac.createBiquadFilter();
-  filt.type='lowpass';
-  filt.frequency.setValueAtTime(2200,t);
-  filt.frequency.exponentialRampToValueAtTime(900,t+dur);
-  filt.Q.setValueAtTime(7,t);
+function toggleSound(){
+  soundOn=!soundOn;
+  var b=document.getElementById('snd');
+  b.textContent=soundOn?'ALARM ON':'ALARM OFF';
+  b.style.background=soundOn?'rgba(61,187,130,.16)':'';
+  b.style.color=soundOn?'#3DBB82':'';
+  b.style.borderColor=soundOn?'rgba(61,187,130,.4)':'';
+  try{localStorage.setItem('osb_console_sound',soundOn?'1':'0');}catch(e){}
+  if(soundOn){
+    if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+    if(ac&&ac.state==='suspended')ac.resume();
+    alarm('test');
+    if(window.Notification&&Notification.permission==='default')Notification.requestPermission();
+  }
+}
 
-  var env=ac.createGain();
-  env.gain.setValueAtTime(0.0001,t);
-  env.gain.exponentialRampToValueAtTime(vol,t+0.012);
-  env.gain.setValueAtTime(vol,t+Math.max(0.05,dur-0.06));
-  env.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-
-  osc.connect(filt); sub.connect(filt);
-  filt.connect(rattle); rattle.connect(env); env.connect(getBus());
-
-  osc.start(t); sub.start(t); lfo.start(t);
-  osc.stop(t+dur+0.02); sub.stop(t+dur+0.02); lfo.stop(t+dur+0.02);
+function alarm(kind){
+  if(!soundOn)return;
+  if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return;}}
+  if(ac.state==='suspended')ac.resume();
+  try{
+    if(kind==='arrival')      playSound(soundArrival, true);
+    else if(kind==='message') playSound(soundMessage, false);
+    else                      playSound(soundArrival, false);
+  }catch(e){}
+  try{ shake(); }catch(e){}
+  if(window.Notification&&Notification.permission==='granted'&&document.hidden){
+    try{
+      var n=new Notification(kind==='arrival'?'New chat waiting - OSB':'New message - OSB',
+        {body:kind==='arrival'?'Someone has just opened a chat.':'A visitor has replied.',requireInteraction:true});
+      n.onclick=function(){window.focus();n.close();};
+    }catch(e){}
+  }
 }
 
 function shake(){
@@ -405,30 +553,49 @@ function shake(){
   },28);
 }
 
-function alarm(kind){
-  if(!soundOn)return;
+/* ── settings panel ── */
+function openSettings(){
+  var m=document.getElementById('snd-modal');
+  m.style.display='flex';
+  renderSoundOptions();
+}
+function closeSettings(){ document.getElementById('snd-modal').style.display='none'; }
+
+function renderSoundOptions(){
+  function block(title, current, setter){
+    return '<div class="sset-group"><div class="sset-h">'+title+'</div>'
+      + SOUNDS.map(function(s){
+          return '<label class="sset-opt'+(current===s.id?' on':'')+'">'
+            +'<input type="radio" name="'+setter+'" value="'+s.id+'"'+(current===s.id?' checked':'')+' '
+            +'onchange="pickSound(\''+setter+'\',\''+s.id+'\')">'
+            +'<span class="sset-n">'+s.name+'</span>'
+            +'<span class="sset-d">'+s.desc+'</span>'
+            +'<button class="sset-play" onclick="event.preventDefault();previewSound(\''+s.id+'\')">Preview</button>'
+            +'</label>';
+        }).join('')
+      +'</div>';
+  }
+  document.getElementById('snd-body').innerHTML =
+      block('New chat arriving', soundArrival, 'arrival')
+    + block('New message in an open chat', soundMessage, 'message')
+    + '<div class="sset-group"><div class="sset-h">Volume</div>'
+    + '<input type="range" min="0.2" max="1" step="0.05" value="'+volumeLevel+'" '
+    + 'oninput="setBusVolume(parseFloat(this.value))" style="width:100%">'
+    + '<div style="font-family:var(--mono);font-size:.55rem;color:var(--mut);margin-top:.4rem">'
+    + 'Set this against your speakers, then preview a sound to check it carries.</div></div>';
+}
+
+function pickSound(which, id){
+  if(which==='arrival'){ soundArrival=id; try{localStorage.setItem('osb_snd_arrival',id);}catch(e){} }
+  else { soundMessage=id; try{localStorage.setItem('osb_snd_message',id);}catch(e){} }
+  renderSoundOptions();
+  previewSound(id);
+}
+
+function previewSound(id){
   if(!ac){try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return;}}
   if(ac.state==='suspended')ac.resume();
-  try{
-    if(kind==='arrival'){
-      buzz(0,0.52,0.55,96);
-      buzz(0.60,0.52,0.55,96);
-      buzz(1.20,0.62,0.6,86);
-    }else if(kind==='message'){
-      buzz(0,0.48,0.52,104);
-      buzz(0.56,0.48,0.52,104);
-    }else{
-      buzz(0,0.5,0.55,96);
-    }
-  }catch(e){}
-  try{ shake(); }catch(e){}
-  if(window.Notification&&Notification.permission==='granted'&&document.hidden){
-    try{
-      var n=new Notification(kind==='arrival'?'New chat waiting - OSB':'New message - OSB',
-        {body:kind==='arrival'?'Someone has just opened a chat.':'A visitor has replied.',requireInteraction:true});
-      n.onclick=function(){window.focus();n.close();};
-    }catch(e){}
-  }
+  playSound(id, false);
 }
 
 function flashTitle(txt){
@@ -451,7 +618,44 @@ window.addEventListener('focus',acknowledge);
 document.addEventListener('click',acknowledge);
 document.addEventListener('keydown',acknowledge);
 
+
+/* ── INSTALL AS AN APP ─────────────────────────────────────────────
+   The console registers its own service worker (network-only, caches
+   nothing) so it can be installed as a standalone app for 24/7 use. */
+var deferredInstall=null;
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('/console-sw.js',{scope:'/chat-console.html'})
+      .catch(function(){ /* installability only; console still works without it */ });
+  });
+}
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault(); deferredInstall=e;
+  var b=document.getElementById('install-btn'); if(b) b.style.display='inline-block';
+});
+window.addEventListener('appinstalled',function(){
+  var b=document.getElementById('install-btn'); if(b) b.style.display='none';
+});
+function installConsole(){
+  if(!deferredInstall){
+    alert('To install: use your browser menu and choose "Install app" or "Add to Home Screen".');
+    return;
+  }
+  deferredInstall.prompt();
+  deferredInstall.userChoice.finally(function(){ deferredInstall=null; });
+}
+
 function toggleQ(close){var q=document.getElementById('QUEUE');if(close){q.classList.remove('open');return;}q.classList.toggle('open');}
 </script>
+
+<div id="snd-modal" onclick="if(event.target===this)closeSettings()">
+  <div class="sset-card">
+    <div class="sset-title">Alert Sounds</div>
+    <div class="sset-sub">Choose what you hear &middot; saved on this device</div>
+    <div id="snd-body"></div>
+    <button class="sset-close" onclick="closeSettings()">Done</button>
+  </div>
+</div>
+
 </body>
 </html>
