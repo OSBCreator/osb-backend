@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /chat-console
+Disallow: /docvault
+Disallow: /case-registry
+Disallow: /form
 
 Sitemap: https://www.onlinesecuritybureau.com/sitemap.xml

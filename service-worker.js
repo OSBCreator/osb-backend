@@ -5,7 +5,7 @@
    admin) always goes to the real server — never served from cache.
    ═══════════════════════════════════════════════════════════════════════ */
 
-const VERSION = "osb-v1";
+const VERSION = "osb-v2";
 const SHELL_CACHE = VERSION + "-shell";
 const RUNTIME_CACHE = VERSION + "-runtime";
 
@@ -13,17 +13,17 @@ const RUNTIME_CACHE = VERSION + "-runtime";
 // Keep this list short and deliberate — it is downloaded on every first visit.
 const SHELL_FILES = [
   "/",
-  "/index.html",
-  "/score.html",
-  "/solace.html",
-  "/community.html",
-  "/contact.html",
-  "/offline.html",
+  "/offline",
   "/manifest.webmanifest",
   "/osb-emblem.png",
-  "/osb-logo.png",
   "/icons/icon-192.png",
-  "/icons/icon-512.png"
+  "/icons/icon-512.png",
+  "/os/os.css?v=9cb5335297",
+  "/os/os.js?v=80bd4b055d",
+  "/os/data.js?v=c365d36e04",
+  "/fonts/mona-sans.woff2",
+  "/fonts/hubot-sans.woff2",
+  "/fonts/monaspace-neon-400.woff2"
 ];
 
 // Anything matching these is LIVE DATA. Never cache. Always go to the network.
@@ -44,11 +44,10 @@ function isNeverCache(url) {
 self.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(SHELL_CACHE).then(function (cache) {
-      return cache.addAll(SHELL_FILES).catch(function (err) {
-        // Don't let one missing file (e.g. a page not yet deployed) break
-        // installation of everything else.
-        console.warn("OSB SW: partial shell cache failure", err);
-      });
+      // Cache each file on its own so one missing file never blocks the rest.
+      return Promise.all(SHELL_FILES.map(function (url) {
+        return cache.add(url).catch(function (err) { console.warn("OSB SW: could not cache " + url, err); });
+      }));
     })
   );
   self.skipWaiting();
@@ -91,7 +90,7 @@ self.addEventListener("fetch", function (event) {
         })
         .catch(function () {
           return caches.match(req).then(function (cached) {
-            return cached || caches.match("/offline.html");
+            return cached || caches.match("/offline");
           });
         })
     );

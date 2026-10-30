@@ -1,815 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solace — OSB Emotional Recovery — OSB</title>
+<meta name="description" content="OSB Solace — emotional recovery guide. Six stages. Your pace. No judgment. No rush.">
+<link rel="canonical" href="https://www.onlinesecuritybureau.com/solace">
 <link rel="icon" href="/osb-emblem.png">
 <link rel="manifest" href="/manifest.webmanifest">
-<meta name="theme-color" content="#07070E">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="OSB">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
-<meta name="description" content="OSB Solace — emotional recovery guide. Six stages. Your pace. No judgment. No rush.">
-<title>Solace — OSB Emotional Recovery — OSB</title>
-<style>
-:focus-visible{outline:2px solid #C1121F;outline-offset:2px}@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Figtree:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;}
-:root{--r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;--g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;}
-html{scroll-behavior:smooth;}
-::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--b);}::-webkit-scrollbar-thumb{background:var(--r);}
-body{font-family:'Figtree',sans-serif;background:var(--b);color:var(--w);overflow-x:hidden;padding-top:72px;line-height:1.6;font-size:16px;}
-/* TICKER */
-.ticker{background:var(--r);height:36px;overflow:hidden;display:flex;align-items:center;}
-.tt{display:flex;animation:tickS 55s linear infinite;white-space:nowrap;}
-.ti{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.85);letter-spacing:2px;text-transform:uppercase;padding:0 2.5rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0;}
-.ts{color:rgba(255,255,255,.3);}
-@keyframes tickS{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:999;height:72px;background:rgba(6,6,8,.97);border-bottom:1px solid rgba(193,18,31,.25);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;transition:border-color .3s;}
-.nav-logo img{height:46px;width:auto;display:block;}
-.nav-links{display:flex;align-items:center;gap:2rem;}
-.nav-links a{font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:4px;}
-.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--r);transition:width .25s;}
-.nav-links a:hover,.nav-links a.active{color:var(--w);}
-.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
-.nav-right{display:flex;align-items:center;gap:.875rem;}
-.nbtn-score{background:var(--r);color:var(--w);padding:9px 22px;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:background .2s;}
-.nbtn-score:hover{background:#d01020;}
-.nbtn-join{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);padding:8px 18px;font-size:11px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .2s;}
-.nbtn-join:hover{border-color:var(--r);color:var(--w);}
-.nav-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
-.nav-ham span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.7);transition:all .3s;}
-.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(6,6,8,.98);border-bottom:2px solid var(--r);padding:1.75rem 2rem;z-index:998;}
-.mob-menu a{display:block;padding:.75rem 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);letter-spacing:.3px;}
-.mob-menu a:last-of-type{border-bottom:none;}
-.mob-menu a:hover{color:var(--r);}
-.mob-ctas{display:flex;gap:.875rem;margin-top:1.5rem;flex-wrap:wrap;}
-/* SECTIONS */
-.sd{background:var(--b);padding:6rem 3rem;}
-.sn{background:var(--n);padding:6rem 3rem;}
-.sr{background:var(--r);padding:6rem 3rem;}
-.so{background:var(--off);color:var(--b);padding:6rem 3rem;}
-.si{max-width:1160px;margin:0 auto;}
-/* LABELS */
-.lbl{display:inline-flex;align-items:center;gap:.75rem;margin-bottom:1.375rem;}
-.lbl-line{width:28px;height:1px;background:var(--r);}
-.lbl-text{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--r);font-weight:500;}
-.lbl-lt .lbl-text{color:rgba(255,255,255,.35);}
-.lbl-lt .lbl-line{background:rgba(255,255,255,.2);}
-/* HEADINGS */
-.hxl{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:600;line-height:.95;letter-spacing:-1.5px;}
-.hlg{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.8rem);font-weight:600;line-height:1.05;letter-spacing:-.75px;}
-.hmd{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:600;line-height:1.15;letter-spacing:-.25px;}
-.hw{color:var(--w);} .hb{color:var(--b);}
-.hw em,.hb em{color:var(--r);font-style:italic;font-weight:400;}
-/* BODY TEXT */
-.blg{font-size:1.05rem;line-height:1.85;font-weight:300;}
-.bmd{font-size:.9rem;line-height:1.85;font-weight:300;}
-.tw{color:rgba(255,255,255,.7);}
-.tmt{color:rgba(255,255,255,.38);}
-.tdk{color:var(--g);}
-/* BUTTONS */
-.btn-r{background:var(--r);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
-.btn-r:hover{background:#d01020;transform:translateY(-2px);box-shadow:0 6px 28px rgba(193,18,31,.4);}
-.btn-g{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);padding:13px 30px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;transition:all .25s;}
-.btn-g:hover{border-color:var(--r);color:var(--w);}
-.btn-dk{background:var(--b);color:var(--w);padding:14px 32px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all .25s;}
-.btn-dk:hover{background:#111;}
-.btn-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease;}
-.reveal.visible{opacity:1;transform:none;}
-.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
-/* INNER PAGE HERO */
-.pg-hero{background:var(--n);padding:5.5rem 3rem 4.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:relative;}
-.pg-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--r);}
-.pg-hero .si{}
-/* FOOTER */
-footer{background:var(--n);border-top:2px solid rgba(193,18,31,.25);padding:5rem 3rem 3rem;}
-.fg{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3.5rem;margin-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
-.flogo img{width:190px;height:auto;display:block;margin-bottom:1.375rem;}
-.fdesc{font-size:.8rem;color:rgba(255,255,255,.25);line-height:1.85;}
-.fcol-t{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
-.flinks{display:flex;flex-direction:column;gap:.5rem;}
-.flinks a{font-size:.8rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;}
-.flinks a:hover{color:var(--w);}
-.fbot{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.fquote{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(255,255,255,.16);font-style:italic;max-width:500px;}
-.fcopy{font-size:.7rem;color:rgba(255,255,255,.1);letter-spacing:.5px;}
-/* MOBILE */
-@media(max-width:1000px){
-  nav{padding:0 1.5rem;}
-  .nav-links,.nbtn-join{display:none;}
-  .nav-ham{display:flex;}
-  .sd,.sn,.sr,.so{padding:4.5rem 1.5rem;}
-  .pg-hero{padding:4rem 1.5rem 3.5rem;}
-  .fg{grid-template-columns:1fr 1fr;gap:2rem;}
-  footer{padding:4rem 1.5rem 2.5rem;}
-}
-@media(max-width:600px){
-  body{font-size:15px;}
-  nav{padding:0 1.25rem;}
-  .sd,.sn,.sr,.so{padding:3.5rem 1.25rem;}
-  .pg-hero{padding:3rem 1.25rem 2.5rem;}
-  .fg{grid-template-columns:1fr;}
-  .fbot{flex-direction:column;text-align:center;}
-  .btn-row{flex-direction:column;align-items:flex-start;}
-}
-
-.two-col{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start;}
-.sticky-card{position:sticky;top:88px;}
-.dark-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--r);padding:2.25rem;}
-.dc-tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.25rem;}
-.dc-quote{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:var(--w);line-height:1.3;font-style:italic;margin-bottom:1.25rem;}
-.dc-quote em{color:var(--r);font-style:normal;}
-.dc-attr{font-size:.78rem;color:rgba(255,255,255,.28);border-top:1px solid rgba(255,255,255,.08);padding-top:.875rem;}
-.vals{display:grid;grid-template-columns:1fr 1fr;gap:.875rem;margin-top:2.5rem;}
-.val{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-left:2px solid var(--r);padding:1.25rem;}
-.val-t{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--w);margin-bottom:.4rem;}
-.val-d{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.7;}
-.eco{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:2rem;}
-.eco-c{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.1rem;transition:all .2s;cursor:default;}
-.eco-c:hover{border-color:rgba(193,18,31,.28);background:rgba(193,18,31,.04);}
-.eco-n{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--r);margin-bottom:.35rem;letter-spacing:1px;}
-.eco-name{font-size:.88rem;font-weight:500;color:var(--w);margin-bottom:.2rem;line-height:1.3;}
-.eco-s{font-size:.72rem;color:rgba(255,255,255,.28);}
-.eco-s.live{color:#16a34a;font-weight:600;}
-.stat-boxes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06);margin-top:2.5rem;}
-.st-box{background:var(--b);padding:2rem 1.25rem;text-align:center;}
-.st-n{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--w);display:block;line-height:1;margin-bottom:.35rem;}
-.st-l{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.28);letter-spacing:.5px;text-transform:uppercase;line-height:1.5;}
-.pf{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);margin-bottom:1.125rem;overflow:hidden;transition:all .22s;}
-.pf:hover{border-color:rgba(193,18,31,.28);}
-.pf-hd{display:flex;align-items:stretch;}
-.pf-let{width:68px;flex-shrink:0;background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(255,255,255,.1);border-right:1px solid rgba(255,255,255,.06);transition:all .22s;}
-.pf:hover .pf-let{color:var(--r);background:rgba(193,18,31,.07);}
-.pf-ht{padding:1.125rem 1.5rem;flex:1;}
-.pf-tag{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--r);letter-spacing:2px;text-transform:uppercase;margin-bottom:.25rem;}
-.pf-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--w);}
-.pf-score{padding:0 1.5rem;display:flex;align-items:center;font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:rgba(255,255,255,.18);}
-.pf-bd{padding:1.5rem;border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.12);}
-.pf-desc{font-size:.85rem;color:rgba(255,255,255,.42);line-height:1.8;margin-bottom:.875rem;}
-.pf-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
-.pf-tag2{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.32);padding:3px 8px;}
-.trig-blk{background:rgba(193,18,31,.07);border:1px solid rgba(193,18,31,.18);border-left:3px solid var(--r);padding:1.125rem;margin-top:.875rem;}
-.trig-t{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--r);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem;}
-.trig-d{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.72;}
-.sc2-sticky{position:sticky;top:88px;}
-.sc2-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--r);padding:2rem;}
-.sc2-tag{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:1.5rem;padding-bottom:1.125rem;border-bottom:1px solid rgba(255,255,255,.07);}
-.sc2-big{font-family:'Bebas Neue',sans-serif;font-size:5.5rem;line-height:1;color:var(--w);}
-.sc2-bar{height:2px;background:rgba(255,255,255,.08);margin:.875rem 0;}
-.sc2-fill{height:2px;background:var(--r);width:0;transition:width 1.8s ease;}
-.sc2-tier{display:inline-block;background:rgba(193,18,31,.1);border-left:2px solid var(--r);padding:3px 12px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--r);margin-bottom:1.5rem;letter-spacing:.5px;text-transform:uppercase;}
-.sc2-rows{display:flex;flex-direction:column;gap:.35rem;}
-.sc2-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem .875rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);}
-.sc2-rl{font-size:.76rem;color:rgba(255,255,255,.36);}
-.sc2-rv{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--w);font-weight:500;}
-.sc2-rv.red{color:var(--r);}
-.score-tbl{width:100%;border-collapse:collapse;margin-top:2.5rem;}
-.score-tbl th{background:rgba(255,255,255,.04);color:rgba(255,255,255,.45);font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;padding:9px 13px;text-align:left;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.08);}
-.score-tbl td{padding:11px 13px;font-size:.875rem;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.45);}
-.score-tbl td:first-child{font-family:'IBM Plex Mono',monospace;color:var(--w);font-weight:500;}
-.th-l{color:#1B7A1B;font-weight:600;}.th-h{color:#B8720A;font-weight:600;}.th-c{color:var(--r);font-weight:600;}
-.ifn-flt{display:flex;gap:.625rem;margin-bottom:2.5rem;flex-wrap:wrap;}
-.ifl{padding:7px 15px;border:1px solid rgba(255,255,255,.1);font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.38);cursor:pointer;transition:all .2s;background:none;letter-spacing:1.5px;text-transform:uppercase;}
-.ifl.active,.ifl:hover{border-color:var(--r);color:var(--r);background:rgba(193,18,31,.06);}
-.ifn-grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.125rem;}
-.ic3{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);transition:all .25s;overflow:hidden;}
-.ic3:hover{border-color:rgba(193,18,31,.3);background:rgba(193,18,31,.04);transform:translateY(-3px);}
-.ic3-hd{background:rgba(255,255,255,.03);padding:.875rem 1.25rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);}
-.ic3-id{font-family:'IBM Plex Mono',monospace;font-size:.9rem;color:var(--r);letter-spacing:1px;font-weight:500;}
-.ic3-cls{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.22);letter-spacing:1.5px;text-transform:uppercase;}
-.ic3-bd{padding:1.5rem 1.25rem;}
-.ic3-t{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--w);margin-bottom:.625rem;line-height:1.25;}
-.ic3-m{display:flex;gap:.625rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.22);flex-wrap:wrap;margin-bottom:.875rem;}
-.ic3-e{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.78;}
-.ic3-tags{margin-top:.875rem;display:flex;gap:.35rem;flex-wrap:wrap;}
-.ic3-tag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.3);padding:2px 7px;}
-.ic3-ft{padding:.875rem 1.25rem;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;}
-.ic3-score{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:rgba(255,255,255,.28);letter-spacing:.5px;}
-.ic3-tier{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.5px;}
-.t-h{color:#B8720A;}.t-c{color:var(--r);}
-.nn{display:inline-block;background:rgba(193,18,31,.07);border-left:2px solid var(--r);padding:.5rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--r);letter-spacing:.5px;margin-bottom:2.5rem;}
-.haven-g{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start;}
-.stages-list{display:flex;flex-direction:column;}
-.stage{display:flex;align-items:stretch;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);margin-bottom:.5rem;transition:all .22s;cursor:default;overflow:hidden;border-left:2px solid transparent;}
-.stage:hover{background:rgba(193,18,31,.055);border-left-color:var(--r);transform:translateX(5px);}
-.stage-n{width:68px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:rgba(193,18,31,.25);background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.06);transition:color .22s;}
-.stage:hover .stage-n{color:var(--r);}
-.stage-content{padding:1.1rem 1.5rem;}
-.stage-t{font-size:.9rem;font-weight:600;color:rgba(255,255,255,.72);margin-bottom:.35rem;}
-.stage-d{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.72;}
-.haven-side{position:sticky;top:88px;}
-.truths-card{background:rgba(193,18,31,.06);border:1px solid rgba(193,18,31,.18);border-top:2px solid var(--r);padding:2rem;margin-bottom:1rem;}
-.truth-t{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.25rem;}
-.truth-item{padding:.875rem 1rem;background:rgba(255,255,255,.03);border-left:2px solid rgba(193,18,31,.35);margin-bottom:.625rem;}
-.truth-item:last-child{margin-bottom:0;}
-.truth-lbl{font-size:.88rem;font-weight:600;color:var(--w);margin-bottom:.3rem;}
-.truth-txt{font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.65;}
-.steps-g{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin-top:2rem;}
-.step-gr{background:var(--n);padding:2rem;}
-.sg-t{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:1.125rem;}
-.sg-item{display:flex;align-items:flex-start;gap:.75rem;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.06);}
-.sg-item:last-child{border-bottom:none;}
-.sg-box{width:16px;height:16px;border:1px solid rgba(255,255,255,.15);flex-shrink:0;margin-top:2px;}
-.sg-t2{font-size:.875rem;color:rgba(255,255,255,.48);line-height:1.55;}
-.feed-g2{display:grid;grid-template-columns:2fr 1fr;gap:5rem;}
-.feed-top2{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,.08);}
-.feed-ttl{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:.75rem;}
-.ldot{display:inline-block;width:7px;height:7px;background:#16a34a;border-radius:50%;animation:ldot 2s ease infinite;flex-shrink:0;}
-@keyframes ldot{0%,100%{opacity:1}50%{opacity:.3}}
-.flt2{display:flex;gap:.4rem;flex-wrap:wrap;}
-.ff2{padding:4px 10px;border:1px solid rgba(255,255,255,.1);font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.32);cursor:pointer;transition:all .15s;background:none;letter-spacing:1.5px;text-transform:uppercase;}
-.ff2.active,.ff2:hover{border-color:var(--r);color:var(--r);background:rgba(193,18,31,.06);}
-.feed-list2{display:flex;flex-direction:column;}
-.fi2{display:grid;grid-template-columns:58px 1fr auto;gap:1.125rem;align-items:start;padding:1.25rem 0;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;}
-.fi2:last-child{border-bottom:none;}
-.fi2:hover .fi2-t{color:var(--r);}
-.fi2-num{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.2);padding-top:2px;}
-.fi2-tag{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--r);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.35rem;}
-.fi2-t{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--w);line-height:1.3;transition:color .18s;}
-.fi2-e{font-size:.8rem;color:rgba(255,255,255,.3);line-height:1.65;margin-top:.3rem;}
-.fi2-stats{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;flex-shrink:0;}
-.fstat2{font-size:.7rem;color:rgba(255,255,255,.2);}
-.comm-side2{display:flex;flex-direction:column;gap:1.125rem;}
-.sc3{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--r);padding:2rem;}
-.sc3-t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--w);margin-bottom:.45rem;}
-.sc3-s{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.7;margin-bottom:1.375rem;}
-.fi3{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--w);padding:11px 14px;font-family:'Figtree',sans-serif;font-size:.875rem;outline:none;transition:border-color .2s;margin-bottom:.75rem;}
-.fi3:focus{border-color:var(--r);}
-.fi3::placeholder{color:rgba(255,255,255,.2);}
-.fb3{width:100%;background:var(--r);color:var(--w);border:none;padding:11px;font-family:'Figtree',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
-.fb3:hover{background:#d01020;}
-.fn3{font-size:.7rem;color:rgba(255,255,255,.2);margin-top:.625rem;line-height:1.5;}
-.rec-l{display:flex;flex-direction:column;gap:.45rem;}
-.rec-i{padding:.875rem 1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-left:2px solid rgba(193,18,31,.45);}
-.rec-tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--r);letter-spacing:1px;text-transform:uppercase;margin-bottom:.28rem;}
-.rec-title{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.4;}
-.nl-bar{background:rgba(193,18,31,.07);border-bottom:1px solid rgba(193,18,31,.18);padding:1.625rem 3rem;}
-.nl-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
-.nl-text strong{color:var(--w);font-size:.95rem;display:block;margin-bottom:.2rem;}
-.nl-text span{font-size:.8rem;color:rgba(255,255,255,.35);}
-.nl-form{display:flex;gap:.625rem;}
-.nl-inp{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--w);padding:9px 15px;font-family:'Figtree',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;min-width:220px;}
-.nl-inp::placeholder{color:rgba(255,255,255,.22);}
-.nl-inp:focus{border-color:var(--r);}
-.nl-btn{background:var(--r);color:var(--w);border:none;padding:9px 20px;font-family:'Figtree',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
-.nl-btn:hover{background:#d01020;}
-.cfw{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-top:2px solid var(--r);padding:2.25rem;}
-.cfl{display:block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:500;letter-spacing:1.5px;color:rgba(255,255,255,.35);margin-bottom:.5rem;text-transform:uppercase;}
-.cfl span{color:rgba(255,255,255,.22);text-transform:none;font-size:.75rem;letter-spacing:0;font-family:'Figtree',sans-serif;}
-.cfi,.cfs,.cft{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--w);padding:11px 15px;font-family:'Figtree',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem;line-height:1.5;}
-.cfi::placeholder,.cft::placeholder{color:rgba(255,255,255,.2);}
-.cfi:focus,.cfs:focus,.cft:focus{border-color:var(--r);}
-.cft{resize:vertical;min-height:115px;}
-.cfb{width:100%;background:var(--r);color:var(--w);border:none;padding:13px;font-family:'Figtree',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
-.cfb:hover{background:#d01020;}
-.ci-stack{display:flex;flex-direction:column;gap:.875rem;}
-.ci-blk{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);padding:1.5rem;}
-.ci-tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--r);margin-bottom:.45rem;}
-.ci-val{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--w);margin-bottom:.28rem;}
-.ci-sub{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.7;}
-.anon-blk{background:rgba(193,18,31,.06);border:1px solid rgba(193,18,31,.18);padding:1.5rem;}
-.anon-t{font-size:.9rem;font-weight:600;color:var(--w);margin-bottom:.35rem;}
-.anon-s{font-size:.8rem;color:rgba(255,255,255,.32);line-height:1.7;}
-.form-ok{display:none;background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.28);padding:1.375rem;text-align:center;margin-top:.875rem;}
-.form-ok p{font-size:.875rem;color:#16a34a;line-height:1.6;}
-.score-hdr{background:var(--r);padding:3rem 3rem;text-align:center;position:relative;overflow:hidden;}
-.score-hdr::before{content:'SCORE';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:18rem;color:rgba(0,0,0,.12);line-height:1;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;letter-spacing:-5px;}
-.score-hdr img{position:relative;z-index:1;height:56px;width:auto;margin:0 auto 1.375rem;display:block;}
-.score-hdr h1{position:relative;z-index:1;font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:600;color:var(--w);font-style:italic;margin-bottom:.45rem;}
-.score-hdr p{position:relative;z-index:1;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:rgba(255,255,255,.62);letter-spacing:2px;text-transform:uppercase;}
-@media(max-width:1000px){
-  .two-col{grid-template-columns:1fr;}.sticky-card{position:static;}
-  .vals{grid-template-columns:1fr;}.eco{grid-template-columns:1fr 1fr;}
-  .stat-boxes{grid-template-columns:1fr 1fr;}
-  .ifn-grid2{grid-template-columns:1fr;}
-  .haven-g{grid-template-columns:1fr;}.haven-side{position:static;}
-  .steps-g{grid-template-columns:1fr;}
-  .feed-g2{grid-template-columns:1fr;gap:3rem;}
-  .nl-form{width:100%;}.nl-inp{flex:1;}
-}
-@media(max-width:600px){.eco{grid-template-columns:1fr;}.stat-boxes{grid-template-columns:1fr 1fr;}.steps-g{grid-template-columns:1fr;}}
-
-.nav-intel-wrap{position:relative;display:inline-block;}
-.nav-intel-wrap:hover .mega-drop{display:block !important;}
-
-
-/* ── THEME TOKENS (permanent dark) ── */
-:root{
-  --r:#C1121F;--b:#0B0B0D;--w:#FFFFFF;--off:#F8F6F2;
-  --g:#5A5A5A;--m:#9A9A9A;--br:#E4E1DB;--rl:#FEF0F0;--n:#060608;
-  --bg:#060608;--surface:rgba(255,255,255,.025);
-  --text:#FFFFFF;--text2:rgba(255,255,255,.7);--text3:rgba(255,255,255,.38);
-  --border:rgba(255,255,255,.08);--nav-bg:rgba(6,6,8,.97);
-  --card-bg:rgba(255,255,255,.025);--card-border:rgba(255,255,255,.07);
-  --mega-bg:#060608;--inp-bg:rgba(255,255,255,.05);--inp-border:rgba(255,255,255,.1);
-}
-
-
-/* Apply theme tokens */
-body{background:var(--bg);color:var(--text);}
-nav{background:var(--nav-bg);}
-.mega-drop{background:var(--mega-bg) !important;}
-
-
-
-
-/* Hero */
-.hero,.h-noise,.h-glow{background:var(--section-dark);}
-.h-h1{color:var(--text);}
-.h-sub{color:var(--text3);}
-
-
-
-
-/* Sections */
-.sd{background:var(--section-black);}
-.sn{background:var(--section-dark);}
-
-
-
-/* Text */
-.hw{color:var(--text);}
-.tw{color:var(--text2);}
-.tmt{color:var(--text3);}
-
-
-/* Cards */
-.pbox,.icard,.signup-card,.sc-card,.dark-card,.ic3,.fi,.stage,.hs,.haven-stages .hs,.trig-strip{
-  background:var(--card-bg);
-  border-color:var(--card-border);
-}
-
-
-
-
-
-
-/* Nav links */
-
-
-
-
-
-/* Intelligence hub */
-
-
-/* Feed */
-
-
-
-
-
-
-/* Inputs */
-.finp,.fi3,.nl-inp,.cfi,.cft,.cfs{
-  background:var(--inp-bg);
-  border-color:var(--inp-border);
-  color:var(--text);
-}
-
-
-/* Tiers */
-
-
-
-
-
-
-
-/* Score card */
-
-
-
-
-
-
-
-
-
-
-/* Haven/Solace stages */
-
-
-
-
-
-/* Community */
-
-
-
-
-
-
-
-/* Map */
-
-
-
-
-/* IFN cards */
-
-
-
-
-
-
-
-
-
-
-/* IC3 intel cards */
-
-
-
-
-
-/* Ticker secondary */
-
-
-/* Footer always dark */
-footer{background:var(--footer-bg) !important;}
-
-
-/* Page hero */
-
-
-
-/* Off section (timeline) */
-
-
-/* Pillar boxes day */
-
-
-
-/* Trig strip */
-
-
-
-
-/* Mission strip stays red */
-.mission-strip{background:var(--r);}
-
-/* Hero intel preview */
-
-
-
-
-
-
-
-</style>
+<meta name="theme-color" content="#0B1015">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSB · Online Security Bureau">
+<meta property="og:title" content="Solace — OSB Emotional Recovery — OSB">
+<meta property="og:description" content="OSB Solace — emotional recovery guide. Six stages. Your pace. No judgment. No rush.">
+<meta property="og:url" content="https://www.onlinesecuritybureau.com/solace">
+<meta property="og:image" content="https://www.onlinesecuritybureau.com/osb-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/hubot-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/os/os.css?v=9cb5335297">
 </head>
-<body>
-<div class="ticker"><div class="tt"><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">Global Scam Losses Est. $442B–$1.03T Annually · GASA 2024–25<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection & Response System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates Dating &amp; Social Platforms on Social Engineering Risk<span class="ts">◆</span></div><div class="ti">State of Social Engineering Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Est. 2021 · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div><div class="ti">IFN-005 · The Facade Bank Page · New S-Pillar Technique Documented<span class="ts">◆</span></div><div class="ti">Global Scam Losses Est. $442B–$1.03T Annually · GASA 2024–25<span class="ts">◆</span></div><div class="ti">RSEI Model™ v2.0 · World's First Behavioural Threat Detection & Response System<span class="ts">◆</span></div><div class="ti">Platform Safety Index · OSB Rates Dating &amp; Social Platforms on Social Engineering Risk<span class="ts">◆</span></div><div class="ti">State of Social Engineering Fraud 2026 · Annual Global Report · Free to Cite<span class="ts">◆</span></div><div class="ti">E Pillar Independent Trigger · Emotional harm is real harm<span class="ts">◆</span></div><div class="ti">OSB · Est. 2021 · Behavioural Threat Intelligence · Est. 2021<span class="ts">◆</span></div></div></div></div>
-<nav id="nav">
-  <a href="index.html" class="nav-logo"><img src="/osb-emblem.png" alt="OSB — Online Security Bureau" style="height:46px;width:auto"></a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
-      <a href="intelligence.html" style="display:inline-flex;align-items:center;gap:4px;height:72px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;padding:0 1.125rem;">Intelligence<span style="font-size:7px;opacity:.4;">▾</span></a>
-      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
-        <a href="rsei-model.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Framework</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Model™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The world's only behavioural scoring framework</div></a>
-        <a href="intelligence.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Case Library</div><div style="font-size:.88rem;font-weight:600;color:#fff;">IFN Intelligence Library</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Field intelligence — named, documented, published</div></a>
-        <a href="newsroom.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Live Newsroom</div><div style="font-size:.88rem;font-weight:600;color:#fff;">OSB Intelligence Wire</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Latest fraud news, read through the RSEI lens</div></a>
-        <a href="platform-index.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Platform Ratings</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Platform Safety Index</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB rates every major dating platform</div></a>
-        <a href="report.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Annual Report</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Global Fraud Report 2026</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The definitive annual intelligence report — free to cite</div></a>
-      </div>
-    </div>
-    <div class="nav-intel-wrap" style="position:relative;display:inline-flex;align-items:center;height:72px;">
-      <a href="certification.html" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;padding:0 1.125rem;height:72px;">For Platforms<span style="font-size:7px;opacity:.4;">▾</span></a>
-      <div class="mega-drop" style="display:none;position:absolute;top:72px;left:0;background:#060608;border:1px solid rgba(193,18,31,.2);border-top:2px solid #C1121F;width:420px;z-index:200;">
-        <a href="certification.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Certification</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Certified™ Programme</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Get your platform assessed and certified</div></a>
-        <a href="registry.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Registry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Certified Platform Registry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Platforms that have earned RSEI Certification</div></a>
-        <a href="standard.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Standard</div><div style="font-size:.88rem;font-weight:600;color:#fff;">RSEI Standard™ v2.0</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">The behavioural detection framework for platforms</div></a>
-        <a href="press.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Press</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Media Kit & Press Resources</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">Assets and contacts for journalists and media</div></a>
-        <a href="open-letter.html" style="display:block;padding:1rem 1.25rem;text-decoration:none;" onmouseover="this.style.background='rgba(193,18,31,.06)'" onmouseout="this.style.background='transparent'"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#C1121F;margin-bottom:.3rem;">Industry</div><div style="font-size:.88rem;font-weight:600;color:#fff;">Letter to the Industry</div><div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.2rem;">OSB's open call to dating platforms globally</div></a>
-      </div>
-    </div>
-    <a href="score.html">CHECK</a>
-    <a href="solace.html" class="active">Solace</a>
-    <a href="community.html">Community</a>
-    <a href="contact.html">Contact</a>
-  </div>
-  <div class="nav-right">
-    <a href="community.html" class="nbtn-join">Community</a>
-    <a href="score.html" class="nbtn-score">Check your situation</a>
-  </div>
-  <button class="nav-ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
-</nav>
-<div class="mob-menu" id="mob">
-  <a href="index.html" onclick="closeMob()">Home</a>
-  <a href="about.html" onclick="closeMob()">About</a>
-  <a href="rsei-model.html" onclick="closeMob()">RSEI Model™</a>
-  <a href="intelligence.html" onclick="closeMob()">Intelligence Library</a>
-  <a href="newsroom.html" onclick="closeMob()">Intelligence Wire</a>
-  <a href="certification.html" onclick="closeMob()">RSEI Certified™ — For Platforms</a>
-  <a href="platform-index.html" onclick="closeMob()">Platform Safety Index</a>
-  <a href="report.html" onclick="closeMob()">Global Fraud Report 2026</a>
-  <a href="score.html" onclick="closeMob()">CHECK</a>
-  <a href="solace.html" onclick="closeMob()">Solace</a>
-  <a href="community.html" onclick="closeMob()">Community</a>
-  <a href="contact.html" onclick="closeMob()">Contact</a>
-  <div class="mob-ctas">
-    <a href="score.html" class="btn-r" style="font-size:10px;padding:11px 22px;">Check your situation</a>
-    <a href="community.html" class="btn-g" style="font-size:10px;padding:10px 20px;">Community</a>
-  </div>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="os-head">
+<a class="brand" href="/" aria-label="OSB, Online Security Bureau, home"><img src="/osb-emblem.png" alt="" width="26" height="33"><b>OSB</b></a>
+<button class="search-btn" id="search-btn" type="button" aria-label="Search OSB"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg>Search cases, publications, the Wire</span><span class="kbd" aria-hidden="true">⌘K</span></button>
+<span class="path-chip" aria-hidden="true">onlinesecuritybureau.com<b>/solace</b></span>
+<a class="ticker" href="/romance-scam-prevention-act"><span class="live">WIRE</span><span>Pinned · The Romance Scam Prevention Act: what dating platforms must do by October 2027</span></a>
+<a class="btn btn-red head-cta" href="/">Check my situation</a>
+</header>
+<div class="os">
+<nav class="os-rail" aria-label="OSB system"><ul class="rail-list"><li><a href="/" title="Check a situation"><span class="rail-n">01</span><span class="rail-t"><span class="rail-label">Check a situation</span><span class="rail-desc">The RSEI Engine, guided</span></span></a></li><li><a href="/how-scams-build" title="How a scam builds"><span class="rail-n">02</span><span class="rail-t"><span class="rail-label">How a scam builds</span><span class="rail-desc">Sixty days, seven moves</span></span></a></li><li><a href="/board" title="Investigation board"><span class="rail-n">03</span><span class="rail-t"><span class="rail-label">Investigation board</span><span class="rail-desc">How the cases connect</span></span></a></li><li><a href="/wire" title="Intelligence Wire"><span class="rail-n">04</span><span class="rail-t"><span class="rail-label">Intelligence Wire</span><span class="rail-desc">Live, tagged by pillar</span></span></a></li><li><a href="/cases" title="Intelligence library"><span class="rail-n">05</span><span class="rail-t"><span class="rail-label">Intelligence library</span><span class="rail-desc">Cases, field notes, dispatches</span></span></a></li><li><a href="/platforms" title="For platforms"><span class="rail-n">06</span><span class="rail-t"><span class="rail-label">For platforms</span><span class="rail-desc">Certification, registry, index, the Act</span></span></a></li><li><a href="/publications" title="Publications"><span class="rail-n">07</span><span class="rail-t"><span class="rail-label">Publications</span><span class="rail-desc">Standard, Model, report, letters</span></span></a></li><li><a href="/solace" aria-current="page" title="Solace"><span class="rail-n">08</span><span class="rail-t"><span class="rail-label">Solace</span><span class="rail-desc">Recovery, at your pace</span></span></a></li></ul><div class="rail-foot"><span>No account needed. Nothing is stored unless you choose to send it.</span><span>Certified DPO · <span class="mono">29320da76866f8e3</span></span></div></nav>
+<main class="os-main" id="main">
+<div class="page"><article class="doc"><p class="kicker">OSB Solace — Emotional Recovery</p>
+<h1>You were not foolish.<br><em>You were targeted.</em></h1>
+<p>Romance scammers do not exploit weakness. They exploit the best of you. OSB Solace walks you through six stages of emotional recovery. At your pace. No judgment. No rush. Designed for everyone — especially seniors.</p>
+<p class="kicker">A Note From OSB</p>
+<h2 id="a-note-to-romance-scam-victims">A Note to Romance Scam Victims</h2>
+<p>Anyone can fall for a romance scam under the right circumstances. You are not alone.</p>
+<p>It&#x27;s okay to grieve the emotional and financial investment you made. Painful experiences—even those we never chose—can still shape us and teach us.</p>
+<p>Don&#x27;t let this experience define your self-worth. You are still intelligent, brave, and strong.</p>
+<p>Falling victim to a romance scam is not a reflection of lack of wisdom or intelligence as judgmental people think of it. It is the result of a cyber predator who carefully studied how to exploit trust, hope, kindness, loneliness, and love.</p>
+<p>Forgive yourself. Holding on to self-blame only drains the emotional strength you need to heal and move forward.</p>
+<p>Suicide is never the answer. Your life matters — to the people who love you and to the future that still lies ahead. As the ancient proverb says, &quot;A living dog is better than a dead lion.&quot;</p>
+<h3 id="to-those-who-have-never-experienced-this">To Those Who Have Never Experienced This</h3>
+<p>Never judge what you have not experienced.</p>
+<p>Judgment and harsh criticism only deepen the pain and isolation that victims already carry.</p>
+<p>Romance scams are crimes of psychological manipulation. Their success is driven by deception, grooming, and emotional exploitation — not by a simple measure of intelligence. Anyone can become vulnerable under the right circumstances.</p>
+<p><strong>P.S.</strong> If you are having thoughts of suicide or self-harm, please reach out to a trusted friend or family member, a mental health professional, or a crisis service in your country. You do not have to carry this burden alone. Help is available, and recovery is possible.</p>
+<p><img src="/osb-emblem.png" alt="" loading="lazy"></p>
+<p>John Dee</p>
+<p class="kicker">Founder, OSB</p>
+<p>You did not fall for a trick. You fell for a person — or what appeared to be one. Romance scammers exploit the best of you — your capacity to love, to trust, to hope, to give. They study you. They mirror you. They build something that feels real because they invested significant time and skill in making it feel that way.</p>
+<p>The feelings you had for this person were real. The love was real. The hope was real. What was not real was the person on the other side of it. OSB Solace is here to walk you through what comes next — at your pace, with no judgment and no rush.</p>
+<p class="kicker">Day by Day</p>
+<h2 id="the-30-day-companion">The 30-Day Companion</h2>
+<p>A gentle, day-by-day walk back to yourself — one short reading a day, for the hardest weeks. You don&#x27;t have to take it all at once. Just today.</p>
+<p><a class="link" href="/solace-companion">Begin the 30-Day Companion</a></p>
+<p class="kicker">The Six Stages</p>
+<h2 id="your-recovery-your-pace">Your recovery. <em>Your pace.</em></h2>
+<p class="kicker">01 · Confusion and Disbelief · You know something is wrong — but the feelings were real. Both can be true. The feelings were real. The person creating them was not.</p>
+<p class="kicker">02 · Shame and Self-Blame · The most damaging stage — and the one the scammer depends on. You were not careless. You were targeted by a professional operation built to defeat careful, intelligent people.</p>
+<p class="kicker">03 · Anger · Anger is healthy. It means you are beginning to see clearly. Let it move through you — just do not let it become the destination. · 04 · Grief · You are grieving a person who never existed. That grief is real and it deserves the respect you would give any genuine loss.</p>
+<p class="kicker">05 · Acceptance · Acceptance does not mean it was okay. It means you have stopped fighting reality and started working with it. · 06 · Reclamation · This is not going back to who you were before. This is becoming someone who carries what they survived as strength — not shame.</p>
+<p>Truths to Hold</p>
+<p class="kicker">Your intelligence is intact.</p>
+<p>Scammers target competent, generous, emotionally available people. Intelligence is not a shield against professional emotional exploitation.</p>
+<p class="kicker">You are not the first.</p>
+<p>The script used on you was used before you. You are one of millions targeted by a global social engineering operation that costs victims hundreds of billions every year.</p>
+<p class="kicker">Your feelings were real.</p>
+<p>Fabricated circumstances do not invalidate authentic emotion. You loved what you believed was real. That capacity is not a flaw.</p>
+<p class="kicker">Silence protects no one.</p>
+<p>Your experience, shared when you are ready, becomes protection for the next person. It has value beyond the pain.</p>
+<p>&quot;OSB is here. No judgment. No rush. Whenever you are ready.&quot;</p>
+<p>— OSB</p>
+<p><a class="link" href="/contact">Reach Out to OSB</a></p>
+<p class="kicker">Practical Steps</p>
+<h2 id="what-to-do-now">What to do now.</h2>
+<p>If you are still in contact</p>
+<p>Stop all financial transactions immediately</p>
+<p>Do not confront them directly — this can escalate</p>
+<p>Screenshot all conversations before blocking</p>
+<p>Contact your bank if financial information was shared</p>
+<p>Reporting</p>
+<p>Report the profile to the platform where contact was made</p>
+<p>FBI IC3 (USA) · Action Fraud (UK) · EFCC (Nigeria)</p>
+<p>Share your case with OSB — your experience protects others</p>
+<p>Your emotional path</p>
+<p>Tell one trusted person — shame grows in silence</p>
+<p>Consider speaking with a therapist experienced in trauma</p>
+<p>Return to this guide whenever the doubt or shame returns</p>
+<p>When you are ready</p>
+<p>Your story may help someone else find their way out</p>
+<p>OSB welcomes survivor accounts — they become field intelligence</p>
+<p>Share at your own pace, on your own terms</p>
+<p><a href="/contact">Reach out to OSB</a> · <a href="/">Check your situation</a></p>
+<p class="kicker">OSB Solace · Recovery Journey</p>
+<h2 id="the-road-back">The Road Back</h2>
+<p>Not a cure. Not a shortcut. A structured journey — at your pace. Four phases. Each with something to read, something to reflect on, and one practical step forward.</p>
+<p class="kicker">Phase One</p>
+<h3 id="accept">Accept</h3>
+<p>The hardest part is not finding out. It is sitting with what you found out. The mind wants to argue its way back to before. It replays conversations looking for the moment it was still real. There was no such moment. What was real was your capacity to love. That part is still intact.</p>
+<p>You are not stupid. You are not weak. You were targeted. There is a difference — and it matters.</p>
+<p class="kicker">REFLECTION</p>
+<p>Write one sentence that begins: &quot;What I know to be true now is...&quot;</p>
+<p class="kicker">ACTION</p>
+<p>Tell one person you trust what happened. Not for their reaction. For your own voice to hear itself say it out loud. Spoken truth is the beginning of release.</p>
+<p class="kicker">Phase Two</p>
+<h3 id="separate">Separate</h3>
+<p>Every photo you go back to is a door you are walking through. Every saved message is a room you are choosing to sit in. The operator is not in those rooms. The feeling is — and the feeling is lying to you about what it is.</p>
+<p>Erase the digital presence. Not because you are deleting what happened. Because you are deciding what you are willing to keep feeding.</p>
+<p class="kicker">REFLECTION</p>
+<p>What are you holding onto that is keeping you in contact with the pain? Name it specifically.</p>
+<p class="kicker">ACTION</p>
+<p>Choose one thing — one folder, one conversation thread, one saved photo — and delete it today. Not all of it. One thing. Forward motion does not require a sprint.</p>
+<p class="kicker">Phase Three</p>
+<h3 id="reclaim">Reclaim</h3>
+<p>Here is what the operator took: time, money, trust, peace. Here is what they could not take: your capacity for connection. Your willingness to love. Your openness. Those things are not liabilities. They are the best of you.</p>
+<p>The void you feel is not emptiness. It is proof of what you brought. That fullness belongs to you. It was never his.</p>
+<p class="kicker">REFLECTION</p>
+<p>Finish this sentence honestly: &quot;Before this, I believed I was someone who...&quot;</p>
+<p class="kicker">ACTION</p>
+<p>Do one thing this week that you used to do before this happened. Not because it will feel the same. Because it reminds you who you were before someone tried to rewrite you.</p>
+<p class="kicker">Phase Four</p>
+<h3 id="forward">Forward</h3>
+<p>Healing is not a destination. There will be days when something triggers the memory and it feels like starting over. It is not. It is a hard day inside a longer journey that is already moving in the right direction.</p>
+<p>You do not have to forgive the operator. You have to forgive yourself — for trusting, for hoping, for being human in a moment when someone chose to exploit that. That forgiveness is yours to give, on your timeline, nobody else&#x27;s.</p>
+<p class="kicker">REFLECTION</p>
+<p>What would you say to someone else going through exactly what you are going through right now?</p>
+<p class="kicker">ACTION</p>
+<p>Write that down. Read it back to yourself. You already know what you need to hear.</p>
+<p>If the weight becomes too heavy to carry alone — please reach out to a professional. Real help, from real people trained to sit in this with you.</p>
+<p class="kicker">Crisis support: <strong>988 Suicide &amp; Crisis Lifeline</strong> (call or text 988, US) · <strong>Crisis Text Line</strong> (text HOME to 741741) · <a href="/contact">Contact OSB directly</a></p></article><div class="btn-row"><a class="btn btn-green" href="/solace-companion">Start the 30-day companion</a><a class="btn btn-line" href="/community">Community</a><a class="btn btn-line" href="/">Check your situation</a></div></div>
+</main>
+<aside class="os-panel" aria-label="Signal and help"><div class="panel-in"><div class="card" style="display:flex;flex-direction:column;gap:8px"><span class="eyebrow c-green">30-day companion</span><span class="small" style="color:var(--soft)">One short page a day, at your own pace.</span><a class="btn btn-green" href="/solace-companion">Start day 1</a><a class="link" href="/community">Join the community →</a></div><div><span class="eyebrow">On this page</span><ul class="toc" style="margin-top:8px"><li><a href="#a-note-to-romance-scam-victims">A Note to Romance Scam Victims</a></li><li><a href="#the-30-day-companion">The 30-Day Companion</a></li><li><a href="#your-recovery-your-pace">Your recovery. Your pace.</a></li><li><a href="#what-to-do-now">What to do now.</a></li><li><a href="#the-road-back">The Road Back</a></li></ul></div><div class="help-box"><span class="eyebrow">Being pressured right now?</span><span>Stop all transfers. Screenshot everything. Call your bank, then OSB.</span><a class="link" href="/contact">Talk to OSB →</a></div></div></aside>
 </div>
-</div>
-<div class="pg-hero">
-  <div class="si">
-    <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">OSB Solace — Emotional Recovery</div></div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.8rem);font-weight:600;line-height:.95;color:var(--w);letter-spacing:-1px;margin-bottom:1.25rem;">You were not foolish.<br><em>You were targeted.</em></h1>
-    <p style="font-size:1rem;color:rgba(255,255,255,.42);max-width:540px;line-height:1.85;font-weight:300;">Romance scammers do not exploit weakness. They exploit the best of you. OSB Solace walks you through six stages of emotional recovery. At your pace. No judgment. No rush. Designed for everyone — especially seniors.</p>
-  </div>
-</div>
-<div class="sd">
-  <div class="si">
-
-    <!-- Welcome letter — first thing a victim reads -->
-    <div class="reveal" style="margin-bottom:4rem;background:var(--n);border:1px solid rgba(193,18,31,.22);border-left:3px solid var(--r);padding:2.5rem clamp(1.5rem,4vw,2.75rem);max-width:760px;">
-      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">A Note From OSB</div></div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:600;color:var(--w);margin:.6rem 0 1.5rem;line-height:1.15;">A Note to Romance Scam Victims</h2>
-
-      <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:1.2rem;">Anyone can fall for a romance scam under the right circumstances. You are not alone.</p>
-      <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:1.2rem;">It's okay to grieve the emotional and financial investment you made. Painful experiences—even those we never chose—can still shape us and teach us.</p>
-      <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:1.2rem;">Don't let this experience define your self-worth. You are still intelligent, brave, and strong.</p>
-      <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:1.2rem;">Falling victim to a romance scam is not a reflection of lack of wisdom or intelligence as judgmental people think of it. It is the result of a cyber predator who carefully studied how to exploit trust, hope, kindness, loneliness, and love.</p>
-      <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:1.2rem;">Forgive yourself. Holding on to self-blame only drains the emotional strength you need to heal and move forward.</p>
-      <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:2rem;">Suicide is never the answer. Your life matters — to the people who love you and to the future that still lies ahead. As the ancient proverb says, "A living dog is better than a dead lion."</p>
-
-      <div style="border-top:1px solid rgba(255,255,255,.09);padding-top:1.75rem;margin-bottom:1.75rem;">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--w);margin-bottom:1rem;">To Those Who Have Never Experienced This</h3>
-        <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:1.2rem;">Never judge what you have not experienced.</p>
-        <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin-bottom:1.2rem;">Judgment and harsh criticism only deepen the pain and isolation that victims already carry.</p>
-        <p style="font-size:1rem;color:rgba(255,255,255,.62);line-height:1.9;font-weight:300;margin:0;">Romance scams are crimes of psychological manipulation. Their success is driven by deception, grooming, and emotional exploitation — not by a simple measure of intelligence. Anyone can become vulnerable under the right circumstances.</p>
-      </div>
-
-      <div style="background:rgba(193,18,31,.06);border:1px solid rgba(193,18,31,.2);padding:1.25rem 1.5rem;margin-bottom:1.75rem;">
-        <p style="font-size:.9rem;color:rgba(255,255,255,.58);line-height:1.85;font-weight:300;margin:0;"><strong style="color:rgba(255,255,255,.8);font-weight:500;">P.S.</strong> If you are having thoughts of suicide or self-harm, please reach out to a trusted friend or family member, a mental health professional, or a crisis service in your country. You do not have to carry this burden alone. Help is available, and recovery is possible.</p>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:.75rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.08);">
-        <img src="/osb-emblem.png" alt="" style="height:32px;width:32px;border-radius:50%;opacity:.9;">
-        <div>
-          <div style="font-size:.85rem;font-weight:600;color:rgba(255,255,255,.85);">John Dee</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;color:rgba(255,255,255,.4);text-transform:uppercase;">Founder, OSB</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="reveal" style="margin-bottom:4rem;">
-      <p class="blg tw" style="max-width:700px;margin-bottom:1rem;">You did not fall for a trick. You fell for a person — or what appeared to be one. Romance scammers exploit the best of you — your capacity to love, to trust, to hope, to give. They study you. They mirror you. They build something that feels real because they invested significant time and skill in making it feel that way.</p>
-      <p class="bmd tmt" style="max-width:700px;">The feelings you had for this person were real. The love was real. The hope was real. What was not real was the person on the other side of it. OSB Solace is here to walk you through what comes next — at your pace, with no judgment and no rush.</p>
-    </div>
-    <div class="reveal" style="margin-bottom:4rem;background:var(--n);border:1px solid rgba(193,18,31,.25);border-left:3px solid var(--r);padding:2rem 2.25rem;max-width:700px;">
-      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Day by Day</div></div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;color:var(--w);margin:.5rem 0 .75rem;">The 30-Day Companion</h2>
-      <p style="font-size:1rem;color:rgba(255,255,255,.55);line-height:1.8;font-weight:300;margin-bottom:1.5rem;">A gentle, day-by-day walk back to yourself — one short reading a day, for the hardest weeks. You don't have to take it all at once. Just today.</p>
-      <a href="solace-companion.html" class="btn-r">Begin the 30-Day Companion</a>
-    </div>
-    <div class="haven-g">
-      <div>
-        <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">The Six Stages</div></div>
-        <h2 class="hlg hw" style="margin-bottom:2rem;">Your recovery. <em>Your pace.</em></h2>
-        <div class="stages-list reveal">
-          <div class="stage"><div class="stage-n">01</div><div class="stage-content"><div class="stage-t">Confusion and Disbelief</div><div class="stage-d">You know something is wrong — but the feelings were real. Both can be true. The feelings were real. The person creating them was not.</div></div></div>
-          <div class="stage"><div class="stage-n">02</div><div class="stage-content"><div class="stage-t">Shame and Self-Blame</div><div class="stage-d">The most damaging stage — and the one the scammer depends on. You were not careless. You were targeted by a professional operation built to defeat careful, intelligent people.</div></div></div>
-          <div class="stage"><div class="stage-n">03</div><div class="stage-content"><div class="stage-t">Anger</div><div class="stage-d">Anger is healthy. It means you are beginning to see clearly. Let it move through you — just do not let it become the destination.</div></div></div>
-          <div class="stage"><div class="stage-n">04</div><div class="stage-content"><div class="stage-t">Grief</div><div class="stage-d">You are grieving a person who never existed. That grief is real and it deserves the respect you would give any genuine loss.</div></div></div>
-          <div class="stage"><div class="stage-n">05</div><div class="stage-content"><div class="stage-t">Acceptance</div><div class="stage-d">Acceptance does not mean it was okay. It means you have stopped fighting reality and started working with it.</div></div></div>
-          <div class="stage"><div class="stage-n">06</div><div class="stage-content"><div class="stage-t">Reclamation</div><div class="stage-d">This is not going back to who you were before. This is becoming someone who carries what they survived as strength — not shame.</div></div></div>
-        </div>
-      </div>
-      <div class="haven-side reveal d2">
-        <div class="truths-card">
-          <div class="truth-t">Truths to Hold</div>
-          <div class="truth-item"><div class="truth-lbl">Your intelligence is intact.</div><div class="truth-txt">Scammers target competent, generous, emotionally available people. Intelligence is not a shield against professional emotional exploitation.</div></div>
-          <div class="truth-item"><div class="truth-lbl">You are not the first.</div><div class="truth-txt">The script used on you was used before you. You are one of millions targeted by a global social engineering operation that costs victims hundreds of billions every year.</div></div>
-          <div class="truth-item"><div class="truth-lbl">Your feelings were real.</div><div class="truth-txt">Fabricated circumstances do not invalidate authentic emotion. You loved what you believed was real. That capacity is not a flaw.</div></div>
-          <div class="truth-item"><div class="truth-lbl">Silence protects no one.</div><div class="truth-txt">Your experience, shared when you are ready, becomes protection for the next person. It has value beyond the pain.</div></div>
-        </div>
-        <div style="background:var(--r);padding:1.75rem;text-align:center;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--w);font-style:italic;line-height:1.4;margin-bottom:.75rem;">"OSB is here. No judgment. No rush. Whenever you are ready."</div>
-          <div style="font-size:.72rem;color:rgba(255,255,255,.6);margin-bottom:1.375rem;">— OSB</div>
-          <a href="contact.html" class="btn-dk" style="font-size:.72rem;letter-spacing:2px;">Reach Out to OSB</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="sn" style="padding:6rem 3rem;">
-  <div class="si">
-    <div class="reveal" style="margin-bottom:3rem;">
-      <div class="lbl lbl-lt"><div class="lbl-line"></div><div class="lbl-text">Practical Steps</div></div>
-      <h2 class="hmd hw">What to do now.</h2>
-    </div>
-    <div class="steps-g reveal">
-      <div class="step-gr"><div class="sg-t">If you are still in contact</div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Stop all financial transactions immediately</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Do not confront them directly — this can escalate</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Screenshot all conversations before blocking</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Contact your bank if financial information was shared</div></div></div>
-      <div class="step-gr"><div class="sg-t">Reporting</div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Report the profile to the platform where contact was made</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">FBI IC3 (USA) · Action Fraud (UK) · EFCC (Nigeria)</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Share your case with OSB — your experience protects others</div></div></div>
-      <div class="step-gr"><div class="sg-t">Your emotional path</div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Tell one trusted person — shame grows in silence</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Consider speaking with a therapist experienced in trauma</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Return to this guide whenever the doubt or shame returns</div></div></div>
-      <div class="step-gr"><div class="sg-t">When you are ready</div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Your story may help someone else find their way out</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">OSB welcomes survivor accounts — they become field intelligence</div></div><div class="sg-item"><div class="sg-box"></div><div class="sg-t2">Share at your own pace, on your own terms</div></div></div>
-    </div>
-    <div style="text-align:center;margin-top:3rem;" class="reveal">
-      <div class="btn-row" style="justify-content:center;">
-        <a href="contact.html" class="btn-r">Reach out to OSB</a>
-        <a href="score.html" class="btn-g">Check your situation</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ROAD BACK PROGRAM -->
-<div style="background:#07070E;border-top:1px solid rgba(255,255,255,.06);padding:5rem 2rem;">
-  <div style="max-width:720px;margin:0 auto;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:#C0272D;margin-bottom:1rem;">OSB Solace · Recovery Journey</div>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;line-height:1.1;margin-bottom:1rem;">The Road Back</h2>
-    <p style="font-size:.95rem;line-height:1.85;font-weight:300;color:rgba(255,255,255,.5);margin-bottom:3.5rem;max-width:560px;">Not a cure. Not a shortcut. A structured journey — at your pace. Four phases. Each with something to read, something to reflect on, and one practical step forward.</p>
-
-    <!-- Phase 1 -->
-    <div style="border-left:2px solid #C0272D;padding:0 0 3rem 2rem;margin-bottom:.5rem;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(192,39,45,.7);margin-bottom:.75rem;">Phase One</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.25rem;">Accept</h3>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.25rem;">The hardest part is not finding out. It is sitting with what you found out. The mind wants to argue its way back to before. It replays conversations looking for the moment it was still real. There was no such moment. What was real was your capacity to love. That part is still intact.</p>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.75rem;">You are not stupid. You are not weak. You were targeted. There is a difference — and it matters.</p>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;margin-bottom:1.25rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">REFLECTION</div>
-        <p style="font-size:.875rem;font-style:italic;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">Write one sentence that begins: "What I know to be true now is..."</p>
-      </div>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">ACTION</div>
-        <p style="font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">Tell one person you trust what happened. Not for their reaction. For your own voice to hear itself say it out loud. Spoken truth is the beginning of release.</p>
-      </div>
-    </div>
-
-    <!-- Phase 2 -->
-    <div style="border-left:2px solid rgba(192,39,45,.4);padding:0 0 3rem 2rem;margin-bottom:.5rem;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(192,39,45,.7);margin-bottom:.75rem;">Phase Two</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.25rem;">Separate</h3>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.25rem;">Every photo you go back to is a door you are walking through. Every saved message is a room you are choosing to sit in. The operator is not in those rooms. The feeling is — and the feeling is lying to you about what it is.</p>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.75rem;">Erase the digital presence. Not because you are deleting what happened. Because you are deciding what you are willing to keep feeding.</p>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;margin-bottom:1.25rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">REFLECTION</div>
-        <p style="font-size:.875rem;font-style:italic;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">What are you holding onto that is keeping you in contact with the pain? Name it specifically.</p>
-      </div>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">ACTION</div>
-        <p style="font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">Choose one thing — one folder, one conversation thread, one saved photo — and delete it today. Not all of it. One thing. Forward motion does not require a sprint.</p>
-      </div>
-    </div>
-
-    <!-- Phase 3 -->
-    <div style="border-left:2px solid rgba(192,39,45,.4);padding:0 0 3rem 2rem;margin-bottom:.5rem;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(192,39,45,.7);margin-bottom:.75rem;">Phase Three</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.25rem;">Reclaim</h3>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.25rem;">Here is what the operator took: time, money, trust, peace. Here is what they could not take: your capacity for connection. Your willingness to love. Your openness. Those things are not liabilities. They are the best of you.</p>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.75rem;">The void you feel is not emptiness. It is proof of what you brought. That fullness belongs to you. It was never his.</p>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;margin-bottom:1.25rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">REFLECTION</div>
-        <p style="font-size:.875rem;font-style:italic;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">Finish this sentence honestly: "Before this, I believed I was someone who..."</p>
-      </div>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">ACTION</div>
-        <p style="font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">Do one thing this week that you used to do before this happened. Not because it will feel the same. Because it reminds you who you were before someone tried to rewrite you.</p>
-      </div>
-    </div>
-
-    <!-- Phase 4 -->
-    <div style="border-left:2px solid rgba(192,39,45,.4);padding:0 0 3rem 2rem;margin-bottom:3rem;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(192,39,45,.7);margin-bottom:.75rem;">Phase Four</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.25rem;">Forward</h3>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.25rem;">Healing is not a destination. There will be days when something triggers the memory and it feels like starting over. It is not. It is a hard day inside a longer journey that is already moving in the right direction.</p>
-      <p style="font-size:.9rem;line-height:1.9;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:1.75rem;">You do not have to forgive the operator. You have to forgive yourself — for trusting, for hoping, for being human in a moment when someone chose to exploit that. That forgiveness is yours to give, on your timeline, nobody else's.</p>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;margin-bottom:1.25rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">REFLECTION</div>
-        <p style="font-size:.875rem;font-style:italic;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">What would you say to someone else going through exactly what you are going through right now?</p>
-      </div>
-      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:1.25rem 1.5rem;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:2px;color:rgba(192,39,45,.6);margin-bottom:.5rem;">ACTION</div>
-        <p style="font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.7;margin:0;">Write that down. Read it back to yourself. You already know what you need to hear.</p>
-      </div>
-    </div>
-
-    <!-- Crisis resource -->
-    <div style="background:rgba(192,39,45,.06);border:1px solid rgba(192,39,45,.2);padding:1.5rem 2rem;text-align:center;">
-      <p style="font-size:.875rem;line-height:1.85;color:rgba(255,255,255,.5);margin-bottom:.75rem;">If the weight becomes too heavy to carry alone — please reach out to a professional. Real help, from real people trained to sit in this with you.</p>
-      <p style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:1.5px;color:rgba(255,255,255,.35);margin:0;">Crisis support: <strong style="color:rgba(255,255,255,.55);">988 Suicide &amp; Crisis Lifeline</strong> (call or text 988, US) · <strong style="color:rgba(255,255,255,.55);">Crisis Text Line</strong> (text HOME to 741741) · <a href="contact.html" style="color:#C0272D;text-decoration:none;">Contact OSB directly</a></p>
-    </div>
-
-  </div>
-</div>
-
-<footer>
-  <div class="fg">
-    <div>
-      <div class="flogo"><img src="/osb-logo.png" alt="OSB — Online Security Bureau" style="max-height:44px;width:auto"></div>
-      <p class="fdesc">OSB is the world's first behavioural threat intelligence organisation. We built the RSEI Model™ — the only detection and response system purpose-built for social engineering fraud. Operational since 2021.</p>
-    </div>
-    <div>
-      <div class="fcol-t">Navigate</div>
-      <div class="flinks">
-        <a href="index.html">Home</a><a href="about.html">About OSB</a>
-        <a href="rsei-model.html">RSEI Model™</a><a href="score.html">CHECK</a>
-        <a href="platform-index.html">Platform Safety Index</a>
-        <a href="report.html">Global Fraud Report</a>
-        <a href="intelligence.html">Intelligence</a><a href="solace.html">Solace</a>
-        <a href="community.html">Community</a><a href="contact.html">Contact</a>
-      </div>
-    </div>
-    <div>
-      <div class="fcol-t">Intelligence</div>
-      <div class="flinks">
-        <a href="rsei-model.html">RSEI Model™ v2.0</a>
-        <a href="platform-index.html">Platform Safety Index</a>
-        <a href="report.html">Global Fraud Report 2026</a>
-        <a href="intelligence.html">IFN Case Library</a>
-        <a href="score.html">Check Tool</a>
-        <a href="solace.html">Solace Guide™</a>
-        <a href="contact.html">Analyst Certification (Coming)</a>
-      </div>
-    </div>
-    <div>
-      <div class="fcol-t">Field Notes</div>
-      <div class="flinks">
-        <a href="intelligence.html">IFN-005 · Facade Bank Page</a>
-        <a href="intelligence.html">IFN-001 · Bank Exploit</a>
-        <a href="intelligence.html">IFN-002 · E Score 5</a>
-        <a href="intelligence.html">IFN-003 · Live Exit</a>
-        <a href="intelligence.html">IFN-004 · $28K Case</a>
-        <a href="contact.html">Submit a Case</a>
-      </div>
-    </div>
-  </div>
-  <div class="fbot">
-    <div class="fquote" id="fq"></div>
-    <div class="fcopy">© 2021–2026 OSB · RSEI Model™ · All Rights Reserved<a href="privacy.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="cookies.html" style="color:rgba(255,255,255,.18);text-decoration:none;">Cookie Policy</a></div>
-  </div>
-</footer>
-<script>
-var QQ = ['"Clarity is not defeat. It is the first step to freedom." — John Dee · OSB', '"We named what they do. Now we stop it." — OSB', '"The feelings were real. The person was not." — OSB Solace', '"Emotional harm is real harm." — E Pillar Independent Trigger · RSEI Model™', '"She called the bank herself. She was still being set up." — IFN-001 · OSB', '"Social engineering has a name. It has a score. Only one organisation built both." — OSB'];
-function toggleMob(){var m=document.getElementById('mob');m.style.display=m.style.display==='block'?'none':'block';}
-function closeMob(){var m=document.getElementById('mob');if(m)m.style.display='none';}
-document.addEventListener('click',function(e){
-  var m=document.getElementById('mob'),h=document.querySelector('.nav-ham');
-  if(m&&h&&!m.contains(e.target)&&!h.contains(e.target))m.style.display='none';
-});
-var ro=new IntersectionObserver(function(e){
-  e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});
-},{threshold:.08});
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
-  var fq=document.getElementById('fq');
-  if(fq)fq.textContent=QQ[Math.floor(Math.random()*QQ.length)];
-});
-window.addEventListener('scroll',function(){
-  var n=document.getElementById('nav');
-  if(n)n.style.borderBottomColor=window.scrollY>60?'rgba(193,18,31,.5)':'rgba(193,18,31,.25)';
-});
-</script>
-
-<script>
-// Day/Night Mode
-
-</script>
-
-<!-- COOKIE CONSENT BANNER -->
-<div id="osb-cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(6,6,8,.98);border-top:2px solid rgba(193,18,31,.4);backdrop-filter:blur(24px);padding:1.25rem 2rem;box-shadow:0 -4px 32px rgba(0,0,0,.5);">
-  <div style="max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
-    <div style="flex:1;min-width:280px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#C1121F;margin-bottom:.5rem;">OSB/LEGAL/CP/001/2026</div>
-      <p style="font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.65;">OSB uses essential cookies to operate this site and functional cookies to improve your experience. We do not use advertising or tracking cookies. <a href="cookies.html" style="color:#C1121F;text-decoration:none;">Cookie Policy</a> &nbsp;·&nbsp; <a href="privacy.html" style="color:#C1121F;text-decoration:none;">Privacy Policy</a></p>
-    </div>
-    <div style="display:flex;gap:.75rem;flex-shrink:0;flex-wrap:wrap;">
-      <button onclick="osbAcceptCookies()" style="background:#C1121F;color:#fff;border:none;padding:10px 24px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#d01020'" onmouseout="this.style.background='#C1121F'">Accept All</button>
-      <button onclick="osbEssentialOnly()" style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:9px 20px;font-family:'Figtree',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='rgba(193,18,31,.5)';this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.5)'">Essential Only</button>
-    </div>
-  </div>
-</div>
-<script>
-(function(){
-  var consent = localStorage.getItem('osb-cookie-consent');
-  if(!consent){
-    var b = document.getElementById('osb-cookie-banner');
-    if(b) b.style.display = 'block';
-  }
-})();
-function osbAcceptCookies(){
-  localStorage.setItem('osb-cookie-consent','accepted');
-  var b = document.getElementById('osb-cookie-banner');
-  if(b){ b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
-}
-function osbEssentialOnly(){
-  localStorage.setItem('osb-cookie-consent','essential');
-  var b = document.getElementById('osb-cookie-banner');
-  if(b){ b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
-}
-</script>
-<!-- END COOKIE CONSENT BANNER -->
-<!-- OSB Live Chat -->
+<footer class="site-foot"><span class="grow">© 2021–2026 OSB · RSEI Model™ · No victim names published · Certified Data Protection Officer · <span class="mono">Cert. no. 29320da76866f8e3</span></span><a href="/about">About</a><a href="/contact">Contact</a><a href="/community">Community</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/security">Trust &amp; security</a><form class="form" data-newsletter novalidate style="flex:1 1 100%;max-width:520px;gap:8px"><label class="small" for="nl-email">Every new OSB publication by email.</label><span style="display:flex;gap:8px;flex-wrap:wrap"><input class="input" id="nl-email" type="email" autocomplete="email" placeholder="you@example.com" style="flex:1 1 200px;width:auto"><button class="btn btn-light" type="submit">Subscribe</button></span><span class="msg" role="status"></span></form></footer>
+<div class="cookie" id="cookie" role="region" aria-label="Cookie notice" hidden><div class="cookie-in"><p>OSB uses essential cookies to run this site and functional cookies to improve it. No advertising or tracking cookies. <a href="/cookies">Cookie Policy</a> · <a href="/privacy">Privacy Policy</a></p><span class="btn-row"><button class="btn btn-light" type="button" data-cookie="accepted">Accept all</button><button class="btn btn-line" type="button" data-cookie="essential">Essential only</button></span></div></div>
+<script src="/os/data.js?v=c365d36e04" defer></script>
+<script src="/os/os.js?v=80bd4b055d" defer></script>
 <script src="/osb-chat.js" defer></script>
 <script src="/osb-install.js" defer></script>
 </body>

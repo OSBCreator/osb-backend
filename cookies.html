@@ -1,95 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cookie Policy — Online Security Bureau</title>
 <meta name="description" content="How Online Security Bureau (OSB) uses cookies. Essential and functional cookies only — no advertising, no cross-site tracking.">
+<link rel="canonical" href="https://www.onlinesecuritybureau.com/cookies">
 <link rel="icon" href="/osb-emblem.png">
 <link rel="manifest" href="/manifest.webmanifest">
-<meta name="theme-color" content="#07070E">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="OSB">
-<style>
-:root{--bg:#07070E;--card:#11111B;--inset:#0C0C14;--ink:#ECECF2;--soft:rgba(255,255,255,.66);--mut:rgba(255,255,255,.42);--faint:rgba(255,255,255,.22);--border:rgba(255,255,255,.10);--red:#C1121F;--redsoft:#E85862;}
-*{box-sizing:border-box;margin:0;padding:0}
-:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-html,body{overflow-x:clip}
-body{background:var(--bg);color:var(--ink);font-family:'Figtree',system-ui,-apple-system,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
-a{color:var(--redsoft)}
-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1rem clamp(1.25rem,4vw,2.5rem);background:rgba(7,7,14,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-nav .nav-logo img{height:42px;width:auto;display:block}
-nav .nav-links{display:flex;gap:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase}
-nav .nav-links a{color:var(--soft);text-decoration:none}
-nav .nav-links a:hover{color:var(--ink)}
-@media(max-width:620px){nav .nav-links{gap:1rem}nav .nav-links a:nth-child(n+3){display:none}}
-.wrap{max-width:780px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.25rem,5vw,2rem) 5rem}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--mut)}
-h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(2.4rem,7vw,3.6rem);line-height:1.08;margin:.5rem 0 1rem}
-.meta{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:2.5rem}
-.meta b{color:var(--soft);font-weight:400}
-.lede{font-size:1.08rem;color:var(--soft);margin-bottom:2.5rem}
-h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(1.5rem,4vw,2rem);margin:2.75rem 0 .85rem;line-height:1.2}
-h2 .n{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--redsoft);vertical-align:super;margin-right:.5rem}
-p{color:var(--soft);margin-bottom:1rem}
-strong{color:var(--ink);font-weight:600}
-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.92rem}
-th,td{text-align:left;padding:.75rem .85rem;border-bottom:1px solid var(--border);vertical-align:top;color:var(--soft)}
-th{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);font-weight:400}
-td strong{color:var(--ink)}
-.callout{background:var(--inset);border-left:3px solid var(--red);border-radius:0 10px 10px 0;padding:1rem 1.15rem;margin:1.25rem 0;color:var(--soft);font-size:.95rem}
-footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.25rem,5vw,2rem);text-align:center}
-footer .flinks{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-bottom:.75rem}
-footer .flinks a{color:var(--mut);text-decoration:none;margin:0 .5rem}
-footer .flinks a:hover{color:var(--soft)}
-footer .fcopy{font-size:.7rem;color:var(--faint)}
-</style>
+<meta name="theme-color" content="#0B1015">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSB · Online Security Bureau">
+<meta property="og:title" content="Cookie Policy — Online Security Bureau">
+<meta property="og:description" content="How Online Security Bureau (OSB) uses cookies. Essential and functional cookies only — no advertising, no cross-site tracking.">
+<meta property="og:url" content="https://www.onlinesecuritybureau.com/cookies">
+<meta property="og:image" content="https://www.onlinesecuritybureau.com/osb-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/hubot-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/os/os.css?v=9cb5335297">
 </head>
-<body>
-<nav id="nav">
-  <a href="index.html" class="nav-logo"><img src="/osb-emblem.png" alt="OSB — Online Security Bureau"></a>
-  <div class="nav-links">
-    <a href="rsei-model.html">RSEI Model</a>
-    <a href="score.html">Check</a>
-    <a href="contact.html">Contact</a>
-    <a href="index.html">Home</a>
-  </div>
-</nav>
-
-<div class="wrap">
-  <div class="eyebrow">OSB · Data &amp; Privacy</div>
-  <h1>Cookie Policy</h1>
-  <div class="meta"><span>Last updated · <b>June 2026</b> · Companion to our <a href="privacy.html">Privacy Policy</a> (OSB/LEGAL/PP/001/2026)</span></div>
-
-  <p class="lede">OSB uses cookies sparingly, and only to make the site work and remember your preferences. <strong>We do not use advertising or cross-site tracking cookies, and we never sell your data.</strong></p>
-
-  <h2><span class="n">01</span>What cookies are</h2>
-  <p>Cookies are small text files a website stores on your device. They let a site remember things between pages and visits — for example, that you've already accepted this notice. Cookies cannot run programs or carry viruses.</p>
-
-  <h2><span class="n">02</span>The cookies we use</h2>
-  <table>
-    <tr><th>Type</th><th>Purpose</th><th>Can you turn it off?</th></tr>
-    <tr><td><strong>Essential</strong></td><td>Required for the site to function — security, load balancing, and remembering your cookie choice.</td><td>These are necessary for the site to work, so they can't be switched off, but they store no marketing data.</td></tr>
-    <tr><td><strong>Functional</strong></td><td>Remember your preferences so your experience is smoother on return visits.</td><td>Yes — you can block these in your browser without breaking core functionality.</td></tr>
-    <tr><td><strong>Advertising / tracking</strong></td><td><strong>None.</strong> OSB does not run advertising and does not track you across other websites.</td><td>Not applicable — we don't use them.</td></tr>
-  </table>
-  <div class="callout">OSB products carry no advertising and no third-party tracking pixels. Your visit isn't a product we sell.</div>
-
-  <h2><span class="n">03</span>Managing cookies</h2>
-  <p>You can accept or limit cookies through the notice shown on your first visit, and you can clear or block cookies at any time in your browser settings. Most browsers let you delete existing cookies and refuse new ones; doing so won't stop you reading the site, though some preferences may not be remembered.</p>
-
-  <h2><span class="n">04</span>Changes &amp; contact</h2>
-  <p>If our use of cookies changes, we'll update this page and the "last updated" date. For any question, contact our Data Protection Officer at <a href="mailto:contact@onlinesecuritybureau.com">contact@onlinesecuritybureau.com</a>. For the full picture of how we handle data, see our <a href="privacy.html">Privacy Policy</a>.</p>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="os-head">
+<a class="brand" href="/" aria-label="OSB, Online Security Bureau, home"><img src="/osb-emblem.png" alt="" width="26" height="33"><b>OSB</b></a>
+<button class="search-btn" id="search-btn" type="button" aria-label="Search OSB"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg>Search cases, publications, the Wire</span><span class="kbd" aria-hidden="true">⌘K</span></button>
+<span class="path-chip" aria-hidden="true">onlinesecuritybureau.com<b>/cookies</b></span>
+<a class="ticker" href="/romance-scam-prevention-act"><span class="live">WIRE</span><span>Pinned · The Romance Scam Prevention Act: what dating platforms must do by October 2027</span></a>
+<a class="btn btn-red head-cta" href="/">Check my situation</a>
+</header>
+<div class="os">
+<nav class="os-rail" aria-label="OSB system"><ul class="rail-list"><li><a href="/" title="Check a situation"><span class="rail-n">01</span><span class="rail-t"><span class="rail-label">Check a situation</span><span class="rail-desc">The RSEI Engine, guided</span></span></a></li><li><a href="/how-scams-build" title="How a scam builds"><span class="rail-n">02</span><span class="rail-t"><span class="rail-label">How a scam builds</span><span class="rail-desc">Sixty days, seven moves</span></span></a></li><li><a href="/board" title="Investigation board"><span class="rail-n">03</span><span class="rail-t"><span class="rail-label">Investigation board</span><span class="rail-desc">How the cases connect</span></span></a></li><li><a href="/wire" title="Intelligence Wire"><span class="rail-n">04</span><span class="rail-t"><span class="rail-label">Intelligence Wire</span><span class="rail-desc">Live, tagged by pillar</span></span></a></li><li><a href="/cases" title="Intelligence library"><span class="rail-n">05</span><span class="rail-t"><span class="rail-label">Intelligence library</span><span class="rail-desc">Cases, field notes, dispatches</span></span></a></li><li><a href="/platforms" title="For platforms"><span class="rail-n">06</span><span class="rail-t"><span class="rail-label">For platforms</span><span class="rail-desc">Certification, registry, index, the Act</span></span></a></li><li><a href="/publications" title="Publications"><span class="rail-n">07</span><span class="rail-t"><span class="rail-label">Publications</span><span class="rail-desc">Standard, Model, report, letters</span></span></a></li><li><a href="/solace" title="Solace"><span class="rail-n">08</span><span class="rail-t"><span class="rail-label">Solace</span><span class="rail-desc">Recovery, at your pace</span></span></a></li></ul><div class="rail-foot"><span>No account needed. Nothing is stored unless you choose to send it.</span><span>Certified DPO · <span class="mono">29320da76866f8e3</span></span></div></nav>
+<main class="os-main" id="main">
+<div class="page"><article class="doc"><p class="kicker">OSB · Data &amp; Privacy</p>
+<h1>Cookie Policy</h1>
+<p class="kicker">Last updated · <strong>June 2026</strong> · Companion to our <a href="/privacy">Privacy Policy</a> (OSB/LEGAL/PP/001/2026)</p>
+<p>OSB uses cookies sparingly, and only to make the site work and remember your preferences. <strong>We do not use advertising or cross-site tracking cookies, and we never sell your data.</strong></p>
+<h2 id="01-what-cookies-are">01 What cookies are</h2>
+<p>Cookies are small text files a website stores on your device. They let a site remember things between pages and visits — for example, that you&#x27;ve already accepted this notice. Cookies cannot run programs or carry viruses.</p>
+<h2 id="02-the-cookies-we-use">02 The cookies we use</h2>
+<div class="tbl"><table><tr><th>Type</th><th>Purpose</th><th>Can you turn it off?</th></tr><tr><td><strong>Essential</strong></td><td>Required for the site to function — security, load balancing, and remembering your cookie choice.</td><td>These are necessary for the site to work, so they can&#x27;t be switched off, but they store no marketing data.</td></tr><tr><td><strong>Functional</strong></td><td>Remember your preferences so your experience is smoother on return visits.</td><td>Yes — you can block these in your browser without breaking core functionality.</td></tr><tr><td><strong>Advertising / tracking</strong></td><td><strong>None.</strong> OSB does not run advertising and does not track you across other websites.</td><td>Not applicable — we don&#x27;t use them.</td></tr></table></div>
+<p>OSB products carry no advertising and no third-party tracking pixels. Your visit isn&#x27;t a product we sell.</p>
+<h2 id="03-managing-cookies">03 Managing cookies</h2>
+<p>You can accept or limit cookies through the notice shown on your first visit, and you can clear or block cookies at any time in your browser settings. Most browsers let you delete existing cookies and refuse new ones; doing so won&#x27;t stop you reading the site, though some preferences may not be remembered.</p>
+<h2 id="04-changes-contact">04 Changes &amp; contact</h2>
+<p>If our use of cookies changes, we&#x27;ll update this page and the &quot;last updated&quot; date. For any question, contact our Data Protection Officer at <a href="mailto:contact@onlinesecuritybureau.com">contact@onlinesecuritybureau.com</a>. For the full picture of how we handle data, see our <a href="/privacy">Privacy Policy</a>.</p></article></div>
+</main>
+<aside class="os-panel" aria-label="Signal and help"><div class="panel-in"><div><span class="eyebrow">On this page</span><ul class="toc" style="margin-top:8px"><li><a href="#01-what-cookies-are">01 What cookies are</a></li><li><a href="#02-the-cookies-we-use">02 The cookies we use</a></li><li><a href="#03-managing-cookies">03 Managing cookies</a></li><li><a href="#04-changes-contact">04 Changes &amp; contact</a></li></ul></div><div class="help-box"><span class="eyebrow">Being pressured right now?</span><span>Stop all transfers. Screenshot everything. Call your bank, then OSB.</span><a class="link" href="/contact">Talk to OSB →</a></div></div></aside>
 </div>
-
-<footer>
-  <div class="flinks">
-    <a href="index.html">Home</a> · <a href="privacy.html">Privacy Policy</a> · <a href="cookies.html">Cookie Policy</a> · <a href="contact.html">Contact</a>
-  </div>
-  <div class="fcopy">© 2021–2026 Online Security Bureau · RSEI Model™ · All Rights Reserved</div>
-</footer>
+<footer class="site-foot"><span class="grow">© 2021–2026 OSB · RSEI Model™ · No victim names published · Certified Data Protection Officer · <span class="mono">Cert. no. 29320da76866f8e3</span></span><a href="/about">About</a><a href="/contact">Contact</a><a href="/community">Community</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/security">Trust &amp; security</a><form class="form" data-newsletter novalidate style="flex:1 1 100%;max-width:520px;gap:8px"><label class="small" for="nl-email">Every new OSB publication by email.</label><span style="display:flex;gap:8px;flex-wrap:wrap"><input class="input" id="nl-email" type="email" autocomplete="email" placeholder="you@example.com" style="flex:1 1 200px;width:auto"><button class="btn btn-light" type="submit">Subscribe</button></span><span class="msg" role="status"></span></form></footer>
+<div class="cookie" id="cookie" role="region" aria-label="Cookie notice" hidden><div class="cookie-in"><p>OSB uses essential cookies to run this site and functional cookies to improve it. No advertising or tracking cookies. <a href="/cookies">Cookie Policy</a> · <a href="/privacy">Privacy Policy</a></p><span class="btn-row"><button class="btn btn-light" type="button" data-cookie="accepted">Accept all</button><button class="btn btn-line" type="button" data-cookie="essential">Essential only</button></span></div></div>
+<script src="/os/data.js?v=c365d36e04" defer></script>
+<script src="/os/os.js?v=80bd4b055d" defer></script>
+<script src="/osb-chat.js" defer></script>
 <script src="/osb-install.js" defer></script>
 </body>
 </html>

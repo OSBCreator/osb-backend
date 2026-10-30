@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OSB — You're Offline</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OSB — You’re offline</title>
+<meta name="description" content="You are offline.">
+<link rel="canonical" href="https://www.onlinesecuritybureau.com/offline">
 <link rel="icon" href="/osb-emblem.png">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#07070E;color:#ECECF2;font-family:'Figtree',system-ui,sans-serif;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center}
-.wrap{max-width:420px}
-img{height:64px;margin-bottom:1.5rem;opacity:.9}
-h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:600;margin-bottom:.75rem}
-p{color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.75rem;font-size:.95rem}
-button{background:#C1121F;color:#fff;border:none;border-radius:10px;padding:.85rem 1.75rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;
-  cursor:pointer;font-weight:600}
-button:hover{background:#d81b28}
-.note{margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:1px;
-  color:rgba(255,255,255,.3);text-transform:uppercase}
-</style>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1015">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSB · Online Security Bureau">
+<meta property="og:title" content="OSB — You’re offline">
+<meta property="og:description" content="You are offline.">
+<meta property="og:url" content="https://www.onlinesecuritybureau.com/offline">
+<meta property="og:image" content="https://www.onlinesecuritybureau.com/osb-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/hubot-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/os/os.css?v=9cb5335297">
 </head>
-<body>
-<div class="wrap">
-  <img src="/osb-emblem.png" alt="OSB">
-  <h1>You're offline.</h1>
-  <p>This page needs a connection to load. Once you're back online, OSB will work as normal — nothing you were doing has been lost.</p>
-  <button onclick="location.reload()">Try again</button>
-  <div class="note">OSB — installed app</div>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="os-head">
+<a class="brand" href="/" aria-label="OSB, Online Security Bureau, home"><img src="/osb-emblem.png" alt="" width="26" height="33"><b>OSB</b></a>
+<button class="search-btn" id="search-btn" type="button" aria-label="Search OSB"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg>Search cases, publications, the Wire</span><span class="kbd" aria-hidden="true">⌘K</span></button>
+<span class="path-chip" aria-hidden="true">onlinesecuritybureau.com<b>/offline</b></span>
+<a class="ticker" href="/romance-scam-prevention-act"><span class="live">WIRE</span><span>Pinned · The Romance Scam Prevention Act: what dating platforms must do by October 2027</span></a>
+<a class="btn btn-red head-cta" href="/">Check my situation</a>
+</header>
+<div class="os">
+<nav class="os-rail" aria-label="OSB system"><ul class="rail-list"><li><a href="/" title="Check a situation"><span class="rail-n">01</span><span class="rail-t"><span class="rail-label">Check a situation</span><span class="rail-desc">The RSEI Engine, guided</span></span></a></li><li><a href="/how-scams-build" title="How a scam builds"><span class="rail-n">02</span><span class="rail-t"><span class="rail-label">How a scam builds</span><span class="rail-desc">Sixty days, seven moves</span></span></a></li><li><a href="/board" title="Investigation board"><span class="rail-n">03</span><span class="rail-t"><span class="rail-label">Investigation board</span><span class="rail-desc">How the cases connect</span></span></a></li><li><a href="/wire" title="Intelligence Wire"><span class="rail-n">04</span><span class="rail-t"><span class="rail-label">Intelligence Wire</span><span class="rail-desc">Live, tagged by pillar</span></span></a></li><li><a href="/cases" title="Intelligence library"><span class="rail-n">05</span><span class="rail-t"><span class="rail-label">Intelligence library</span><span class="rail-desc">Cases, field notes, dispatches</span></span></a></li><li><a href="/platforms" title="For platforms"><span class="rail-n">06</span><span class="rail-t"><span class="rail-label">For platforms</span><span class="rail-desc">Certification, registry, index, the Act</span></span></a></li><li><a href="/publications" title="Publications"><span class="rail-n">07</span><span class="rail-t"><span class="rail-label">Publications</span><span class="rail-desc">Standard, Model, report, letters</span></span></a></li><li><a href="/solace" title="Solace"><span class="rail-n">08</span><span class="rail-t"><span class="rail-label">Solace</span><span class="rail-desc">Recovery, at your pace</span></span></a></li></ul><div class="rail-foot"><span>No account needed. Nothing is stored unless you choose to send it.</span><span>Certified DPO · <span class="mono">29320da76866f8e3</span></span></div></nav>
+<main class="os-main" id="main">
+<div class="page page-narrow">
+<span class="eyebrow">Offline</span><h1 class="h1">You’re offline.</h1>
+<p class="lede">This page needs a connection to load. Once you are back online, OSB will work normally.</p>
+<p class="small">If you are being pressured right now: stop all transfers, screenshot everything, and call your bank.</p>
+<div class="btn-row"><a class="btn btn-light" href="/">Try again</a></div></div>
+</main>
+<aside class="os-panel" aria-label="Signal and help"><div class="panel-in"><div class="help-box"><span class="eyebrow">Being pressured right now?</span><span>Stop all transfers. Screenshot everything. Call your bank, then OSB.</span><a class="link" href="/contact">Talk to OSB →</a></div></div></aside>
 </div>
+<footer class="site-foot"><span class="grow">© 2021–2026 OSB · RSEI Model™ · No victim names published · Certified Data Protection Officer · <span class="mono">Cert. no. 29320da76866f8e3</span></span><a href="/about">About</a><a href="/contact">Contact</a><a href="/community">Community</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/security">Trust &amp; security</a><form class="form" data-newsletter novalidate style="flex:1 1 100%;max-width:520px;gap:8px"><label class="small" for="nl-email">Every new OSB publication by email.</label><span style="display:flex;gap:8px;flex-wrap:wrap"><input class="input" id="nl-email" type="email" autocomplete="email" placeholder="you@example.com" style="flex:1 1 200px;width:auto"><button class="btn btn-light" type="submit">Subscribe</button></span><span class="msg" role="status"></span></form></footer>
+<div class="cookie" id="cookie" role="region" aria-label="Cookie notice" hidden><div class="cookie-in"><p>OSB uses essential cookies to run this site and functional cookies to improve it. No advertising or tracking cookies. <a href="/cookies">Cookie Policy</a> · <a href="/privacy">Privacy Policy</a></p><span class="btn-row"><button class="btn btn-light" type="button" data-cookie="accepted">Accept all</button><button class="btn btn-line" type="button" data-cookie="essential">Essential only</button></span></div></div>
+<script src="/os/data.js?v=c365d36e04" defer></script>
+<script src="/os/os.js?v=80bd4b055d" defer></script>
+<script src="/osb-chat.js" defer></script>
+<script src="/osb-install.js" defer></script>
 </body>
 </html>
