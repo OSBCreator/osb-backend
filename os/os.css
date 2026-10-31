@@ -3,6 +3,8 @@
    rail and panel are sticky on wide screens and stack on phones. */
 
 @font-face{font-family:'Hubot Sans';src:url(/fonts/hubot-sans.woff2) format('woff2');font-weight:200 900;font-stretch:75% 125%;font-style:normal;font-display:swap}
+/* Hubot Sans draws zero like a theta; headline digits use Mona Sans instead */
+@font-face{font-family:'OSB Digits';src:url(/fonts/mona-sans.woff2) format('woff2');font-weight:200 900;font-stretch:75% 125%;font-style:normal;font-display:swap;unicode-range:U+0030-0039}
 @font-face{font-family:'Mona Sans';src:url(/fonts/mona-sans.woff2) format('woff2');font-weight:200 900;font-stretch:75% 125%;font-style:normal;font-display:swap}
 @font-face{font-family:'Mona Sans';src:url(/fonts/mona-sans-italic.woff2) format('woff2');font-weight:200 900;font-stretch:75% 125%;font-style:italic;font-display:swap}
 @font-face{font-family:'Monaspace Neon';src:url(/fonts/monaspace-neon-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
@@ -15,7 +17,7 @@
   --red:#C0272D; --red-soft:#FF8A8E; --green:#5BD69A;
   --R:#F2B544; --S:#6FC3DF; --E:#FF5A5F; --I:#B79CFF; --SE:#9AA8B4;
   --focus:#8FB4FF;
-  --display:'Hubot Sans','Arial Narrow',Arial,sans-serif;
+  --display:'OSB Digits','Hubot Sans','Arial Narrow',Arial,sans-serif;
   --body:'Mona Sans','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
   --mono:'Monaspace Neon',ui-monospace,'SFMono-Regular',Menlo,monospace;
   --head-h:58px;
@@ -331,3 +333,9 @@ body.has-cookie #osbi-bar{bottom:calc(var(--cookie-h,120px) + 16px)!important}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media print{.os-head,.os-rail,.os-panel,.site-foot,.cookie{display:none!important}.os{display:block}body{background:#fff;color:#000}.doc,.doc *{color:#000!important}}
+
+/* Phone: pressure box near the top of the front door; keyboard hint only where there is a keyboard */
+.only-phone{display:none}
+@media (max-width:760px){.only-phone{display:block}}
+@media (hover:none),(max-width:760px){.search-btn .kbd{display:none}}
+.site-foot .foot-indep{flex:1 1 100%;margin:0;color:var(--soft);font-size:14px}

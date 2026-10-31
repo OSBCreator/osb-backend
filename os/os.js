@@ -266,7 +266,7 @@
     function sync() {
       var on = document.body.classList.contains('calm');
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      b.textContent = on ? 'Calm view · on' : 'Calm view · off';
+      b.textContent = on ? 'Simpler view · on' : 'Simpler view · off';
     }
     b.addEventListener('click', function () { document.body.classList.toggle('calm'); sync(); });
     sync();
@@ -299,7 +299,7 @@
     }
     function live() {
       var n = st.answers.filter(function (x) { return typeof x === 'number'; }).length;
-      if (!n) { Signal.show(null, { source: 'IDLE', title: 'No signal yet', text: 'Answer the first question and your four channels start to fill. Nothing you enter is stored unless you choose to send it.' }); return; }
+      if (!n) { Signal.show(null, { source: 'WAITING', title: 'Your picture builds here', text: 'As you answer, the four behaviours OSB looks for fill in here, one bar each. Nothing you enter is stored unless you choose to send it.' }); return; }
       Signal.show(pillarVals(), { source: 'YOUR ANSWERS · ' + n + ' OF 8', title: 'Building your signal', complete: false });
     }
     function showScope() {
@@ -373,7 +373,7 @@
       $('#res-eflag').hidden = !(vals[2] >= 4);
       $('#res-body').hidden = false;
       document.body.classList.remove('calm');
-      var ct = $('#calm-toggle'); if (ct) { ct.setAttribute('aria-pressed', 'false'); ct.textContent = 'Calm view · off'; }
+      var ct = $('#calm-toggle'); if (ct) { ct.setAttribute('aria-pressed', 'false'); ct.textContent = 'Simpler view · off'; }
       Signal.show(vals, { source: 'YOUR RESULT', title: band.name, complete: true });
       paintProgress();
       tierEl.setAttribute('tabindex', '-1');
