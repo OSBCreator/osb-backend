@@ -70,7 +70,7 @@
   &quot;score&quot;: 18,
   &quot;score_max&quot;: 20,
   &quot;pillars&quot;: { &quot;R&quot;: 5, &quot;S&quot;: 4, &quot;E&quot;: 5, &quot;I&quot;: 5 },
-  &quot;tier&quot;: &quot;Critical — Exploitation in Progress&quot;,
+  &quot;tier&quot;: &quot;Critical Exploitation&quot;,
   &quot;risk&quot;: &quot;critical&quot;,
   &quot;e_pillar_trigger&quot;: true,
   &quot;dominant_pillar&quot;: &quot;R&quot;,
@@ -80,7 +80,8 @@
 <div class="tbl"><table><tr><th>ID</th><th>Pillar</th><th>What it measures</th></tr><tr><td><strong>R</strong></td><td>Relationship Acceleration</td><td>Intimacy and commitment established on a compressed timeline</td></tr><tr><td><strong>S</strong></td><td>Script Consistency</td><td>A rehearsed persona that holds under scrutiny because it is material, not memory</td></tr><tr><td><strong>E</strong></td><td>Emotional Manipulation</td><td>Affection, guilt or urgency used to override judgement at decision points</td></tr><tr><td><strong>I</strong></td><td>Incremental Extraction</td><td>Requests escalating in deniable stages, each framed as the last</td></tr></table></div>
 <p>Each pillar scores 1–5 as the rounded mean of its two questions. <strong>Core score = R + S + E + I</strong>, range 4–20.</p>
 <h2 id="06-classification-bands">06 Classification bands</h2>
-<div class="tbl"><table><tr><th>Score</th><th>Tier</th></tr><tr><td><strong>4–11</strong></td><td>Low Behavioural Risk</td></tr><tr><td><strong>12–16</strong></td><td>High Probability Romance Scam</td></tr><tr><td><strong>17–20</strong></td><td>Critical — Exploitation in Progress</td></tr></table></div>
+<div class="tbl"><table><tr><th>Score</th><th>Tier</th></tr><tr><td><strong>4–11</strong></td><td>Low Behavioural Risk</td></tr><tr><td><strong>12–16</strong></td><td>High Probability Social Engineering</td></tr><tr><td><strong>17–20</strong></td><td>Critical Exploitation</td></tr></table></div>
+<p>Tier names were updated on 31 October 2026 to match the RSEI Standard. For logic, use the <code>risk</code> field, which has not changed.</p>
 <h2 id="07-the-e-pillar-trigger">07 The E-pillar trigger</h2>
 <p><code>e_pillar_trigger</code> returns <strong>true</strong> when E ≥ 4, independent of the total score. It indicates victim support is warranted regardless of whether any financial loss occurred.<br><br> It exists because emotional harm and financial harm do not correlate reliably. Treating a low-loss case as a low-harm case is the most common failure in this field.</p>
 <h2 id="08-errors">08 Errors</h2>
