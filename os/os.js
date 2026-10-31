@@ -449,8 +449,6 @@
     }
     function restart() {
       st = { scope: null, qi: 0, answers: [null, null, null, null, null, null, null, null], result: null };
-      document.body.classList.add('calm');
-      var ct = $('#calm-toggle'); if (ct) { ct.setAttribute('aria-pressed', 'true'); ct.textContent = 'Calm view · on'; }
       var f = $('#send-form'); if (f) f.reset();
       var m = $('#send-msg'); if (m) m.textContent = '';
       var b = $('#send-btn'); if (b) { b.disabled = false; b.textContent = 'Send to OSB privately'; }
