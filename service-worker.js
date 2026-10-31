@@ -19,7 +19,7 @@ const SHELL_FILES = [
   "/icons/icon-192.png",
   "/icons/icon-512.png",
   "/os/os.css?v=9cb5335297",
-  "/os/os.js?v=80bd4b055d",
+  "/os/os.js?v=db415e769d",
   "/os/data.js?v=c365d36e04",
   "/fonts/mona-sans.woff2",
   "/fonts/hubot-sans.woff2",
