@@ -1,0 +1,25 @@
+OSB OS release 1.2: October 2026 Letter to the Industry
+
+Upload in two steps.
+
+1) Root files: everything in this folder EXCEPT the "os" folder
+   (45 .html files, _headers, sitemap.xml, service-worker.js)
+   Go to https://github.com/OSBCreator/osb-backend/upload/main
+   Drag them in and commit with "Release 1.2: October letter".
+
+2) The os folder: os/data.js
+   Go to https://github.com/OSBCreator/osb-backend/upload/main/os
+   Drag in data.js only and commit.
+
+Then check Cloudflare > Workers & Pages > osb-backend > Deployments for a new
+build. If none appears in 5 minutes, make any small edit to robots.txt to
+trigger one.
+
+Check live:
+  /open-letter-2026          the new letter
+  /open-letter               amber banner pointing to the new letter
+  /publications              the new letter listed first
+  /platforms                 "Our October letter to the industry" button
+  Press / and search "question has changed"
+
+score.html and admin.html are not touched.
