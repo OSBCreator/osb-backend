@@ -18,9 +18,9 @@ const SHELL_FILES = [
   "/osb-emblem.png",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
-  "/os/os.css?v=427bd5821d",
-  "/os/os.js?v=ca0c0e3726",
-  "/os/data.js?v=7616ab921d",
+  "/os/os.css?v=3174f8d262",
+  "/os/os.js?v=a47fee5d52",
+  "/os/data.js?v=804459fa40",
   "/fonts/mona-sans.woff2",
   "/fonts/hubot-sans.woff2",
   "/fonts/monaspace-neon-400.woff2"
