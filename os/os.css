@@ -339,3 +339,9 @@ body.has-cookie #osbi-bar{bottom:calc(var(--cookie-h,120px) + 16px)!important}
 @media (max-width:760px){.only-phone{display:block}}
 @media (hover:none),(max-width:760px){.search-btn .kbd{display:none}}
 .site-foot .foot-indep{flex:1 1 100%;margin:0;color:var(--soft);font-size:14px}
+.checklist{display:flex;flex-direction:column;gap:12px}
+.checklist ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.checklist li{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.checklist input{width:20px;height:20px;margin:3px 0 0;flex:0 0 auto;accent-color:var(--green)}
+.checklist label{color:var(--soft);line-height:1.55}
+.checklist label strong{color:var(--text)}

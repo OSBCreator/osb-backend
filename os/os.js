@@ -591,6 +591,12 @@
     function ref(type) { return 'OSB/' + type + '/' + new Date().getFullYear() + '/' + String(Math.floor(Math.random() * 9000) + 1000); }
 
     var cf = $('#contact-form');
+    try {
+      if (/[?&]reason=platform(&|$)/.test(location.search)) {
+        var sel = $('#cf-reason');
+        if (sel) for (var i = 0; i < sel.options.length; i++) if (/^Platform readiness/.test(sel.options[i].text)) { sel.selectedIndex = i; break; }
+      }
+    } catch (e) {}
     if (cf) cf.addEventListener('submit', function (e) {
       e.preventDefault();
       var msg = $('.msg', cf), btn = $('button[type=submit]', cf);
